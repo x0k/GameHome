@@ -20,6 +20,7 @@ type
     Bar: TBar;
     ttask: TText;
     tans: TText;
+    Main: TLayout;
     procedure DecClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormActivate(Sender: TObject);

@@ -25,6 +25,7 @@ type
     Tiul: TText;
     Tsent: TText;
     Bar: TBar;
+    Main: TLayout;
     procedure BackSBtnClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure DecClick(Sender: TObject);

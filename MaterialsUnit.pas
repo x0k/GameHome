@@ -23,6 +23,7 @@ type
     cList: TCheckBox;
     cOsina: TCheckBox;
     Bar: TBar;
+    Main: TLayout;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure cSosnChange(Sender: TObject);

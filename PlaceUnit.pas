@@ -31,6 +31,8 @@ type
     Text: TMemo;
     place: TImage;
     Bar: TBar;
+    Main1: TLayout;
+    Main2: TLayout;
     procedure FormShow(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure placeClick(Sender: TObject);

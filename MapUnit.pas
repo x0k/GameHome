@@ -36,6 +36,7 @@ type
     brevno: TImage;
     ShadowEffect1: TShadowEffect;
     shp: TImage;
+    Main: TLayout;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure BarBackBtnClick(Sender: TObject);

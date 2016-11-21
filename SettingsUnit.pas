@@ -28,6 +28,7 @@ type
     CLev: TLabel;
     Contrast: TText;
     BG: TImage;
+    SetStyle: TButton;
     procedure IncVolClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
@@ -72,6 +73,7 @@ procedure TSettingsForm.FormCreate(Sender: TObject);
 begin
   DataForm.Load(0);
   Eff.Parent:=BG;
+  SetStyle.OnClick:=DataForm.SelSt;
 
   Vlev.Tag:=round(vol*10);
   Vlev.Text:=Vlev.Tag.ToString;

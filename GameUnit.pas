@@ -35,6 +35,9 @@ type
     BG3: TImage;
     Btns: TLayout;
     Bar: TBar;
+    Main1: TLayout;
+    Main2: TLayout;
+    Main3: TLayout;
     procedure ExitBtnClick(Sender: TObject);
     procedure NextSBtnClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

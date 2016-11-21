@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.Media,
   System.ImageList, FMX.ImgList, FMX.MultiResBitmap, FMX.Forms, FMX.Objects,
-  system.JSON, Bass, FMX.Filter.Effects;
+  system.JSON, Bass, FMX.Filter.Effects, FMX.Styles, FMX.Dialogs;
 
 type
   TPanelData = record
@@ -32,6 +32,7 @@ type
     procedure LoadScaleImg(l,p:byte; img:Timage);
     procedure LoadSeqImgs(l,p:byte; mass:array of Timage);
     function LoadText:boolean;
+    procedure SelSt(Sender: TObject);
   end;
 
 const
@@ -163,6 +164,21 @@ begin
   if mSt <> 0 then Bass_StreamFree(mSt);
   mSt:=BASS_StreamCreateFile(false,pchar(TPath.Combine(TPath.GetLibraryPath, 's\'+f[i])),0,0,BASS_UNICODE);
   SetVol(vol);
+end;
+
+procedure TDataForm.SelSt;
+var
+  od : TOpenDialog;
+begin
+  od := nil;
+  try
+    od := TOpenDialog.Create(self);
+    od.Filter := 'Style Files|*.style';
+    if od.Execute() then
+      TStyleManager.SetStyleFromFile(od.FileName);
+  finally
+    od.Free();
+  end;
 end;
 
 end.

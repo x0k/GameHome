@@ -23,6 +23,7 @@ type
     inoth: TImage;
     Glow: TInnerGlowEffect;
     Bar: TBar;
+    Main: TLayout;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormActivate(Sender: TObject);
