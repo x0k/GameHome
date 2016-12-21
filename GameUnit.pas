@@ -6,10 +6,10 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.StdCtrls, FMX.ScrollBox, FMX.Memo, FMX.Controls.Presentation,
-  FMX.TabControl, FMX.Layouts, FGX.FlipView, FMX.Filter.Effects, BarUnit;
+  FMX.TabControl, FMX.Layouts, FGX.FlipView, FMX.Filter.Effects, DataUnit;
 
 type
-  TGameForm = class(TForm)
+  TGameForm = class(TGForm)
     Tabs: TTabControl;
     TabItem1: TTabItem;
     TabItem2: TTabItem;
@@ -34,135 +34,73 @@ type
     BG2: TImage;
     BG3: TImage;
     Btns: TLayout;
-    Bar: TBar;
     Main1: TLayout;
     Main2: TLayout;
     Main3: TLayout;
-    procedure ExitBtnClick(Sender: TObject);
-    procedure NextSBtnClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure BackSBtnClick(Sender: TObject);
-    procedure l1btnClick(Sender: TObject);
-    procedure MenuBtnClick(Sender: TObject);
-    procedure l2btnClick(Sender: TObject);
-    procedure l3btnClick(Sender: TObject);
-    procedure BarNextBtnClick(Sender: TObject);
+    Shome: TImage;
+    //procedure l1btnClick(Sender: TObject);
+    //procedure MenuBtnClick(Sender: TObject);
+    //procedure BarNextBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure l4btnClick(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
-    procedure l5btnClick(Sender: TObject);
-    procedure l6btnClick(Sender: TObject);
-    procedure l7btnClick(Sender: TObject);
   private
+    procedure FShow; override;
   public
     { Public declarations }
   end;
-
-var
-  GameForm: TGameForm;
 implementation
 
 {$R *.fmx}
 
-uses SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, DataUnit, TaskUnit,
-  FoundationUnit, MapUnit;
-
-procedure TGameForm.BackSBtnClick(Sender: TObject);
+procedure TGameForm.FormCreate(Sender: TObject);
 begin
-  Tabs.Previous();
+  IM.SetImages(TImgs.Create(IOTH,[],[Alex,Map]));
+  Bar.progress.Visible:=false;
+  Bar.MenuBtn.Visible:=false;
+  Bar.BonusBtn.Visible:=false;
 end;
 
-procedure TGameForm.BarNextBtnClick(Sender: TObject);
+{procedure TGameForm.FormShow(Sender: TObject);
+begin
+  if not showed then
+  begin
+    Bar.Load(nLogo[Tabs.TabIndex],self.Name);
+    Bar.Draw(self.Width,self.Height);
+
+    showed:=true;
+  end else Bar.pUpdate;
+end; }
+
+procedure TGameForm.FShow;
+begin
+  IM.SetImages(TImgs.Create(IBG,['Village','Village','Wall'],[BG1,BG2,BG3]));
+  IM.SetImage(IOTH,TImg.Create('Shome',Shome),true);
+end;
+
+{procedure TGameForm.BarNextBtnClick(Sender: TObject);
 begin
   Tabs.Next();
-  Bar.DrawPanel(1+Tabs.TabIndex,Tabs.TabIndex,Tabs.TabIndex);
+  Bar.DrawPanel(nLogo[Tabs.TabIndex],Tabs.TabIndex,Tabs.TabIndex);
   if Tabs.TabIndex=2 then
   begin
-    Bar.NextBtn.Visible:=false;
+    Bar.NextBtn.Opacity:=0;
     Bar.progress.Visible:=true;
     Bar.MenuBtn.Visible:=true;
     bar.BonusBtn.Visible:=true;
   end;
-end;
+end;}
 
-procedure TGameForm.ExitBtnClick(Sender: TObject);
+{procedure TGameForm.l1btnClick(Sender: TObject);
 begin
-  GameForm.Close;
-end;
-
-procedure TGameForm.FormActivate(Sender: TObject);
-begin
-  Bar.DrawProgress;
-end;
-
-procedure TGameForm.FormCreate(Sender: TObject);
-begin
-  DataForm.LoadImg(3,0,Alex);
-  DataForm.LoadImg(3,1,Map);
-  Bar.Load(1,self.Name);
-  Bar.progress.Visible:=false;
-  Bar.MenuBtn.Visible:=false;
-  bar.BonusBtn.Visible:=false;
-end;
-
-procedure TGameForm.FormShow(Sender: TObject);
-begin
-  Bar.Draw(self.Width,self.Height);
-  DataForm.LoadScaleImg(0,0,BG1);
-  DataForm.LoadScaleImg(0,1,BG2);
-  DataForm.LoadScaleImg(0,1,BG3);
-end;
-
-procedure TGameForm.l1btnClick(Sender: TObject);
-begin
-  SeazonForm:=TSeazonForm.Create(GameForm);
-  SeazonForm.Show;
-end;
-
-procedure TGameForm.l2btnClick(Sender: TObject);
-begin
-  PlaceForm:=TPlaceForm.Create(GameForm);
-  PlaceForm.Show;
-end;
-
-procedure TGameForm.l3btnClick(Sender: TObject);
-begin
-  ToolsForm:=TToolsForm.Create(GameForm);
-  ToolsForm.Show;
-end;
-
-procedure TGameForm.l4btnClick(Sender: TObject);
-begin
-  MaterialsForm:=TMaterialsForm.Create(GameForm);
-  MaterialsForm.Show;
-end;
-
-procedure TGameForm.l5btnClick(Sender: TObject);
-begin
-  TaskForm:=TTaskForm.Create(GameForm);
-  TaskForm.Show;
-end;
-
-procedure TGameForm.l6btnClick(Sender: TObject);
-begin
-  FoundationForm:=TFoundationForm.Create(GameForm);
-  FoundationForm.Show;
-end;
-
-procedure TGameForm.l7btnClick(Sender: TObject);
-begin
-  MapForm:=TMapForm.Create(GameForm);
-  MapForm.Show;
-end;
-
-procedure TGameForm.MenuBtnClick(Sender: TObject);
-begin
-  GameForm.Close;
-end;
-
-procedure TGameForm.NextSBtnClick(Sender: TObject);
-begin
-  Tabs.Next();
-end;
+  case (Sender as TFmxObject).Tag of
+    1:SeazonForm.Show;
+    2:PlaceForm.Show;
+    3:ToolsForm.Show;
+    4:MaterialsForm.Show;
+    5:TaskForm.Show;
+    6:FoundationForm.Show;
+    7:MapForm.Show;
+    else showmessage('Error');
+  end;
+end;}
 
 end.

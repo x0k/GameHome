@@ -15,6 +15,7 @@ object MainForm: TMainForm
   FormFactor.Orientations = [Landscape]
   FormFactor.Devices = [Desktop]
   FullScreen = True
+  ShowFullScreenIcon = True
   ShowHint = False
   OnCreate = FormCreate
   OnShow = FormShow

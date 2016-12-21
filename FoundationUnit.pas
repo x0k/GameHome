@@ -6,10 +6,10 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Effects,
-  FMX.Filter.Effects, BarUnit;
+  FMX.Filter.Effects, DataUnit;
 
 type
-  TFoundationForm = class(TForm)
+  TFoundationForm = class(TGForm)
     BG: TImage;
     fon: TImage;
     Grid: TGridPanelLayout;
@@ -22,7 +22,6 @@ type
     iwood: TImage;
     inoth: TImage;
     Glow: TInnerGlowEffect;
-    Bar: TBar;
     Main: TLayout;
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -30,6 +29,7 @@ type
     procedure istoneClick(Sender: TObject);
     procedure iwoodClick(Sender: TObject);
     procedure BarBackBtnClick(Sender: TObject);
+    procedure BarNextBtnClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,47 +37,51 @@ type
   end;
 
 var
-  FoundationForm: TFoundationForm;
   Eff1:TGloomEffect;
+
 implementation
 
 {$R *.fmx}
 
-uses DataUnit, GameUnit;
-
 procedure TFoundationForm.BarBackBtnClick(Sender: TObject);
 begin
-  GameForm.Show;
-  FoundationForm.Release;
+  //GameForm.Show;
+  //FoundationForm.Release;
+end;
+
+procedure TFoundationForm.BarNextBtnClick(Sender: TObject);
+begin
+  //MapForm.Show;
+  //FoundationForm.Release;
 end;
 
 procedure TFoundationForm.FormActivate(Sender: TObject);
 begin
-  Bar.DrawProgress;
+  //Bar.DrawProgress;
 end;
 
 procedure TFoundationForm.FormCreate(Sender: TObject);
 begin
-  Bar.Load(1,self.Name);
-  DataForm.LoadImg(3,3,fon);
-  DataForm.LoadSeqImgs(1,8,[istone,istolb,iwood,inoth]);
+  //Bar.Load(nLogo,self.Name);
+  IM.SetImage(IOTH,TImg.Create('Fon',fon),false);
+  //IM.SetImages(ISEQ,['Stone','Stolb','Wood','Nothing'],false,[istone,istolb,iwood,inoth]);
   Eff1:=TGloomEffect.Create(self);
 end;
 
 procedure TFoundationForm.FormShow(Sender: TObject);
 begin
-  Lev[6]:=1;
-  DataForm.Load(0);
+  GD.UpStatus(6);
+  SM.LoadSound(0);
   Bar.Draw(self.Width,self.Height);
-  DataForm.LoadScaleImg(0,1,BG);
+  IM.SetImage(IBG,TImg.Create('Wall',BG),true);
 end;
 
 procedure TFoundationForm.istoneClick(Sender: TObject);
 begin
   Eff1.Parent:=TFmxObject(sender);
   Eff1.UpdateParentEffects;
-  Bar.DrawPanel(1,Timage(sender).Tag);
-  DataForm.Play;
+  //Bar.DrawPanel(nLogo,Timage(sender).Tag);
+  SM.Play;
 end;
 
 procedure TFoundationForm.iwoodClick(Sender: TObject);
@@ -88,12 +92,14 @@ begin
   istone.OnClick:=nil;
   istolb.OnClick:=nil;
   inoth.OnClick:=nil;
-  Bar.DrawPanel(1,Timage(sender).Tag);
-  lev[6]:=2;
-  vis[4]:=true;
-  Bar.DrawProgress;
-  DataForm.Load(1);
-  DataForm.Play;
+  //Bar.DrawPanel(nLogo,Timage(sender).Tag);
+  GD.UpStatus(6);
+  GD.GetAwd(3);
+  //Bar.DrawProgress;
+  Bar.NextBtn.Enabled:=true;
+  Bar.NextBtn.Opacity:=1;
+  SM.LoadSound(1);
+  SM.Play;
 end;
 
 end.

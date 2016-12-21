@@ -55,8 +55,7 @@ end;
 
 procedure TMainForm.BGameBtnClick(Sender: TObject);
 begin
-  if GameForm=nil then GameForm:=TGameForm.Create(MainForm);
-  GameForm.Show;
+  TGForm.Forms[0].Show;
 end;
 
 procedure TMainForm.ExitBtnClick(Sender: TObject);
@@ -67,17 +66,12 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-  if DataForm.LoadText then
-  begin
-    showmessage('Error: Тексты не найдены.');
-  end;
-  if DataForm.Lbass then ShowMessage('Error: Ошибка инициализации BASS.');
-  DataForm.LoadImg(2,0,Logo);
+  TGForm.IM.SetImage(IICO,TImg.Create('Logo',logo));
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);
 begin
-  DataForm.LoadScaleImg(0,0,BG);
+  TGForm.IM.SetImage(IBG,TImg.Create('Village',BG),true);
 end;
 
 procedure TMainForm.MuseumBtnClick(Sender: TObject);

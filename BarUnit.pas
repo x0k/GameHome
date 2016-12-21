@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, FMX.Layouts, FMX.Controls.Presentation, DataUnit, FMX.Ani,
+  FMX.Objects, FMX.Layouts, FMX.Controls.Presentation, FMX.Ani,
   FGX.Animations, FMX.ScrollBox, FMX.Memo, FMX.TabControl;
 
 type
@@ -46,7 +46,6 @@ type
     body: TImage;
     st1: TImage;
     st2: TImage;
-    telega: TLayout;
     SPanel: TPanel;
     NextBtn: TSpeedButton;
     BackBtn: TSpeedButton;
@@ -57,72 +56,80 @@ type
     chip: TImage;
     procedure BonusBtnClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure MenuBtnClick(Sender: TObject);
   private
-    { Private declarations }
+
   public
     procedure Draw(w,h:integer);
-    procedure DrawPanel(s:byte;x:byte = 0;y:byte = 0);
-    procedure DrawProgress;
-    procedure Load(i:byte;s:string);
+    procedure DrawPanel(s:string;x:byte = 0;y:byte = 0);
+    procedure Load(Ico,s:string);
+    procedure UpStatus(i:byte);
+    procedure pUpdate;
   end;
 
 implementation
 
 {$R *.fmx}
 
-procedure TBar.DrawProgress;
-var
-  I: Integer;
-  Img:Timage;
+uses GameUnit, DataUnit;
+
+procedure TBar.UpStatus(i: Byte);
 begin
-  for I := 0 to progress.ChildrenCount-1 do
-  begin
-    img:=(progress.Children.Items[i] as Timage);
-    if lev[img.tag]=2 then DataForm.LoadImg(2,3,img)
-      else if lev[img.tag]=1 then DataForm.LoadImg(2,2,img)
-        else DataForm.LoadImg(2,1,img);
-  end;
-  for I := 0 to RBonus.ChildrenCount-1 do
-  begin
-    if (RBonus.Children.Items[i] is Timage) then
-    begin
-      img:=(RBonus.Children.Items[i] as Timage);
-      if vis[img.tag] then img.Visible:=true
-        else img.Visible:=false;
+  {GD.UpStatus(i);
+  case GD.StatusLevels[i] of
+    1:SM.LoadSound(0);
+    2:begin
+      SM.LoadSound(1);
+      SM.Play;
     end;
-  end;
-  for I := 0 to telega.ChildrenCount-1 do
-  begin
-    if (telega.Children.Items[i] is Timage) then
-    begin
-      img:=(telega.Children.Items[i] as Timage);
-      if vis[img.tag] then img.Visible:=true
-        else img.Visible:=false;
-    end;
-  end;
+  end;}
+  pUpdate;
 end;
 
-procedure TBar.DrawPanel(s:byte;x:byte = 0;y:byte = 0);
+procedure TBar.DrawPanel(s:string;x:byte = 0;y:byte = 0);
 begin
-  SubName.Text:=PData.SubNames[y];
-  DataForm.LoadImg(2,s,SubLogo);
-  if PData.SubTexts[x]=nil then SubText.Lines.Clear else SubText.Lines.Assign(PData.SubTexts[x]);
+  //IM.SetImage(IICO,TImg.Create(s,SubLogo),false);
+  //SubName.Text:=FD.SubNames[y];
+  //if FD.SubTexts[x]=nil then SubText.Lines.Clear else SubText.Lines.Assign(FD.SubTexts[x]);
 end;
 
 procedure TBar.BonusBtnClick(Sender: TObject);
+var
+  i:byte;
 begin
+  for i:=0 to RBonus.ChildrenCount-1 do
+    if RBonus.Children.Items[i] is TImage then
+      //if GD.Awards[(RBonus.Children.Items[i] as TImage).Tag] then (RBonus.Children.Items[i] as TImage).Visible:=true
+        else (RBonus.Children.Items[i] as TImage).Visible:=false;
   Pos.Enabled:=true;
   Pos2.Enabled:=false;
 end;
 
-procedure TBar.Load(i:byte;s:string);
+procedure TBar.Load(Ico,s:string);
 begin
+  DrawPanel(ico);
+end;
 
-  if s<>PData.Last then
-    if PData.Load(s) then showmessage('Error load');
-  DrawPanel(i);
-  DrawProgress;
-  DataForm.LoadImg(2,0,Logo);
+procedure TBar.MenuBtnClick(Sender: TObject);
+begin
+  //GameForm.Show;
+end;
+
+procedure TBar.pUpdate;
+  function GetName(i:byte):string;
+  begin
+    case i of
+      0:result:='Black';
+      1:result:='Gray'
+      else result:='White';
+    end;
+  end;
+var
+  i:byte;
+begin
+  //for i:=0 to progress.ChildrenCount-1 do
+    //if progress.Children.Items[i] is Timage then
+      //IM.SetImage(IICO,TImg.Create(GetName(GD.StatusLevels[(progress.Children.Items[i] as TFmxObject).Tag]),(progress.Children.Items[i] as Timage)))
 end;
 
 procedure TBar.Draw(w,h:integer);

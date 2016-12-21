@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Objects,
-  FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts, DataUnit;
+  FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts, DataUnit, BarUnit;
 
 type
   TSettingsForm = class(TForm)
@@ -18,28 +18,27 @@ type
     DecBr: TButton;
     IncBr: TButton;
     BLev: TLabel;
-    Panel1: TPanel;
-    Button1: TButton;
-    Layout1: TLayout;
-    Desc: TText;
-    Log: TImage;
     DecCtr: TButton;
     IncCtr: TButton;
     CLev: TLabel;
     Contrast: TText;
     BG: TImage;
-    SetStyle: TButton;
+    main: TLayout;
+    Bar: TBar;
     procedure IncVolClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
     procedure DecBrClick(Sender: TObject);
     procedure DecCtrClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure BarBackBtnClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
+
+const
+  nLogo = 'Setts';
 var
   SettingsForm: TSettingsForm;
 
@@ -47,47 +46,51 @@ implementation
 
 {$R *.fmx}
 
-procedure TSettingsForm.Button1Click(Sender: TObject);
+procedure TSettingsForm.BarBackBtnClick(Sender: TObject);
 begin
-  Eff.Parent:=nil;
-  SettingsForm.Release;
+  //Eff.Parent:=nil;
+  SettingsForm.Close;
+  SettingsForm.Destroy;
 end;
 
 procedure TSettingsForm.DecBrClick(Sender: TObject);
 begin
-  if ((sender as Tbutton).Tag=1)and(Blev.Tag<20) then Blev.Tag:=Blev.Tag+1 else
+  if ((sender as Tbutton).Tag=1)and(Blev.Tag<10) then Blev.Tag:=Blev.Tag+1 else
   if ((sender as Tbutton).Tag=0)and(Blev.Tag>0) then Blev.Tag:=Blev.Tag-1;
   Blev.Text:=Blev.Tag.ToString;
-  Eff.Brightness:=Blev.Tag/50;
+  TGForm.GD.Br:=Blev.Tag;
+  TGForm.GD.UpdateGamma//if not  then
+    //Raise Exception.create('ќшибка при изменении €ркости.');
 end;
 
 procedure TSettingsForm.DecCtrClick(Sender: TObject);
 begin
-  if ((sender as Tbutton).Tag=1)and(Clev.Tag<20) then Clev.Tag:=Clev.Tag+1 else
+  if ((sender as Tbutton).Tag=1)and(Clev.Tag<10) then Clev.Tag:=Clev.Tag+1 else
   if ((sender as Tbutton).Tag=0)and(Clev.Tag>0) then Clev.Tag:=Clev.Tag-1;
   Clev.Text:=Clev.Tag.ToString;
-  Eff.Contrast:=Clev.Tag/10;
+  TGForm.GD.Ct:=Clev.Tag;
+  TGForm.GD.UpdateGamma;
 end;
 
 procedure TSettingsForm.FormCreate(Sender: TObject);
 begin
-  DataForm.Load(0);
-  Eff.Parent:=BG;
-  SetStyle.OnClick:=DataForm.SelSt;
+  TGForm.SM.LoadSound(0);
 
-  Vlev.Tag:=round(vol*10);
+  Vlev.Tag:=round(TGForm.SM.Volume*50);
   Vlev.Text:=Vlev.Tag.ToString;
 
-  Blev.Tag:=round(Eff.Brightness*50);
+  Blev.Tag:=TGForm.GD.Br;
   Blev.Text:=Blev.Tag.ToString;
 
-  Clev.Tag:=round(Eff.Contrast*10);
+  Clev.Tag:=TGForm.GD.Ct;
   Clev.Text:=Clev.Tag.ToString;
+
+  Bar.Load(nLogo,self.Name);
 end;
 
 procedure TSettingsForm.FormShow(Sender: TObject);
 begin
-  DataForm.LoadScaleImg(0,1,BG);
+  TGForm.IM.SetImage(IBG,TImg.Create('Wall',BG),true);
 end;
 
 procedure TSettingsForm.IncVolClick(Sender: TObject);
@@ -95,8 +98,8 @@ begin
   if ((sender as Tbutton).Tag=1)and(Vlev.Tag<10) then Vlev.Tag:=Vlev.Tag+1 else
   if ((sender as Tbutton).Tag=0)and(Vlev.Tag>0) then Vlev.Tag:=Vlev.Tag-1;
   Vlev.Text:=Vlev.Tag.ToString;
-  DataForm.SetVol(Vlev.Tag/10);
-  DataForm.Play;
+  TGForm.SM.SetVol(Vlev.Tag/50);
+  TGForm.SM.Play;
 end;
 
 end.

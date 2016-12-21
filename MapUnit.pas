@@ -5,10 +5,10 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, BarUnit, FMX.Layouts, FMX.Ani, FMX.Effects;
+  FMX.Objects, BarUnit, FMX.Layouts, FMX.Ani, FMX.Effects, DataUnit;
 
 type
-  TMapForm = class(TForm)
+  TMapForm = class(TGForm)
     BG: TImage;
     Imap: TImage;
     Bar: TBar;
@@ -49,9 +49,7 @@ type
   public
     { Public declarations }
   end;
-
 var
-  MapForm: TMapForm;
   Paths:array[0..18] of Tpath;
   efs:array[0..18] of TFloatAnimation;
   F:TGlowEffect;
@@ -62,24 +60,22 @@ implementation
 
 {$R *.fmx}
 
-uses DataUnit, GameUnit;
-
 procedure TMapForm.BarBackBtnClick(Sender: TObject);
 begin
-  GameForm.Show;
-  MapForm.Release;
+  //GameForm.Show;
+  //MapForm.Release;
 end;
 
 procedure TMapForm.Up;
 begin
   if d=20 then
   begin
-    lev[7]:=2;
-    vis[17]:=true;
-    Bar.DrawPanel(1,1);
-    Bar.DrawProgress;
-    DataForm.Load(1);
-    DataForm.Play;
+    GD.GetAwd(17);
+    GD.UpStatus(7);
+    //Bar.DrawPanel(nLogo,1);
+    //Bar.DrawProgress;
+    SM.LoadSound(1);
+    SM.Play;
   end;
 end;
 
@@ -90,7 +86,7 @@ begin
     s:=0;
     ph.Visible:=false;
     shp.Visible:=true;
-    DataForm.Play;
+    SM.Play;
     inc(d);
     up;
   end;
@@ -98,7 +94,7 @@ end;
 
 procedure TMapForm.FormActivate(Sender: TObject);
 begin
-  Bar.DrawProgress;
+  //Bar.DrawProgress;
 end;
 
 procedure TMapForm.OnClickPN(Sender: TObject);
@@ -120,7 +116,7 @@ begin
     TPath(sender).Fill.Color:=TAlphaColorRec.Blue;
     TPath(sender).Opacity:=1;
     up;
-    DataForm.Play;
+    SM.Play;
   end;
 end;
 
@@ -128,12 +124,10 @@ procedure TMapForm.FormCreate(Sender: TObject);
 var
   I: Integer;
 begin
-  Bar.Load(1,self.Name);
-  DataForm.Load(2);
+  //Bar.Load(nLogo,self.Name);
+  SM.LoadSound(2);
   F:=TGlowEffect.Create(self);
-  DataForm.LoadImg(3,5,imap);
-  DataForm.LoadImg(3,6,brevno);
-  DataForm.LoadImg(3,7,shp);
+  //IM.SetImages('other',['Imap','Brevno','Shp'],false,[imap,brevno,shp]);
   for I:=0 to 18 do
     begin
       Paths[i]:=Tpath(imap.Children[i].Clone(self));
@@ -156,9 +150,9 @@ end;
 procedure TMapForm.FormShow(Sender: TObject);
 var i:byte;
 begin
-  Lev[7]:=1;
+  GD.UpStatus(7);
   Bar.Draw(self.Width,self.Height);
-  DataForm.LoadScaleImg(0,1,BG);
+  IM.SetImage(IBG,TImg.Create('Wall',BG),true);
   ph.Position.X:=10+random(round(CT.Width-10));
   ph.Position.Y:=10+random(round(CT.Height-10));
   for I:=0 to 18 do

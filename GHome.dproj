@@ -306,61 +306,47 @@
         </DelphiCompile>
         <DCCReference Include="MainUnit.pas">
             <Form>MainForm</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="SettingsUnit.pas">
             <Form>SettingsForm</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="DataUnit.pas">
             <Form>DataForm</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="MuseumUnit.pas">
             <Form>MuseumForm</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="AboutUnit.pas">
             <Form>AboutForm</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="GameUnit.pas">
             <Form>GameForm</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="SeazonUnit.pas">
             <Form>SeazonForm</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="BarUnit.pas">
             <Form>Bar</Form>
-            <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <DCCReference Include="PlaceUnit.pas">
             <Form>PlaceForm</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="ToolsUnit.pas">
             <Form>ToolsForm</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="MaterialsUnit.pas">
             <Form>MaterialsForm</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="TaskUnit.pas">
             <Form>TaskForm</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="FoundationUnit.pas">
             <Form>FoundationForm</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <DCCReference Include="MapUnit.pas">
             <Form>MapForm</Form>
-            <FormType>fmx</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

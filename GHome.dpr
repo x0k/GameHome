@@ -1,9 +1,6 @@
 program GHome;
 
 
-
-
-
 uses
   System.StartUpCopy,
   FMX.Forms,

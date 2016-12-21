@@ -6,10 +6,10 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Objects, FMX.ScrollBox, FMX.Memo, FMX.Layouts, FMX.StdCtrls,
-  FMX.Controls.Presentation, FMX.Effects, BarUnit,FMX.Filter.Effects;
+  FMX.Controls.Presentation, FMX.Effects, FMX.Filter.Effects, DataUnit;
 
 type
-  TToolsForm = class(TForm)
+  TToolsForm = class(TGForm)
     BG: TImage;
     Tools: TLayout;
     T1: TImage;
@@ -22,7 +22,6 @@ type
     T8: TImage;
     T9: TImage;
     T10: TImage;
-    Bar: TBar;
     procedure FormShow(Sender: TObject);
     procedure T2Click(Sender: TObject);
     procedure T1Click(Sender: TObject);
@@ -30,15 +29,14 @@ type
     procedure FormCreate(Sender: TObject);
     procedure BarBackBtnClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure BarNextBtnClick(Sender: TObject);
   private
     procedure rotate;
     procedure Up;
   public
     { Public declarations }
   end;
-
 var
-  ToolsForm: TToolsForm;
   eff:TInnerGlowEffect;
   a,b:boolean;
 
@@ -46,18 +44,18 @@ implementation
 
 {$R *.fmx}
 
-uses GameUnit, DataUnit;
-
 procedure TToolsForm.Up;
 begin
   if a and b then
   begin
-    vis[8]:=true;
-    Lev[3]:=2;
+    //vis[8]:=true;
+    //Lev[3]:=2;
     //Bar.DrawPanel(1,11);
-    Bar.DrawProgress;
-    DataForm.Load(1);
-    DataForm.Play;
+    Bar.NextBtn.Enabled:=true;
+    Bar.NextBtn.Opacity:=1;
+    //Bar.DrawProgress;
+    SM.LoadSound(1);
+    SM.Play;
   end;
 end;
 
@@ -79,17 +77,17 @@ begin
   ef.Parent:=TFmxObject(Sender);
   ef.UpdateParentEffects;
   a:=true;
-  Bar.DrawPanel(1,(Sender as Timage).Tag);
+  //Bar.DrawPanel(nLogo,(Sender as Timage).Tag);
   up;
   Timage(Sender).OnClick:=nil;
 end;
 
 procedure TToolsForm.T2Click(Sender: TObject);
 begin
-  DataForm.Play;
+  SM.Play;
   eff.Parent:=TFmxObject(Sender);
   eff.UpdateParentEffects;
-  Bar.DrawPanel(1,(Sender as Timage).Tag);
+  //Bar.DrawPanel(nLogo,(Sender as Timage).Tag);
 end;
 
 procedure TToolsForm.T6Click(Sender: TObject);
@@ -102,36 +100,42 @@ begin
   ef.Parent:=TFmxObject(Sender);
   ef.UpdateParentEffects;
   b:=true;
-  Bar.DrawPanel(1,(Sender as Timage).Tag);
+  //Bar.DrawPanel(nLogo,(Sender as Timage).Tag);
   up;
   Timage(Sender).OnClick:=nil;
 end;
 
 procedure TToolsForm.BarBackBtnClick(Sender: TObject);
 begin
-  GameForm.FormActivate(TObject(self));
-  ToolsForm.Release;
+  //ToolsForm.Release;
+end;
+
+procedure TToolsForm.BarNextBtnClick(Sender: TObject);
+begin
+  //MaterialsForm:=TMaterialsForm.Create(GameForm);
+  //MaterialsForm.Show;
+  //ToolsForm.Release;
 end;
 
 procedure TToolsForm.FormActivate(Sender: TObject);
 begin
-  Bar.DrawProgress;
+  //Bar.DrawProgress;
 end;
 
 procedure TToolsForm.FormCreate(Sender: TObject);
 begin
   eff:=TInnerGlowEffect.Create(Tcomponent(Sender));
   eff.GlowColor:=TAlphaColorRec.Blue;
-  Bar.Load(1,self.Name);
+  //Bar.Load(nLogo,self.Name);
   a:=false;b:=false;
 end;
 
 procedure TToolsForm.FormShow(Sender: TObject);
 begin
-  Lev[3]:=1;
+  //Lev[3]:=1;
   Bar.Draw(self.Width,self.Height);
-  DataForm.Load(0);
-  DataForm.LoadScaleImg(0,1,BG);
+  //DataForm.LoadSound(0);
+  //DataForm.LoadScaleImg(0,1,BG);
   rotate;
 end;
 

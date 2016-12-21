@@ -20,11 +20,13 @@ type
     procedure BarBackBtnClick(Sender: TObject);
     procedure BarNextBtnClick(Sender: TObject);
   private
-    { Private declarations }
+    M:TImageManager;
   public
     { Public declarations }
   end;
-
+const
+  nLogo = 'Museum';
+  IMG_COUNT = 15;
 var
   MuseumForm: TMuseumForm;
 
@@ -46,7 +48,7 @@ end;
 procedure TMuseumForm.SliderStartChanging(Sender: TObject;
   const NewItemIndex: Integer);
 begin
-  Bar.DrawPanel(1,NewItemIndex);
+  Bar.DrawPanel(nLogo,NewItemIndex);
 end;
 
 procedure TMuseumForm.BarNextBtnClick(Sender: TObject);
@@ -55,8 +57,15 @@ begin
 end;
 
 procedure TMuseumForm.FormCreate(Sender: TObject);
+var
+  i:byte;
 begin
-  Bar.Load(1,self.Name);
+  M:=TImageManager.Create('Museum',['museum']);
+  if M=nil then
+      Raise Exception.create('Ошибка при загрузке изображений');
+  for i:=1 to IMG_COUNT do
+    Slider.Images.AddImage(M.GetBitmap(0,'M'+i.ToString),'M'+i.ToString);
+  Bar.Load(nLogo,self.Name);
 end;
 
 end.
