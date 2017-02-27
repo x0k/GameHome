@@ -4,55 +4,57 @@ interface
 
 uses
   System.SysUtils, System.Classes, FMX.Types, FMX.Controls, FMX.Forms,
-  System.ImageList, FMX.ImgList, FMX.Objects, FMX.Media,
+  System.ImageList, FMX.ImgList, FMX.Objects, FMX.Media, FMX.Memo,
   FMX.Styles, FMX.Dialogs, FMX.Graphics, FMX.MultiResBitmap,
-  system.JSON, system.Generics.Collections, system.Types, BarUnit, Bass;
+  system.JSON, system.Generics.Collections, system.Types, BarUnit, Bass,
+  System.Actions, FMX.ActnList, System.UITypes;
 
 const
   AWD_COUNT = 17;
   LVL_COUNT = 14;
-  IBG = 0;
-  IICO = 1;
-  ISEQ = 2;
-  IOTH = 3;
-  Sounds:TArray<string> = ['s0.wav','s1.wav','s2.wav'];
-  TextsPath = 't';
-  SoundsPath = 's';
-  ImagesPath = 'i';
 
 type
-  //DataForm
-  TDataForm = class(TDataModule)
-    Styles:TStyleBook;
-    procedure DataModuleCreate(Sender: TObject);
-    procedure DataModuleDestroy(Sender: TObject);
-  end;
+  ePath = (pTexts, pSounds, pResource);
+
+  eResource = (rBackgrounds, rIcons, rSequences, rOther, rMuseum);
+
+  eSound = (sMain, sBackground, sClick, sAward, sWrong);
+
+  eTexts = (tLevels, tMuseum, tOther);
 
   //Управление изображениями
-  TImg = TPair<string,Timage>;
+  TImg = TPair<string, TImage>;
 
-  TImgs = record
-    c:byte;
-    m:Tarray<Timg>;
-    constructor Create(const cat:byte; const names:TArray<string>;const images:TArray<TImage>);
-  end;
+  TImgs = TArray<TImg>;
 
   TImageManager = class
-    Lists:TArray<TImageList>;//Изображения для форм
-    function GetImgs(const s:TArray<string>;const m:TArray<TImage>):TArray<TImg>;
-    function GetBitmap(const cat:byte; const name:string):TBitmap;
-    procedure SetImage(cat:byte; P:TImg; const sc:boolean = false);
-    procedure SetImages(Imgs:TImgs; const sc:boolean = true);
-    constructor Create(const RName: string;const LNames:TArray<string>);
+  private
+    List:TImageList;//Изображения для форм
+    rm:TDictionary<eResource, TList<integer>>;
+  public
+    procedure add(r:eResource;bRm:boolean = false);
+    procedure remove(r: eResource);
+    procedure clear;
+    function getBitmap(const name:string):TBitmap;
+    procedure setImage(P:TImg); overload;
+    procedure setImage(name:string; img:TImage; const sc:boolean = false); overload;
+    procedure setImages(Imgs:TImgs);
+
+    constructor Create();
   end;
 
   //Управление текстами
   TTextManager = class
+  private
+    last:string;
     Texts:TJSONObject;//Тексты для форм
+    SubLogos:TArray<string>;
     SubNames:TArray<string>;
     SubTexts:TArray<TStrings>;
-    function LoadText(name:string):boolean;
-    constructor Create(name:string);
+  public
+    function getName(id:byte):string;
+    procedure Load(t:eTexts);
+    procedure LoadText(name:string);
   end;
 
   // массив для хранения таблиц гамма-коррекции (gamma ramp)
@@ -65,9 +67,13 @@ type
     origramparray: tramparray;//текущие значения gamma ramp
     Br,Ct,Gm:byte;
     procedure GetAwd(index:byte);
-    procedure UpStatus(index:byte);
+    procedure UpStatus(var st:byte);
     procedure LoadSavedRamp;
     function UpdateGamma: boolean;
+    procedure SetBr(b:byte);
+    function GetBr:byte;
+    procedure SetCt(b:byte);
+    function GetCt:byte;
     constructor Create;
   end;
 
@@ -75,31 +81,72 @@ type
   TSoundManager = class
     Volume:single;
     MainStream,BackgroundStream:HSTREAM;
-    procedure SetVol(v:single);
-    procedure LoadSound(i:byte);
+    procedure SetVol(v:single); overload;
+    procedure SetVol(v:byte); overload;
+    procedure LoadSound(s:eSound);
     procedure Play;
+    function GetVol:byte;
     constructor Create;
   end;
 
+  TBarForm = class(TForm)
+  protected
+    lLogo,lCapt,lDesc:byte;
+    last:TFmxObject;
+    procedure setLogo(Logo:byte; img:TImage);
+    procedure setCaption(Capt:byte; text:TText);
+    procedure setDescription(Desc:byte; memo:TMemo);
+    procedure vCreate; virtual;
+    procedure vShow; virtual;
+    procedure vClose; virtual;
+  public
+    procedure setText;
+    procedure bCreate(Sender:TObject);
+    procedure bShow(Sender:TObject);
+    procedure closeByClick(Sender:TObject);
+    procedure bClose(Sender: TObject; var Action: TCloseAction);
+    constructor Create(AOwner: TComponent); override;
+  End;
+
   //GForm
-  TGForm = class(TForm)
-    Bar: TBar;
-  public class var
-    Status:byte;//0 - не открывали, 1 - просматривали, 2 - прошли.
-    nLevel:byte;
-    nLogo:TArray<string>;
-    IM:TImageManager;
-    TM:TTextManager;
-    SM:TSoundManager;
-    GD:TGameData;
-    Forms:array[0..LVL_COUNT] of TGForm;
-    procedure GShow(Sender: TObject);
-    procedure FShow; virtual;abstract;
-    constructor Create(Lvl:byte;Logo:TArray<string>;AOwner: TComponent); overload;
+  TGForm = class(TBarForm)
+  protected
+    status:byte;
+    level:byte;
+    sLogo:TArray<string>;
+    images:TImgs;
+    procedure fShow; virtual;
+    procedure aWin; virtual;
+    procedure gShow; virtual;
+    procedure gBack; virtual;//возврат на форму
+    procedure vShow; override;
+    procedure vClose; override;
+  public
+    procedure win;
+    procedure setText(l, c, d: byte); overload;
+    procedure GNext(Sender: TObject); virtual;
+    constructor Create(Lvl:byte);  overload;
+  end;
+
+  //DataForm
+  TDataForm = class(TDataModule)
+    Backgrounds: TImageList;
+    Icons: TImageList;
+    Sequence: TImageList;
+    Other: TImageList;
+    procedure DataModuleCreate(Sender: TObject);
+    procedure DataModuleDestroy(Sender: TObject);
+    procedure ShowForm(i:byte);
   end;
 
 var
   DataForm: TDataForm;
+  Styles:TStyleBook;
+  IM:TImageManager;
+  TM:TTextManager;
+  SM:TSoundManager;
+  GD:TGameData;
+  Bar: TBar;
 
 implementation
 
@@ -109,6 +156,56 @@ implementation
 
 uses system.IOUtils, system.Math, windows, Messages,
 GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit;
+
+  { }
+
+function getPath(p:ePath):string;
+begin
+  case p of
+    pTexts: result:=TPath.Combine(TPath.GetLibraryPath,'t');
+    pSounds: result:=TPath.Combine(TPath.GetLibraryPath,'s');
+    pResource: result:=TPath.Combine(TPath.GetLibraryPath,'i');
+  end;
+end;
+
+function getResource(r:eResource):string;
+begin
+  case r of
+    rBackgrounds: result:=TPath.Combine(getPath(pResource),'Backgrounds.style');
+    rIcons: result:=TPath.Combine(getPath(pResource),'Icons.style');
+    rSequences: result:=TPath.Combine(getPath(pResource),'Sequences.style');
+    rOther: result:=TPath.Combine(getPath(pResource),'Other.style');
+    rMuseum: result:=TPath.Combine(getPath(pResource),'Museum.style');
+  end;
+end;
+
+function getTexts(t:eTexts):string;
+begin
+  case t of
+    tLevels: result:=TPath.Combine(getPath(pTexts),'levels.json');
+    tMuseum: result:=TPath.Combine(getPath(pTexts),'museum.json');
+    tOther: result:=TPath.Combine(getPath(pTexts),'other.json');
+  end;
+end;
+
+function getSound(s:eSound):string;
+  function gWrong:string;
+  begin
+    result:='wrong'+random(1).toString+'.wav';
+  end;
+  function gAward:string;
+  begin
+    result:='award'+random(1).toString+'.wav';
+  end;
+begin
+  case s of
+    sMain: result:=TPath.Combine(getPath(pSounds),'s.wav');
+    sBackground: result:=TPath.Combine(getPath(pSounds),'bgtheme.mp3');
+    sClick: result:=TPath.Combine(getPath(pSounds),'Click.wav');
+    sAward: result:=TPath.Combine(getPath(pSounds),gAward);
+    sWrong: result:=TPath.Combine(getPath(pSounds),gWrong);
+  end;
+end;
 
   {TGameData}
 
@@ -135,9 +232,10 @@ begin
 end;
 
 //Обновить статус в "прогрессбаре"
-procedure TGameData.UpStatus(index: Byte);
+procedure TGameData.UpStatus(var st: Byte);
 begin
-  //StatusLevels[index]:=StatusLevels[index]+1;
+  st:=st+1;
+  if st=2 then Bar.showNext;
 end;
 
 //Загрузить сохраненную гамму
@@ -184,6 +282,28 @@ begin
   end
 end;
 
+procedure TGameData.SetBr;
+begin
+  Br:=b;
+  UpdateGamma;
+end;
+
+procedure TGameData.SetCt(b:byte);
+begin
+  Ct:=b;
+  UpdateGamma;
+end;
+
+function TGameData.GetBr:byte;
+begin
+  result:=Br;
+end;
+
+function TGameData.GetCt;
+begin
+  result:=Ct;
+end;
+
   {TSoundManager}
 
 //Конструктор
@@ -191,13 +311,16 @@ constructor TSoundManager.Create;
 begin
   try
     if not BASS_Init(-1, 44100, 0, 0, nil) then Raise Exception.create('Ошибка при загрузке шрифтов');
+    BackgroundStream:=BASS_StreamCreateFile(false,pchar(getSound(sBackground)),0,0,BASS_UNICODE);
+    BASS_ChannelFlags(BackgroundStream, BASS_SAMPLE_LOOP, BASS_SAMPLE_LOOP);
   finally
-    Volume:=0.1;
+    SetVol(0.1);
+    //BASS_ChannelPlay(BackgroundStream,true);
   end;
 end;
 
 //Установить уровень звука
-procedure TSoundManager.SetVol;
+procedure TSoundManager.SetVol(v:single);
 begin
   Volume:=v;
   Bass_ChannelSetAttribute(MainStream, BASS_ATTRIB_VOL, Volume);
@@ -208,7 +331,7 @@ end;
 procedure TSoundManager.LoadSound;
 begin
   if MainStream <> 0 then Bass_StreamFree(MainStream);
-  MainStream:=BASS_StreamCreateFile(false,pchar(TPath.GetLibraryPath+'\'+SoundsPath+'\'+Sounds[i]),0,0,BASS_UNICODE);
+  MainStream:=BASS_StreamCreateFile(false,pchar(getSound(s)),0,0,BASS_UNICODE);
   SetVol(Volume);
 end;
 
@@ -218,29 +341,24 @@ begin
   Bass_ChannelPlay(MainStream,true);
 end;
 
-  {TImageManager}
-
-//Конструктор списка пар (название,изображение) из одной категории
-constructor TImgs.Create(const cat: Byte; const names: TArray<System.string>; const images: TArray<FMX.Objects.TImage>);
-var
-  i,k,l:byte;
+procedure TSoundManager.SetVol(v:byte);
 begin
-  c:=cat;
-  l:=length(names);
-  k:=length(Images);
-  setlength(m,k);
-  for i:=0 to k-1 do
-    if (l=0)or(names[i]='') then m[i]:=TImg.Create(images[i].Name,images[i])
-      else m[i]:=TImg.Create(names[i],images[i]);
+  SetVol(v/50);
 end;
 
-//Конструктор (загрузка изображений из .style в массив TImageList'ов)
-constructor TImageManager.Create(const RName: string;const LNames:TArray<string>);
+function TSoundManager.GetVol;
+begin
+  result:=round(SM.Volume*50);
+end;
+
+  {TImageManager}
+
+procedure TImageManager.add(r: eResource; bRm:boolean = false);
 var
   Res: TStyleBook;
-  Cat: TFmxObject;
   Sor: TCustomSourceItem;
-  i,j,c:byte;
+  lRm: TList<integer>;
+  i:byte;
   procedure LoadPicture(const Source: TCustomSourceItem; const Scale: Single; const pBitmap: FMX.graphics.TBitmap);
   var
     BitmapItem: TCustomBitmapItem;
@@ -256,172 +374,326 @@ var
 begin
   try
     Res:=TStyleBook.Create(DataForm);
-    Res.LoadFromFile(TPath.GetLibraryPath+'\'+ImagesPath+'\'+RName+'.style');
-  finally
-    if Assigned(Res) then
+    Res.LoadFromFile(getResource(r));
+    lRm:=TList<integer>.create;
+    for i:=0 to Res.Style.ChildrenCount-1 do
     begin
-      c:=length(LNames);
-      SetLength(Lists,c);
-      for i:=0 to c-1 do
-      begin
-        Lists[i]:=TImageList.Create(DataForm);
-        Cat:=Res.Style.FindStyleResource(LNames[i]);
-        for j:=0 to Cat.ChildrenCount-1 do
-        begin
-          Sor:=Lists[i].Source.Add;
-          Sor.Name:=Cat.Children.Items[j].StyleName;
-          Sor.MultiResBitmap.SizeKind:= TSizeKind.Source;
-          LoadPicture(Sor, 1, (Cat.Children.Items[j] as TBitmapObject).Bitmap);
-        end;
-      end;
+      Sor:=List.Source.Add;
+      Sor.Name:=Res.Style.Children.Items[i].StyleName;
+      lRm.Add(sor.ID);
+      Sor.MultiResBitmap.SizeKind:= TSizeKind.Source;
+      LoadPicture(Sor, 1, (Res.Style.Children.Items[i] as TBitmapObject).Bitmap);
     end;
+    if bRm then
+      rm.Add(r, lRm);
+  finally
+    Res.Free;
+    if List.Source.Count=0 then
+      raise Exception.Create('Ошибка при загрузке изображений.');
   end;
 end;
 
-//???
-function TImageManager.GetImgs(const s: TArray<System.string>; const m: TArray<FMX.Objects.TImage>):TArray<Timg>;
+procedure TImageManager.remove(r: eResource);
 var
-  i,c:byte;
+  id:integer;
 begin
-  c:=length(s);
-  setlength(result,c);
-  for i:=0 to c-1 do
-    result[i]:=TImg.Create(s[i],m[i]);
+  if rm.ContainsKey(r) then
+    for id in rm.Items[r] do
+      List.Source.Delete(id);
 end;
 
-//Возвращает битмап по категории и имени.
+procedure TImageManager.clear;
+begin
+  List.Source.clear;
+end;
+
+//Конструктор (загрузка изображений из .style в TImageList)
+constructor TImageManager.Create();
+begin
+  List:=TImageList.Create(DataForm);
+  rm:=TDictionary<eResource, TList<integer>>.create;
+end;
+
+//Возвращает битмап по имени.
 function TImageManager.GetBitmap;
 var
   I:TCustomBitmapItem;
   S:TSize;
 begin
-  if Lists[cat].BitmapItemByName(name,I,S) then result:=I.Bitmap else result:=nil;
+  if List.BitmapItemByName(name,I,S) then result:=I.Bitmap else result:=nil;
 end;
 
 //Загружает битмап в изображение с возможностью скейла
-procedure TImageManager.SetImage(cat:byte; P:TImg; const sc:boolean = false);
+procedure TImageManager.SetImage(P:TImg);
+begin
+  SetImage( P.Key, P.Value, true);
+end;
+
+procedure TImageManager.SetImage(name:string; img:TImage; const sc:boolean);
 var
   I:TCustomBitmapItem;
   S:TSize;
 begin
-  if Lists[cat].BitmapItemByName(P.Key,I,S) then
+  if List.BitmapItemByName(name,I,S) then
   begin
-    if sc then I.Scale:=1/max(P.Value.Width/S.Width,P.Value.Height/S.Height);
-    P.Value.Bitmap.Assign(I.Bitmap);
+    if sc then I.Scale:=1/max(img.Width/S.Width,img.Height/S.Height);
+    img.Bitmap.Assign(I.Bitmap);
   end;
 end;
 
-//Загружает в каждое изображение из списка свой битмап с возможностью скейла
-procedure TImageManager.SetImages(Imgs:TImgs; const sc:boolean = true);
+//Загружает в каждое изображение из списка свой битмап
+procedure TImageManager.SetImages(Imgs:TImgs);
 var
-  i:byte;
+  img:TImg;
 begin
-  for i:=0 to High(Imgs.m) do
-    SetImage(Imgs.c, Imgs.m[i], sc);
+  for img in Imgs do
+    SetImage(img);
 end;
 
   {TTextManager}
 
-//Конструктор загружает данные из файла
-constructor TTextManager.Create(name:string);
-var
-  f:string;
+function TTextManager.getName(id: Byte):string;
+begin
+  result:=TM.SubNames[id];
+end;
+
+//загружает данные из файла
+procedure TTextManager.Load(t: eTexts);
 begin
   try
-    f:=TPath.GetLibraryPath+'\'+TextsPath+'\'+name;
-    if TFile.Exists(f) then
-      Texts:=TJSONObject(TJSONObject.ParseJSONValue(TFile.ReadAllText(f,TEncoding.UTF8)))
+    if TFile.Exists(getTexts(t)) then
+      Texts:=TJSONObject(TJSONObject.ParseJSONValue(TFile.ReadAllText(getTexts(t),TEncoding.UTF8)))
   finally
-    //if Assigned(Texts) then result:=false else result:=true;
+    if not Assigned(Texts) then
+      raise Exception.Create('Ошибка при загрузке текстов.');
   end;
 end;
 
 //Загружает данные для конкретной формы
-function TTextManager.LoadText(name:string):boolean;
+procedure TTextManager.LoadText(name:string);
 var
   i,j:byte;
   ss:TStringList;
   Form:TJsonObject;
-  STexts,Strs,SNames:TJsonArray;
+  STexts,Strs,SNames,SLogos:TJsonArray;
 begin
-  try
-    Form:=TJSONObject(TJSONObject.ParseJSONValue(Texts.GetValue(name).ToJSON));
-    //SubNames
-    SNames:=TJsonObject.ParseJSONValue(Form.GetValue('SubNames').ToJSON) as TJsonArray;
-    Setlength(SubNames,SNames.Count);
-    for i:=0 to SNames.Count-1 do SubNames[i]:=SNames.Items[i].Value;
-    //SubTexts
-    STexts:=TJsonObject.ParseJSONValue(Form.GetValue('SubTexts').ToJSON) as TJsonArray;
-    Setlength(SubTexts,STexts.Count);
-    for i:=0 to STexts.Count-1 do
-    begin
-      Strs:=TJsonObject.ParseJSONValue(STexts.Items[i].ToJSON) as TJsonArray;
-      ss:=TStringList.Create;
-      for j:=0 to Strs.Count-1 do ss.Add(Strs.Items[j].Value);
-      SubTexts[i]:=ss;
-    end;
-  finally
-    if length(SubNames)+Length(SubTexts)=0 then result:=true else result:=false;
-  end;
+  if last<>name then
+    if Assigned(Texts.Values[name]) then
+      try
+        Form:=Texts.GetValue(name) as TJSonObject;
+        //SubNames
+        SNames:=TJsonObject.ParseJSONValue(Form.GetValue('SubNames').ToJSON) as TJsonArray;
+        Setlength(SubNames,SNames.Count);
+        for i:=0 to SNames.Count-1 do SubNames[i]:=SNames.Items[i].Value;
+        //SubLogos
+        SLogos:=TJsonObject.ParseJSONValue(Form.GetValue('SubLogos').ToJSON) as TJsonArray;
+        Setlength(SubLogos,SLogos.Count);
+        for i:=0 to SLogos.Count-1 do SubLogos[i]:=SLogos.Items[i].Value;
+        //SubTexts
+        STexts:=TJsonObject.ParseJSONValue(Form.GetValue('SubTexts').ToJSON) as TJsonArray;
+        Setlength(SubTexts,STexts.Count);
+        for i:=0 to STexts.Count-1 do
+        begin
+          Strs:=TJsonObject.ParseJSONValue(STexts.Items[i].ToJSON) as TJsonArray;
+          ss:=TStringList.Create;
+          for j:=0 to Strs.Count-1 do ss.Add(Strs.Items[j].Value);
+          SubTexts[i]:=ss;
+        end;
+      finally
+        last:=name;
+        if length(SubNames)+Length(SubTexts)=0 then
+        begin
+          last:='';
+          raise Exception.Create('Ошибка при чтении текста из памяти.');
+        end;
+      end
+    else raise Exception.Create('Текст "'+name+'" не найден.');
+end;
+
+  {TBarForm}
+
+procedure TBarForm.SetLogo(Logo:byte; img:TImage);
+begin
+  lLogo:=Logo;
+  if Logo<length(TM.SubLogos) then
+    IM.SetImage(TM.SubLogos[Logo], img, false);
+end;
+
+procedure TBarForm.SetCaption(Capt:byte; text:TText);
+begin
+  lCapt:=Capt;
+  if Capt<length(TM.SubNames) then
+    text.Text:=TM.SubNames[Capt];
+end;
+
+procedure TBarForm.SetDescription(Desc:byte; memo:TMemo);
+begin
+  lDesc:=Desc;
+  if (Desc>=length(TM.SubTexts))or(TM.SubTexts[Desc]=nil) then memo.Lines.Clear
+    else memo.Lines.Assign(TM.SubTexts[Desc]);
+end;
+
+procedure TBarForm.vCreate;
+begin
+end;
+
+procedure TBarForm.vShow;
+begin
+end;
+
+procedure TBarForm.vClose;
+begin
+end;
+
+procedure TBarForm.SetText;
+begin
+  SetLogo(llogo, Bar.SubLogo);
+  SetCaption(lCapt, Bar.SubName);
+  SetDescription(lDesc, Bar.SubText);
+end;
+
+procedure TBarForm.bCreate(Sender: TObject);
+begin
+  vCreate;
+end;
+
+procedure TBarForm.bShow(Sender: TObject);
+var
+  i:byte;
+begin
+  last:=Bar.Parent;
+  Bar.Parent:=self;
+  Bar.update;
+  vShow;
+end;
+
+procedure TBarForm.closeByClick(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TBarForm.bClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if Assigned(last) then
+  begin
+    Bar.Parent:=last;
+    Bar.update;
+    if last is TGForm then TGForm(last).gBack;    
+  end else Bar.Parent:=nil;
+  vClose;
+end;
+
+constructor TBarForm.create(AOwner: TComponent);
+begin
+  inherited create(AOwner);
+  self.OnCreate:=bCreate;
+  self.OnShow:=bShow;
+  self.OnClose:=bClose;
 end;
 
   {TGForm}
 
 //Конструктор, инициализация полей
-constructor TGForm.Create(Lvl:byte;Logo:TArray<string>;AOwner: TComponent);
+constructor TGForm.Create(Lvl:byte);
 begin
-  inherited Create(AOwner);
-  nLevel:=lvl;
-  nLogo:=logo;
-  Bar:=TBar.Create(self);
-  Bar.parent:=self;
-  self.OnShow:=GShow;
+  inherited Create(nil);
+  Level:=lvl;
+end;
+
+procedure TGForm.win;
+begin
+  GD.UpStatus(status);
+  aWin;
+end;
+
+procedure TGForm.SetText(l, c, d: byte);
+begin
+  SetLogo(l, Bar.SubLogo);
+  SetCaption(c, Bar.SubName);
+  SetDescription(d, Bar.SubText);
+end;
+
+procedure TGForm.gBack;
+begin
+  if status=2 then
+    Bar.showNext;
+end;
+
+procedure TGForm.gShow;
+begin
+end;
+
+procedure TGForm.fShow;
+begin
+end;
+
+procedure TGForm.aWin;
+begin
 end;
 
 //Код исполняющийся при открытии формы
-procedure TGForm.GShow;
+procedure TGForm.vShow;
 begin
-  if status=0 then
+  gShow;
+  if status=0 then//Первое открытие
   begin
-    Bar.Load(nLogo[0],self.Name);
-    Bar.Draw(self.Width,self.Height);
-    Bar.UpStatus(1);
-    FShow;
-  end else Bar.pUpdate;
+    GD.UpStatus(Status);
+    fShow;
+  end;
+end;
+
+procedure TGForm.vClose;
+begin
+  self.Release;
+end;
+
+procedure TGForm.GNext;
+begin
+  if level<LVL_COUNT then
+    DataForm.ShowForm(level+1);
 end;
 
   {TDataForm}
 
-//Инициализация классовых переменных TGForm. Создание форм.
-procedure TDataForm.DataModuleCreate(Sender: TObject);
-var
-  i:byte;
+function createForm(i:byte):TGForm;
 begin
-  try
-    TGForm.GD:=TGameData.Create;
-    TGForm.SM:=TSoundManager.Create;
-    TGForm.TM:=TTextManager.Create('text.json');
-    TGForm.IM:=TImageManager.Create('Images',['bg','icon','seq','other']);
-    if AddFontResource(PChar(TPath.GetLibraryPath+'\'+TextsPath+'\'+'font.ttf')) = 1 then
-      SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0)
-    else
-      Raise Exception.create('Ошибка при загрузке шрифтов');
-  finally
-    with TGForm do
-    begin
-      Forms[0]:=(TGameForm.Create(0,['Alex','Map','Map'],self) as TGForm);
-      for i:=1 to LVL_COUNT-13 do
-        Forms[i]:=(TSeazonForm.Create(i,['L'+i.ToString],self) as TGForm);
-    end;
+  case i of
+    0:result:=TGameForm.Create(0);
+    1:result:=TSeazonForm.Create(1);
+    2:result:=TPlaceForm.Create(2);
+    3:result:=TToolsForm.Create(3);
+    4:result:=TMaterialsForm.Create(4);
+    5:result:=TTaskForm.Create(5);
+    6:result:=TFoundationForm.Create(6);
+    else result:=nil;
   end;
 end;
 
-//Ворвращение дефолтных настроек системе
+procedure TDataForm.ShowForm(i: Byte);
+begin
+  createForm(i).Show;
+end;
+
+//Инициализация классовых переменных TGForm. Создание форм.
+procedure TDataForm.DataModuleCreate(Sender: TObject);
+begin
+  GD:=TGameData.Create;
+  SM:=TSoundManager.Create;
+  TM:=TTextManager.Create();
+  IM:=TImageManager.Create();
+  IM.add(eResource.rBackgrounds);
+  IM.add(eResource.rIcons);
+  Bar:=TBar.create(self);
+  if AddFontResource(PChar(getPath(pTexts)+'font.ttf'))>0 then SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+  //  else Raise Exception.create('Ошибка при загрузке шрифтов');
+end;
+
+//
 procedure TDataForm.DataModuleDestroy(Sender: TObject);
 begin
-  RemoveFontResource(PChar(TPath.GetLibraryPath+'\'+TextsPath+'\'+'font.ttf'));
+  RemoveFontResource(PChar(getPath(pTexts)+'font.ttf'));
   SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
-  TGForm.GD.LoadSavedRamp;
+  GD.LoadSavedRamp;
 end;
 
 end.

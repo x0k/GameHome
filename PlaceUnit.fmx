@@ -13,7 +13,6 @@ object PlaceForm: TPlaceForm
   FormFactor.Devices = [Desktop]
   FullScreen = True
   ShowHint = False
-  OnShow = FormShow
   DesignerMasterStyle = 0
   object Tabs: TTabControl
     Align = Client
@@ -41,39 +40,13 @@ object PlaceForm: TPlaceForm
       Text = 'TabItem1'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object BG: TImage
-        MultiResBitmap = <
-          item
-          end>
+      object BG: TGlyph
         Align = Client
-        HitTest = False
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
-        WrapMode = Center
-      end
-      object Main1: TLayout
-        Align = Client
-        Margins.Bottom = 160.000000000000000000
-        Size.Width = 1280.000000000000000000
-        Size.Height = 560.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 1
-        object place: TImage
-          MultiResBitmap.Height = 1024
-          MultiResBitmap.Width = 1366
-          MultiResBitmap = <
-            item
-            end>
-          Align = Scale
-          Position.X = 424.000000000000000000
-          Position.Y = 67.200012207031240000
-          Size.Width = 833.000000000000000000
-          Size.Height = 468.000061035156200000
-          Size.PlatformDefault = False
-          WrapMode = Center
-          OnClick = placeClick
-        end
+        ImageIndex = 1
+        Images = DataForm.Backgrounds
         object Text: TMemo
           Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
           DataDetectorTypes = []
@@ -81,23 +54,31 @@ object PlaceForm: TPlaceForm
           StyledSettings = [Family, Style]
           TextSettings.Font.Size = 20.000000000000000000
           TextSettings.WordWrap = True
-          Anchors = [akLeft, akTop, akBottom]
+          Align = Left
           CanFocus = False
           Cursor = crDefault
           DisableFocusEffect = True
-          Margins.Left = 20.000000000000000000
-          Margins.Top = 10.000000000000000000
-          Margins.Right = 20.000000000000000000
-          Margins.Bottom = 10.000000000000000000
-          Position.X = 20.000000000000000000
-          Position.Y = 120.000000000000000000
-          Size.Width = 365.000000000000000000
-          Size.Height = 417.000000000000000000
+          Margins.Left = 100.000000000000000000
+          Margins.Top = 200.000000000000000000
+          Margins.Bottom = 200.000000000000000000
+          Position.X = 100.000000000000000000
+          Position.Y = 200.000000000000000000
+          Size.Width = 473.000000000000000000
+          Size.Height = 320.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'SMemo'
-          TabOrder = 1
-          Viewport.Width = 365.000000000000000000
-          Viewport.Height = 417.000000000000000000
+          TabOrder = 0
+          Viewport.Width = 473.000000000000000000
+          Viewport.Height = 320.000000000000000000
+        end
+        object mapstr: TGlyph
+          Margins.Bottom = 100.000000000000000000
+          Align = Client
+          Size.Width = 707.000000000000000000
+          Size.Height = 620.000000000000000000
+          Size.PlatformDefault = False
+          ImageIndex = 27
+          Images = DataForm.Other
         end
       end
     end
@@ -114,180 +95,184 @@ object PlaceForm: TPlaceForm
       Text = 'TabItem2'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object Grid: TGridPanelLayout
+      object Main: TLayout
         Align = Client
-        HitTest = False
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 0
-        ColumnCollection = <
-          item
-            Value = 25.000327054435120000
+        TabOrder = 1
+        object s0: TLayout
+          Align = Left
+          ClipChildren = True
+          HitTest = True
+          Size.Width = 320.000000000000000000
+          Size.Height = 720.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          OnClick = s0Click
+          object img0: TGlyph
+            Tag = 1
+            Align = HorzCenter
+            Position.X = -381.000000000000000000
+            Size.Width = 1082.000000000000000000
+            Size.Height = 720.000000000000000000
+            Size.PlatformDefault = False
+            ImageIndex = 4
+            Images = DataForm.Sequence
+            object t1: TText
+              Align = Bottom
+              Anchors = []
+              HitTest = False
+              Margins.Bottom = 200.000000000000000000
+              Position.Y = 470.000000000000000000
+              Size.Width = 1082.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              Text = #1086#1087#1091#1096#1082#1072' '#1083#1077#1089#1072
+              TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+              TextSettings.Font.Size = 40.000000000000000000
+              TextSettings.FontColor = claWhite
+              object ShadowEffect1: TShadowEffect
+                Distance = 3.000000000000000000
+                Direction = 90.000000000000000000
+                Softness = 0.300000011920929000
+                Opacity = 0.800000011920929000
+                ShadowColor = claBlack
+                Trigger = 'IsVisible=true'
+              end
+            end
           end
-          item
-            Value = 24.998325752826680000
-          end
-          item
-            Value = 25.000449672482660000
-          end
-          item
-            Value = 25.000897520255530000
-          end>
-        ControlCollection = <
-          item
-            Column = 0
-            Control = forest
-            Row = 0
-          end
-          item
-            Column = 1
-            Control = boloto
-            Row = 0
-          end
-          item
-            Column = 2
-            Control = River
-            Row = 0
-          end
-          item
-            Column = 3
-            Control = pole
-            Row = 0
-          end>
-        RowCollection = <
-          item
-            Value = 100.000000000000000000
-          end
-          item
-            SizeStyle = Auto
-          end>
-        object forest: TImage
+        end
+        object s1: TLayout
           Tag = 1
-          MultiResBitmap.Height = 2832
-          MultiResBitmap.Width = 4256
-          MultiResBitmap.LoadSize = 2
-          MultiResBitmap = <
-            item
-            end>
-          Align = Client
+          Align = Left
           ClipChildren = True
-          Size.Width = 320.004180908203100000
+          HitTest = True
+          Position.X = 320.000000000000000000
+          Size.Width = 320.000000000000000000
           Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
-          WrapMode = Center
-          OnClick = forestClick
-          object b1: TBlurEffect
-            Softness = 0.400000005960464400
-            Trigger = 'IsMouseOver=false'
-          end
-          object Tfor: TText
-            Align = Bottom
-            Margins.Bottom = 180.000000000000000000
-            Position.Y = 490.000000000000000000
-            Size.Width = 320.004180908203100000
-            Size.Height = 50.000000000000000000
+          TabOrder = 1
+          OnClick = s0Click
+          object img1: TGlyph
+            Tag = 2
+            Align = HorzCenter
+            Position.X = -381.000000000000000000
+            Size.Width = 1082.000000000000000000
+            Size.Height = 720.000000000000000000
             Size.PlatformDefault = False
-            Text = #1053#1072' '#1086#1087#1091#1096#1082#1077' '#1083#1077#1089#1072
-            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-            TextSettings.Font.Size = 40.000000000000000000
-            TextSettings.FontColor = claWhite
+            ImageIndex = 5
+            Images = DataForm.Sequence
+            object Text1: TText
+              Align = Bottom
+              Anchors = []
+              HitTest = False
+              Margins.Bottom = 200.000000000000000000
+              Position.Y = 470.000000000000000000
+              Size.Width = 1082.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              Text = #1041#1086#1083#1086#1090#1086
+              TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+              TextSettings.Font.Size = 40.000000000000000000
+              TextSettings.FontColor = claWhite
+              object ShadowEffect2: TShadowEffect
+                Distance = 3.000000000000000000
+                Direction = 90.000000000000000000
+                Softness = 0.300000011920929000
+                Opacity = 0.800000011920929000
+                ShadowColor = claBlack
+                Trigger = 'IsVisible=true'
+              end
+            end
           end
         end
-        object River: TImage
-          Tag = 4
-          MultiResBitmap.Height = 2804
-          MultiResBitmap.Width = 4214
-          MultiResBitmap.LoadSize = 2
-          MultiResBitmap = <
-            item
-            end>
-          Align = Client
-          ClipChildren = True
-          Size.Width = 320.005737304687500000
-          Size.Height = 720.000000000000000000
-          Size.PlatformDefault = False
-          WrapMode = Center
-          OnClick = RiverClick
-          object b2: TBlurEffect
-            Softness = 0.400000005960464400
-            Trigger = 'IsMouseOver=false'
-          end
-          object Tiul: TText
-            Align = Bottom
-            Margins.Bottom = 180.000000000000000000
-            Position.Y = 490.000000000000000000
-            Size.Width = 320.005737304687500000
-            Size.Height = 50.000000000000000000
-            Size.PlatformDefault = False
-            Text = #1059' '#1088#1077#1082#1080
-            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-            TextSettings.Font.Size = 40.000000000000000000
-            TextSettings.FontColor = claWhite
-          end
-        end
-        object pole: TImage
-          Tag = 3
-          MultiResBitmap.Height = 2777
-          MultiResBitmap.Width = 4173
-          MultiResBitmap.LoadSize = 2
-          MultiResBitmap = <
-            item
-            end>
-          Align = Client
-          ClipChildren = True
-          Size.Width = 320.011474609375000000
-          Size.Height = 720.000000000000000000
-          Size.PlatformDefault = False
-          WrapMode = Center
-          OnClick = forestClick
-          object b3: TBlurEffect
-            Softness = 0.400000005960464400
-            Trigger = 'IsMouseOver=false'
-          end
-          object Tsent: TText
-            Align = Bottom
-            Margins.Bottom = 180.000000000000000000
-            Position.Y = 490.000000000000000000
-            Size.Width = 320.011474609375000000
-            Size.Height = 50.000000000000000000
-            Size.PlatformDefault = False
-            Text = #1053#1072' '#1088#1072#1074#1085#1080#1085#1077
-            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-            TextSettings.Font.Size = 40.000000000000000000
-            TextSettings.FontColor = claWhite
-          end
-        end
-        object boloto: TImage
+        object s2: TLayout
           Tag = 2
-          MultiResBitmap.Height = 2848
-          MultiResBitmap.Width = 4288
-          MultiResBitmap.LoadSize = 2
-          MultiResBitmap = <
-            item
-            end>
-          Align = Client
+          Align = Left
           ClipChildren = True
-          Size.Width = 319.978607177734400000
+          HitTest = True
+          Position.X = 640.000000000000000000
+          Size.Width = 320.000000000000000000
           Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
-          WrapMode = Center
-          OnClick = forestClick
-          object Blur: TBlurEffect
-            Softness = 0.400000005960464400
-            Trigger = 'IsMouseOver=false'
-          end
-          object Tmart: TText
-            Align = Bottom
-            Margins.Bottom = 180.000000000000000000
-            Position.Y = 490.000000000000000000
-            Size.Width = 319.978607177734400000
-            Size.Height = 50.000000000000000000
+          TabOrder = 2
+          OnClick = s0Click
+          object img2: TGlyph
+            Tag = 4
+            Align = HorzCenter
+            Position.X = -381.000000000000000000
+            Size.Width = 1082.000000000000000000
+            Size.Height = 720.000000000000000000
             Size.PlatformDefault = False
-            Text = #1053#1072' '#1073#1086#1083#1086#1090#1077
-            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-            TextSettings.Font.Size = 40.000000000000000000
-            TextSettings.FontColor = claWhite
+            ImageIndex = 6
+            Images = DataForm.Sequence
+            object Text2: TText
+              Align = Bottom
+              Anchors = []
+              HitTest = False
+              Margins.Bottom = 200.000000000000000000
+              Position.Y = 470.000000000000000000
+              Size.Width = 1082.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              Text = #1059' '#1088#1077#1082#1080
+              TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+              TextSettings.Font.Size = 40.000000000000000000
+              TextSettings.FontColor = claWhite
+              object ShadowEffect3: TShadowEffect
+                Distance = 3.000000000000000000
+                Direction = 90.000000000000000000
+                Softness = 0.300000011920929000
+                Opacity = 0.800000011920929000
+                ShadowColor = claBlack
+                Trigger = 'IsVisible=true'
+              end
+            end
+          end
+        end
+        object s3: TLayout
+          Tag = 3
+          Align = Left
+          ClipChildren = True
+          HitTest = True
+          Position.X = 960.000000000000000000
+          Size.Width = 320.000000000000000000
+          Size.Height = 720.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          OnClick = s0Click
+          object img3: TGlyph
+            Tag = 3
+            Align = HorzCenter
+            Position.X = -381.000000000000000000
+            Size.Width = 1082.000000000000000000
+            Size.Height = 720.000000000000000000
+            Size.PlatformDefault = False
+            ImageIndex = 7
+            Images = DataForm.Sequence
+            object Text3: TText
+              Align = Bottom
+              Anchors = []
+              HitTest = False
+              Margins.Bottom = 200.000000000000000000
+              Position.Y = 470.000000000000000000
+              Size.Width = 1082.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              Text = #1056#1072#1074#1085#1080#1085#1072
+              TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+              TextSettings.Font.Size = 40.000000000000000000
+              TextSettings.FontColor = claWhite
+              object ShadowEffect4: TShadowEffect
+                Distance = 3.000000000000000000
+                Direction = 90.000000000000000000
+                Softness = 0.300000011920929000
+                Opacity = 0.800000011920929000
+                ShadowColor = claBlack
+                Trigger = 'IsVisible=true'
+              end
+            end
           end
         end
       end

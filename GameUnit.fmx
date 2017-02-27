@@ -14,7 +14,6 @@ object GameForm: TGameForm
   FormFactor.Orientations = [Landscape]
   FormFactor.Devices = [Desktop]
   FullScreen = True
-  OnCreate = FormCreate
   DesignerMasterStyle = 0
   object Tabs: TTabControl
     Align = Client
@@ -44,15 +43,13 @@ object GameForm: TGameForm
       Text = 'TabItem1'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object BG1: TImage
-        MultiResBitmap = <
-          item
-          end>
+      object BG1: TGlyph
         Align = Client
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
-        WrapMode = Center
+        ImageIndex = 2
+        Images = DataForm.Backgrounds
       end
       object Main1: TLayout
         Align = Client
@@ -60,7 +57,7 @@ object GameForm: TGameForm
         Size.Width = 1280.000000000000000000
         Size.Height = 560.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 1
+        TabOrder = 0
         object Alex: TImage
           MultiResBitmap.Height = 514
           MultiResBitmap.Width = 440
@@ -91,23 +88,13 @@ object GameForm: TGameForm
       Text = 'TabItem2'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object BG2: TImage
-        MultiResBitmap = <
-          item
-          end>
-        Align = Client
-        Size.Width = 1280.000000000000000000
-        Size.Height = 720.000000000000000000
-        Size.PlatformDefault = False
-        WrapMode = Center
-      end
       object Main2: TLayout
         Align = Client
         Margins.Bottom = 160.000000000000000000
         Size.Width = 1280.000000000000000000
         Size.Height = 560.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 1
+        TabOrder = 0
         object Map: TImage
           MultiResBitmap.Height = 514
           MultiResBitmap.Width = 440
@@ -124,6 +111,14 @@ object GameForm: TGameForm
           Size.PlatformDefault = False
         end
       end
+      object BG2: TGlyph
+        Align = Client
+        Size.Width = 1280.000000000000000000
+        Size.Height = 720.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 3
+        Images = DataForm.Backgrounds
+      end
     end
     object TabItem3: TTabItem
       CustomIcon = <
@@ -138,25 +133,13 @@ object GameForm: TGameForm
       Text = 'TabItem3'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object BG3: TImage
-        MultiResBitmap = <
-          item
-          end>
+      object BG3: TGlyph
         Align = Client
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
-        WrapMode = Center
-        object Shome: TImage
-          MultiResBitmap = <
-            item
-            end>
-          Align = Client
-          Size.Width = 1280.000000000000000000
-          Size.Height = 720.000000000000000000
-          Size.PlatformDefault = False
-          WrapMode = Center
-        end
+        ImageIndex = 4
+        Images = DataForm.Backgrounds
       end
       object Main3: TLayout
         Align = Client
@@ -164,7 +147,7 @@ object GameForm: TGameForm
         Size.Width = 1280.000000000000000000
         Size.Height = 560.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 1
+        TabOrder = 0
         object Btns: TLayout
           Align = Client
           Size.Width = 1280.000000000000000000
@@ -184,6 +167,7 @@ object GameForm: TGameForm
             TabOrder = 0
             Text = '10'
             TextSettings.Font.Size = 50.000000000000000000
+            OnClick = l1btnClick
           end
           object l11btn: TButton
             Tag = 11
@@ -198,6 +182,7 @@ object GameForm: TGameForm
             TabOrder = 1
             Text = '11'
             TextSettings.Font.Size = 36.000000000000000000
+            OnClick = l1btnClick
           end
           object l12btn: TButton
             Tag = 12
@@ -212,6 +197,7 @@ object GameForm: TGameForm
             TabOrder = 2
             Text = '12'
             TextSettings.Font.Size = 52.000000000000000000
+            OnClick = l1btnClick
           end
           object l13btn: TButton
             Tag = 13
@@ -226,6 +212,7 @@ object GameForm: TGameForm
             TabOrder = 3
             Text = '13'
             TextSettings.Font.Size = 38.000000000000000000
+            OnClick = l1btnClick
           end
           object l14btn: TButton
             Tag = 14
@@ -240,6 +227,7 @@ object GameForm: TGameForm
             TabOrder = 4
             Text = '14'
             TextSettings.Font.Size = 46.000000000000000000
+            OnClick = l1btnClick
           end
           object l1btn: TButton
             Tag = 1
@@ -254,6 +242,7 @@ object GameForm: TGameForm
             TabOrder = 5
             Text = '1'
             TextSettings.Font.Size = 50.000000000000000000
+            OnClick = l1btnClick
           end
           object l3btn: TButton
             Tag = 3
@@ -268,6 +257,7 @@ object GameForm: TGameForm
             TabOrder = 6
             Text = '3'
             TextSettings.Font.Size = 55.000000000000000000
+            OnClick = l1btnClick
           end
           object l4btn: TButton
             Tag = 4
@@ -282,6 +272,7 @@ object GameForm: TGameForm
             TabOrder = 7
             Text = '4'
             TextSettings.Font.Size = 35.000000000000000000
+            OnClick = l1btnClick
           end
           object l5btn: TButton
             Tag = 5
@@ -296,6 +287,7 @@ object GameForm: TGameForm
             TabOrder = 8
             Text = '5'
             TextSettings.Font.Size = 60.000000000000000000
+            OnClick = l1btnClick
           end
           object l6btn: TButton
             Tag = 6
@@ -308,6 +300,7 @@ object GameForm: TGameForm
             StyleLookup = 'MapBtn'
             TabOrder = 9
             Text = '6'
+            OnClick = l1btnClick
           end
           object l7btn: TButton
             Tag = 7
@@ -322,6 +315,7 @@ object GameForm: TGameForm
             TabOrder = 10
             Text = '7'
             TextSettings.Font.Size = 35.000000000000000000
+            OnClick = l1btnClick
           end
           object l8btn: TButton
             Tag = 8
@@ -336,6 +330,7 @@ object GameForm: TGameForm
             TabOrder = 11
             Text = '8'
             TextSettings.Font.Size = 35.000000000000000000
+            OnClick = l1btnClick
           end
           object l9btn: TButton
             Tag = 9
@@ -348,6 +343,7 @@ object GameForm: TGameForm
             StyleLookup = 'MapBtn'
             TabOrder = 12
             Text = '9'
+            OnClick = l1btnClick
           end
           object l2btn: TButton
             Tag = 2
@@ -362,6 +358,7 @@ object GameForm: TGameForm
             TabOrder = 13
             Text = '2'
             TextSettings.Font.Size = 35.000000000000000000
+            OnClick = l1btnClick
           end
         end
       end

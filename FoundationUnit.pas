@@ -6,100 +6,75 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Effects,
-  FMX.Filter.Effects, DataUnit;
+  FMX.Filter.Effects, DataUnit, FMX.ImgList, FMX.Ani;
 
 type
   TFoundationForm = class(TGForm)
-    BG: TImage;
-    fon: TImage;
-    Grid: TGridPanelLayout;
-    Tsosn: TText;
-    Tfor: TText;
-    Tiul: TText;
-    Tsent: TText;
-    istone: TImage;
-    istolb: TImage;
-    iwood: TImage;
-    inoth: TImage;
-    Glow: TInnerGlowEffect;
+    BG: TGlyph;
+    f0: TGlyph;
+    f1: TGlyph;
+    f2: TGlyph;
+    f3: TGlyph;
     Main: TLayout;
-    procedure FormCreate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
-    procedure istoneClick(Sender: TObject);
-    procedure iwoodClick(Sender: TObject);
-    procedure BarBackBtnClick(Sender: TObject);
-    procedure BarNextBtnClick(Sender: TObject);
-  private
-    { Private declarations }
+    s0: TLayout;
+    s1: TLayout;
+    s2: TLayout;
+    s3: TLayout;
+    t0: TText;
+    t1: TText;
+    t2: TText;
+    t3: TText;
+    procedure s0MouseEnter(Sender: TObject);
+  protected
+    procedure vCreate; override;
+    procedure gShow; override;
   public
     { Public declarations }
   end;
 
 var
-  Eff1:TGloomEffect;
+  eff:TGloomEffect;
 
 implementation
 
 {$R *.fmx}
+var
+  w,p:single;
+  shw, lst:ShortInt;
 
-procedure TFoundationForm.BarBackBtnClick(Sender: TObject);
+procedure TFoundationForm.s0MouseEnter(Sender: TObject);
+var
+  id:byte;
 begin
-  //GameForm.Show;
-  //FoundationForm.Release;
+  id:=main.Children.IndexOf(TFmxObject(sender));
+  if (shw<0)and(id<>lst) then
+  begin
+    TAnimator.AnimateInt(Main.Children[lst].Children[0].Children[0], 'TextSettings.Font.Size', 30);
+    //TAnimator.AnimateFloat(Main.Children[lst].Children[0].Children[0], 'opacity', 0);
+    TAnimator.AnimateFloat(Main.Children[lst], 'width', w);
+
+    TAnimator.AnimateInt(TFmxObject(sender).Children[0].Children[0], 'TextSettings.Font.Size', 50);
+    //TAnimator.AnimateFloat(TFmxObject(sender).Children[0].Children[0], 'opacity', 1);
+    TAnimator.AnimateFloat(Main, 'Position.X', p-(80*TFmxObject(sender).Tag/3));
+    TAnimator.AnimateFloat(TFmxObject(sender), 'width', 80+w);
+    lst:=id;
+  end;
 end;
 
-procedure TFoundationForm.BarNextBtnClick(Sender: TObject);
+procedure TFoundationForm.vCreate;
 begin
-  //MapForm.Show;
-  //FoundationForm.Release;
+  eff:=TGloomEffect.Create(self);
 end;
 
-procedure TFoundationForm.FormActivate(Sender: TObject);
+procedure TFoundationForm.gShow;
 begin
-  //Bar.DrawProgress;
-end;
-
-procedure TFoundationForm.FormCreate(Sender: TObject);
-begin
-  //Bar.Load(nLogo,self.Name);
-  IM.SetImage(IOTH,TImg.Create('Fon',fon),false);
-  //IM.SetImages(ISEQ,['Stone','Stolb','Wood','Nothing'],false,[istone,istolb,iwood,inoth]);
-  Eff1:=TGloomEffect.Create(self);
-end;
-
-procedure TFoundationForm.FormShow(Sender: TObject);
-begin
-  GD.UpStatus(6);
-  SM.LoadSound(0);
-  Bar.Draw(self.Width,self.Height);
-  IM.SetImage(IBG,TImg.Create('Wall',BG),true);
-end;
-
-procedure TFoundationForm.istoneClick(Sender: TObject);
-begin
-  Eff1.Parent:=TFmxObject(sender);
-  Eff1.UpdateParentEffects;
-  //Bar.DrawPanel(nLogo,Timage(sender).Tag);
-  SM.Play;
-end;
-
-procedure TFoundationForm.iwoodClick(Sender: TObject);
-begin
-  Eff1.Parent:=nil;
-  Eff1.UpdateParentEffects;
-  Glow.Enabled:=true;
-  istone.OnClick:=nil;
-  istolb.OnClick:=nil;
-  inoth.OnClick:=nil;
-  //Bar.DrawPanel(nLogo,Timage(sender).Tag);
-  GD.UpStatus(6);
-  GD.GetAwd(3);
-  //Bar.DrawProgress;
-  Bar.NextBtn.Enabled:=true;
-  Bar.NextBtn.Opacity:=1;
-  SM.LoadSound(1);
-  SM.Play;
+  w:=main.Width/4;
+  s0.Width:=w;
+  s1.Width:=w;
+  s2.Width:=w;
+  s3.Width:=w;
+  p:=main.Position.X;
+  shw:=-1;
 end;
 
 end.

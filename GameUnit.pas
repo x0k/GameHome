@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.StdCtrls, FMX.ScrollBox, FMX.Memo, FMX.Controls.Presentation,
-  FMX.TabControl, FMX.Layouts, FGX.FlipView, FMX.Filter.Effects, DataUnit;
+  FMX.TabControl, FMX.Layouts, FGX.FlipView, FMX.Filter.Effects, DataUnit,
+  FMX.ImgList, BarUnit;
 
 type
   TGameForm = class(TGForm)
@@ -29,78 +30,41 @@ type
     l12btn: TButton;
     l11btn: TButton;
     l10btn: TButton;
-    BG1: TImage;
     Alex: TImage;
-    BG2: TImage;
-    BG3: TImage;
     Btns: TLayout;
     Main1: TLayout;
     Main2: TLayout;
     Main3: TLayout;
-    Shome: TImage;
-    //procedure l1btnClick(Sender: TObject);
-    //procedure MenuBtnClick(Sender: TObject);
-    //procedure BarNextBtnClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-  private
-    procedure FShow; override;
+    BG1: TGlyph;
+    BG2: TGlyph;
+    BG3: TGlyph;
+    procedure l1btnClick(Sender: TObject);
+  protected
+    procedure gShow; override;
   public
-    { Public declarations }
+    procedure GNext(Sender: TObject);override;
   end;
 implementation
 
 {$R *.fmx}
 
-procedure TGameForm.FormCreate(Sender: TObject);
+procedure TGameForm.gShow;
 begin
-  IM.SetImages(TImgs.Create(IOTH,[],[Alex,Map]));
-  Bar.progress.Visible:=false;
-  Bar.MenuBtn.Visible:=false;
-  Bar.BonusBtn.Visible:=false;
+  Bar.showNext;
 end;
 
-{procedure TGameForm.FormShow(Sender: TObject);
+procedure TGameForm.GNext;
 begin
-  if not showed then
+  if Tabs.TabIndex<2 then
   begin
-    Bar.Load(nLogo[Tabs.TabIndex],self.Name);
-    Bar.Draw(self.Width,self.Height);
-
-    showed:=true;
-  end else Bar.pUpdate;
-end; }
-
-procedure TGameForm.FShow;
-begin
-  IM.SetImages(TImgs.Create(IBG,['Village','Village','Wall'],[BG1,BG2,BG3]));
-  IM.SetImage(IOTH,TImg.Create('Shome',Shome),true);
+    Tabs.Next();
+    SetText(Tabs.TabIndex,Tabs.TabIndex,Tabs.TabIndex);
+  end else Bar.setShowBonus;
 end;
 
-{procedure TGameForm.BarNextBtnClick(Sender: TObject);
+procedure TGameForm.l1btnClick(Sender: TObject);
 begin
-  Tabs.Next();
-  Bar.DrawPanel(nLogo[Tabs.TabIndex],Tabs.TabIndex,Tabs.TabIndex);
-  if Tabs.TabIndex=2 then
-  begin
-    Bar.NextBtn.Opacity:=0;
-    Bar.progress.Visible:=true;
-    Bar.MenuBtn.Visible:=true;
-    bar.BonusBtn.Visible:=true;
-  end;
-end;}
-
-{procedure TGameForm.l1btnClick(Sender: TObject);
-begin
-  case (Sender as TFmxObject).Tag of
-    1:SeazonForm.Show;
-    2:PlaceForm.Show;
-    3:ToolsForm.Show;
-    4:MaterialsForm.Show;
-    5:TaskForm.Show;
-    6:FoundationForm.Show;
-    7:MapForm.Show;
-    else showmessage('Error');
-  end;
-end;}
+  DataForm.ShowForm((Sender as TFmxObject).Tag);
+end;
 
 end.

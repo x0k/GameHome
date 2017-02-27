@@ -6,32 +6,26 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Objects,
-  FMX.Layouts, FMX.StdCtrls, DataUnit;
+  FMX.Layouts, FMX.StdCtrls, DataUnit, FMX.ImgList, FMX.Ani;
 
 type
   TMaterialsForm = class(TGForm)
-    BG: TImage;
-    Trees: TImage;
-    Text: TMemo;
+    Main: TLayout;
     Grid: TGridPanelLayout;
+    Tsosn: TText;
     Tfor: TText;
     Tiul: TText;
     Tsent: TText;
-    Tsosn: TText;
-    cSosn: TCheckBox;
-    cEl: TCheckBox;
-    cList: TCheckBox;
-    cOsina: TCheckBox;
-    Main: TLayout;
-    procedure FormCreate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure cSosnChange(Sender: TObject);
-    procedure cElChange(Sender: TObject);
-    procedure BarBackBtnClick(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
-    procedure BarNextBtnClick(Sender: TObject);
-  private
-    procedure up;
+    Text: TMemo;
+    BG: TGlyph;
+    trees: TGlyph;
+    m0: TGlyph;
+    m1: TGlyph;
+    m2: TGlyph;
+    m3: TGlyph;
+  protected
+    procedure gShow; override;
+    procedure click(Sender: TObject);
   public
     { Public declarations }
   end;
@@ -40,67 +34,36 @@ implementation
 
 {$R *.fmx}
 
-procedure TMaterialsForm.up;
+var
+  a,b:boolean;
+
+procedure TMaterialsForm.click(Sender: TObject);
+var
+  id:byte;
 begin
-  if cSosn.IsChecked and cList.IsChecked then
-  begin
-    //vis[2]:=true;
-    //lev[4]:=2;
-    //Bar.DrawProgress;
-    Bar.NextBtn.Enabled:=true;
-    Bar.NextBtn.Opacity:=1;
-    SM.LoadSound(1);
-    SM.Play;
+  id:=TGlyph(sender).ImageIndex;
+  case id of
+    18:a:=true;
+    22:b:=true;
   end;
+  if id mod 2=0 then TGlyph(sender).ImageIndex:=id+1;
+  self.setDescription(TGlyph(sender).Tag, Bar.SubText);
+  if a and b then win;
 end;
 
-procedure TMaterialsForm.BarBackBtnClick(Sender: TObject);
+procedure TMaterialsForm.gShow;
 begin
-  //MaterialsForm.Release;
-end;
+  self.setDescription(5, text);
+  main.Height:=self.Height/2;
 
-procedure TMaterialsForm.BarNextBtnClick(Sender: TObject);
-begin
-  //TaskForm:=TTaskForm.Create(GameForm);
-  //TaskForm.Show;
-  //MaterialsForm.Release;
-end;
-
-procedure TMaterialsForm.cElChange(Sender: TObject);
-begin
-  TCheckBox(sender).HitTest:=false;
-  //Bar.DrawPanel(nLogo,TCheckBox(sender).Tag);
-  //DataForm.Load(0);
-  SM.Play;
-end;
-
-procedure TMaterialsForm.cSosnChange(Sender: TObject);
-begin
-  TCheckBox(sender).OnChange:=nil;
-  //DataForm.Load(1);
-  SM.Play;
-  //Bar.DrawPanel(nLogo,TCheckBox(sender).Tag);
-  up;
-end;
-
-procedure TMaterialsForm.FormActivate(Sender: TObject);
-begin
-  //Bar.DrawProgress;
-end;
-
-procedure TMaterialsForm.FormCreate(Sender: TObject);
-begin
-  //Bar.Load(nLogo,self.Name);
-  //DataForm.LoadImg(3,3,Trees);
-  //Text.Lines.Assign(FD.SubTexts[5]);
-end;
-
-procedure TMaterialsForm.FormShow(Sender: TObject);
-begin
-  //Lev[4]:=1;
-  //DataForm.LoadSound(0);
-  Bar.Draw(self.Width,self.Height);
-  //DataForm.LoadScaleImg(0,1,BG);
+  m0.OnClick:=click;
+  m0.HitTest:=true;
+  m1.OnClick:=click;
+  m1.HitTest:=true;
+  m2.OnClick:=click;
+  m2.HitTest:=true;
+  m3.OnClick:=click;
+  m3.HitTest:=true;
 end;
 
 end.

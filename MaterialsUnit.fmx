@@ -14,37 +14,64 @@ object MaterialsForm: TMaterialsForm
   FormFactor.Orientations = [Landscape]
   FormFactor.Devices = [Desktop]
   FullScreen = True
-  OnActivate = FormActivate
-  OnCreate = FormCreate
-  OnShow = FormShow
   DesignerMasterStyle = 0
-  object BG: TImage
-    MultiResBitmap = <
-      item
-      end>
+  object BG: TGlyph
     Align = Client
-    HitTest = False
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
-    WrapMode = Center
-  end
-  object Main: TLayout
-    Align = Client
-    Margins.Bottom = 160.000000000000000000
-    Size.Width = 1280.000000000000000000
-    Size.Height = 560.000000000000000000
-    Size.PlatformDefault = False
-    TabOrder = 0
-    object Grid: TGridPanelLayout
-      Anchors = [akLeft, akRight, akBottom]
-      HitTest = False
-      Position.X = 200.000000000000000000
-      Position.Y = 296.000000000000000000
-      Size.Width = 880.000000000000000000
-      Size.Height = 233.000000000000000000
+    ImageIndex = 1
+    Images = DataForm.Backgrounds
+    object Main: TLayout
+      Align = Top
+      Anchors = [akBottom]
+      Size.Width = 1280.000000000000000000
+      Size.Height = 360.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
+      object Text: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        ReadOnly = True
+        StyledSettings = [Family, Style]
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.WordWrap = True
+        Align = Left
+        Anchors = [akLeft, akTop]
+        CanFocus = False
+        Cursor = crDefault
+        DisableFocusEffect = True
+        Margins.Left = 100.000000000000000000
+        Margins.Top = 100.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Margins.Bottom = 20.000000000000000000
+        Position.X = 100.000000000000000000
+        Position.Y = 100.000000000000000000
+        Size.Width = 365.000000000000000000
+        Size.Height = 240.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'SMemo'
+        TabOrder = 0
+        Viewport.Width = 365.000000000000000000
+        Viewport.Height = 240.000000000000000000
+      end
+      object trees: TGlyph
+        Align = Client
+        Size.Width = 795.000000000000000000
+        Size.Height = 360.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 17
+        Images = DataForm.Other
+      end
+    end
+    object Grid: TGridPanelLayout
+      Align = Client
+      HitTest = False
+      Margins.Bottom = 200.000000000000000000
+      Size.Width = 1280.000000000000000000
+      Size.Height = 160.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
       ColumnCollection = <
         item
           Value = 25.000327054435120000
@@ -81,22 +108,22 @@ object MaterialsForm: TMaterialsForm
         end
         item
           Column = 0
-          Control = cSosn
+          Control = m0
           Row = 0
         end
         item
           Column = 1
-          Control = cEl
+          Control = m1
           Row = 0
         end
         item
           Column = 2
-          Control = cList
+          Control = m2
           Row = 0
         end
         item
           Column = 3
-          Control = cOsina
+          Control = m3
           Row = 0
         end>
       RowCollection = <
@@ -112,8 +139,8 @@ object MaterialsForm: TMaterialsForm
       object Tsosn: TText
         Align = Bottom
         Anchors = []
-        Position.Y = 183.000000000000000000
-        Size.Width = 220.002883911132800000
+        Position.Y = 110.000000000000000000
+        Size.Width = 320.004180908203100000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         Text = #1057#1086#1089#1085#1072
@@ -123,9 +150,9 @@ object MaterialsForm: TMaterialsForm
       object Tfor: TText
         Align = Bottom
         Anchors = []
-        Position.X = 220.002883911132800000
-        Position.Y = 183.000000000000000000
-        Size.Width = 219.985275268554700000
+        Position.X = 320.004180908203100000
+        Position.Y = 110.000000000000000000
+        Size.Width = 319.978607177734400000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         Text = #1045#1083#1100
@@ -135,9 +162,9 @@ object MaterialsForm: TMaterialsForm
       object Tiul: TText
         Align = Bottom
         Anchors = []
-        Position.X = 439.988159179687500000
-        Position.Y = 183.000000000000000000
-        Size.Width = 220.003967285156300000
+        Position.X = 639.982788085937500000
+        Position.Y = 110.000000000000000000
+        Size.Width = 320.005737304687500000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         Text = #1051#1080#1089#1090#1074#1077#1085#1085#1080#1094#1072
@@ -147,97 +174,51 @@ object MaterialsForm: TMaterialsForm
       object Tsent: TText
         Align = Bottom
         Anchors = []
-        Position.X = 659.992126464843800000
-        Position.Y = 183.000000000000000000
-        Size.Width = 220.007934570312500000
+        Position.X = 959.988525390625000000
+        Position.Y = 110.000000000000000000
+        Size.Width = 320.011474609375000000
         Size.Height = 50.000000000000000000
         Size.PlatformDefault = False
         Text = #1054#1089#1080#1085#1072
         TextSettings.Font.Family = 'Tkachenko Sketch 4F'
         TextSettings.Font.Size = 40.000000000000000000
       end
-      object cSosn: TCheckBox
+      object m0: TGlyph
         Tag = 1
         Align = Client
-        Size.Width = 220.002883911132800000
-        Size.Height = 183.000000000000000000
+        Size.Width = 320.004180908203100000
+        Size.Height = 110.000000000000000000
         Size.PlatformDefault = False
-        StyleLookup = 'sosna'
-        TabOrder = 0
-        Text = 'cSosn'
-        OnChange = cSosnChange
+        ImageIndex = 18
+        Images = DataForm.Other
       end
-      object cEl: TCheckBox
+      object m1: TGlyph
         Tag = 2
         Align = Client
-        Size.Width = 219.985275268554700000
-        Size.Height = 183.000000000000000000
+        Size.Width = 319.978607177734400000
+        Size.Height = 110.000000000000000000
         Size.PlatformDefault = False
-        StyleLookup = 'el'
-        TabOrder = 1
-        Text = 'cEl'
-        OnChange = cElChange
+        ImageIndex = 20
+        Images = DataForm.Other
       end
-      object cList: TCheckBox
+      object m2: TGlyph
         Tag = 3
         Align = Client
-        Size.Width = 220.003967285156300000
-        Size.Height = 183.000000000000000000
+        Size.Width = 320.005737304687500000
+        Size.Height = 110.000000000000000000
         Size.PlatformDefault = False
-        StyleLookup = 'listv'
-        TabOrder = 2
-        Text = 'cList'
-        OnChange = cSosnChange
+        ImageIndex = 22
+        Images = DataForm.Other
       end
-      object cOsina: TCheckBox
+      object m3: TGlyph
         Tag = 4
         Align = Client
-        Size.Width = 220.007934570312500000
-        Size.Height = 183.000000000000000000
+        Size.Width = 320.011474609375000000
+        Size.Height = 110.000000000000000000
         Size.PlatformDefault = False
-        StyleLookup = 'osina'
-        TabOrder = 3
-        Text = 'cOsina'
-        OnChange = cElChange
+        ImageIndex = 24
+        Images = DataForm.Other
       end
-    end
-    object Text: TMemo
-      Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
-      DataDetectorTypes = []
-      ReadOnly = True
-      StyledSettings = [Family, Style]
-      TextSettings.Font.Size = 20.000000000000000000
-      TextSettings.WordWrap = True
-      Anchors = [akLeft, akTop, akBottom]
-      CanFocus = False
-      Cursor = crDefault
-      DisableFocusEffect = True
-      Margins.Left = 20.000000000000000000
-      Margins.Top = 10.000000000000000000
-      Margins.Right = 20.000000000000000000
-      Margins.Bottom = 10.000000000000000000
-      Position.X = 20.000000000000000000
-      Position.Y = 120.000000000000000000
-      Size.Width = 365.000000000000000000
-      Size.Height = 201.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'SMemo'
-      TabOrder = 1
-      Viewport.Width = 365.000000000000000000
-      Viewport.Height = 201.000000000000000000
-    end
-    object Trees: TImage
-      MultiResBitmap.Height = 1024
-      MultiResBitmap.Width = 1366
-      MultiResBitmap = <
-        item
-        end>
-      Align = Scale
-      Position.X = 424.000000000000000000
-      Position.Y = 47.999996185302730000
-      Size.Width = 713.000000000000000000
-      Size.Height = 273.000000000000000000
-      Size.PlatformDefault = False
     end
   end
 end

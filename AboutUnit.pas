@@ -4,29 +4,23 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, DataUnit,
   FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.ListView, FMX.ListBox, FMX.ScrollBox, FMX.Memo,FMX.Filter.Effects, BarUnit;
+  FMX.ListView, FMX.ListBox, FMX.ScrollBox, FMX.Memo, FMX.Filter.Effects, BarUnit,
+  FMX.ImgList;
 
 type
-  TAboutForm = class(TForm)
-    Logo: TImage;
+  TAboutForm = class(TBarForm)
     Text: TMemo;
-    BG: TImage;
-    main: TLayout;
-    Bar: TBar;
-    procedure FormShow(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure BarBackBtnClick(Sender: TObject);
-  private
-    { Private declarations }
+    BG: TGlyph;
+  protected
+    procedure vShow; override;
+    procedure vClose; override;
   public
     { Public declarations }
   end;
 
-const
-  nLogo = 'About';
 var
   AboutForm: TAboutForm;
 
@@ -34,23 +28,17 @@ implementation
 
 {$R *.fmx}
 
-uses DataUnit;
 
-procedure TAboutForm.BarBackBtnClick(Sender: TObject);
+procedure TAboutForm.vShow;
 begin
-  AboutForm.Release;
+  Bar.Logo.Visible:=false;
+  SetDescription(1, Text);
 end;
 
-procedure TAboutForm.FormCreate(Sender: TObject);
+procedure TAboutForm.vClose;
 begin
-  Bar.Load(nLogo,self.Name);
-  //Text.Lines.Assign(FD.SubTexts[1]);
-end;
-
-procedure TAboutForm.FormShow(Sender: TObject);
-begin
-  TGForm.IM.SetImage(IBG,TImg.Create('Wall',BG),true);
-  TGForm.IM.SetImage(IICO,TImg.Create('Logo',logo),false);
+  lDesc:=0;
+  Bar.Logo.Visible:=true;
 end;
 
 end.

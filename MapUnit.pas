@@ -11,7 +11,6 @@ type
   TMapForm = class(TGForm)
     BG: TImage;
     Imap: TImage;
-    Bar: TBar;
     ct: TLayout;
     p1: TPath;
     P2: TPath;
@@ -71,10 +70,10 @@ begin
   if d=20 then
   begin
     GD.GetAwd(17);
-    GD.UpStatus(7);
+    GD.UpStatus(Status);
     //Bar.DrawPanel(nLogo,1);
     //Bar.DrawProgress;
-    SM.LoadSound(1);
+    SM.LoadSound(sAward);
     SM.Play;
   end;
 end;
@@ -125,7 +124,7 @@ var
   I: Integer;
 begin
   //Bar.Load(nLogo,self.Name);
-  SM.LoadSound(2);
+  //SM.LoadSound(2);
   F:=TGlowEffect.Create(self);
   //IM.SetImages('other',['Imap','Brevno','Shp'],false,[imap,brevno,shp]);
   for I:=0 to 18 do
@@ -150,9 +149,8 @@ end;
 procedure TMapForm.FormShow(Sender: TObject);
 var i:byte;
 begin
-  GD.UpStatus(7);
-  Bar.Draw(self.Width,self.Height);
-  IM.SetImage(IBG,TImg.Create('Wall',BG),true);
+  GD.UpStatus(Status);
+  IM.SetImage('Wall',BG,true);
   ph.Position.X:=10+random(round(CT.Width-10));
   ph.Position.Y:=10+random(round(CT.Height-10));
   for I:=0 to 18 do

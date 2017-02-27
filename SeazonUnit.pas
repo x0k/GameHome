@@ -6,27 +6,27 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.StdCtrls, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo,
-  FMX.Ani, FMX.Effects, FMX.Filter.Effects, system.JSON, DataUnit;
+  FMX.Ani, FMX.Effects, FMX.Filter.Effects, system.JSON, DataUnit, FMX.ImgList;
 
 type
   TSeazonForm = class(TGForm)
-    Dec: TImage;
-    Mart: TImage;
-    Iul: TImage;
-    Sent: TImage;
-    Grid: TGridPanelLayout;
-    b1: TBlurEffect;
-    b2: TBlurEffect;
-    b3: TBlurEffect;
-    Blur: TBlurEffect;
-    Tdec: TText;
-    Tmart: TText;
-    Tiul: TText;
-    Tsent: TText;
-    procedure DecClick(Sender: TObject);
-    procedure MartClick(Sender: TObject);
-  private
-    procedure FShow; override;
+    s0: TLayout;
+    s1: TLayout;
+    s2: TLayout;
+    s3: TLayout;
+    img0: TGlyph;
+    img1: TGlyph;
+    img2: TGlyph;
+    img3: TGlyph;
+    Main: TLayout;
+    t0: TText;
+    t1: TText;
+    t2: TText;
+    t3: TText;
+    procedure s0Click(Sender: TObject);
+    procedure s0MouseEnter(Sender: TObject);
+  protected
+    procedure gShow; override;
   public
     { Public declarations }
   end;
@@ -35,35 +35,71 @@ implementation
 
 {$R *.fmx}
 
-procedure TSeazonForm.FShow;
+const
+  m =40;
+
+var
+  w:single;
+  shw,lst:ShortInt;
+
+procedure TSeazonForm.gShow;
+var
+  img_w:single;
 begin
-  IM.SetImages(TImgs.Create(ISEQ,[],[Dec,Mart,Iul,Sent]));
+  w:=Width/4;
+  img_w:=Height/720*1082;
+
+  s0.Width:=w;
+  img0.Width:=img_w;
+
+  s1.Width:=w;
+  img1.Width:=img_w;
+
+  s2.Width:=w;
+  img2.Width:=img_w;
+
+  s3.Width:=w;
+  img3.Width:=img_w;
+  shw:=-1;
 end;
 
-{procedure TSeazonForm.BarNextBtnClick(Sender: TObject);
+procedure TSeazonForm.s0Click(Sender: TObject);
 begin
-  PlaceForm.Show;
-  SeazonForm.Close;
-end;}
+  if shw>=0 then
+  begin
+    TAnimator.AnimateFloat(Main.Children[shw], 'width', w);
+    TAnimator.AnimateFloat(Main, 'Position.X', 0);
+    TAnimator.AnimateInt(Main.Children[shw].Children[0].Children[0], 'TextSettings.Font.Size', 40);
+    TAnimator.AnimateFloat(Main.Children[shw].Children[0].Children[0], 'opacity', 0);
+    shw:=-1;
+  end else begin
+    shw:=Main.Children.IndexOf(TFmxObject(sender));
+    self.setDescription(TFmxObject(sender).Children[0].tag, Bar.SubText);
 
-procedure TSeazonForm.DecClick(Sender: TObject);
-begin
-  SM.Play;
-  Bar.DrawPanel(nLogo[0],(Sender as Timage).Tag);
+    TAnimator.AnimateFloat(Main, 'Position.X', -(2*w*TFmxObject(sender).Tag/3));
+    TAnimator.AnimateFloat(TFmxObject(sender), 'width', 3*w);
+    TAnimator.AnimateFloat(TFmxObject(sender).Children[0].Children[0], 'opacity', 1);
+    TAnimator.AnimateInt(TFmxObject(sender).Children[0].Children[0], 'TextSettings.Font.Size', 80);
+
+    if TFmxObject(sender).Tag=1 then win;
+  end;
 end;
 
-procedure TSeazonForm.MartClick(Sender: TObject);
+procedure TSeazonForm.s0MouseEnter(Sender: TObject);
+var
+  id:byte;
 begin
-  Blur.Trigger:='IsVisible=false';
-  b1.Trigger:='IsVisible=true';
-  b2.Trigger:='IsVisible=true';
-  b3.Trigger:='IsVisible=true';
-  Dec.OnClick:=nil;Mart.OnClick:=nil;Iul.OnClick:=nil;Sent.OnClick:=nil;
-  Bar.DrawPanel(nLogo[0],(Sender as Timage).Tag);
-  GD.GetAwd(1);
-  Bar.UpStatus(1);
-  Bar.NextBtn.Opacity:=1;
-  Bar.NextBtn.Enabled:=true;
+  id:=main.Children.IndexOf(TFmxObject(sender));
+  if (shw<0)and(id<>lst) then
+  begin
+    TAnimator.AnimateFloat(Main.Children[lst].Children[0].Children[0], 'opacity', 0);
+    TAnimator.AnimateFloat(Main.Children[lst], 'width', w);
+
+    TAnimator.AnimateFloat(TFmxObject(sender).Children[0].Children[0], 'opacity', 1);
+    TAnimator.AnimateFloat(Main, 'Position.X', -(80*TFmxObject(sender).Tag/3));
+    TAnimator.AnimateFloat(TFmxObject(sender), 'width', 80+w);
+    lst:=id;
+  end;
 end;
 
 end.

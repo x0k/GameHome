@@ -6,94 +6,99 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.ScrollBox,
   FMX.Memo, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Objects, FMX.Effects,
-  FMX.Layouts, FMX.TabControl, FMX.Filter.Effects, DataUnit;
+  FMX.Layouts, FMX.TabControl, FMX.Filter.Effects, DataUnit, FMX.ImgList, FMX.Ani;
 
 type
   TPlaceForm = class(TGForm)
     Tabs: TTabControl;
     TabItem1: TTabItem;
     TabItem2: TTabItem;
-    Grid: TGridPanelLayout;
-    forest: TImage;
-    b1: TBlurEffect;
-    Tfor: TText;
-    River: TImage;
-    b2: TBlurEffect;
-    Tiul: TText;
-    pole: TImage;
-    b3: TBlurEffect;
-    Tsent: TText;
-    boloto: TImage;
-    Blur: TBlurEffect;
-    BG: TImage;
     Text: TMemo;
-    place: TImage;
-    Main1: TLayout;
-    Tmart: TText;
-    procedure FormShow(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
-    procedure placeClick(Sender: TObject);
-    procedure forestClick(Sender: TObject);
-    procedure RiverClick(Sender: TObject);
-    procedure BarNextBtnClick(Sender: TObject);
-  private
-    showed:boolean;
+    BG: TGlyph;
+    Main: TLayout;
+    s0: TLayout;
+    img0: TGlyph;
+    t1: TText;
+    ShadowEffect1: TShadowEffect;
+    s1: TLayout;
+    img1: TGlyph;
+    Text1: TText;
+    ShadowEffect2: TShadowEffect;
+    s2: TLayout;
+    img2: TGlyph;
+    Text2: TText;
+    ShadowEffect3: TShadowEffect;
+    s3: TLayout;
+    img3: TGlyph;
+    Text3: TText;
+    ShadowEffect4: TShadowEffect;
+    mapstr: TGlyph;
+    procedure s0Click(Sender: TObject);
+  protected
+    procedure gShow; override;
   public
-    { Public declarations }
+    procedure GNext(Sender: TObject);override;
   end;
 
 implementation
 
 {$R *.fmx}
 
-procedure TPlaceForm.FormShow(Sender: TObject);
+var
+  w:single;
+  shw:ShortInt;
+
+procedure TPlaceForm.s0Click(Sender: TObject);
 begin
-  if not showed then
+  if shw>=0 then
   begin
-    //Bar.Load(nLogo,self.Name);
-    //Text.Lines.Assign(FD.SubTexts[5]);
-    Bar.UpStatus(2);
-    Bar.Draw(self.Width,self.Height);
-    IM.SetImage(IBG,TImg.Create('Wall',BG),true);
-    IM.SetImage(IOTH,TImg.Create('Place',place));
-    IM.SetImages(TImgs.Create(ISEQ,[],[forest,boloto,river,pole]));
-  end else Bar.pUpdate;
+    TAnimator.AnimateFloat(Main.Children[shw], 'width', w);
+    TAnimator.AnimateFloat(Main, 'Position.X', 0);
+    TAnimator.AnimateInt(Main.Children[shw].Children[0].Children[0], 'TextSettings.Font.Size', 40);
+    shw:=-1;
+  end else begin
+    shw:=Main.Children.IndexOf(TFmxObject(sender));
+    self.setDescription(TFmxObject(sender).Children[0].tag, Bar.SubText);
+
+    TAnimator.AnimateFloat(Main, 'Position.X', -(2*w*TFmxObject(sender).Tag/3));
+    TAnimator.AnimateFloat(TFmxObject(sender), 'width', 3*w);
+    TAnimator.AnimateInt(TFmxObject(sender).Children[0].Children[0], 'TextSettings.Font.Size', 80);
+
+    if TFmxObject(sender).Tag=2 then win;
+  end;
 end;
 
-procedure TPlaceForm.BarNextBtnClick(Sender: TObject);
+procedure TPlaceForm.gShow;
+var
+  img_w:single;
 begin
-  //ToolsForm.Show;
-  //PlaceForm.Close;
+  w:=Width/4;
+  img_w:=Height/720*1082;
+
+  s0.Width:=w;
+  img0.Width:=img_w;
+
+  s1.Width:=w;
+  img1.Width:=img_w;
+
+  s2.Width:=w;
+  img2.Width:=img_w;
+
+  s3.Width:=w;
+  img3.Width:=img_w;
+  shw:=-1;
+
+  self.setDescription(5, Text);
+  Bar.showNext;
 end;
 
-procedure TPlaceForm.SpeedButton3Click(Sender: TObject);
+procedure TPlaceForm.GNext(Sender: TObject);
 begin
-  //PlaceForm.Close;
-end;
-
-procedure TPlaceForm.forestClick(Sender: TObject);
-begin
-  SM.Play;
-  //Bar.DrawPanel(nLogo,(Sender as Timage).Tag);
-end;
-
-procedure TPlaceForm.placeClick(Sender: TObject);
-begin
-  Tabs.Next();
-end;
-
-procedure TPlaceForm.RiverClick(Sender: TObject);
-begin
-  Blur.Trigger:='IsVisible=false';
-  b1.Trigger:='IsVisible=true';
-  b2.Trigger:='IsVisible=true';
-  b3.Trigger:='IsVisible=true';
-  Bar.NextBtn.Opacity:=1;
-  bar.NextBtn.Enabled:=true;
-  forest.OnClick:=nil;boloto.OnClick:=nil;river.OnClick:=nil;pole.OnClick:=nil;
-  //Bar.DrawPanel(nLogo,(Sender as Timage).Tag);
-  GD.GetAwd(10);
-  Bar.UpStatus(2);
+  if Tabs.TabIndex<1 then
+  begin
+    Tabs.Next();
+    Bar.hideNext;
+  end else DataForm.ShowForm(level+1);
 end;
 
 end.
