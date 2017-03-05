@@ -15,8 +15,8 @@ type
     procedure SliderStartChanging(Sender: TObject; const NewItemIndex: Integer);
   protected
     loaded:boolean;
-    procedure vShow; override;
-    procedure vClose; override;
+    procedure onShowGForm; override;
+    procedure onCloseGForm; override;
   end;
 const
   IMG_COUNT = 15;
@@ -39,17 +39,16 @@ begin
   SetDescription(NewItemIndex,Bar.SubText);
 end;
 
-procedure TMuseumForm.VShow;
+procedure TMuseumForm.onShowGForm;
 var
  i:byte;
 begin
   IM.add(eResource.rMuseum);
   for i:=1 to IMG_COUNT do
     Slider.Images.AddImage(IM.GetBitmap('M'+i.ToString),'M'+i.ToString);
-
 end;
 
-procedure TMuseumForm.vClose;
+procedure TMuseumForm.onCloseGForm;
 begin
   Slider.Images.Clear;
   IM.clear;

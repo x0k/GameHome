@@ -48,30 +48,28 @@ object GameForm: TGameForm
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
-        ImageIndex = 2
+        ImageIndex = 1
         Images = DataForm.Backgrounds
       end
       object Main1: TLayout
         Align = Client
+        Opacity = 0.000000000000000000
         Margins.Bottom = 160.000000000000000000
         Size.Width = 1280.000000000000000000
         Size.Height = 560.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        object Alex: TImage
-          MultiResBitmap.Height = 514
-          MultiResBitmap.Width = 440
-          MultiResBitmap = <
-            item
-            end>
+        object Alex: TGlyph
+          Margins.Left = 40.000000000000000000
+          Margins.Top = 40.000000000000000000
+          Margins.Right = 40.000000000000000000
+          Margins.Bottom = 40.000000000000000000
           Align = Client
-          Margins.Left = 10.000000000000000000
-          Margins.Top = 10.000000000000000000
-          Margins.Right = 10.000000000000000000
-          Margins.Bottom = 10.000000000000000000
-          Size.Width = 1260.000000000000000000
-          Size.Height = 540.000000000000000000
+          Size.Width = 1200.000000000000000000
+          Size.Height = 480.000000000000000000
           Size.PlatformDefault = False
+          ImageIndex = 0
+          Images = DataForm.Images
         end
       end
     end
@@ -88,6 +86,14 @@ object GameForm: TGameForm
       Text = 'TabItem2'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
+      object BG2: TGlyph
+        Align = Client
+        Size.Width = 1280.000000000000000000
+        Size.Height = 720.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 1
+        Images = DataForm.Backgrounds
+      end
       object Main2: TLayout
         Align = Client
         Margins.Bottom = 160.000000000000000000
@@ -95,29 +101,18 @@ object GameForm: TGameForm
         Size.Height = 560.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        object Map: TImage
-          MultiResBitmap.Height = 514
-          MultiResBitmap.Width = 440
-          MultiResBitmap = <
-            item
-            end>
+        object Place: TGlyph
+          Margins.Left = 40.000000000000000000
+          Margins.Top = 40.000000000000000000
+          Margins.Right = 40.000000000000000000
+          Margins.Bottom = 40.000000000000000000
           Align = Client
-          Margins.Left = 10.000000000000000000
-          Margins.Top = 10.000000000000000000
-          Margins.Right = 10.000000000000000000
-          Margins.Bottom = 10.000000000000000000
-          Size.Width = 1260.000000000000000000
-          Size.Height = 540.000000000000000000
+          Size.Width = 1200.000000000000000000
+          Size.Height = 480.000000000000000000
           Size.PlatformDefault = False
+          ImageIndex = 1
+          Images = DataForm.Images
         end
-      end
-      object BG2: TGlyph
-        Align = Client
-        Size.Width = 1280.000000000000000000
-        Size.Height = 720.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 3
-        Images = DataForm.Backgrounds
       end
     end
     object TabItem3: TTabItem
@@ -138,18 +133,26 @@ object GameForm: TGameForm
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
-        ImageIndex = 4
+        ImageIndex = 1
         Images = DataForm.Backgrounds
       end
       object Main3: TLayout
         Align = Client
-        Margins.Bottom = 160.000000000000000000
         Size.Width = 1280.000000000000000000
-        Size.Height = 560.000000000000000000
+        Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
+        object Home: TGlyph
+          Align = Client
+          Size.Width = 1280.000000000000000000
+          Size.Height = 720.000000000000000000
+          Size.PlatformDefault = False
+          ImageIndex = 2
+          Images = DataForm.Images
+        end
         object Btns: TLayout
           Align = Client
+          Margins.Bottom = 160.000000000000000000
           Size.Width = 1280.000000000000000000
           Size.Height = 560.000000000000000000
           Size.PlatformDefault = False

@@ -7,14 +7,13 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.StdCtrls, FMX.ScrollBox, FMX.Memo, FMX.Controls.Presentation,
   FMX.TabControl, FMX.Layouts, FGX.FlipView, FMX.Filter.Effects, DataUnit,
-  FMX.ImgList, BarUnit;
+  FMX.ImgList, BarUnit, FMX.ani;
 
 type
   TGameForm = class(TGForm)
     Tabs: TTabControl;
     TabItem1: TTabItem;
     TabItem2: TTabItem;
-    Map: TImage;
     TabItem3: TTabItem;
     l4btn: TButton;
     l5btn: TButton;
@@ -30,7 +29,6 @@ type
     l12btn: TButton;
     l11btn: TButton;
     l10btn: TButton;
-    Alex: TImage;
     Btns: TLayout;
     Main1: TLayout;
     Main2: TLayout;
@@ -38,22 +36,37 @@ type
     BG1: TGlyph;
     BG2: TGlyph;
     BG3: TGlyph;
+    Alex: TGlyph;
+    Place: TGlyph;
+    Home: TGlyph;
     procedure l1btnClick(Sender: TObject);
-  protected
-    procedure gShow; override;
   public
-    procedure GNext(Sender: TObject);override;
+    procedure hideAnimation; override;
+    procedure showAnimation; override;
+    procedure Back(Sender: TObject);override;
+    procedure Next(Sender: TObject);override;
   end;
+
+var
+  GameForm: TGameForm;
+
 implementation
 
 {$R *.fmx}
 
-procedure TGameForm.gShow;
+procedure TGameForm.showAnimation;
 begin
-  Bar.showNext;
+  TAnimator.AnimateFloat(Main1, 'opacity', 1, 0.4);
+  TAnimator.AnimateFloatWait(Main3, 'opacity', 1, 0.4);
 end;
 
-procedure TGameForm.GNext;
+procedure TGameForm.hideAnimation;
+begin
+  TAnimator.AnimateFloat(Main1, 'opacity', 0, 0.3);
+  TAnimator.AnimateFloatWait(Main3, 'opacity', 0, 0.3);
+end;
+
+procedure TGameForm.Next;
 begin
   if Tabs.TabIndex<2 then
   begin
@@ -62,8 +75,16 @@ begin
   end else Bar.setShowBonus;
 end;
 
+procedure TGameForm.Back(Sender: TObject);
+begin
+  hideAnimation;
+  Bar.Parent:=nil;
+  free;
+end;
+
 procedure TGameForm.l1btnClick(Sender: TObject);
 begin
+  hideAnimation;
   DataForm.ShowForm((Sender as TFmxObject).Tag);
 end;
 

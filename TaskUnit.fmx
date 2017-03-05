@@ -31,8 +31,8 @@ object TaskForm: TTaskForm
       Size.Width = 640.000000000000000000
       Size.Height = 420.000000000000000000
       Size.PlatformDefault = False
-      ImageIndex = 26
-      Images = DataForm.Other
+      ImageIndex = 4
+      Images = DataForm.Images
     end
     object Grid: TGridPanelLayout
       Align = Client

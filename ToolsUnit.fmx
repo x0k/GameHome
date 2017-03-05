@@ -20,19 +20,20 @@ object ToolsForm: TToolsForm
     Size.PlatformDefault = False
     ImageIndex = 1
     Images = DataForm.Backgrounds
-    object tools: TGridLayout
-      Align = Client
-      ItemHeight = 64.000000000000000000
-      ItemWidth = 64.000000000000000000
-      Orientation = Horizontal
-      Margins.Left = 80.000000000000000000
-      Margins.Top = 80.000000000000000000
-      Margins.Right = 80.000000000000000000
-      Margins.Bottom = 220.000000000000000000
-      Size.Width = 1120.000000000000000000
-      Size.Height = 420.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 0
-    end
+  end
+  object tools: TGridLayout
+    Align = Client
+    ItemHeight = 64.000000000000000000
+    ItemWidth = 64.000000000000000000
+    Opacity = 0.000000000000000000
+    Orientation = Horizontal
+    Margins.Left = 80.000000000000000000
+    Margins.Top = 80.000000000000000000
+    Margins.Right = 80.000000000000000000
+    Margins.Bottom = 220.000000000000000000
+    Size.Width = 1120.000000000000000000
+    Size.Height = 420.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
   end
 end

@@ -23,12 +23,14 @@ type
     t1: TText;
     t2: TText;
     t3: TText;
+    BG: TGlyph;
     procedure s0Click(Sender: TObject);
     procedure s0MouseEnter(Sender: TObject);
   protected
     procedure gShow; override;
   public
-    { Public declarations }
+    procedure hideAnimation; override;
+    procedure showAnimation; override;
   end;
 
 implementation
@@ -41,6 +43,16 @@ const
 var
   w:single;
   shw,lst:ShortInt;
+
+procedure TSeazonForm.showAnimation;
+begin
+  TAnimator.AnimateFloatWait(Main, 'opacity', 1, 0.4);
+end;
+
+procedure TSeazonForm.hideAnimation;
+begin
+  TAnimator.AnimateFloatWait(Main, 'opacity', 0, 0.3);
+end;
 
 procedure TSeazonForm.gShow;
 var
@@ -70,7 +82,6 @@ begin
     TAnimator.AnimateFloat(Main.Children[shw], 'width', w);
     TAnimator.AnimateFloat(Main, 'Position.X', 0);
     TAnimator.AnimateInt(Main.Children[shw].Children[0].Children[0], 'TextSettings.Font.Size', 40);
-    TAnimator.AnimateFloat(Main.Children[shw].Children[0].Children[0], 'opacity', 0);
     shw:=-1;
   end else begin
     shw:=Main.Children.IndexOf(TFmxObject(sender));
@@ -78,7 +89,6 @@ begin
 
     TAnimator.AnimateFloat(Main, 'Position.X', -(2*w*TFmxObject(sender).Tag/3));
     TAnimator.AnimateFloat(TFmxObject(sender), 'width', 3*w);
-    TAnimator.AnimateFloat(TFmxObject(sender).Children[0].Children[0], 'opacity', 1);
     TAnimator.AnimateInt(TFmxObject(sender).Children[0].Children[0], 'TextSettings.Font.Size', 80);
 
     if TFmxObject(sender).Tag=1 then win;
@@ -87,15 +97,15 @@ end;
 
 procedure TSeazonForm.s0MouseEnter(Sender: TObject);
 var
-  id:byte;
+  id:shortint;
 begin
   id:=main.Children.IndexOf(TFmxObject(sender));
   if (shw<0)and(id<>lst) then
   begin
-    TAnimator.AnimateFloat(Main.Children[lst].Children[0].Children[0], 'opacity', 0);
+    TAnimator.AnimateInt(Main.Children[lst].Children[0].Children[0], 'TextSettings.Font.Size', 40);
     TAnimator.AnimateFloat(Main.Children[lst], 'width', w);
 
-    TAnimator.AnimateFloat(TFmxObject(sender).Children[0].Children[0], 'opacity', 1);
+    TAnimator.AnimateInt(TFmxObject(sender).Children[0].Children[0], 'TextSettings.Font.Size', 52);
     TAnimator.AnimateFloat(Main, 'Position.X', -(80*TFmxObject(sender).Tag/3));
     TAnimator.AnimateFloat(TFmxObject(sender), 'width', 80+w);
     lst:=id;

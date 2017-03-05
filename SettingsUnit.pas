@@ -28,7 +28,7 @@ type
     procedure DecBrClick(Sender: TObject);
     procedure DecCtrClick(Sender: TObject);
   protected
-    procedure vCreate; override;
+    procedure onCreateGForm; override;
   public
     { Public declarations }
   end;
@@ -65,7 +65,7 @@ begin
   SM.Play;
 end;
 
-procedure TSettingsForm.vCreate;
+procedure TSettingsForm.onCreateGForm;
 begin
   SM.LoadSound(eSound.sWrong);
 

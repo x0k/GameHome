@@ -26,7 +26,7 @@ type
     t3: TText;
     procedure s0MouseEnter(Sender: TObject);
   protected
-    procedure vCreate; override;
+    procedure onCreateGForm; override;
     procedure gShow; override;
   public
     { Public declarations }
@@ -61,7 +61,7 @@ begin
   end;
 end;
 
-procedure TFoundationForm.vCreate;
+procedure TFoundationForm.onCreateGForm;
 begin
   eff:=TGloomEffect.Create(self);
 end;

@@ -15,8 +15,8 @@ type
     Text: TMemo;
     BG: TGlyph;
   protected
-    procedure vShow; override;
-    procedure vClose; override;
+    procedure onShowGForm; override;
+    procedure onCloseGForm; override;
   public
     { Public declarations }
   end;
@@ -29,13 +29,13 @@ implementation
 {$R *.fmx}
 
 
-procedure TAboutForm.vShow;
+procedure TAboutForm.onShowGForm;
 begin
   Bar.Logo.Visible:=false;
   SetDescription(1, Text);
 end;
 
-procedure TAboutForm.vClose;
+procedure TAboutForm.onCloseGForm;
 begin
   lDesc:=0;
   Bar.Logo.Visible:=true;

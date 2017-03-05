@@ -38,6 +38,7 @@ type
     bonusBG: TRectangle;
     telega: TLayout;
     procedure RBonusMouseLeave(Sender: TObject);
+    procedure logoLayoutClick(Sender: TObject);
   protected
     procedure showBonus(Sender: TObject);
   public
@@ -78,6 +79,20 @@ begin
   open:=not open;
 end;
 
+procedure TBar.logoLayoutClick(Sender: TObject);
+var
+  g:TGForm;
+begin
+  g:=nil;
+  if parent is TGForm then g:=(parent as TGForm);
+  if Assigned(g)and(g.lvl>0) then
+  begin
+    g.hideAnimation;
+    DataForm.ShowForm(0);
+    g.Free;
+  end;
+end;
+
 procedure TBar.RBonusMouseLeave(Sender: TObject);
 begin
   TAnimator.AnimateFloat(Rbonus, 'Position.X', (parent as TBarForm).Width);
@@ -105,8 +120,11 @@ begin
   open:=false;
   if parent is TGForm then
   begin
-    NextBtn.OnClick:=(parent as TGForm).GNext;
-    hideNext;
+    NextBtn.Visible:=true;
+    NextBtn.OnClick:=(parent as TGForm).Next;
+    BackBtn.OnClick:=(parent as TGForm).Back;
+    if (parent as TGForm).status<2 then hideNext
+      else if NextBtn.Opacity=0 then showNext;
   end else begin
     NextBtn.Visible:=false;
   end;

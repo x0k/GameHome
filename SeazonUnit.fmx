@@ -15,13 +15,22 @@ object SeazonForm: TSeazonForm
   FormFactor.Devices = [Desktop]
   FullScreen = True
   DesignerMasterStyle = 0
-  object Main: TLayout
-    Align = Scale
-    HitTest = True
+  object BG: TGlyph
+    Align = Client
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 1
+    ImageIndex = 1
+    Images = DataForm.Backgrounds
+  end
+  object Main: TLayout
+    Align = Scale
+    HitTest = True
+    Opacity = 0.000000000000000000
+    Size.Width = 1280.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
     object s0: TLayout
       Align = Left
       ClipChildren = True
@@ -45,7 +54,6 @@ object SeazonForm: TSeazonForm
           Align = Bottom
           Anchors = []
           HitTest = False
-          Opacity = 0.000000000000000000
           Margins.Bottom = 200.000000000000000000
           Position.Y = 440.000000000000000000
           Size.Width = 1082.000000000000000000
@@ -83,7 +91,6 @@ object SeazonForm: TSeazonForm
           Align = Bottom
           Anchors = []
           HitTest = False
-          Opacity = 0.000000000000000000
           Margins.Bottom = 200.000000000000000000
           Position.Y = 440.000000000000000000
           Size.Width = 1082.000000000000000000
@@ -121,7 +128,6 @@ object SeazonForm: TSeazonForm
           Align = Bottom
           Anchors = []
           HitTest = False
-          Opacity = 0.000000000000000000
           Margins.Bottom = 200.000000000000000000
           Position.Y = 440.000000000000000000
           Size.Width = 1082.000000000000000000
@@ -159,7 +165,6 @@ object SeazonForm: TSeazonForm
           Align = Bottom
           Anchors = []
           HitTest = False
-          Opacity = 0.000000000000000000
           Margins.Bottom = 200.000000000000000000
           Position.Y = 440.000000000000000000
           Size.Width = 1082.000000000000000000

@@ -46,7 +46,7 @@ object FoundationForm: TFoundationForm
           Size.Width = 220.000000000000000000
           Size.Height = 320.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 28
+          ImageIndex = 26
           Images = DataForm.Other
           object t0: TText
             Align = Bottom
@@ -77,7 +77,7 @@ object FoundationForm: TFoundationForm
           Size.Width = 220.000000000000000000
           Size.Height = 320.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 29
+          ImageIndex = 27
           Images = DataForm.Other
           object t1: TText
             Align = Bottom
@@ -109,7 +109,7 @@ object FoundationForm: TFoundationForm
           Size.Width = 220.000000000000000000
           Size.Height = 320.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 30
+          ImageIndex = 28
           Images = DataForm.Other
           object t2: TText
             Align = Bottom
@@ -141,7 +141,7 @@ object FoundationForm: TFoundationForm
           Size.Width = 220.000000000000000000
           Size.Height = 320.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 31
+          ImageIndex = 29
           Images = DataForm.Other
           object t3: TText
             Align = Bottom

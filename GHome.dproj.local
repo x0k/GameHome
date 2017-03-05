@@ -3,7 +3,7 @@
 	<Transactions>
     <Transaction>1899.12.30 00:00:00.000.059,D:\Drive\projects\Delphi\GameHome\Unit1.fmx=D:\Drive\projects\Delphi\GameHome\PlaceUnit.fmx</Transaction>
     <Transaction>1899.12.30 00:00:00.000.131,D:\Drive\projects\Delphi\GameHome\Unit1.fmx=D:\Drive\projects\Delphi\GameHome\ToolsUnit.fmx</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.663,=D:\Drive\projects\Delphi\GameHome\Img\backgrounds</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.046,D:\Drive\projects\Delphi\GameHome\Img\backgrounds=</Transaction>
     <Transaction>1899.12.30 00:00:00.000.355,D:\Drive\projects\Delphi\GameHome\Unit1.fmx=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
     <Transaction>1899.12.30 00:00:00.000.301,D:\Drive\projects\Delphi\GameHome\Unit1.fmx=D:\Drive\projects\Delphi\GameHome\TaskUnit.fmx</Transaction>
     <Transaction>1899.12.30 00:00:00.000.607,D:\Drive\projects\Delphi\GameHome\Unit1.fmx=D:\Drive\projects\Delphi\GameHome\GameUnit.fmx</Transaction>
@@ -12,7 +12,7 @@
     <Transaction>1899.12.30 00:00:00.000.754,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\MainUnit.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.514,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\SettingsUnit.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.629,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.046,D:\Drive\projects\Delphi\GameHome\Img\backgrounds=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.663,=D:\Drive\projects\Delphi\GameHome\Img\backgrounds</Transaction>
     <Transaction>1899.12.30 00:00:00.000.904,D:\Drive\projects\Delphi\GameHome\BarUnit.pas=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.748,D:\Drive\projects\Delphi\GameHome\GHome.dproj=D:\Drive\projects\Delphi\GameHome\Main.dproj</Transaction>
     <Transaction>1899.12.30 00:00:00.000.636,D:\Drive\projects\Delphi\GameHome\Unit1.dfm=D:\Drive\projects\Delphi\GameHome\DataUnit.dfm</Transaction>
@@ -27,15 +27,15 @@
     <Transaction>1899.12.30 00:00:00.000.229,D:\Drive\projects\Delphi\GameHome\Unit1.fmx=D:\Drive\projects\Delphi\GameHome\MapUnit.fmx</Transaction>
     <Transaction>1899.12.30 00:00:00.000.754,D:\Drive\projects\Delphi\GameHome\Unit1.fmx=D:\Drive\projects\Delphi\GameHome\MainUnit.fmx</Transaction>
     <Transaction>1899.12.30 00:00:00.000.916,=D:\Downloads\fgx_0.7.1.118\R101 (Update 1)\Styles\TfgFlipView.style</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.904,D:\Drive\projects\Delphi\GameHome\BarUnit.fmx=D:\Drive\projects\Delphi\GameHome\Unit1.fmx</Transaction>
     <Transaction>1899.12.30 00:00:00.000.531,D:\Drive\projects\Delphi\GameHome\MaterialsUnit.fmx=D:\Drive\projects\Delphi\GameHome\Unit1.fmx</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.853,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.059,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.904,D:\Drive\projects\Delphi\GameHome\BarUnit.fmx=D:\Drive\projects\Delphi\GameHome\Unit1.fmx</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.588,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.471,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.573,D:\Drive\projects\Delphi\GameHome\Project1.dproj=D:\Drive\projects\Delphi\GameHome\Main.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.553,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.952,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.763,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.026,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.030,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.059,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\PlaceUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.488,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.842,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.850,=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.477,=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.674,=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
@@ -43,20 +43,20 @@
     <Transaction>1899.12.30 00:00:00.000.901,D:\Drive\projects\Delphi\GameHome\Project1.dproj=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>1899.12.30 00:00:00.000.851,=D:\Projects\Delphi\GameHome\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.531,D:\Drive\projects\Delphi\GameHome\MaterialsUnit.pas=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.588,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.853,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.059,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.355,D:\Drive\projects\Delphi\GameHome\Unit1.pas=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.636,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\DataUnit.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.471,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.030,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.488,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.842,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.396,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\SeazonUnit.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.059,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\PlaceUnit.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.301,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\TaskUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.553,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.952,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.763,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.026,=D:\Drive\projects\Delphi\GameHome\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.229,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\MapUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.131,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\ToolsUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.301,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\TaskUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.396,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\SeazonUnit.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.636,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\DataUnit.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.628,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\FoundationUnit.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.607,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\GameUnit.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.131,D:\Drive\projects\Delphi\GameHome\Unit1.pas=D:\Drive\projects\Delphi\GameHome\ToolsUnit.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<NoProfile iOSSimulator="iPhone5" Android="BAMVOZHYEUJNDQAM"/>
@@ -70,24 +70,16 @@
     <File Path="google-play-billing.dex.jar"/>
     <File Path="google-play-licensing.dex.jar"/>
     <File Path="google-play-services.dex.jar"/>
-    <File Path="AboutUnit.pas"/>
-    <File Path="AboutUnit.fmx"/>
-    <File Path="BarUnit.pas"/>
-    <File Path="BarUnit.fmx"/>
     <File Path="DataUnit.pas"/>
     <File Path="DataUnit.dfm"/>
-    <File Path="GameUnit.pas"/>
-    <File Path="GameUnit.fmx"/>
     <File Path="MainUnit.pas"/>
     <File Path="MainUnit.fmx"/>
-    <File Path="MuseumUnit.pas"/>
-    <File Path="MuseumUnit.fmx"/>
-    <File Path="PlaceUnit.pas"/>
-    <File Path="PlaceUnit.fmx"/>
+    <File Path="GameUnit.pas"/>
+    <File Path="GameUnit.fmx"/>
     <File Path="SeazonUnit.pas"/>
     <File Path="SeazonUnit.fmx"/>
-    <File Path="SettingsUnit.pas"/>
-    <File Path="SettingsUnit.fmx"/>
+    <File Path="PlaceUnit.pas"/>
+    <File Path="PlaceUnit.fmx"/>
     <File Path="ToolsUnit.pas"/>
     <File Path="ToolsUnit.fmx"/>
     <File Path="MaterialsUnit.pas"/>
@@ -98,5 +90,13 @@
     <File Path="FoundationUnit.fmx"/>
     <File Path="MapUnit.pas"/>
     <File Path="MapUnit.fmx"/>
+    <File Path="BarUnit.pas"/>
+    <File Path="BarUnit.fmx"/>
+    <File Path="AboutUnit.pas"/>
+    <File Path="AboutUnit.fmx"/>
+    <File Path="MuseumUnit.pas"/>
+    <File Path="MuseumUnit.fmx"/>
+    <File Path="SettingsUnit.pas"/>
+    <File Path="SettingsUnit.fmx"/>
   </ProjectSortOrder>
 </BorlandProject>

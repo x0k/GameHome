@@ -4,9 +4,8 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, GameUnit,
-  FMX.Controls.Presentation, FMX.StdCtrls, FMX.ScrollBox, FMX.Memo, FMX.Objects,
-  FMX.Layouts, FMX.Effects, FMX.Filter.Effects, System.ImageList, FMX.ImgList;
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Controls.Presentation, FMX.StdCtrls,
+  FMX.Objects, FMX.Layouts, FMX.ImgList;
 
 type
   TMainForm = class(TForm)
@@ -45,7 +44,7 @@ implementation
 
 {$R *.fmx}
 
-uses SettingsUnit, MuseumUnit, AboutUnit, DataUnit;
+uses SettingsUnit, MuseumUnit, AboutUnit, DataUnit, GameUnit;
 
 procedure TMainForm.AboutBtnClick(Sender: TObject);
 begin
@@ -56,13 +55,13 @@ end;
 procedure TMainForm.BGameBtnClick(Sender: TObject);
 begin
   TM.Load(tLevels);
+  GameForm:=TGameForm.Create(0);
   DataForm.ShowForm(0);
 end;
 
 procedure TMainForm.ExitBtnClick(Sender: TObject);
 begin
-   mainform.Release;
-   mainform.Close;
+  close;
 end;
 
 procedure TMainForm.MuseumBtnClick(Sender: TObject);

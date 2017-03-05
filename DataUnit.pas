@@ -63,11 +63,12 @@ type
   //Игровая информация
   TGameData = class
     CurrentForm:Byte;
+    Status:array[0..LVL_COUNT] of byte;
     Awards:array[1..AWD_COUNT] of boolean;
     origramparray: tramparray;//текущие значения gamma ramp
     Br,Ct,Gm:byte;
     procedure GetAwd(index:byte);
-    procedure UpStatus(var st:byte);
+    procedure UpStatus(l:byte);
     procedure LoadSavedRamp;
     function UpdateGamma: boolean;
     procedure SetBr(b:byte);
@@ -92,39 +93,48 @@ type
   TBarForm = class(TForm)
   protected
     lLogo,lCapt,lDesc:byte;
-    last:TFmxObject;
     procedure setLogo(Logo:byte; img:TImage);
     procedure setCaption(Capt:byte; text:TText);
     procedure setDescription(Desc:byte; memo:TMemo);
-    procedure vCreate; virtual;
-    procedure vShow; virtual;
-    procedure vClose; virtual;
+    procedure onCreateGForm; virtual;
+    procedure onShowGForm; virtual;
+    procedure onCloseGForm; virtual;
   public
     procedure setText;
-    procedure bCreate(Sender:TObject);
-    procedure bShow(Sender:TObject);
+    procedure onCreateBForm(Sender:TObject);
+    procedure onShowBForm(Sender:TObject);
+    procedure onCloseBForm(Sender: TObject; var Action: TCloseAction);
+
     procedure closeByClick(Sender:TObject);
-    procedure bClose(Sender: TObject; var Action: TCloseAction);
     constructor Create(AOwner: TComponent); override;
   End;
 
   //GForm
   TGForm = class(TBarForm)
   protected
-    status:byte;
     level:byte;
     sLogo:TArray<string>;
     images:TImgs;
-    procedure fShow; virtual;
-    procedure aWin; virtual;
+    function getStatus:byte;
+    procedure upStatus(l:byte);
+    procedure firstShow; virtual;
+    procedure addWin; virtual;
     procedure gShow; virtual;
-    procedure gBack; virtual;//возврат на форму
-    procedure vShow; override;
-    procedure vClose; override;
+    procedure onShowGForm; override;
+    procedure onCloseGForm; override;
   public
     procedure win;
     procedure setText(l, c, d: byte); overload;
-    procedure GNext(Sender: TObject); virtual;
+    procedure showAnimation; virtual;
+    procedure hideAnimation; virtual;
+    procedure Next(Sender: TObject); virtual;
+    procedure Back(Sender: TObject); virtual;
+
+    class function getNameById(i:byte):string;
+    class function getFormById(i:byte):TGForm;
+
+    property lvl:byte read level;
+    property status:byte read getStatus write upStatus;
     constructor Create(Lvl:byte);  overload;
   end;
 
@@ -134,6 +144,7 @@ type
     Icons: TImageList;
     Sequence: TImageList;
     Other: TImageList;
+    Images: TImageList;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure ShowForm(i:byte);
@@ -220,6 +231,7 @@ begin
   finally
     releasedc(0, dc)
   end;
+  Status[0]:=3;
   Ct:=5;
   Br:=5;
   Gm:=1;
@@ -232,10 +244,10 @@ begin
 end;
 
 //Обновить статус в "прогрессбаре"
-procedure TGameData.UpStatus(var st: Byte);
+procedure TGameData.UpStatus(l: Byte);
 begin
-  st:=st+1;
-  if st=2 then Bar.showNext;
+  inc(status[l]);
+  if status[l]=2 then Bar.showNext;
 end;
 
 //Загрузить сохраненную гамму
@@ -533,15 +545,15 @@ begin
     else memo.Lines.Assign(TM.SubTexts[Desc]);
 end;
 
-procedure TBarForm.vCreate;
+procedure TBarForm.onCreateGForm;
 begin
 end;
 
-procedure TBarForm.vShow;
+procedure TBarForm.onShowGForm;
 begin
 end;
 
-procedure TBarForm.vClose;
+procedure TBarForm.onCloseGForm;
 begin
 end;
 
@@ -552,19 +564,16 @@ begin
   SetDescription(lDesc, Bar.SubText);
 end;
 
-procedure TBarForm.bCreate(Sender: TObject);
+procedure TBarForm.onCreateBForm(Sender: TObject);
 begin
-  vCreate;
+  onCreateGForm;
 end;
 
-procedure TBarForm.bShow(Sender: TObject);
-var
-  i:byte;
+procedure TBarForm.onShowBForm(Sender: TObject);
 begin
-  last:=Bar.Parent;
   Bar.Parent:=self;
   Bar.update;
-  vShow;
+  onShowGForm;
 end;
 
 procedure TBarForm.closeByClick(Sender: TObject);
@@ -572,23 +581,18 @@ begin
   close;
 end;
 
-procedure TBarForm.bClose(Sender: TObject; var Action: TCloseAction);
+procedure TBarForm.onCloseBForm(Sender: TObject; var Action: TCloseAction);
 begin
-  if Assigned(last) then
-  begin
-    Bar.Parent:=last;
-    Bar.update;
-    if last is TGForm then TGForm(last).gBack;    
-  end else Bar.Parent:=nil;
-  vClose;
+  Bar.Parent:=nil;
+  onCloseGForm;
 end;
 
 constructor TBarForm.create(AOwner: TComponent);
 begin
   inherited create(AOwner);
-  self.OnCreate:=bCreate;
-  self.OnShow:=bShow;
-  self.OnClose:=bClose;
+  self.OnCreate:=onCreateBForm;
+  self.OnShow:=onShowBForm;
+  self.OnClose:=onCloseBForm;
 end;
 
   {TGForm}
@@ -596,14 +600,14 @@ end;
 //Конструктор, инициализация полей
 constructor TGForm.Create(Lvl:byte);
 begin
-  inherited Create(nil);
+  inherited Create(DataForm);
   Level:=lvl;
 end;
 
 procedure TGForm.win;
 begin
-  GD.UpStatus(status);
-  aWin;
+  GD.UpStatus(level);
+  addWin;
 end;
 
 procedure TGForm.SetText(l, c, d: byte);
@@ -613,52 +617,88 @@ begin
   SetDescription(d, Bar.SubText);
 end;
 
-procedure TGForm.gBack;
+function TGForm.getStatus;
 begin
-  if status=2 then
-    Bar.showNext;
+  result:=GD.Status[level];
+end;
+
+procedure TGForm.upStatus;
+begin
+  GD.upStatus(l);
 end;
 
 procedure TGForm.gShow;
 begin
 end;
 
-procedure TGForm.fShow;
+procedure TGForm.firstShow;
 begin
 end;
 
-procedure TGForm.aWin;
+procedure TGForm.addWin;
+begin
+end;
+
+procedure TGForm.hideAnimation;
+begin
+end;
+
+procedure TGForm.showAnimation;
 begin
 end;
 
 //Код исполняющийся при открытии формы
-procedure TGForm.vShow;
+procedure TGForm.onShowGForm;
 begin
   gShow;
   if status=0 then//Первое открытие
   begin
-    GD.UpStatus(Status);
-    fShow;
+    GD.UpStatus(level);
+    firstShow;
+  end;
+  showAnimation;
+end;
+
+procedure TGForm.onCloseGForm;
+begin
+  free;
+end;
+
+procedure TGForm.Next;
+begin
+  hideAnimation;
+  if level<LVL_COUNT then
+    DataForm.ShowForm(level+1);
+  free;
+end;
+
+procedure TGForm.Back;
+begin
+  hideAnimation;
+  if level>0 then
+  begin
+    DataForm.ShowForm(level-1);
+    free;
+  end else hide;
+end;
+
+class function TGForm.getNameById(i: Byte):string;
+begin
+  case i of
+    0:result:='GameForm';
+    1:result:='SeazonForm';
+    2:result:='PlaceForm';
+    3:result:='ToolsForm';
+    4:result:='MaterialsForm';
+    5:result:='TaskForm';
+    6:result:='FoundationForm';
   end;
 end;
 
-procedure TGForm.vClose;
-begin
-  self.Release;
-end;
-
-procedure TGForm.GNext;
-begin
-  if level<LVL_COUNT then
-    DataForm.ShowForm(level+1);
-end;
-
-  {TDataForm}
-
-function createForm(i:byte):TGForm;
+class function TGForm.getFormById(i: Byte):TGForm;
 begin
   case i of
-    0:result:=TGameForm.Create(0);
+    0:result:=GameForm;
     1:result:=TSeazonForm.Create(1);
     2:result:=TPlaceForm.Create(2);
     3:result:=TToolsForm.Create(3);
@@ -669,9 +709,15 @@ begin
   end;
 end;
 
+  {TDataForm}
+
 procedure TDataForm.ShowForm(i: Byte);
+var
+ f:TGForm;
 begin
-  createForm(i).Show;
+  f:=TGForm.getFormById(i);
+  if Assigned(f) then f.Show else showmessage('form is nil');
+  if i=0 then f.onShowBForm(self);
 end;
 
 //Инициализация классовых переменных TGForm. Создание форм.

@@ -22,7 +22,7 @@ type
     procedure DecClick(Sender: TObject);
   protected
     procedure gShow; override;
-    procedure aWin; override;
+    procedure addWin; override;
   public
     { Public declarations }
   end;
@@ -46,7 +46,7 @@ begin
   ldesc:=0;
 end;
 
-procedure TTaskForm.aWin;
+procedure TTaskForm.addWin;
 begin
   Num.StyleLookup:='SelText';
 end;
