@@ -14,7 +14,7 @@ object ToolsForm: TToolsForm
   FullScreen = True
   DesignerMasterStyle = 0
   object BG: TGlyph
-    Align = Client
+    Align = Center
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
@@ -25,7 +25,6 @@ object ToolsForm: TToolsForm
     Align = Client
     ItemHeight = 64.000000000000000000
     ItemWidth = 64.000000000000000000
-    Opacity = 0.000000000000000000
     Orientation = Horizontal
     Margins.Left = 80.000000000000000000
     Margins.Top = 80.000000000000000000

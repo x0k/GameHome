@@ -24,57 +24,85 @@ type
     t1: TText;
     t2: TText;
     t3: TText;
+    home: TGlyph;
+    cont: TLayout;
     procedure s0MouseEnter(Sender: TObject);
+    procedure s0Click(Sender: TObject);
   protected
-    procedure onCreateGForm; override;
-    procedure gShow; override;
-  public
-    { Public declarations }
+    procedure onFormCreate; override;
+    procedure addShow; override;
   end;
-
-var
-  eff:TGloomEffect;
 
 implementation
 
 {$R *.fmx}
+
 var
-  w,p:single;
-  shw, lst:ShortInt;
+  w, p:single;
+  lst:ShortInt;
+
+procedure TFoundationForm.onFormCreate;
+var
+  i:byte;
+begin
+  bgs:=[BG];
+  lts:=[cont];
+  w:=Screen.Width/5;
+  main.Width:=w*4;
+  for i:=0 to 3 do
+  begin
+    (Main.Children[i] as TLayout).Width:=w;
+    (Main.Children[i].Children[0] as TGlyph).Height:=w+120;
+  end;
+end;
+
+procedure TFoundationForm.s0Click(Sender: TObject);
+  procedure wrongAni(O:TFmxObject);
+  begin
+    TAnimator.AnimateFloat(O, 'Margins.Left', 70);
+    TAnimator.AnimateFloatWait(O, 'Margins.Right', 70);
+    TAnimator.AnimateFloat(O, 'Margins.Left', 0);
+    TAnimator.AnimateFloat(O, 'Margins.Right', 0);
+  end;
+  procedure winAni(O:TFmxObject);
+  begin
+    TAnimator.AnimateFloat(O, 'Margins.Left', -70);
+    TAnimator.AnimateFloatWait(O, 'Margins.Right', -70);
+    TAnimator.AnimateFloat(O, 'Margins.Left', 0);
+    TAnimator.AnimateFloat(O, 'Margins.Right', 0);
+  end;
+begin
+  self.setDescription(TFmxObject(sender).Children[0].Tag, Bar.SubText);
+  if TFmxObject(sender).Tag=2 then
+  begin
+    win;
+    winAni(TFmxObject(sender).Children[0]);
+  end else wrongAni(TFmxObject(sender).Children[0]);
+end;
 
 procedure TFoundationForm.s0MouseEnter(Sender: TObject);
 var
-  id:byte;
+  id:shortint;
 begin
   id:=main.Children.IndexOf(TFmxObject(sender));
-  if (shw<0)and(id<>lst) then
+  if id<>lst then
   begin
-    TAnimator.AnimateInt(Main.Children[lst].Children[0].Children[0], 'TextSettings.Font.Size', 30);
-    //TAnimator.AnimateFloat(Main.Children[lst].Children[0].Children[0], 'opacity', 0);
     TAnimator.AnimateFloat(Main.Children[lst], 'width', w);
 
-    TAnimator.AnimateInt(TFmxObject(sender).Children[0].Children[0], 'TextSettings.Font.Size', 50);
-    //TAnimator.AnimateFloat(TFmxObject(sender).Children[0].Children[0], 'opacity', 1);
-    TAnimator.AnimateFloat(Main, 'Position.X', p-(80*TFmxObject(sender).Tag/3));
-    TAnimator.AnimateFloat(TFmxObject(sender), 'width', 80+w);
+    TAnimator.AnimateFloat(Main, 'Position.X', p-(60*TFmxObject(sender).Tag/3));
+    TAnimator.AnimateFloat(TFmxObject(sender), 'width', 60+w);
     lst:=id;
   end;
 end;
 
-procedure TFoundationForm.onCreateGForm;
-begin
-  eff:=TGloomEffect.Create(self);
-end;
-
-procedure TFoundationForm.gShow;
+procedure TFoundationForm.addShow;
+var
+  i:byte;
 begin
   w:=main.Width/4;
-  s0.Width:=w;
-  s1.Width:=w;
-  s2.Width:=w;
-  s3.Width:=w;
+  for i:=0 to 3 do
+    (main.Children[i] as TControl).Width:=w;
   p:=main.Position.X;
-  shw:=-1;
 end;
 
 end.

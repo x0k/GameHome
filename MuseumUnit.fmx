@@ -16,18 +16,44 @@ object MuseumForm: TMuseumForm
   FormFactor.Devices = [Desktop]
   FullScreen = True
   DesignerMasterStyle = 0
-  object Slider: TfgFlipView
-    Images = <>
-    EffectOptions.Kind = Fade
-    EffectOptions.Duration = 0.400000005960464500
-    SlideOptions.Duration = 0.500000000000000000
-    OnStartChanging = SliderStartChanging
-    OnImageClick = SliderImageClick
+  object main: TLayout
     Align = Client
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
-    StyleLookup = 'fgFlipViewStyle'
     TabOrder = 2
+    object frame: TLayout
+      Align = Client
+      Size.Width = 1280.000000000000000000
+      Size.Height = 720.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+    end
+    object controls: TLayout
+      Align = Client
+      Size.Width = 1280.000000000000000000
+      Size.Height = 720.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object back: TLayout
+        Align = Left
+        HitTest = True
+        Size.Width = 200.000000000000000000
+        Size.Height = 720.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        OnClick = backClick
+      end
+      object next: TLayout
+        Tag = 1
+        Align = Client
+        HitTest = True
+        Size.Width = 1080.000000000000000000
+        Size.Height = 720.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        OnClick = backClick
+      end
+    end
   end
 end

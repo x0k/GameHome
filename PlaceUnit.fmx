@@ -41,7 +41,7 @@ object PlaceForm: TPlaceForm
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
       object BG1: TGlyph
-        Align = Client
+        Align = Center
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
@@ -50,7 +50,6 @@ object PlaceForm: TPlaceForm
       end
       object Main1: TLayout
         Align = Client
-        Opacity = 0.000000000000000000
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
@@ -104,7 +103,7 @@ object PlaceForm: TPlaceForm
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
       object BG2: TGlyph
-        Align = Client
+        Align = Center
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False

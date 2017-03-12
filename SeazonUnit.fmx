@@ -16,7 +16,7 @@ object SeazonForm: TSeazonForm
   FullScreen = True
   DesignerMasterStyle = 0
   object BG: TGlyph
-    Align = Client
+    Align = Center
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
@@ -26,7 +26,6 @@ object SeazonForm: TSeazonForm
   object Main: TLayout
     Align = Scale
     HitTest = True
-    Opacity = 0.000000000000000000
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False

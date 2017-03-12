@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Objects, FMX.StdCtrls,
-  FMX.Layouts, DataUnit, FMX.ImgList;
+  FMX.Layouts, DataUnit, FMX.ImgList, FMX.ani;
 
 type
   TTaskForm = class(TGForm)
@@ -19,12 +19,12 @@ type
     tans: TText;
     img: TGlyph;
     BG: TGlyph;
+    main: TLayout;
     procedure DecClick(Sender: TObject);
   protected
-    procedure gShow; override;
+    procedure onFormCreate; override;
+    procedure addShow; override;
     procedure addWin; override;
-  public
-    { Public declarations }
   end;
 
 var
@@ -35,7 +35,13 @@ implementation
 
 {$R *.fmx}
 
-procedure TTaskForm.gShow;
+procedure TTaskForm.onFormCreate;
+begin
+  bgs:=[BG];
+  lts:=[main];
+end;
+
+procedure TTaskForm.addShow;
 begin
   ans:=TM.getName(1).toInteger;
   repeat

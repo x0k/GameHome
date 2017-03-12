@@ -348,6 +348,10 @@
         <DCCReference Include="MapUnit.pas">
             <Form>MapForm</Form>
         </DCCReference>
+        <DCCReference Include="OmenUnit.pas">
+            <Form>OmenForm</Form>
+            <FormType>fmx</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

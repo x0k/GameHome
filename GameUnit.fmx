@@ -20,7 +20,7 @@ object GameForm: TGameForm
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     TabPosition = None
     Sizes = (
@@ -34,7 +34,7 @@ object GameForm: TGameForm
       CustomIcon = <
         item
         end>
-      IsSelected = True
+      IsSelected = False
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -44,7 +44,7 @@ object GameForm: TGameForm
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
       object BG1: TGlyph
-        Align = Client
+        Align = Center
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
@@ -53,7 +53,6 @@ object GameForm: TGameForm
       end
       object Main1: TLayout
         Align = Client
-        Opacity = 0.000000000000000000
         Margins.Bottom = 160.000000000000000000
         Size.Width = 1280.000000000000000000
         Size.Height = 560.000000000000000000
@@ -87,7 +86,7 @@ object GameForm: TGameForm
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
       object BG2: TGlyph
-        Align = Client
+        Align = Center
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
@@ -119,7 +118,7 @@ object GameForm: TGameForm
       CustomIcon = <
         item
         end>
-      IsSelected = False
+      IsSelected = True
       Size.Width = 8.000000000000000000
       Size.Height = 8.000000000000000000
       Size.PlatformDefault = False
@@ -129,7 +128,7 @@ object GameForm: TGameForm
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
       object BG3: TGlyph
-        Align = Client
+        Align = Center
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
@@ -143,7 +142,7 @@ object GameForm: TGameForm
         Size.PlatformDefault = False
         TabOrder = 0
         object Home: TGlyph
-          Align = Client
+          Align = Center
           Size.Width = 1280.000000000000000000
           Size.Height = 720.000000000000000000
           Size.PlatformDefault = False

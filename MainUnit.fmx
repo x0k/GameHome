@@ -18,41 +18,30 @@ object MainForm: TMainForm
   ShowFullScreenIcon = True
   ShowHint = False
   OnCreate = FormCreate
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object BG: TGlyph
-    Align = Client
+    Align = Center
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
     Stretch = False
     ImageIndex = 0
     Images = DataForm.Backgrounds
-    object Panel1: TPanel
-      Align = Bottom
-      Position.Y = 560.000000000000000000
-      Size.Width = 1280.000000000000000000
-      Size.Height = 160.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'SPanel'
-      TabOrder = 0
-      object Text6: TText
-        Align = Center
-        Size.Width = 236.000000000000000000
-        Size.Height = 64.000000000000000000
-        Size.PlatformDefault = False
-        Text = #1043#1083#1072#1074#1085#1086#1077' '#1084#1077#1085#1102
-        TextSettings.Font.Size = 30.000000000000000000
-        TextSettings.FontColor = claWhite
-        TextSettings.WordWrap = False
-      end
-    end
+  end
+  object main: TLayout
+    Align = Client
+    Size.Width = 1280.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
     object centerLayout: TLayout
       Align = HorzCenter
       Position.X = 386.000000000000000000
       Size.Width = 507.000000000000000000
       Size.Height = 560.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 1
+      TabOrder = 0
       object Glyph1: TGlyph
         Margins.Bottom = 400.000000000000000000
         Align = Center
@@ -242,6 +231,25 @@ object MainForm: TMainForm
           Text = 'AboutBtn'
           OnClick = AboutBtnClick
         end
+      end
+    end
+    object Panel1: TPanel
+      Align = Bottom
+      Position.Y = 560.000000000000000000
+      Size.Width = 1280.000000000000000000
+      Size.Height = 160.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'SPanel'
+      TabOrder = 1
+      object Text6: TText
+        Align = Center
+        Size.Width = 236.000000000000000000
+        Size.Height = 64.000000000000000000
+        Size.PlatformDefault = False
+        Text = #1043#1083#1072#1074#1085#1086#1077' '#1084#1077#1085#1102
+        TextSettings.Font.Size = 30.000000000000000000
+        TextSettings.FontColor = claWhite
+        TextSettings.WordWrap = False
       end
     end
   end

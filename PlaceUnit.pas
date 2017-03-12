@@ -34,10 +34,9 @@ type
     procedure s0Click(Sender: TObject);
     procedure s0MouseEnter(Sender: TObject);
   protected
-    procedure gShow; override;
+    procedure addShow; override;
+    procedure onFormCreate; override;
   public
-    procedure hideAnimation; override;
-    procedure showAnimation; override;
     procedure Next(Sender: TObject);override;
   end;
 
@@ -51,15 +50,10 @@ var
   w:single;
   shw,lst:ShortInt;
 
-procedure TPlaceForm.showAnimation;
+procedure TPlaceForm.onFormCreate;
 begin
-  TAnimator.AnimateFloatWait(Main1, 'opacity', 1, 0.4);
-end;
-
-procedure TPlaceForm.hideAnimation;
-begin
-  TAnimator.AnimateFloat(Main1, 'opacity', 0, 0.3);
-  TAnimator.AnimateFloatWait(Main2, 'opacity', 0, 0.3);
+  bgs:=[BG1, BG2];
+  lts:=[main1, main2];
 end;
 
 procedure TPlaceForm.s0Click(Sender: TObject);
@@ -99,24 +93,18 @@ begin
   end;
 end;
 
-procedure TPlaceForm.gShow;
+procedure TPlaceForm.addShow;
 var
-  img_w:single;
+  i:byte;
+  s:TSizeF;
 begin
   w:=Width/4;
-  img_w:=Height/720*1082;
-
-  s0.Width:=w;
-  img0.Width:=img_w;
-
-  s1.Width:=w;
-  img1.Width:=img_w;
-
-  s2.Width:=w;
-  img2.Width:=img_w;
-
-  s3.Width:=w;
-  img3.Width:=img_w;
+  s:=TSizeF.Create(w, Height);
+  for i:=0 to 3 do
+  begin
+    (main2.Children[i] as TLayout).Width:=w;
+    IM.setSize(main2.Children[i].Children[0] as TGlyph, s);
+  end;
   shw:=-1;
 
   self.setDescription(5, Text);
@@ -130,7 +118,7 @@ begin
     Tabs.Next();
     if status<2 then Bar.hideNext;
   end else begin
-    hideAnimation;
+    hideAni;
     DataForm.ShowForm(level+1);
     free;
   end;

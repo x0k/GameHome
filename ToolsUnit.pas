@@ -14,15 +14,12 @@ type
     BG: TGlyph;
     tools: TGridLayout;
   protected
-    procedure onCreateGForm; override;
-    procedure gShow; override;
+    procedure onFormCreate; override;
+    procedure addShow; override;
     procedure addWin; override;
     procedure click(Sender: TObject);
     procedure enter(Sender: TObject);
     procedure leave(Sender: TObject);
-  public
-    procedure hideAnimation; override;
-    procedure showAnimation; override;
   end;
 
 implementation
@@ -30,30 +27,20 @@ implementation
 {$R *.fmx}
 
 var
-  glow, eff1, eff2:TInnerGlowEffect;
+  eff1, eff2:TInnerGlowEffect;
   a,b:boolean;
-
-procedure TToolsForm.showAnimation;
-begin
-  TAnimator.AnimateFloatWait(tools, 'opacity', 1, 0.4);
-end;
-
-procedure TToolsForm.hideAnimation;
-begin
-  TAnimator.AnimateFloatWait(tools, 'opacity', 0, 0.3);
-end;
 
 procedure TToolsForm.addWin;
 begin
   a:=false;b:=false;
 end;
 
-procedure TToolsForm.onCreateGForm;
+procedure TToolsForm.onFormCreate;
 begin
-  glow:=TInnerGlowEffect.Create(self);
-  glow.GlowColor:=TAlphaColorRec.Blue;
   eff1:=TInnerGlowEffect.Create(self);
   eff2:=TInnerGlowEffect.Create(self);
+  bgs:=[BG];
+  lts:=[tools];
 end;
 
 procedure TToolsForm.click(Sender: TObject);
@@ -64,15 +51,13 @@ begin
   case id of
     0:begin
       eff1.Parent:=TFmxObject(sender).Children[0];
-      glow.Parent:=nil;
       a:=true;
     end;
     1:begin
       eff2.Parent:=TFmxObject(sender).Children[0];
-      glow.Parent:=nil;
       b:=true;
     end;
-    else glow.Parent:=TFmxObject(sender).Children[0];
+    else leave(sender);
   end;
   self.setDescription(id+1, Bar.SubText);
   if a and b then win;
@@ -80,15 +65,15 @@ end;
 
 procedure TToolsForm.enter(Sender: TObject);
 begin
-  TAnimator.AnimateFloat(sender as TFmxObject,'RotationAngle', 20+random(20));
+  TAnimator.AnimateFloat(sender as TFmxObject, 'RotationAngle', 20+random(20));
 end;
 
 procedure TToolsForm.leave(Sender: TObject);
 begin
-  TAnimator.AnimateFloat(sender as TFmxObject,'RotationAngle', 0);
+  TAnimator.AnimateFloat(sender as TFmxObject, 'RotationAngle', 0);
 end;
 
-procedure TToolsForm.gShow;
+procedure TToolsForm.addShow;
 var
   L:TList<byte>;
   lt,lr:TLayout;
@@ -102,7 +87,7 @@ begin
   lt.Align:=TAlignLayout.Client;
   G:=TGlyph.Create(self);
   G.Align:=TAlignLayout.Client;
-  G.Images:=DataForm.Other;
+  G.Images:=DataForm.getList(rOther);
   G.Margins.Top:=20;
   G.Margins.Right:=20;
   G.Margins.Left:=20;
@@ -124,6 +109,5 @@ begin
   end;
   l.Free;
 end;
-
 
 end.

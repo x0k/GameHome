@@ -3,164 +3,120 @@ unit MapUnit;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, BarUnit, FMX.Layouts, FMX.Ani, FMX.Effects, DataUnit;
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, system.Generics.Collections,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, system.Math,
+  FMX.Objects, BarUnit, FMX.Layouts, FMX.Ani, FMX.Effects, DataUnit, FMX.ImgList, System.UIConsts;
 
 type
   TMapForm = class(TGForm)
-    BG: TImage;
-    Imap: TImage;
-    ct: TLayout;
-    p1: TPath;
-    P2: TPath;
-    P3: TPath;
-    P4: TPath;
-    P5: TPath;
-    P6: TPath;
-    P7: TPath;
-    P8: TPath;
-    P9: TPath;
-    P10: TPath;
-    P11: TPath;
-    P12: TPath;
-    P13: TPath;
-    P14: TPath;
-    P15: TPath;
-    P16: TPath;
-    P17: TPath;
-    P18: TPath;
-    P19: TPath;
-    ph: TImage;
-    brevno: TImage;
-    ShadowEffect1: TShadowEffect;
-    shp: TImage;
     Main: TLayout;
-    procedure FormCreate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure BarBackBtnClick(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
-    procedure brevnoClick(Sender: TObject);
-    procedure p1Click(Sender: TObject);
-  private
-    procedure OnClickPN(Sender: TObject);
-    procedure Up;
+    BG: TGlyph;
+    Map: TGlyph;
+    brevno: TGlyph;
+    Details: TFlowLayout;
+    cent: TLayout;
+    Path1: TPath;
+    Path2: TPath;
+    Path3: TPath;
+    Path4: TPath;
+    Path5: TPath;
+    Path6: TPath;
+    Path7: TPath;
+    Path8: TPath;
+    Path9: TPath;
+    Path10: TPath;
+    Path11: TPath;
+    Path12: TPath;
+    Path13: TPath;
+    Path14: TPath;
+    Path15: TPath;
+    Path16: TPath;
+    Path17: TPath;
+    Path18: TPath;
+    Path19: TPath;
+    left: TLayout;
+    sp: TPath;
+    wood: TLayout;
+    shepka: TGlyph;
+    procedure Path1DragOver(Sender: TObject; const Data: TDragObject; const Point: TPointF; var Operation: TDragOperation);
+    procedure Path1DragDrop(Sender: TObject; const Data: TDragObject; const Point: TPointF);
+  protected
+    procedure onFormCreate; override;
+    procedure addShow; override;
   public
-    { Public declarations }
+
   end;
-var
-  Paths:array[0..18] of Tpath;
-  efs:array[0..18] of TFloatAnimation;
-  F:TGlowEffect;
-  s:byte = 21;
-  d:byte = 0;
 
 implementation
 
 {$R *.fmx}
 
-procedure TMapForm.BarBackBtnClick(Sender: TObject);
-begin
-  //GameForm.Show;
-  //MapForm.Release;
-end;
-
-procedure TMapForm.Up;
-begin
-  if d=20 then
-  begin
-    GD.GetAwd(17);
-    GD.UpStatus(Status);
-    //Bar.DrawPanel(nLogo,1);
-    //Bar.DrawProgress;
-    SM.LoadSound(sAward);
-    SM.Play;
-  end;
-end;
-
-procedure TMapForm.brevnoClick(Sender: TObject);
-begin
-  if s=20 then
-  begin
-    s:=0;
-    ph.Visible:=false;
-    shp.Visible:=true;
-    SM.Play;
-    inc(d);
-    up;
-  end;
-end;
-
-procedure TMapForm.FormActivate(Sender: TObject);
-begin
-  //Bar.DrawProgress;
-end;
-
-procedure TMapForm.OnClickPN(Sender: TObject);
-begin
-  F.Parent:=TFmxObject(sender);
-  s:=Tpath(sender).Tag;
-  F.UpdateParentEffects;
-end;
-
-procedure TMapForm.p1Click(Sender: TObject);
-begin
-  if TFmxObject(sender).Tag=s then
-  begin
-    inc(d);
-    Paths[s].Visible:=false;
-    efs[s].Trigger:='IsVisible=false';
-    efs[s].TriggerInverse:='IsVisible=false';
-    s:=0;
-    TPath(sender).Fill.Color:=TAlphaColorRec.Blue;
-    TPath(sender).Opacity:=1;
-    up;
-    SM.Play;
-  end;
-end;
-
-procedure TMapForm.FormCreate(Sender: TObject);
 var
-  I: Integer;
+  w:single;
+  c:byte;
+
+procedure TMapForm.onFormCreate;
 begin
-  //Bar.Load(nLogo,self.Name);
-  //SM.LoadSound(2);
-  F:=TGlowEffect.Create(self);
-  //IM.SetImages('other',['Imap','Brevno','Shp'],false,[imap,brevno,shp]);
-  for I:=0 to 18 do
-    begin
-      Paths[i]:=Tpath(imap.Children[i].Clone(self));
-      Paths[i].Opacity:=1;
-      efs[i]:=TFloatAnimation.Create(self);
-      efs[i].Trigger:='IsMouseOver=true';
-      efs[i].TriggerInverse:='IsMouseOver=false';
-      efs[i].StopValue:=1;
-      efs[i].PropertyName:='Opacity';
-      efs[i].Duration:=1;
-      efs[i].Parent:=TFmxObject(imap.Children[i]);
-      Paths[i].Parent:=TFmxObject(CT);
-      TPath(imap.Children[i]).Tag:=i;
-      Paths[i].Tag:=i;
-      Paths[i].OnClick:=OnClickPN;
-    end;
-  ph.OnClick:=OnClickPN;
+  bgs:=[BG];
+  lts:=[main];
+  left.Width:=Screen.Width/2;
+  w:=min(Screen.Width/2, Screen.Height-240);
 end;
 
-procedure TMapForm.FormShow(Sender: TObject);
-var i:byte;
+procedure TMapForm.addShow;
+var
+  i,r:byte;
+  c:TPath;
+  s:TList<TPath>;
 begin
-  GD.UpStatus(Status);
-  IM.SetImage('Wall',BG,true);
-  ph.Position.X:=10+random(round(CT.Width-10));
-  ph.Position.Y:=10+random(round(CT.Height-10));
-  for I:=0 to 18 do
+  Map.SetBounds(Map.Position.X,Map.Position.Y, w-80,w-80);
+  s:=TList<TPath>.Create;
+  for i:=0 to 18 do
   begin
-    paths[i].Scale.X:=1.1;
-    paths[i].Scale.Y:=1.1;
-    paths[i].RotationAngle:=random(360);
-    paths[i].Position.X:=10+random(round(CT.Width-10));
-    paths[i].Position.Y:=10+random(round(CT.Height-10));
-    paths[i].Repaint;
+    Map.Children[i].Tag:=i;
+    c:=Map.Children[i].clone(self) as Tpath;
+    c.DragMode:=TDragMode.dmAutomatic;
+    s.Add(c);
+    (Map.Children[i] as TPath).Opacity:=0;
+  end;
+  s.Add(sp.Clone(self) as TPath);
+  sp.DragMode:=TDragMode.dmManual;
+  sp.Opacity:=0;
+  repeat
+    r:=random(s.Count);
+    details.AddObject(s.Items[r]);
+    s.Delete(r);
+  until s.Count=0;
+end;
+
+procedure TMapForm.Path1DragDrop(Sender: TObject; const Data: TDragObject; const Point: TPointF);
+begin
+  if TFmxObject(sender).Tag=TPath(Data.Source).Tag then
+  begin
+    TPath(Data.Source).Destroy;
+    TFmxObject(sender).Tag:=TFmxObject(sender).Tag+20;
+    if TFmxObject(sender).Tag<19 then
+    begin
+      TPath(sender).Fill.Color:=changeHSL(TAlphaColorRec.Blue, (random(61)-30)/360, 0, 0);
+      TAnimator.AnimateFloat(TFmxObject(sender), 'opacity', 1, 1);
+    end else begin
+      TAnimator.AnimateFloat(shepka, 'opacity', 1, 1);
+    end;
+    inc(c);
+    if c=20 then win;
+  end else begin
+    TPath(sender).Fill.Color:=TAlphaColorRec.Crimson;
+    TAnimator.AnimateFloatWait(TFmxObject(sender), 'opacity', 1, 0.5);
+    TAnimator.AnimateFloat(TFmxObject(sender), 'opacity', 0,  0.5);
+  end;
+end;
+
+procedure TMapForm.Path1DragOver(Sender: TObject; const Data: TDragObject; const Point: TPointF; var Operation: TDragOperation);
+begin
+  if (Data.Source is TPath)and(TFmxObject(sender).Tag<20) then
+  begin
+    TFmxObject(sender).BringToFront;
+    Operation:=TDragOperation.Move;
   end;
 end;
 

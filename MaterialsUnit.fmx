@@ -16,15 +16,21 @@ object MaterialsForm: TMaterialsForm
   FullScreen = True
   DesignerMasterStyle = 0
   object BG: TGlyph
-    Align = Client
+    Align = Center
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
     ImageIndex = 1
     Images = DataForm.Backgrounds
-    object Main: TLayout
-      Align = Top
-      Anchors = [akBottom]
+  end
+  object main: TLayout
+    Align = Client
+    Size.Width = 1280.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object top: TLayout
+      Align = MostTop
       Size.Width = 1280.000000000000000000
       Size.Height = 360.000000000000000000
       Size.PlatformDefault = False
@@ -37,7 +43,6 @@ object MaterialsForm: TMaterialsForm
         TextSettings.Font.Size = 20.000000000000000000
         TextSettings.WordWrap = True
         Align = Left
-        Anchors = [akLeft, akTop]
         CanFocus = False
         Cursor = crDefault
         DisableFocusEffect = True
@@ -47,177 +52,171 @@ object MaterialsForm: TMaterialsForm
         Margins.Bottom = 20.000000000000000000
         Position.X = 100.000000000000000000
         Position.Y = 100.000000000000000000
-        Size.Width = 365.000000000000000000
+        Size.Width = 280.000000000000000000
         Size.Height = 240.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SMemo'
         TabOrder = 0
-        Viewport.Width = 365.000000000000000000
+        Viewport.Width = 280.000000000000000000
         Viewport.Height = 240.000000000000000000
       end
       object trees: TGlyph
+        Margins.Top = 60.000000000000000000
         Align = Client
-        Size.Width = 795.000000000000000000
-        Size.Height = 360.000000000000000000
+        Size.Width = 880.000000000000000000
+        Size.Height = 300.000000000000000000
         Size.PlatformDefault = False
         ImageIndex = 17
         Images = DataForm.Other
       end
     end
-    object Grid: TGridPanelLayout
-      Align = Client
-      HitTest = False
-      Margins.Bottom = 200.000000000000000000
-      Size.Width = 1280.000000000000000000
-      Size.Height = 160.000000000000000000
+    object grid: TLayout
+      Align = HorzCenter
+      Margins.Bottom = 230.000000000000000000
+      Position.X = 216.000000000000000000
+      Position.Y = 360.000000000000000000
+      Size.Width = 848.000000000000000000
+      Size.Height = 130.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
-      ColumnCollection = <
-        item
-          Value = 25.000327054435120000
-        end
-        item
-          Value = 24.998325752826680000
-        end
-        item
-          Value = 25.000449672482660000
-        end
-        item
-          Value = 25.000897520255530000
-        end>
-      ControlCollection = <
-        item
-          Column = 0
-          Control = Tsosn
-          Row = 1
-        end
-        item
-          Column = 1
-          Control = Tfor
-          Row = 1
-        end
-        item
-          Column = 2
-          Control = Tiul
-          Row = 1
-        end
-        item
-          Column = 3
-          Control = Tsent
-          Row = 1
-        end
-        item
-          Column = 0
-          Control = m0
-          Row = 0
-        end
-        item
-          Column = 1
-          Control = m1
-          Row = 0
-        end
-        item
-          Column = 2
-          Control = m2
-          Row = 0
-        end
-        item
-          Column = 3
-          Control = m3
-          Row = 0
-        end>
-      RowCollection = <
-        item
-          Value = 100.000000000000000000
-        end
-        item
-          SizeStyle = Auto
-        end
-        item
-          SizeStyle = Auto
-        end>
-      object Tsosn: TText
-        Align = Bottom
-        Anchors = []
-        Position.Y = 110.000000000000000000
-        Size.Width = 320.004180908203100000
-        Size.Height = 50.000000000000000000
+      object L0: TLayout
+        Align = Left
+        HitTest = True
+        Size.Width = 212.000000000000000000
+        Size.Height = 130.000000000000000000
         Size.PlatformDefault = False
-        Text = #1057#1086#1089#1085#1072
-        TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-        TextSettings.Font.Size = 40.000000000000000000
+        TabOrder = 0
+        OnClick = L0Click
+        OnMouseEnter = L0MouseEnter
+        object m0: TGlyph
+          Tag = 1
+          Margins.Left = 60.000000000000000000
+          Margins.Right = 60.000000000000000000
+          Align = Client
+          Size.Width = 92.000000000000000000
+          Size.Height = 130.000000000000000000
+          Size.PlatformDefault = False
+          ImageIndex = 18
+          Images = DataForm.Other
+        end
+        object T0: TText
+          Align = Bottom
+          Anchors = []
+          HitTest = False
+          Margins.Bottom = -50.000000000000000000
+          Position.Y = 130.000000000000000000
+          Size.Width = 212.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1057#1086#1089#1085#1072
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 40.000000000000000000
+        end
       end
-      object Tfor: TText
-        Align = Bottom
-        Anchors = []
-        Position.X = 320.004180908203100000
-        Position.Y = 110.000000000000000000
-        Size.Width = 319.978607177734400000
-        Size.Height = 50.000000000000000000
+      object L1: TLayout
+        Align = Left
+        HitTest = True
+        Position.X = 212.000000000000000000
+        Size.Width = 212.000000000000000000
+        Size.Height = 130.000000000000000000
         Size.PlatformDefault = False
-        Text = #1045#1083#1100
-        TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-        TextSettings.Font.Size = 40.000000000000000000
+        TabOrder = 1
+        OnClick = L0Click
+        OnMouseEnter = L0MouseEnter
+        object m1: TGlyph
+          Tag = 2
+          Margins.Left = 60.000000000000000000
+          Margins.Right = 60.000000000000000000
+          Align = Client
+          Size.Width = 92.000000000000000000
+          Size.Height = 130.000000000000000000
+          Size.PlatformDefault = False
+          ImageIndex = 20
+          Images = DataForm.Other
+        end
+        object T1: TText
+          Align = Bottom
+          Anchors = []
+          HitTest = False
+          Margins.Bottom = -50.000000000000000000
+          Position.Y = 130.000000000000000000
+          Size.Width = 212.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1045#1083#1100
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 40.000000000000000000
+        end
       end
-      object Tiul: TText
-        Align = Bottom
-        Anchors = []
-        Position.X = 639.982788085937500000
-        Position.Y = 110.000000000000000000
-        Size.Width = 320.005737304687500000
-        Size.Height = 50.000000000000000000
+      object L2: TLayout
+        Align = Left
+        HitTest = True
+        Position.X = 424.000000000000000000
+        Size.Width = 212.000000000000000000
+        Size.Height = 130.000000000000000000
         Size.PlatformDefault = False
-        Text = #1051#1080#1089#1090#1074#1077#1085#1085#1080#1094#1072
-        TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-        TextSettings.Font.Size = 40.000000000000000000
+        TabOrder = 2
+        OnClick = L0Click
+        OnMouseEnter = L0MouseEnter
+        object m2: TGlyph
+          Tag = 3
+          Margins.Left = 60.000000000000000000
+          Margins.Right = 60.000000000000000000
+          Align = Client
+          Size.Width = 92.000000000000000000
+          Size.Height = 130.000000000000000000
+          Size.PlatformDefault = False
+          ImageIndex = 22
+          Images = DataForm.Other
+        end
+        object T2: TText
+          Align = Bottom
+          Anchors = []
+          HitTest = False
+          Margins.Bottom = -50.000000000000000000
+          Position.Y = 130.000000000000000000
+          Size.Width = 212.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1051#1080#1089#1090#1074#1077#1085#1085#1080#1094#1072
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 40.000000000000000000
+        end
       end
-      object Tsent: TText
-        Align = Bottom
-        Anchors = []
-        Position.X = 959.988525390625000000
-        Position.Y = 110.000000000000000000
-        Size.Width = 320.011474609375000000
-        Size.Height = 50.000000000000000000
+      object L3: TLayout
+        Align = Left
+        HitTest = True
+        Position.X = 636.000000000000000000
+        Size.Width = 212.000000000000000000
+        Size.Height = 130.000000000000000000
         Size.PlatformDefault = False
-        Text = #1054#1089#1080#1085#1072
-        TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-        TextSettings.Font.Size = 40.000000000000000000
-      end
-      object m0: TGlyph
-        Tag = 1
-        Align = Client
-        Size.Width = 320.004180908203100000
-        Size.Height = 110.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 18
-        Images = DataForm.Other
-      end
-      object m1: TGlyph
-        Tag = 2
-        Align = Client
-        Size.Width = 319.978607177734400000
-        Size.Height = 110.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 20
-        Images = DataForm.Other
-      end
-      object m2: TGlyph
-        Tag = 3
-        Align = Client
-        Size.Width = 320.005737304687500000
-        Size.Height = 110.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 22
-        Images = DataForm.Other
-      end
-      object m3: TGlyph
-        Tag = 4
-        Align = Client
-        Size.Width = 320.011474609375000000
-        Size.Height = 110.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 24
-        Images = DataForm.Other
+        TabOrder = 3
+        OnClick = L0Click
+        OnMouseEnter = L0MouseEnter
+        object m3: TGlyph
+          Tag = 4
+          Margins.Left = 60.000000000000000000
+          Margins.Right = 60.000000000000000000
+          Align = Client
+          Size.Width = 92.000000000000000000
+          Size.Height = 130.000000000000000000
+          Size.PlatformDefault = False
+          ImageIndex = 24
+          Images = DataForm.Other
+        end
+        object T3: TText
+          Align = Bottom
+          Anchors = []
+          HitTest = False
+          Margins.Bottom = -50.000000000000000000
+          Position.Y = 130.000000000000000000
+          Size.Width = 212.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1054#1089#1080#1085#1072
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 40.000000000000000000
+        end
       end
     end
   end

@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.StdCtrls, FMX.ScrollBox, FMX.Memo, FMX.Controls.Presentation,
-  FMX.TabControl, FMX.Layouts, FGX.FlipView, FMX.Filter.Effects, DataUnit,
+  FMX.TabControl, FMX.Layouts, FMX.Filter.Effects, DataUnit,
   FMX.ImgList, BarUnit, FMX.ani;
 
 type
@@ -40,9 +40,9 @@ type
     Place: TGlyph;
     Home: TGlyph;
     procedure l1btnClick(Sender: TObject);
+  protected
+    procedure onFormCreate; override;
   public
-    procedure hideAnimation; override;
-    procedure showAnimation; override;
     procedure Back(Sender: TObject);override;
     procedure Next(Sender: TObject);override;
   end;
@@ -54,16 +54,13 @@ implementation
 
 {$R *.fmx}
 
-procedure TGameForm.showAnimation;
+procedure TGameForm.onFormCreate;
 begin
-  TAnimator.AnimateFloat(Main1, 'opacity', 1, 0.4);
-  TAnimator.AnimateFloatWait(Main3, 'opacity', 1, 0.4);
-end;
-
-procedure TGameForm.hideAnimation;
-begin
-  TAnimator.AnimateFloat(Main1, 'opacity', 0, 0.3);
-  TAnimator.AnimateFloatWait(Main3, 'opacity', 0, 0.3);
+  IM.add(rSequences);
+  IM.add(rImages);
+  IM.add(rOther);
+  bgs:=[home, BG1, BG2, BG3];
+  lts:=[main1, main3];
 end;
 
 procedure TGameForm.Next;
@@ -77,14 +74,14 @@ end;
 
 procedure TGameForm.Back(Sender: TObject);
 begin
-  hideAnimation;
+  hideAni;
   Bar.Parent:=nil;
-  free;
+  hide;
 end;
 
 procedure TGameForm.l1btnClick(Sender: TObject);
 begin
-  hideAnimation;
+  hideAni;
   DataForm.ShowForm((Sender as TFmxObject).Tag);
 end;
 

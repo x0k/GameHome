@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Controls.Presentation, FMX.StdCtrls,
-  FMX.Objects, FMX.Layouts, FMX.ImgList;
+  FMX.Objects, FMX.Layouts, FMX.ImgList, FMX.Ani;
 
 type
   TMainForm = class(TForm)
@@ -25,12 +25,14 @@ type
     BG: TGlyph;
     Glyph1: TGlyph;
     centerLayout: TLayout;
+    main: TLayout;
     procedure ExitBtnClick(Sender: TObject);
     procedure SettsBtnClick(Sender: TObject);
     procedure MuseumBtnClick(Sender: TObject);
     procedure AboutBtnClick(Sender: TObject);
     procedure BGameBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,7 +57,6 @@ end;
 procedure TMainForm.BGameBtnClick(Sender: TObject);
 begin
   TM.Load(tLevels);
-  GameForm:=TGameForm.Create(0);
   DataForm.ShowForm(0);
 end;
 
@@ -67,6 +68,7 @@ end;
 procedure TMainForm.MuseumBtnClick(Sender: TObject);
 begin
   TM.Load(tMuseum);
+  if not Assigned(MuseumForm) then MuseumForm:=TMuseumForm.Create(DataForm);
   MuseumForm.Show;
 end;
 
@@ -79,8 +81,14 @@ end;
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   SettingsForm:=TSettingsForm.Create(self);
-  MuseumForm:=TMuseumForm.Create(self);
   AboutForm:=TAboutForm.Create(self);
+  IM.setSize(BG, Screen.Size);
+  main.Opacity:=0;
+end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+begin
+  TAnimator.AnimateFloatDelay(main, 'opacity', 1, 1, 1);
 end;
 
 end.

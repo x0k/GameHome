@@ -6,15 +6,13 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Objects, FMX.Layouts, FMX.Controls.Presentation, FMX.Ani,
-  FGX.Animations, FMX.ScrollBox, FMX.Memo, FMX.TabControl, FMX.ImgList;
+  FMX.ScrollBox, FMX.Memo, FMX.TabControl, FMX.ImgList;
 
 type
   TBar = class(TFrame)
     SPanel: TPanel;
     NextBtn: TSpeedButton;
     BackBtn: TSpeedButton;
-    SubPanel1: TGridPanelLayout;
-    SubLogo: TImage;
     SubName: TText;
     SubText: TMemo;
     chip: TImage;
@@ -37,6 +35,8 @@ type
     RBonus: TLayout;
     bonusBG: TRectangle;
     telega: TLayout;
+    nextLayout: TLayout;
+    SubLogo: TGlyph;
     procedure RBonusMouseLeave(Sender: TObject);
     procedure logoLayoutClick(Sender: TObject);
   protected
@@ -83,14 +83,19 @@ procedure TBar.logoLayoutClick(Sender: TObject);
 var
   g:TGForm;
 begin
-  g:=nil;
-  if parent is TGForm then g:=(parent as TGForm);
-  if Assigned(g)and(g.lvl>0) then
-  begin
-    g.hideAnimation;
-    DataForm.ShowForm(0);
-    g.Free;
-  end;
+  if Assigned(parent) then
+    if (parent is TGForm) then
+    begin
+      g:=(parent as TGForm);
+      g.hideAni;
+      if (g.lvl>0) then DataForm.ShowForm(0) else
+      begin
+        Bar.Parent:=nil;
+        hide;
+      end;
+      hide;
+      g.Free;
+    end else (parent as TForm).close;
 end;
 
 procedure TBar.RBonusMouseLeave(Sender: TObject);

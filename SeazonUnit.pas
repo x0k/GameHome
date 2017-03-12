@@ -27,10 +27,8 @@ type
     procedure s0Click(Sender: TObject);
     procedure s0MouseEnter(Sender: TObject);
   protected
-    procedure gShow; override;
-  public
-    procedure hideAnimation; override;
-    procedure showAnimation; override;
+    procedure addShow; override;
+    procedure onFormCreate; override;
   end;
 
 implementation
@@ -44,34 +42,24 @@ var
   w:single;
   shw,lst:ShortInt;
 
-procedure TSeazonForm.showAnimation;
+procedure TSeazonForm.onFormCreate;
 begin
-  TAnimator.AnimateFloatWait(Main, 'opacity', 1, 0.4);
+  bgs:=[BG];
+  lts:=[Main];
 end;
 
-procedure TSeazonForm.hideAnimation;
-begin
-  TAnimator.AnimateFloatWait(Main, 'opacity', 0, 0.3);
-end;
-
-procedure TSeazonForm.gShow;
+procedure TSeazonForm.addShow;
 var
-  img_w:single;
+  i:byte;
+  s:TSizeF;
 begin
   w:=Width/4;
-  img_w:=Height/720*1082;
-
-  s0.Width:=w;
-  img0.Width:=img_w;
-
-  s1.Width:=w;
-  img1.Width:=img_w;
-
-  s2.Width:=w;
-  img2.Width:=img_w;
-
-  s3.Width:=w;
-  img3.Width:=img_w;
+  s:=TSizeF.Create(w, Height);
+  for i:=0 to 3 do
+  begin
+    (main.Children[i] as TLayout).Width:=w;
+    IM.setSize(main.Children[i].Children[0] as TGlyph, s);
+  end;
   shw:=-1;
 end;
 

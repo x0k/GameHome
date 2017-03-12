@@ -15,25 +15,19 @@ object TaskForm: TTaskForm
   FullScreen = True
   DesignerMasterStyle = 0
   object BG: TGlyph
-    Align = Client
+    Align = Center
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
     ImageIndex = 1
     Images = DataForm.Backgrounds
-    object img: TGlyph
-      Margins.Left = 100.000000000000000000
-      Margins.Top = 100.000000000000000000
-      Margins.Bottom = 200.000000000000000000
-      Align = Left
-      Position.X = 100.000000000000000000
-      Position.Y = 100.000000000000000000
-      Size.Width = 640.000000000000000000
-      Size.Height = 420.000000000000000000
-      Size.PlatformDefault = False
-      ImageIndex = 4
-      Images = DataForm.Images
-    end
+  end
+  object main: TLayout
+    Align = Client
+    Size.Width = 1280.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
     object Grid: TGridPanelLayout
       Align = Client
       Margins.Top = 100.000000000000000000
@@ -42,7 +36,7 @@ object TaskForm: TTaskForm
       Size.Width = 440.000000000000000000
       Size.Height = 420.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 1
+      TabOrder = 0
       ColumnCollection = <
         item
           Value = 49.999094193764460000
@@ -181,6 +175,19 @@ object TaskForm: TTaskForm
         TextSettings.Font.Size = 30.000000000000000000
         TextSettings.HorzAlign = Leading
       end
+    end
+    object img: TGlyph
+      Margins.Left = 100.000000000000000000
+      Margins.Top = 100.000000000000000000
+      Margins.Bottom = 200.000000000000000000
+      Align = Left
+      Position.X = 100.000000000000000000
+      Position.Y = 100.000000000000000000
+      Size.Width = 640.000000000000000000
+      Size.Height = 420.000000000000000000
+      Size.PlatformDefault = False
+      ImageIndex = 4
+      Images = DataForm.Images
     end
   end
 end

@@ -17,7 +17,8 @@ uses
   MaterialsUnit in 'MaterialsUnit.pas' {MaterialsForm},
   TaskUnit in 'TaskUnit.pas' {TaskForm},
   FoundationUnit in 'FoundationUnit.pas' {FoundationForm},
-  MapUnit in 'MapUnit.pas' {MapForm};
+  MapUnit in 'MapUnit.pas' {MapForm},
+  OmenUnit in 'OmenUnit.pas' {OmenForm};
 
 {$R *.res}
 
