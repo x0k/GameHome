@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
   FMX.Objects, FMX.Layouts, FMX.Controls.Presentation, FMX.Ani,
-  FMX.ScrollBox, FMX.Memo, FMX.TabControl, FMX.ImgList;
+  FMX.ScrollBox, FMX.Memo, FMX.TabControl, FMX.ImgList, System.ImageList;
 
 type
   TBar = class(TFrame)
@@ -15,7 +15,6 @@ type
     BackBtn: TSpeedButton;
     SubName: TText;
     SubText: TMemo;
-    chip: TImage;
     logoLayout: TLayout;
     Logo: TGlyph;
     tools: TGlyph;
@@ -37,6 +36,24 @@ type
     telega: TLayout;
     nextLayout: TLayout;
     SubLogo: TGlyph;
+    backLayout: TLayout;
+    Glyph1: TGlyph;
+    progress: TLayout;
+    Glyph2: TGlyph;
+    Glyph3: TGlyph;
+    Glyph4: TGlyph;
+    Glyph5: TGlyph;
+    Glyph6: TGlyph;
+    Glyph7: TGlyph;
+    Glyph8: TGlyph;
+    Glyph9: TGlyph;
+    Glyph10: TGlyph;
+    Glyph11: TGlyph;
+    Glyph12: TGlyph;
+    Glyph13: TGlyph;
+    Glyph14: TGlyph;
+    Glyph15: TGlyph;
+    ImageList1: TImageList;
     procedure RBonusMouseLeave(Sender: TObject);
     procedure logoLayoutClick(Sender: TObject);
   protected
@@ -46,6 +63,7 @@ type
     procedure showNext;
     procedure hideNext;
     procedure update;
+    procedure upProgress;
   end;
 
 implementation
@@ -80,22 +98,9 @@ begin
 end;
 
 procedure TBar.logoLayoutClick(Sender: TObject);
-var
-  g:TGForm;
 begin
   if Assigned(parent) then
-    if (parent is TGForm) then
-    begin
-      g:=(parent as TGForm);
-      g.hideAni;
-      if (g.lvl>0) then DataForm.ShowForm(0) else
-      begin
-        Bar.Parent:=nil;
-        hide;
-      end;
-      hide;
-      g.Free;
-    end else (parent as TForm).close;
+    (parent as TForm).close;
 end;
 
 procedure TBar.RBonusMouseLeave(Sender: TObject);
@@ -107,12 +112,12 @@ end;
 procedure TBar.showNext;
 begin
   NextBtn.Visible:=true;
-  TAnimator.AnimateFloat(NextBtn, 'opacity', 1);
+  TAnimator.AnimateFloat(NextLayout, 'opacity', 1);
 end;
 
 procedure TBar.hideNext;
 begin
-  TAnimator.AnimateFloat(NextBtn, 'opacity', 0);
+  TAnimator.AnimateFloat(NextLayout, 'opacity', 0);
   NextBtn.Visible:=false;
 end;
 
@@ -126,12 +131,26 @@ begin
   if parent is TGForm then
   begin
     NextBtn.Visible:=true;
+    progress.Visible:=true;
     NextBtn.OnClick:=(parent as TGForm).Next;
     BackBtn.OnClick:=(parent as TGForm).Back;
-    if (parent as TGForm).status<2 then hideNext
+    if (parent as TGForm).state<2 then hideNext
       else if NextBtn.Opacity=0 then showNext;
   end else begin
     NextBtn.Visible:=false;
+    progress.Visible:=false;
+  end;
+end;
+
+procedure TBar.upProgress;
+var
+  f:TGlyph;
+  i:byte;
+begin
+  for i:=0 to progress.Children.Count-1 do
+  begin
+    f:=progress.Children[i] as TGlyph;
+    f.ImageIndex:=TGForm.getState(f.Tag);
   end;
 end;
 

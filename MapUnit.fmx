@@ -306,7 +306,7 @@ object MapForm: TMapForm
             D82EB143EE9D604302000000084BB043CE426043020000003867AF43AEE75F43
             02000000F8FEA8438EB35C4302000000F8FEA8438EB35C4303000000F8FEA843
             8EB35C43}
-          Position.X = 175.199996948242200000
+          Position.X = 175.000000000000000000
           Position.Y = 120.000000000000000000
           Size.Width = 102.400009155273400000
           Size.Height = 62.399993896484380000
@@ -461,7 +461,7 @@ object MapForm: TMapForm
             0200000000F0754302F460430200000000277843028962430200000000007B43
             0252604302000000005E7A4302DA62430200000000BC79430262654302000000
             016B7943037F694302000000015E7A4303726A4303000000005E7A4302726A43}
-          Position.X = 123.200004577636700000
+          Position.X = 124.000000000000000000
           Position.Y = 171.199996948242200000
           Size.Width = 66.400001525878910000
           Size.Height = 79.199996948242190000
@@ -564,7 +564,7 @@ object MapForm: TMapForm
             023C51430141A04302000000021554430192A0430200000002EE564301E3A043
             02000000026C604381F1A24302000000026C604381F1A24303000000FF6B6043
             81F1A243}
-          Position.X = 90.400001525878910000
+          Position.X = 91.000000000000000000
           Position.Y = 171.199996948242200000
           Size.Width = 63.999992370605470000
           Size.Height = 92.800003051757810000
@@ -671,7 +671,7 @@ object MapForm: TMapForm
             001E664301F6AB430200000000556843812BAB43020000000055684381B3AD43
             0200000000556843813BB0430200000000C0664381C3B24302000000007C6543
             0130B44303000000007C65430130B443}
-          Position.X = 111.200004577636700000
+          Position.X = 112.000000000000000000
           Position.Y = 237.600006103515600000
           Size.Width = 47.200004577636720000
           Size.Height = 82.399993896484380000
@@ -759,6 +759,18 @@ object MapForm: TMapForm
           Size.PlatformDefault = False
           ImageIndex = 6
           Images = DataForm.Images
+          object shepka: TGlyph
+            AutoHide = False
+            Align = Scale
+            Position.X = 62.000000000000000000
+            Position.Y = 8.000000000000000000
+            Opacity = 0.000000000000000000
+            Size.Width = 65.000000000000000000
+            Size.Height = 44.000000000000000000
+            Size.PlatformDefault = False
+            ImageIndex = 30
+            Images = DataForm.Other
+          end
           object sp: TPath
             Tag = 19
             Align = Scale
@@ -780,17 +792,6 @@ object MapForm: TMapForm
             Size.PlatformDefault = False
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
-          end
-          object shepka: TGlyph
-            Align = Scale
-            Position.X = 62.000000000000000000
-            Position.Y = 8.000000000000000000
-            Opacity = 0.000000000000000000
-            Size.Width = 65.000000000000000000
-            Size.Height = 44.000000000000000000
-            Size.PlatformDefault = False
-            ImageIndex = 30
-            Images = DataForm.Other
           end
         end
       end

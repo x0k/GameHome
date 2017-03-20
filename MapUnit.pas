@@ -35,16 +35,15 @@ type
     Path18: TPath;
     Path19: TPath;
     left: TLayout;
-    sp: TPath;
     wood: TLayout;
     shepka: TGlyph;
+    sp: TPath;
     procedure Path1DragOver(Sender: TObject; const Data: TDragObject; const Point: TPointF; var Operation: TDragOperation);
     procedure Path1DragDrop(Sender: TObject; const Data: TDragObject; const Point: TPointF);
   protected
     procedure onFormCreate; override;
     procedure addShow; override;
-  public
-
+    procedure addWin; override;
   end;
 
 implementation
@@ -84,6 +83,7 @@ begin
   sp.Opacity:=0;
   repeat
     r:=random(s.Count);
+    s.Items[r].Fill.Color:=changeHSL(TAlphaColorRec.Blue, (random(91)-45)/360, 0, 0);
     details.AddObject(s.Items[r]);
     s.Delete(r);
   until s.Count=0;
@@ -94,14 +94,12 @@ begin
   if TFmxObject(sender).Tag=TPath(Data.Source).Tag then
   begin
     TPath(Data.Source).Destroy;
-    TFmxObject(sender).Tag:=TFmxObject(sender).Tag+20;
+    TPath(sender).Fill.Color:=TPath(Data.Source).Fill.Color;
     if TFmxObject(sender).Tag<19 then
-    begin
-      TPath(sender).Fill.Color:=changeHSL(TAlphaColorRec.Blue, (random(61)-30)/360, 0, 0);
-      TAnimator.AnimateFloat(TFmxObject(sender), 'opacity', 1, 1);
-    end else begin
+      TAnimator.AnimateFloat(TFmxObject(sender), 'opacity', 1, 1)
+    else
       TAnimator.AnimateFloat(shepka, 'opacity', 1, 1);
-    end;
+    TFmxObject(sender).Tag:=TFmxObject(sender).Tag+20;
     inc(c);
     if c=20 then win;
   end else begin
@@ -118,6 +116,11 @@ begin
     TFmxObject(sender).BringToFront;
     Operation:=TDragOperation.Move;
   end;
+end;
+
+procedure TMapForm.addWin;
+begin
+  setDescription(1, Bar.SubText);
 end;
 
 end.

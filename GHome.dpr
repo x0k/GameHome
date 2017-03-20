@@ -2,8 +2,8 @@ program GHome;
 
 
 uses
-  System.StartUpCopy,
-  FMX.Forms,
+  System.StartUpCopy, System.SysUtils,
+  FMX.Forms, windows, Messages,
   MainUnit in 'MainUnit.pas' {MainForm},
   SettingsUnit in 'SettingsUnit.pas' {SettingsForm},
   DataUnit in 'DataUnit.pas' {DataForm: TDataModule},
@@ -18,11 +18,14 @@ uses
   TaskUnit in 'TaskUnit.pas' {TaskForm},
   FoundationUnit in 'FoundationUnit.pas' {FoundationForm},
   MapUnit in 'MapUnit.pas' {MapForm},
-  OmenUnit in 'OmenUnit.pas' {OmenForm};
+  OmenUnit in 'OmenUnit.pas' {OmenForm},
+  WarmingUnit in 'WarmingUnit.pas' {WarmingForm};
 
 {$R *.res}
 
 begin
+  if AddFontResource('t/font.ttf')>0 then SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0)
+    else Raise Exception.create('Ошибка при загрузке шрифтов');
   Application.Initialize;
   Application.CreateForm(TDataForm, DataForm);
   Application.CreateForm(TMainForm, MainForm);

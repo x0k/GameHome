@@ -7,7 +7,7 @@ uses
   System.ImageList, FMX.ImgList, FMX.Objects, FMX.Media, FMX.Memo,
   FMX.Styles, FMX.Dialogs, FMX.Graphics, FMX.MultiResBitmap,
   system.JSON, system.Generics.Collections, system.Types, BarUnit, Bass,
-  System.Actions, FMX.ActnList, System.UITypes, FMX.Layouts, FMX.ani;
+  System.Actions, FMX.ActnList, System.UITypes, FMX.Layouts, FMX.ani, FMX.TabControl;
 
 const
   AWD_COUNT = 17;
@@ -57,12 +57,8 @@ type
   //Игровая информация
   TGameData = class
   private
-    Status:array[0..LVL_COUNT] of byte;
-    Awards:array[1..AWD_COUNT] of boolean;
     origramparray: tramparray;//текущие значения gamma ramp
     Br,Ct,Gm:byte;
-    procedure GetAwd(index:byte);
-    procedure UpStatus(l:byte);
     procedure LoadSavedRamp;
     function UpdateGamma: boolean;
     procedure SetBr(b:byte);
@@ -113,12 +109,19 @@ type
 
   //GForm
   TGForm = class(TBarForm)
+  private class var
+    forms:array[0..LVL_COUNT]of TGForm;
+    states:array[0..LVL_COUNT] of byte;
+    //awards:array[1..AWD_COUNT] of boolean;
   protected
     level:byte;
     bgs:TArray<TGlyph>;
     lts:TArray<TControl>;
+    tbs:TTabControl;
     function getStatus:byte;
-    procedure upStatus(l:byte);
+    procedure setStatus(s:byte);
+    procedure upStatus;
+    procedure clearData;
 
     procedure addShow; virtual;
     procedure firstShow; virtual;
@@ -127,8 +130,6 @@ type
     procedure afterFormCreate; override;
     procedure onFormShow; override;
     procedure onFormClose; override;
-
-    class function getFormById(i:byte):TGForm;
   public
     procedure win;
     procedure setText(l, c, d: byte); overload;
@@ -138,9 +139,11 @@ type
     procedure Back(Sender: TObject); virtual;
 
     property lvl:byte read level;
-    property status:byte read getStatus write upStatus;
+    property state:byte read getStatus write setStatus;
 
-    constructor Create(Lvl:byte);
+    class procedure createForm(id:byte);
+    class function getState(id:byte):byte;
+    constructor Create(Lvl:byte; Own:TComponent); reintroduce;
   end;
 
   //DataForm
@@ -154,7 +157,7 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     function getList(r:eResource):TImageList;
-    procedure ShowForm(i:byte);
+    procedure ShowForm(id:byte);
   end;
 
 var
@@ -173,7 +176,7 @@ implementation
 {$R *.dfm}
 
 uses system.IOUtils, system.Math, windows, Messages,
-GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit;
+GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit, WarmingUnit;
 
   { }
 
@@ -237,23 +240,9 @@ begin
   finally
     releasedc(0, dc)
   end;
-  Status[0]:=3;
   Ct:=5;
   Br:=5;
   Gm:=1;
-end;
-
-//Дать награду
-procedure TGameData.GetAwd(index: Byte);
-begin
-  Awards[index]:=true;
-end;
-
-//Обновить статус в "прогрессбаре"
-procedure TGameData.UpStatus(l: Byte);
-begin
-  if status[l]<2 then inc(status[l]);
-  if status[l]=2 then Bar.showNext;
 end;
 
 //Загрузить сохраненную гамму
@@ -406,7 +395,7 @@ begin
     end;
   finally
     loaded.Add(r);
-    Res.Free;
+    Res.Destroy;
   end;
 end;
 
@@ -594,15 +583,16 @@ end;
 
   {TGForm}
 
-constructor TGForm.Create(Lvl:byte);
+constructor TGForm.Create(Lvl:byte; Own:TComponent);
 begin
-  inherited Create(DataForm);
+  inherited Create(own);
   Level:=lvl;
+  forms[lvl]:=self;
 end;
 
 procedure TGForm.win;
 begin
-  GD.UpStatus(level);
+  upStatus;
   addWin;
 end;
 
@@ -613,14 +603,29 @@ begin
   SetDescription(d, Bar.SubText);
 end;
 
+procedure TGForm.setStatus(s: Byte);
+begin
+  states[level]:=s;
+end;
+
 function TGForm.getStatus;
 begin
-  result:=GD.Status[level];
+  result:=states[level];
 end;
 
 procedure TGForm.upStatus;
 begin
-  GD.upStatus(l);
+  if states[level]<2 then inc(states[level]);
+  if states[level]=2 then Bar.showNext;
+  Bar.upProgress;
+end;
+
+procedure TGForm.clearData;
+var
+  i:byte;
+begin
+  for i:=0 to LVL_COUNT do
+
 end;
 
 procedure TGForm.addShow;
@@ -629,6 +634,8 @@ end;
 
 procedure TGForm.firstShow;
 begin
+  if Assigned(tbs) then tbs.TabIndex:=0;
+  lLogo:=0;lCapt:=0;lDesc:=0;
 end;
 
 procedure TGForm.addWin;
@@ -664,21 +671,21 @@ var
   i:byte;
 begin
   if length(bgs)>0 then
-  for i:=0 to High(bgs) do
-    IM.setSize(bgs[i], screen.Size);
+    for i:=0 to High(bgs) do
+      IM.setSize(bgs[i], screen.Size);
   if length(lts)>0 then
-  for i:=0 to High(lts) do
-    lts[i].Opacity:=0;
+    for i:=0 to High(lts) do
+      lts[i].Opacity:=0;
 end;
 
 procedure TGForm.onFormShow;
 begin
   addShow;
-  if status=0 then//Первое открытие
+  if state=0 then//Первое открытие
   begin
-    GD.UpStatus(level);
     firstShow;
-  end;
+    upStatus;
+  end else Bar.upProgress;
   showAni;
 end;
 
@@ -687,9 +694,10 @@ begin
   if level>0 then
   begin
     DataForm.ShowForm(0);
+    if state<2 then
+      state:=0;
     Release;
   end;
-  hide;
 end;
 
 procedure TGForm.Next;
@@ -697,42 +705,48 @@ begin
   hideAni;
   if level<LVL_COUNT then
     DataForm.ShowForm(level+1);
-  free;
+  if state<2 then
+    state:=0;
+  Destroy;
 end;
 
 procedure TGForm.Back;
 begin
   hideAni;
   if level>0 then
-  begin
     DataForm.ShowForm(level-1);
-    free;
-  end else free;
+  if state<2 then
+    state:=0;
+  Destroy;
 end;
 
-class function TGForm.getFormById(i: Byte):TGForm;
+class procedure TGForm.createForm;
 begin
-  case i of
-    0:begin
-        if not Assigned(GameForm) then GameForm:=TGameForm.Create(0);
-        result:=GameForm;
-      end;
-    1:result:=TSeazonForm.Create(1);
-    2:result:=TPlaceForm.Create(2);
-    3:result:=TToolsForm.Create(3);
-    4:result:=TMaterialsForm.Create(4);
-    5:result:=TTaskForm.Create(5);
-    6:result:=TFoundationForm.Create(6);
-    7:result:=TMapForm.Create(7);
-    8:result:=TOmenForm.Create(8);
-    else result:=nil;
+  case id of
+    0:TGameForm.Create(0, DataForm);
+    1:TSeazonForm.Create(1, forms[0]);
+    2:TPlaceForm.Create(2, forms[0]);
+    3:TToolsForm.Create(3, forms[0]);
+    4:TMaterialsForm.Create(4, forms[0]);
+    5:TTaskForm.Create(5, forms[0]);
+    6:TFoundationForm.Create(6, forms[0]);
+    7:TMapForm.Create(7, forms[0]);
+    8:TOmenForm.Create(8, forms[0]);
+    9:TWarmingForm.Create(9, forms[0]);
   end;
+end;
+
+class function TGForm.getState(id: Byte):byte;
+begin
+  result:=0;
+  if (id>0)and(id<=LVL_COUNT) then result:=states[id]
 end;
 
   {TDataForm}
 
 function TDataForm.getList(r: eResource):TImageList;
 begin
+  result:=nil;
   case r of
     rImages: result:=Images;
     rSequences: result:=Sequence;
@@ -741,16 +755,11 @@ begin
   end;
 end;
 
-procedure TDataForm.ShowForm(i: Byte);
-var
- f:TGForm;
+procedure TDataForm.ShowForm(id: Byte);
 begin
-  f:=TGForm.getFormById(i);
-  if Assigned(f) then
-  begin
-    f.Show;
-    if i=0 then f.onBarShow(self);
-  end;
+  if (id>0)or not Assigned(TGForm.forms[id]) then
+    TGForm.createForm(id);
+  TGForm.forms[id].Show;
 end;
 
 //Инициализация классовых переменных TGForm. Создание форм.
@@ -761,8 +770,7 @@ begin
   TM:=TTextManager.Create();
   IM:=TImageManager.Create();
   Bar:=TBar.create(self);
-  if AddFontResource(PChar(getPath(pTexts)+'font.ttf'))>0 then SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
-  //  else Raise Exception.create('Ошибка при загрузке шрифтов');
+  TGForm.states[0]:=2;
 end;
 
 //

@@ -75,17 +75,17 @@ object PlaceForm: TPlaceForm
           Cursor = crDefault
           DisableFocusEffect = True
           Margins.Left = 100.000000000000000000
-          Margins.Top = 200.000000000000000000
+          Margins.Top = 150.000000000000000000
           Margins.Bottom = 200.000000000000000000
           Position.X = 100.000000000000000000
-          Position.Y = 200.000000000000000000
+          Position.Y = 150.000000000000000000
           Size.Width = 473.000000000000000000
-          Size.Height = 320.000000000000000000
+          Size.Height = 370.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'SMemo'
           TabOrder = 1
           Viewport.Width = 473.000000000000000000
-          Viewport.Height = 320.000000000000000000
+          Viewport.Height = 370.000000000000000000
         end
       end
     end

@@ -47,9 +47,6 @@ type
     procedure Next(Sender: TObject);override;
   end;
 
-var
-  GameForm: TGameForm;
-
 implementation
 
 {$R *.fmx}
@@ -61,6 +58,7 @@ begin
   IM.add(rOther);
   bgs:=[home, BG1, BG2, BG3];
   lts:=[main1, main3];
+  tbs:=tabs;
 end;
 
 procedure TGameForm.Next;
@@ -75,14 +73,14 @@ end;
 procedure TGameForm.Back(Sender: TObject);
 begin
   hideAni;
-  Bar.Parent:=nil;
-  hide;
+  close;
 end;
 
 procedure TGameForm.l1btnClick(Sender: TObject);
 begin
   hideAni;
   DataForm.ShowForm((Sender as TFmxObject).Tag);
+  hide;
 end;
 
 end.

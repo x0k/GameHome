@@ -7,7 +7,6 @@ object MaterialsForm: TMaterialsForm
   Caption = 'MaterialsForm'
   ClientHeight = 720
   ClientWidth = 1280
-  Position = DesktopCenter
   StyleBook = DataForm.Styles
   FormFactor.Width = 1280
   FormFactor.Height = 720

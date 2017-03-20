@@ -116,11 +116,11 @@ begin
   if Tabs.TabIndex<1 then
   begin
     Tabs.Next();
-    if status<2 then Bar.hideNext;
+    if state<2 then Bar.hideNext;
   end else begin
     hideAni;
     DataForm.ShowForm(level+1);
-    free;
+    Destroy;
   end;
 end;
 

@@ -39,6 +39,7 @@ procedure TTaskForm.onFormCreate;
 begin
   bgs:=[BG];
   lts:=[main];
+  img.Width:=(Screen.Height-300)/597*457;
 end;
 
 procedure TTaskForm.addShow;

@@ -350,7 +350,9 @@
         </DCCReference>
         <DCCReference Include="OmenUnit.pas">
             <Form>OmenForm</Form>
-            <FormType>fmx</FormType>
+        </DCCReference>
+        <DCCReference Include="WarmingUnit.pas">
+            <Form>WarmingForm</Form>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
