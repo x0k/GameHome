@@ -58,7 +58,7 @@ object FoundationForm: TFoundationForm
         OnMouseEnter = s0MouseEnter
         object f0: TGlyph
           Tag = 1
-          Margins.Bottom = -120.000000000000000000
+          Margins.Bottom = -80.000000000000000000
           Align = Bottom
           Position.Y = 352.000000000000000000
           Size.Width = 220.000000000000000000
@@ -70,13 +70,13 @@ object FoundationForm: TFoundationForm
         object t0: TText
           Align = MostBottom
           HitTest = False
-          Position.Y = 440.000000000000000000
+          Position.Y = 480.000000000000000000
           Size.Width = 220.000000000000000000
-          Size.Height = 120.000000000000000000
+          Size.Height = 80.000000000000000000
           Size.PlatformDefault = False
           Text = #1053#1072' '#1082#1072#1084#1085#1103#1093
           TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-          TextSettings.Font.Size = 40.000000000000000000
+          TextSettings.Font.Size = 22.000000000000000000
         end
       end
       object s1: TLayout
@@ -92,7 +92,7 @@ object FoundationForm: TFoundationForm
         OnMouseEnter = s0MouseEnter
         object f1: TGlyph
           Tag = 2
-          Margins.Bottom = -120.000000000000000000
+          Margins.Bottom = -80.000000000000000000
           Align = Bottom
           Position.Y = 304.000000000000000000
           Size.Width = 220.000000000000000000
@@ -104,13 +104,13 @@ object FoundationForm: TFoundationForm
         object t1: TText
           Align = MostBottom
           HitTest = False
-          Position.Y = 440.000000000000000000
+          Position.Y = 480.000000000000000000
           Size.Width = 220.000000000000000000
-          Size.Height = 120.000000000000000000
+          Size.Height = 80.000000000000000000
           Size.PlatformDefault = False
           Text = #1053#1072' '#1073#1077#1090#1086#1085#1085#1099#1093' '#1089#1090#1086#1083#1073#1072#1093
           TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-          TextSettings.Font.Size = 40.000000000000000000
+          TextSettings.Font.Size = 22.000000000000000000
         end
       end
       object s2: TLayout
@@ -126,7 +126,7 @@ object FoundationForm: TFoundationForm
         OnMouseEnter = s0MouseEnter
         object f2: TGlyph
           Tag = 4
-          Margins.Bottom = -120.000000000000000000
+          Margins.Bottom = -80.000000000000000000
           Align = Bottom
           Position.Y = 312.000000000000000000
           Size.Width = 220.000000000000000000
@@ -138,13 +138,13 @@ object FoundationForm: TFoundationForm
         object t2: TText
           Align = MostBottom
           HitTest = False
-          Position.Y = 440.000000000000000000
+          Position.Y = 480.000000000000000000
           Size.Width = 220.000000000000000000
-          Size.Height = 120.000000000000000000
+          Size.Height = 80.000000000000000000
           Size.PlatformDefault = False
           Text = #1053#1072' '#1076#1077#1088#1077#1074#1103#1085#1085#1099#1093' '#1089#1090#1086#1083#1073#1072#1093
           TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-          TextSettings.Font.Size = 40.000000000000000000
+          TextSettings.Font.Size = 22.000000000000000000
         end
       end
       object s3: TLayout
@@ -160,7 +160,7 @@ object FoundationForm: TFoundationForm
         OnMouseEnter = s0MouseEnter
         object f3: TGlyph
           Tag = 3
-          Margins.Bottom = -120.000000000000000000
+          Margins.Bottom = -80.000000000000000000
           Align = Bottom
           Position.Y = 320.000000000000000000
           Size.Width = 220.000000000000000000
@@ -172,13 +172,13 @@ object FoundationForm: TFoundationForm
         object t3: TText
           Align = MostBottom
           HitTest = False
-          Position.Y = 440.000000000000000000
+          Position.Y = 480.000000000000000000
           Size.Width = 220.000000000000000000
-          Size.Height = 120.000000000000000000
+          Size.Height = 80.000000000000000000
           Size.PlatformDefault = False
           Text = #1041#1077#1079' '#1092#1091#1085#1076#1072#1084#1077#1085#1090#1072
           TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-          TextSettings.Font.Size = 40.000000000000000000
+          TextSettings.Font.Size = 22.000000000000000000
         end
       end
     end

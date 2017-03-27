@@ -3,10 +3,9 @@ unit SeazonUnit;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
-  FMX.Layouts, FMX.StdCtrls, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo,
-  FMX.Ani, FMX.Effects, FMX.Filter.Effects, system.JSON, DataUnit, FMX.ImgList;
+  System.SysUtils, System.Types, System.Classes,
+  FMX.Types, FMX.Controls, FMX.Objects, FMX.Layouts, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Ani, FMX.ImgList,
+  Forms;
 
 type
   TSeazonForm = class(TGForm)
@@ -44,22 +43,13 @@ var
 
 procedure TSeazonForm.onFormCreate;
 begin
-  bgs:=[BG];
-  lts:=[Main];
+  backgrounds:=[BG];
+  layouts:=[Main];
 end;
 
 procedure TSeazonForm.addShow;
-var
-  i:byte;
-  s:TSizeF;
 begin
-  w:=Width/4;
-  s:=TSizeF.Create(w, Height);
-  for i:=0 to 3 do
-  begin
-    (main.Children[i] as TLayout).Width:=w;
-    IM.setSize(main.Children[i].Children[0] as TGlyph, s);
-  end;
+  fillFormByImgs([s0, s1, s2, s3]);
   shw:=-1;
 end;
 
@@ -73,7 +63,7 @@ begin
     shw:=-1;
   end else begin
     shw:=Main.Children.IndexOf(TFmxObject(sender));
-    self.setDescription(TFmxObject(sender).Children[0].tag, Bar.SubText);
+    setText(TFmxObject(sender).Children[0].tag);
 
     TAnimator.AnimateFloat(Main, 'Position.X', -(2*w*TFmxObject(sender).Tag/3));
     TAnimator.AnimateFloat(TFmxObject(sender), 'width', 3*w);

@@ -7,7 +7,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Objects, FMX.Layouts, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.Effects, FMX.Filter.Effects, DataUnit,
-  FMX.ImgList, system.Generics.Collections, FMX.ani;
+  FMX.ImgList, system.Generics.Collections, FMX.ani,
+  Forms;
 
 type
   TToolsForm = class(TGForm)
@@ -26,6 +27,9 @@ implementation
 
 {$R *.fmx}
 
+uses
+  ResourcesManager;
+
 var
   eff1, eff2:TInnerGlowEffect;
   a,b:boolean;
@@ -39,8 +43,8 @@ procedure TToolsForm.onFormCreate;
 begin
   eff1:=TInnerGlowEffect.Create(self);
   eff2:=TInnerGlowEffect.Create(self);
-  bgs:=[BG];
-  lts:=[tools];
+  backgrounds:=[BG];
+  layouts:=[tools];
 end;
 
 procedure TToolsForm.click(Sender: TObject);
@@ -59,7 +63,7 @@ begin
     end;
     else leave(sender);
   end;
-  self.setDescription(id+1, Bar.SubText);
+  setText(id+1);
   if a and b then win;
 end;
 
@@ -81,13 +85,13 @@ var
   i,k:byte;
 begin
   l:=TList<byte>.create;
-  tools.ItemWidth:=tools.Width/5;
-  tools.ItemHeight:=tools.Height/2;
+  tools.ItemWidth:=(tools.Width-100)/5;
+  tools.ItemHeight:=(tools.Height-40)/2;
   lt:=TLayout.Create(self);
   lt.Align:=TAlignLayout.Client;
   G:=TGlyph.Create(self);
   G.Align:=TAlignLayout.Client;
-  G.Images:=DataForm.getList(rOther);
+  G.Images:=getImgList(rOther);
   G.Margins.Top:=20;
   G.Margins.Right:=20;
   G.Margins.Left:=20;

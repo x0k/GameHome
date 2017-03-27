@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, system.Generics.Collections,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, system.Math,
-  FMX.Objects, BarUnit, FMX.Layouts, FMX.Ani, FMX.Effects, DataUnit, FMX.ImgList, System.UIConsts;
+  FMX.Objects, BarUnit, FMX.Layouts, FMX.Ani, FMX.Effects, DataUnit, FMX.ImgList, System.UIConsts,
+  Forms;
 
 type
   TMapForm = class(TGForm)
@@ -56,8 +57,8 @@ var
 
 procedure TMapForm.onFormCreate;
 begin
-  bgs:=[BG];
-  lts:=[main];
+  backgrounds:=[BG];
+  layouts:=[main];
   left.Width:=Screen.Width/2;
   w:=min(Screen.Width/2, Screen.Height-240);
 end;
@@ -120,7 +121,7 @@ end;
 
 procedure TMapForm.addWin;
 begin
-  setDescription(1, Bar.SubText);
+  setText(1);
 end;
 
 end.

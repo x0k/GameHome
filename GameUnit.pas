@@ -6,11 +6,11 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.StdCtrls, FMX.ScrollBox, FMX.Memo, FMX.Controls.Presentation,
-  FMX.TabControl, FMX.Layouts, FMX.Filter.Effects, DataUnit,
-  FMX.ImgList, BarUnit, FMX.ani;
+  FMX.TabControl, FMX.Layouts, FMX.Filter.Effects, FMX.ImgList, BarUnit, FMX.ani,
+  Forms;
 
 type
-  TGameForm = class(TGForm)
+  TGameForm = class(TGTabForm)
     Tabs: TTabControl;
     TabItem1: TTabItem;
     TabItem2: TTabItem;
@@ -42,44 +42,27 @@ type
     procedure l1btnClick(Sender: TObject);
   protected
     procedure onFormCreate; override;
-  public
-    procedure Back(Sender: TObject);override;
-    procedure Next(Sender: TObject);override;
   end;
 
 implementation
 
 {$R *.fmx}
 
+uses
+  ResourcesManager;
+
 procedure TGameForm.onFormCreate;
 begin
-  IM.add(rSequences);
-  IM.add(rImages);
-  IM.add(rOther);
-  bgs:=[home, BG1, BG2, BG3];
-  lts:=[main1, main3];
-  tbs:=tabs;
-end;
-
-procedure TGameForm.Next;
-begin
-  if Tabs.TabIndex<2 then
-  begin
-    Tabs.Next();
-    SetText(Tabs.TabIndex,Tabs.TabIndex,Tabs.TabIndex);
-  end else Bar.setShowBonus;
-end;
-
-procedure TGameForm.Back(Sender: TObject);
-begin
-  hideAni;
-  close;
+  backgrounds:=[home, BG1, BG2, BG3];
+  layouts:=[main1, main3];
+  gTabs:=tabs;
+  gTab:=3;
 end;
 
 procedure TGameForm.l1btnClick(Sender: TObject);
 begin
   hideAni;
-  DataForm.ShowForm((Sender as TFmxObject).Tag);
+    showForm((Sender as TFmxObject).Tag);
   hide;
 end;
 

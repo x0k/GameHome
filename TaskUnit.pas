@@ -6,20 +6,22 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Objects, FMX.StdCtrls,
-  FMX.Layouts, DataUnit, FMX.ImgList, FMX.ani;
+  FMX.Layouts, DataUnit, FMX.ImgList, FMX.ani,
+  Forms;
 
 type
   TTaskForm = class(TGForm)
-    Text: TMemo;
-    Grid: TGridPanelLayout;
-    Dec: TButton;
-    Num: TLabel;
-    Inc: TButton;
-    ttask: TText;
-    tans: TText;
     img: TGlyph;
     BG: TGlyph;
     main: TLayout;
+    Text1: TText;
+    text: TMemo;
+    Text2: TText;
+    Layout1: TLayout;
+    Button1: TButton;
+    Button2: TButton;
+    num: TLabel;
+    grid: TLayout;
     procedure DecClick(Sender: TObject);
   protected
     procedure onFormCreate; override;
@@ -37,20 +39,19 @@ implementation
 
 procedure TTaskForm.onFormCreate;
 begin
-  bgs:=[BG];
-  lts:=[main];
+  backgrounds:=[BG];
+  layouts:=[main];
   img.Width:=(Screen.Height-300)/597*457;
 end;
 
 procedure TTaskForm.addShow;
 begin
-  ans:=TM.getName(1).toInteger;
+  ans:=FormText.Items[0].ToInteger;
   repeat
     num.Tag:=random(14)-7+ans;
   until (num.Tag>ans+2)or(num.Tag<ans-2);
   Num.Text:=Num.Tag.ToString;
-  self.setDescription(2, text);
-  ldesc:=0;
+  self.setItem(1, text);
 end;
 
 procedure TTaskForm.addWin;

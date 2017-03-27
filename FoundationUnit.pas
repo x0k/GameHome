@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Effects,
-  FMX.Filter.Effects, DataUnit, FMX.ImgList, FMX.Ani;
+  FMX.Filter.Effects, DataUnit, FMX.ImgList, FMX.Ani,
+  Forms;
 
 type
   TFoundationForm = class(TGForm)
@@ -45,8 +46,8 @@ procedure TFoundationForm.onFormCreate;
 var
   i:byte;
 begin
-  bgs:=[BG];
-  lts:=[cont];
+  backgrounds:=[BG];
+  layouts:=[cont];
   w:=Screen.Width/5;
   main.Width:=w*4;
   for i:=0 to 3 do
@@ -72,7 +73,7 @@ procedure TFoundationForm.s0Click(Sender: TObject);
     TAnimator.AnimateFloat(O, 'Margins.Right', 0);
   end;
 begin
-  self.setDescription(TFmxObject(sender).Children[0].Tag, Bar.SubText);
+  self.setText(TFmxObject(sender).Children[0].Tag);
   if TFmxObject(sender).Tag=2 then
   begin
     win;
@@ -98,10 +99,15 @@ end;
 procedure TFoundationForm.addShow;
 var
   i:byte;
+  t:TText;
+  m:TArray<TText>;
 begin
   w:=main.Width/4;
   for i:=0 to 3 do
     (main.Children[i] as TControl).Width:=w;
+  m:=[t0, t1, t2, t3];
+  for t in m do
+    t.Font.Size:=22*t0.Width/220;
   p:=main.Position.X;
 end;
 

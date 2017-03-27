@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, DataUnit,
   FMX.StdCtrls, FMX.Objects, FMX.Controls.Presentation,
-  BarUnit, FMX.ImgList, FMX.Layouts, FMX.ani;
+  BarUnit, FMX.ImgList, FMX.Layouts, FMX.ani,
+  Forms;
 
 type
   TMuseumForm = class(TBarForm)
@@ -19,7 +20,6 @@ type
   protected
     procedure onFormCreate; override;
     procedure onFormShow; override;
-    procedure onFormClose; override;
     procedure showImg(i:byte);
   end;
 
@@ -29,6 +29,9 @@ var
 implementation
 
 {$R *.fmx}
+
+uses
+  ResourcesManager;
 
 var
   imgs:TArray<TGlyph>;
@@ -42,11 +45,11 @@ var
   i:byte;
 begin
   IM.add(rMuseum);
-  count:=DataForm.getList(rMuseum).Destination.Count;
+  count:=getImgList(rMuseum).Destination.Count;
   if count>0 then
   begin
     G:=TGlyph.Create(self);
-    G.Images:=DataForm.getList(rMuseum);
+    G.Images:=getImgList(rMuseum);
     G.Align:=TAlignLayout.Center;
     G.ImageIndex:=0;
     IM.setSize(G, Screen.Size);
@@ -67,21 +70,15 @@ end;
 
 procedure TMuseumForm.onFormShow;
 begin
-  Bar.BackBtn.Visible:=false;
   if last<=0 then last:=-1;
   id:=0;
   showImg(id);
 end;
 
-procedure TMuseumForm.onFormClose;
-begin
-  Bar.BackBtn.Visible:=true;
-end;
-
 procedure TMuseumForm.showImg(i: Byte);
 begin
   imgs[i].BringToFront;
-  setDescription(i, Bar.SubText);
+  setText(i);
   TAnimator.AnimateFloatWait(imgs[i], 'Opacity', 1, 0.6);
   if last>=0 then imgs[last].Opacity:=0;
   last:=id;

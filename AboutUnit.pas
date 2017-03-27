@@ -8,7 +8,8 @@ uses
   FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
   FMX.ListView, FMX.ListBox, FMX.ScrollBox, FMX.Memo, FMX.Filter.Effects, BarUnit,
-  FMX.ImgList;
+  FMX.ImgList,
+  Forms;
 
 type
   TAboutForm = class(TBarForm)
@@ -16,7 +17,6 @@ type
     BG: TGlyph;
   protected
     procedure onFormShow; override;
-    procedure onFormClose; override;
   public
     { Public declarations }
   end;
@@ -31,14 +31,7 @@ implementation
 
 procedure TAboutForm.onFormShow;
 begin
-  Bar.Logo.Visible:=false;
-  SetDescription(1, Text);
-end;
-
-procedure TAboutForm.onFormClose;
-begin
-  lDesc:=0;
-  Bar.Logo.Visible:=true;
+  setItem(1, Text);
 end;
 
 end.

@@ -3,10 +3,10 @@ unit BarUnit;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
-  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  FMX.Objects, FMX.Layouts, FMX.Controls.Presentation, FMX.Ani,
-  FMX.ScrollBox, FMX.Memo, FMX.TabControl, FMX.ImgList, System.ImageList;
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, System.ImageList,
+  FMX.Types, FMX.Graphics, FMX.Forms, FMX.StdCtrls,
+  FMX.Objects, FMX.Layouts, FMX.Ani, FMX.Memo, FMX.ImgList,
+  FMX.ScrollBox, FMX.Controls.Presentation, FMX.Controls;
 
 type
   TBar = class(TFrame)
@@ -70,7 +70,8 @@ implementation
 
 {$R *.fmx}
 
-uses GameUnit, DataUnit;
+uses
+  Forms;
 
 const
   w = 360;
@@ -123,8 +124,6 @@ end;
 
 procedure TBar.update;
 begin
-  TM.LoadText(parent.Name);
-  (parent as TBarForm).setText;
   BackBtn.OnClick:=(parent as TBarForm).closeByClick;
   RBonus.Position.X:=(parent as TBarForm).Width;
   open:=false;
@@ -147,11 +146,11 @@ var
   f:TGlyph;
   i:byte;
 begin
-  for i:=0 to progress.Children.Count-1 do
+  {for i:=0 to progress.Children.Count-1 do
   begin
     f:=progress.Children[i] as TGlyph;
     f.ImageIndex:=TGForm.getState(f.Tag);
-  end;
+  end;}
 end;
 
 end.

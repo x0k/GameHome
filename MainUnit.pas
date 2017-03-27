@@ -46,37 +46,9 @@ implementation
 
 {$R *.fmx}
 
-uses SettingsUnit, MuseumUnit, AboutUnit, DataUnit, GameUnit;
-
-procedure TMainForm.AboutBtnClick(Sender: TObject);
-begin
-  TM.Load(tOther);
-  AboutForm.Show;
-end;
-
-procedure TMainForm.BGameBtnClick(Sender: TObject);
-begin
-  TM.Load(tLevels);
-  DataForm.ShowForm(0);
-end;
-
-procedure TMainForm.ExitBtnClick(Sender: TObject);
-begin
-  close;
-end;
-
-procedure TMainForm.MuseumBtnClick(Sender: TObject);
-begin
-  TM.Load(tMuseum);
-  if not Assigned(MuseumForm) then MuseumForm:=TMuseumForm.Create(DataForm);
-  MuseumForm.Show;
-end;
-
-procedure TMainForm.SettsBtnClick(Sender: TObject);
-begin
-  TM.Load(tOther);
-  SettingsForm.Show;
-end;
+uses
+  FMX.Dialogs,
+  SettingsUnit, MuseumUnit, AboutUnit, Forms, TextManager;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
@@ -86,8 +58,43 @@ begin
   main.Opacity:=0;
 end;
 
-procedure TMainForm.FormShow(Sender: TObject);
+procedure TMainForm.AboutBtnClick(Sender: TObject);
 begin
+  AboutForm.Show;
+end;
+
+procedure TMainForm.BGameBtnClick(Sender: TObject);
+begin
+  TGForm.showForm(0);
+end;
+
+procedure TMainForm.ExitBtnClick(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TMainForm.MuseumBtnClick(Sender: TObject);
+begin
+  if not Assigned(MuseumForm) then MuseumForm:=TMuseumForm.Create(self);
+  MuseumForm.Show;
+end;
+
+procedure TMainForm.SettsBtnClick(Sender: TObject);
+begin
+  SettingsForm.Show;
+end;
+
+procedure TMainForm.FormShow(Sender: TObject);
+var
+  m:TArray<TText>;
+  t:TFormText;
+  i: byte;
+begin
+  t:=TM.Forms[name];
+  m:=[text1, text2, text3, text4, text5];
+  text6.Text:=t.Names[0];
+  for i:=0 to 4 do
+    m[i].Text:=t.Items[i];
   TAnimator.AnimateFloatDelay(main, 'opacity', 1, 1, 1);
 end;
 

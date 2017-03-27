@@ -6,10 +6,11 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.ScrollBox,
   FMX.Memo, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Objects,
-  FMX.Layouts, FMX.TabControl, DataUnit, FMX.ImgList, FMX.Ani;
+  FMX.Layouts, FMX.TabControl, DataUnit, FMX.ImgList, FMX.Ani,
+  Forms;
 
 type
-  TPlaceForm = class(TGForm)
+  TPlaceForm = class(TGTabForm)
     Tabs: TTabControl;
     TabItem1: TTabItem;
     TabItem2: TTabItem;
@@ -36,8 +37,6 @@ type
   protected
     procedure addShow; override;
     procedure onFormCreate; override;
-  public
-    procedure Next(Sender: TObject);override;
   end;
 
 
@@ -52,8 +51,10 @@ var
 
 procedure TPlaceForm.onFormCreate;
 begin
-  bgs:=[BG1, BG2];
-  lts:=[main1, main2];
+  backgrounds:=[BG1, BG2];
+  layouts:=[main1, main2];
+  gTabs:=tabs;
+  gTab:=0;
 end;
 
 procedure TPlaceForm.s0Click(Sender: TObject);
@@ -66,7 +67,7 @@ begin
     shw:=-1;
   end else begin
     shw:=Main2.Children.IndexOf(TFmxObject(sender));
-    self.setDescription(TFmxObject(sender).Children[0].tag, Bar.SubText);
+    setText(TFmxObject(sender).Children[0].tag);
 
     TAnimator.AnimateFloat(Main2, 'Position.X', -(2*w*TFmxObject(sender).Tag/3));
     TAnimator.AnimateFloat(TFmxObject(sender), 'width', 3*w);
@@ -94,34 +95,11 @@ begin
 end;
 
 procedure TPlaceForm.addShow;
-var
-  i:byte;
-  s:TSizeF;
 begin
-  w:=Width/4;
-  s:=TSizeF.Create(w, Height);
-  for i:=0 to 3 do
-  begin
-    (main2.Children[i] as TLayout).Width:=w;
-    IM.setSize(main2.Children[i].Children[0] as TGlyph, s);
-  end;
+  fillFormByImgs([s0, s1, s2, s3]);
+
   shw:=-1;
-
-  self.setDescription(5, Text);
-  Bar.showNext;
-end;
-
-procedure TPlaceForm.Next(Sender: TObject);
-begin
-  if Tabs.TabIndex<1 then
-  begin
-    Tabs.Next();
-    if state<2 then Bar.hideNext;
-  end else begin
-    hideAni;
-    DataForm.ShowForm(level+1);
-    Destroy;
-  end;
+  self.setItem(0, Text);
 end;
 
 end.

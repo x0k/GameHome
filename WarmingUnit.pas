@@ -6,10 +6,11 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.ImgList, DataUnit, FMX.TabControl, FMX.ani, system.Math,
-  FMX.Effects, FMX.Filter.Effects;
+  FMX.Effects, FMX.Filter.Effects,
+  Forms;
 
 type
-  TWarmingForm = class(TGForm)
+  TWarmingForm = class(TGTabForm)
     main: TLayout;
     home: TGlyph;
     rigth: TLayout;
@@ -40,7 +41,6 @@ type
     procedure addShow; override;
     procedure addWin; override;
   public
-    procedure Next(Sender: TObject);override;
     procedure click(Sender: TObject);
     procedure enter(Sender: TObject);
     procedure leave(Sender: TObject);
@@ -58,8 +58,9 @@ var
 procedure TWarmingForm.click(Sender: TObject);
 begin
   inn.Parent:=nil;
-  setDescription(TFmxObject(sender).Tag+1, Bar.SubText);
+  setText(TFmxObject(sender).Tag+1);
   c.Parent:=TFmxObject(sender);
+
   if TFmxObject(sender).Tag=1 then win;
 end;
 
@@ -85,8 +86,11 @@ var
     g.HitTest:=true;
   end;
 begin
-  bgs:=[BG1, BG2, BG3, BG4];
-  lts:=[main, BG4];
+  backgrounds:=[BG1, BG2, BG3, BG4];
+  layouts:=[main, BG4];
+  gTabs:=tabs;
+  gTab:=0;
+
   c:=TContrastEffect.Create(self);
   inn:=TInnerGlowEffect.Create(self);
   w:=min((Screen.Width-220)/2, (Screen.Height-260));
@@ -94,19 +98,6 @@ begin
     setGl(g as TGlyph);
   for g in rigth.Children do
     setGl(g as TGlyph)
-end;
-
-procedure TWarmingForm.Next(Sender: TObject);
-begin
-  if Tabs.TabIndex<2 then begin
-    Tabs.Next();
-    setDescription(3, Bar.SubText);
-  end
-  else begin
-    hideAni;
-    DataForm.ShowForm(level+1);
-    Destroy;
-  end;
 end;
 
 procedure TWarmingForm.addShow;

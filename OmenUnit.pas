@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, DataUnit, system.Math,
   FMX.Objects, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Layouts,
-  FMX.ImgList, FMX.ani;
+  FMX.ImgList, FMX.ani,
+  Forms;
 
 type
   TWalls = class(TGlyph)
@@ -20,7 +21,7 @@ type
     procedure drop(Sender: TObject; const Data: TDragObject; const Point: TPointF);
     procedure over(Sender: TObject; const Data: TDragObject; const Point: TPointF; var Operation: TDragOperation);
   public
-    procedure upPositions;
+    procedure upPositions(h:single);
     constructor create(own:TComponent; p :TFmxObject); reintroduce;
   end;
 
@@ -54,6 +55,9 @@ implementation
 
 {$R *.fmx}
 
+uses
+  ResourcesManager;
+
 var
   w:single;
   t:boolean;
@@ -74,10 +78,10 @@ var
   end;
 begin
   inherited create(own);
-  Images:=DataForm.getList(rImages);
+  Images:=getImgList(rImages);
   ImageIndex:=7;
   Align:=TAlignLayout.Center;
-  Width:=min(Screen.Width*23/64-260, Screen.Height*3/5-240);
+  Width:=min(Screen.Width/2-140, Screen.Height*2/3-200);
   Height:=Width;
   parent:=p;
   k:=width/360;
@@ -85,27 +89,29 @@ begin
   begin
     points[i]:=getPoint(i);
     circles[i]:=TGlyph.Create(own);
-    circles[i].Images:=DataForm.getList(rOther);
+    circles[i].Images:=getImgList(rOther);
     circles[i].OnDragOver:=over;
     circles[i].OnDragDrop:=drop;
     circles[i].AutoHide:=false;
     circles[i].Visible:=true;
     circles[i].HitTest:=true;
-    circles[i].Width:=100;
-    circles[i].Height:=100;
     circles[i].Opacity:=0;
     circles[i].Tag:=i;
     p.AddObject(circles[i]);
   end;
-  points[4]:=TPointF.Create(50, 50);
 end;
 
 procedure TWalls.upPositions;
 var
   i:byte;
 begin
+  points[4]:=TPointF.Create(h/2, h/2);
   for i:=0 to 3 do
+  begin
+    circles[i].Width:=h;
+    circles[i].Height:=h;
     circles[i].Position.Point:=self.Position.Point+points[i]-points[4];
+  end;
 end;
 
 procedure TWalls.clear;
@@ -170,17 +176,20 @@ end;
 procedure TOmenForm.L0MouseEnter(Sender: TObject);
 begin
   if not t then
-    setDescription(TFmxObject(sender).Tag+1, Bar.SubText);
+    setText(TFmxObject(sender).Tag+1);
 end;
 
 procedure TOmenForm.onFormCreate;
 var
   i:byte;
 begin
-  bgs:=[BG];
-  lts:=[main];
-  top.Height:=Screen.Height*3/5;
-  text.Margins.Right:=Screen.Width*(9/64);
+  backgrounds:=[BG];
+  layouts:=[main];
+  top.Height:=Screen.Height*2/3;
+  text.Margins.Right:=Screen.Width*(5/32);
+  text.Margins.Top:=Screen.Width*(5/36);
+  left.Margins.Right:=Screen.Width*(5/36);
+  left.Margins.Left:=Screen.Width*(5/32);
   text.Width:=Screen.Width/2-(20+text.Margins.Right);
   Walls:=TWalls.create(self, left);
   w:=Screen.Width/6;
@@ -191,15 +200,15 @@ end;
 
 procedure TOmenForm.addShow;
 begin
-  setDescription(6, Text);
-  walls.upPositions;
+  setItem(0, Text);
+  walls.upPositions(min(m0.Height, m0.Width));
   t:=false;
 end;
 
 procedure TOmenForm.addWin;
 begin
   t:=true;
-  setDescription(5, Bar.SubText);
+  setText(5);
 end;
 
 end.

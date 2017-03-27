@@ -52,7 +52,7 @@ object SettingsForm: TSettingsForm
         end
         item
           Column = 0
-          Control = Brithness
+          Control = Brithnes
           Row = 1
         end
         item
@@ -126,7 +126,7 @@ object SettingsForm: TSettingsForm
         Text = #1043#1088#1086#1084#1082#1086#1089#1090#1100
         TextSettings.Font.Size = 30.000000000000000000
       end
-      object Brithness: TText
+      object Brithnes: TText
         Align = Client
         Size.Width = 280.272125244140600000
         Size.Height = 153.332458496093800000

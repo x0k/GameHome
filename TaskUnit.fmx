@@ -28,7 +28,21 @@ object TaskForm: TTaskForm
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
-    object Grid: TGridPanelLayout
+    object img: TGlyph
+      Margins.Left = 100.000000000000000000
+      Margins.Top = 100.000000000000000000
+      Margins.Right = 100.000000000000000000
+      Margins.Bottom = 200.000000000000000000
+      Align = Left
+      Position.X = 100.000000000000000000
+      Position.Y = 100.000000000000000000
+      Size.Width = 495.000000000000000000
+      Size.Height = 420.000000000000000000
+      Size.PlatformDefault = False
+      ImageIndex = 4
+      Images = DataForm.Images
+    end
+    object grid: TLayout
       Align = Client
       Margins.Top = 100.000000000000000000
       Margins.Right = 100.000000000000000000
@@ -37,106 +51,51 @@ object TaskForm: TTaskForm
       Size.Height = 420.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
-      ColumnCollection = <
-        item
-          Value = 49.999094193764460000
-        end
-        item
-          SizeStyle = Absolute
-          Value = 160.000000000000000000
-        end
-        item
-          Value = 50.000905806235540000
-        end>
-      ControlCollection = <
-        item
-          Column = 0
-          Control = Dec
-          Row = 3
-        end
-        item
-          Column = 1
-          Control = Num
-          Row = 3
-        end
-        item
-          Column = 2
-          Control = Inc
-          Row = 3
-        end
-        item
-          Column = 0
-          ColumnSpan = 3
-          Control = Text
-          Row = 1
-        end
-        item
-          Column = 0
-          ColumnSpan = 3
-          Control = ttask
-          Row = 0
-        end
-        item
-          Column = 0
-          ColumnSpan = 3
-          Control = tans
-          Row = 2
-        end>
-      RowCollection = <
-        item
-          Value = 5.075482044997262000
-        end
-        item
-          Value = 59.464412499792610000
-        end
-        item
-          Value = 5.451464581478069000
-        end
-        item
-          Value = 30.008640873732060000
-        end
-        item
-          SizeStyle = Auto
-        end>
-      object Dec: TButton
-        Align = MostRight
-        Position.X = 98.497055053710940000
-        Position.Y = 324.963714599609400000
-        Size.Width = 64.000000000000000000
-        Size.Height = 64.000000000000000000
+      object Layout1: TLayout
+        Align = Bottom
+        Position.Y = 289.000000000000000000
+        Size.Width = 485.000000000000000000
+        Size.Height = 131.000000000000000000
         Size.PlatformDefault = False
-        StyleLookup = 'decbtn'
-        TabOrder = 2
-        Text = 'Dec'
-        OnClick = DecClick
+        TabOrder = 0
+        object Button1: TButton
+          Align = Center
+          Margins.Right = 220.000000000000000000
+          Size.Width = 64.000000000000000000
+          Size.Height = 64.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'decbtn'
+          TabOrder = 2
+          Text = 'Dec'
+          OnClick = DecClick
+        end
+        object Button2: TButton
+          Tag = 1
+          Align = Center
+          Margins.Left = 220.000000000000000000
+          Size.Width = 64.000000000000000000
+          Size.Height = 64.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'incbtn'
+          TabOrder = 1
+          Text = 'Button1'
+          OnClick = DecClick
+        end
+        object num: TLabel
+          Tag = 456
+          Align = Center
+          StyledSettings = [Style, FontColor]
+          Size.Width = 128.000000000000000000
+          Size.Height = 128.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'VarText'
+          TextSettings.Font.Size = 50.000000000000000000
+          TextSettings.FontColor = claWhite
+          TextSettings.HorzAlign = Center
+          Text = '456'
+        end
       end
-      object Num: TLabel
-        Tag = 456
-        Align = Center
-        StyledSettings = [Style, FontColor]
-        Size.Width = 128.000000000000000000
-        Size.Height = 128.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = 'VarText'
-        TextSettings.Font.Size = 50.000000000000000000
-        TextSettings.FontColor = claWhite
-        TextSettings.HorzAlign = Center
-        Text = '456'
-      end
-      object Inc: TButton
-        Tag = 1
-        Align = MostLeft
-        Position.X = 322.497070312500000000
-        Position.Y = 324.963714599609400000
-        Size.Width = 64.000000000000000000
-        Size.Height = 64.000000000000000000
-        Size.PlatformDefault = False
-        StyleLookup = 'incbtn'
-        TabOrder = 1
-        Text = 'Button1'
-        OnClick = DecClick
-      end
-      object Text: TMemo
+      object text: TMemo
         Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
         DataDetectorTypes = []
         ReadOnly = True
@@ -152,47 +111,34 @@ object TaskForm: TTaskForm
         Margins.Right = 10.000000000000000000
         Margins.Bottom = 10.000000000000000000
         Size.Width = 465.000000000000000000
-        Size.Height = 229.750549316406300000
+        Size.Height = 209.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SMemo'
-        TabOrder = 3
+        TabOrder = 1
         Viewport.Width = 465.000000000000000000
-        Viewport.Height = 229.800000000000000000
+        Viewport.Height = 209.000000000000000000
       end
-      object ttask: TText
-        Align = Client
+      object Text1: TText
+        Align = Top
         Size.Width = 485.000000000000000000
-        Size.Height = 21.317024230957030000
+        Size.Height = 30.000000000000000000
         Size.PlatformDefault = False
         Text = #1047#1072#1076#1072#1095#1072
         TextSettings.Font.Family = 'Tkachenko Sketch 4F'
         TextSettings.Font.Size = 30.000000000000000000
         TextSettings.HorzAlign = Leading
       end
-      object tans: TText
-        Align = Client
+      object Text2: TText
+        Align = Bottom
+        Position.Y = 259.000000000000000000
         Size.Width = 485.000000000000000000
-        Size.Height = 22.896148681640630000
+        Size.Height = 30.000000000000000000
         Size.PlatformDefault = False
         Text = #1054#1090#1074#1077#1090':'
         TextSettings.Font.Family = 'Tkachenko Sketch 4F'
         TextSettings.Font.Size = 30.000000000000000000
         TextSettings.HorzAlign = Leading
       end
-    end
-    object img: TGlyph
-      Margins.Left = 100.000000000000000000
-      Margins.Top = 100.000000000000000000
-      Margins.Right = 100.000000000000000000
-      Margins.Bottom = 200.000000000000000000
-      Align = Left
-      Position.X = 100.000000000000000000
-      Position.Y = 100.000000000000000000
-      Size.Width = 495.000000000000000000
-      Size.Height = 420.000000000000000000
-      Size.PlatformDefault = False
-      ImageIndex = 4
-      Images = DataForm.Images
     end
   end
 end

@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Objects,
-  FMX.Layouts, FMX.StdCtrls, DataUnit, FMX.ImgList, FMX.Ani;
+  FMX.Layouts, FMX.StdCtrls, DataUnit, FMX.ImgList, FMX.Ani,
+  Forms;
 
 type
   TMaterialsForm = class(TGForm)
@@ -48,8 +49,8 @@ procedure TMaterialsForm.onFormCreate;
 var
   i:byte;
 begin
-  bgs:=[BG];
-  lts:=[main];
+  backgrounds:=[BG];
+  layouts:=[main];
   top.Height:=Screen.Height/2;
   text.Width:=Screen.Width/3;
   w:=Screen.Width/6;
@@ -61,7 +62,7 @@ end;
 
 procedure TMaterialsForm.addShow;
 begin
-  self.setDescription(5, text);
+  setItem(0, text);
 end;
 
 procedure TMaterialsForm.L0Click(Sender: TObject);
@@ -76,7 +77,7 @@ begin
     22:b:=true;
   end;
   if id mod 2=0 then G.ImageIndex:=id+1;
-  self.setDescription(G.Tag, Bar.SubText);
+  setText(G.Tag);
   if a and b then win;
 end;
 

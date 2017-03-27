@@ -6,13 +6,14 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Objects,
   FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts, DataUnit, BarUnit,
-  FMX.ImgList;
+  FMX.ImgList,
+  Forms;
 
 type
   TSettingsForm = class(TBarForm)
     Grid: TGridPanelLayout;
     Volume: TText;
-    Brithness: TText;
+    Brithnes: TText;
     DecVol: TButton;
     VLev: TLabel;
     IncVol: TButton;
@@ -29,6 +30,7 @@ type
     procedure DecCtrClick(Sender: TObject);
   protected
     procedure onFormCreate; override;
+    procedure onFormShow; override;
   public
     { Public declarations }
   end;
@@ -39,6 +41,9 @@ var
 implementation
 
 {$R *.fmx}
+
+uses
+  ResourcesManager;
 
 procedure TSettingsForm.DecBrClick(Sender: TObject);
 begin
@@ -75,6 +80,13 @@ begin
 
   Clev.Tag:=GD.contrast;
   Clev.Text:=Clev.Tag.ToString;
+end;
+
+procedure TSettingsForm.onFormShow;
+begin
+  setItem(0, Volume);
+  setItem(1, Brithnes);
+  setItem(2, Contrast);
 end;
 
 end.

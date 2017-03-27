@@ -2,8 +2,11 @@ program GHome;
 
 
 uses
-  System.StartUpCopy, System.SysUtils,
-  FMX.Forms, windows, Messages,
+  System.StartUpCopy,
+  System.SysUtils,
+  FMX.Forms,
+  windows,
+  Messages,
   MainUnit in 'MainUnit.pas' {MainForm},
   SettingsUnit in 'SettingsUnit.pas' {SettingsForm},
   DataUnit in 'DataUnit.pas' {DataForm: TDataModule},
@@ -19,7 +22,13 @@ uses
   FoundationUnit in 'FoundationUnit.pas' {FoundationForm},
   MapUnit in 'MapUnit.pas' {MapForm},
   OmenUnit in 'OmenUnit.pas' {OmenForm},
-  WarmingUnit in 'WarmingUnit.pas' {WarmingForm};
+  WarmingUnit in 'WarmingUnit.pas' {WarmingForm},
+  Forms in 'Forms.pas',
+  TextManager in 'TextManager.pas',
+  ResourcesManager in 'ResourcesManager.pas',
+  ImageManager in 'ImageManager.pas',
+  GameData in 'GameData.pas',
+  SoundManager in 'SoundManager.pas';
 
 {$R *.res}
 
