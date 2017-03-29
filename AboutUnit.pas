@@ -16,7 +16,7 @@ type
     Text: TMemo;
     BG: TGlyph;
   protected
-    procedure onFormShow; override;
+    procedure onFormCreate; override;
   public
     { Public declarations }
   end;
@@ -29,9 +29,9 @@ implementation
 {$R *.fmx}
 
 
-procedure TAboutForm.onFormShow;
+procedure TAboutForm.onFormCreate;
 begin
-  setItem(1, Text);
+  setItem(0, Text);
 end;
 
 end.

@@ -30,7 +30,6 @@ type
     procedure DecCtrClick(Sender: TObject);
   protected
     procedure onFormCreate; override;
-    procedure onFormShow; override;
   public
     { Public declarations }
   end;
@@ -80,10 +79,7 @@ begin
 
   Clev.Tag:=GD.contrast;
   Clev.Text:=Clev.Tag.ToString;
-end;
 
-procedure TSettingsForm.onFormShow;
-begin
   setItem(0, Volume);
   setItem(1, Brithnes);
   setItem(2, Contrast);

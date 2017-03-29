@@ -14,11 +14,11 @@ object MainForm: TMainForm
   FormFactor.Height = 720
   FormFactor.Orientations = [Landscape]
   FormFactor.Devices = [Desktop]
+  FormFamily = 'MainForm'
   FullScreen = True
   ShowFullScreenIcon = True
   ShowHint = False
   OnCreate = FormCreate
-  OnShow = FormShow
   DesignerMasterStyle = 0
   object BG: TGlyph
     Align = Center
@@ -42,7 +42,7 @@ object MainForm: TMainForm
       Size.Height = 560.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
-      object Glyph1: TGlyph
+      object Logo: TGlyph
         Margins.Top = 50.000000000000000000
         Position.Y = 50.000000000000000000
         Size.Width = 507.000000000000000000
@@ -52,185 +52,155 @@ object MainForm: TMainForm
         ImageIndex = 0
         Images = DataForm.Icons
       end
-      object GridPanelLayout1: TGridPanelLayout
+      object MenuLayout: TScaledLayout
         Align = Center
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        Size.Width = 507.000000000000000000
-        Size.Height = 137.000000000000000000
+        OriginalWidth = 605.000000000000000000
+        OriginalHeight = 134.000000000000000000
+        Size.Width = 605.000000000000000000
+        Size.Height = 134.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 1
-        ColumnCollection = <
-          item
-            Value = 19.999962396387090000
-          end
-          item
-            Value = 20.000006066841700000
-          end
-          item
-            Value = 20.000026832201520000
-          end
-          item
-            Value = 20.000009202553930000
-          end
-          item
-            Value = 19.999995502015770000
-          end>
-        ControlCollection = <
-          item
-            Column = 0
-            Control = BGameBtn
-            Row = 0
-          end
-          item
-            Column = 1
-            Control = SettsBtn
-            Row = 0
-          end
-          item
-            Column = 4
-            Control = ExitBtn
-            Row = 0
-          end
-          item
-            Column = 0
-            Control = Text1
-            Row = 1
-          end
-          item
-            Column = 1
-            Control = Text2
-            Row = 1
-          end
-          item
-            Column = 2
-            Control = Text3
-            Row = 1
-          end
-          item
-            Column = 3
-            Control = Text4
-            Row = 1
-          end
-          item
-            Column = 4
-            Control = Text5
-            Row = 1
-          end
-          item
-            Column = 2
-            Control = MuseumBtn
-            Row = 0
-          end
-          item
-            Column = 3
-            Control = AboutBtn
-            Row = 0
-          end>
-        RowCollection = <
-          item
-            SizeStyle = Absolute
-            Value = 92.000000000000000000
-          end
-          item
-            Value = 100.000000000000000000
-          end
-          item
-            SizeStyle = Absolute
-          end>
-        object BGameBtn: TButton
-          Align = Center
-          Size.Width = 92.000000000000000000
-          Size.Height = 92.000000000000000000
+        object beginLayout: TLayout
+          Align = Left
+          Size.Width = 121.000000000000000000
+          Size.Height = 134.000000000000000000
           Size.PlatformDefault = False
-          StyleLookup = 'bgamebtn'
-          TabOrder = 0
-          Text = 'text'
-          OnClick = BGameBtnClick
-        end
-        object SettsBtn: TButton
-          Align = Center
-          Size.Width = 92.000000000000000000
-          Size.Height = 92.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'settsbtn'
-          TabOrder = 1
-          Text = 'Button1'
-          OnClick = SettsBtnClick
-        end
-        object ExitBtn: TButton
-          Align = Center
-          Size.Width = 92.000000000000000000
-          Size.Height = 92.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'exitbtn'
-          TabOrder = 2
-          Text = 'ExitBtn'
-          OnClick = ExitBtnClick
-        end
-        object Text1: TText
-          Align = Client
-          Size.Width = 101.399810791015600000
-          Size.Height = 45.000000000000000000
-          Size.PlatformDefault = False
-          Text = #1053#1072#1095#1072#1090#1100' '#1080#1075#1088#1091
-          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-          TextSettings.Font.Size = 18.000000000000000000
-        end
-        object Text2: TText
-          Align = Client
-          Size.Width = 101.400024414062500000
-          Size.Height = 45.000000000000000000
-          Size.PlatformDefault = False
-          Text = #1053#1072#1089#1090#1088#1086#1081#1082#1080
-          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-          TextSettings.Font.Size = 18.000000000000000000
-        end
-        object Text3: TText
-          Align = Client
-          Size.Width = 101.400146484375000000
-          Size.Height = 45.000000000000000000
-          Size.PlatformDefault = False
-          Text = #1052#1091#1079#1077#1081
-          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-          TextSettings.Font.Size = 18.000000000000000000
-        end
-        object Text4: TText
-          Align = Client
-          Size.Width = 101.400054931640600000
-          Size.Height = 45.000000000000000000
-          Size.PlatformDefault = False
-          Text = #1054#1073' '#1080#1075#1088#1077
-          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-          TextSettings.Font.Size = 18.000000000000000000
-        end
-        object Text5: TText
-          Align = Client
-          Size.Width = 101.399963378906300000
-          Size.Height = 45.000000000000000000
-          Size.PlatformDefault = False
-          Text = #1042#1099#1093#1086#1076
-          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-          TextSettings.Font.Size = 18.000000000000000000
-        end
-        object MuseumBtn: TButton
-          Align = Center
-          Size.Width = 92.000000000000000000
-          Size.Height = 92.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'MuseumBtn'
-          TabOrder = 3
-          Text = 'MuseumBtn'
-          OnClick = MuseumBtnClick
-        end
-        object AboutBtn: TButton
-          Align = Center
-          Size.Width = 92.000000000000000000
-          Size.Height = 92.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'aboutBtn'
           TabOrder = 4
-          Text = 'AboutBtn'
-          OnClick = AboutBtnClick
+          object BGameBtn: TButton
+            Align = MostTop
+            Position.X = 14.000000000000000000
+            Size.Width = 92.000000000000000000
+            Size.Height = 92.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'bgamebtn'
+            TabOrder = 0
+            OnClick = BGameBtnClick
+          end
+          object Text1: TText
+            Align = Top
+            Position.Y = 92.000000000000000000
+            Size.Width = 121.000000000000000000
+            Size.Height = 42.000000000000000000
+            Size.PlatformDefault = False
+            Text = #1053#1072#1095#1072#1090#1100' '#1080#1075#1088#1091
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 18.000000000000000000
+          end
+        end
+        object exitLayout: TLayout
+          Align = Left
+          Position.X = 484.000000000000000000
+          Size.Width = 121.000000000000000000
+          Size.Height = 134.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 3
+          object ExitBtn: TButton
+            Align = MostTop
+            Position.X = 14.000000000000000000
+            Size.Width = 92.000000000000000000
+            Size.Height = 92.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'exitbtn'
+            TabOrder = 0
+            Text = 'ExitBtn'
+            OnClick = ExitBtnClick
+          end
+          object Text5: TText
+            Align = Top
+            Position.Y = 92.000000000000000000
+            Size.Width = 121.000000000000000000
+            Size.Height = 42.000000000000000000
+            Size.PlatformDefault = False
+            Text = #1042#1099#1093#1086#1076
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 18.000000000000000000
+          end
+        end
+        object aboutLayout: TLayout
+          Align = Left
+          Position.X = 363.000000000000000000
+          Size.Width = 121.000000000000000000
+          Size.Height = 134.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 2
+          object AboutBtn: TButton
+            Align = MostTop
+            Position.X = 14.000000000000000000
+            Size.Width = 92.000000000000000000
+            Size.Height = 92.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'aboutBtn'
+            TabOrder = 0
+            Text = 'AboutBtn'
+            OnClick = AboutBtnClick
+          end
+          object Text4: TText
+            Align = Top
+            Position.Y = 92.000000000000000000
+            Size.Width = 121.000000000000000000
+            Size.Height = 42.000000000000000000
+            Size.PlatformDefault = False
+            Text = #1054#1073' '#1080#1075#1088#1077
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 18.000000000000000000
+          end
+        end
+        object museumLayout: TLayout
+          Align = Left
+          Position.X = 242.000000000000000000
+          Size.Width = 121.000000000000000000
+          Size.Height = 134.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 1
+          object MuseumBtn: TButton
+            Align = MostTop
+            Position.X = 14.000000000000000000
+            Size.Width = 92.000000000000000000
+            Size.Height = 92.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MuseumBtn'
+            TabOrder = 0
+            Text = 'MuseumBtn'
+            OnClick = MuseumBtnClick
+          end
+          object Text3: TText
+            Align = Top
+            Position.Y = 92.000000000000000000
+            Size.Width = 121.000000000000000000
+            Size.Height = 42.000000000000000000
+            Size.PlatformDefault = False
+            Text = #1052#1091#1079#1077#1081
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 18.000000000000000000
+          end
+        end
+        object settingsLayout: TLayout
+          Align = Left
+          Position.X = 121.000000000000000000
+          Size.Width = 121.000000000000000000
+          Size.Height = 134.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object SettsBtn: TButton
+            Align = MostTop
+            Position.X = 14.000000000000000000
+            Size.Width = 92.000000000000000000
+            Size.Height = 92.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'settsbtn'
+            TabOrder = 0
+            Text = 'Button1'
+            OnClick = SettsBtnClick
+          end
+          object Text2: TText
+            Align = Top
+            Position.Y = 92.000000000000000000
+            Size.Width = 121.000000000000000000
+            Size.Height = 42.000000000000000000
+            Size.PlatformDefault = False
+            Text = #1053#1072#1089#1090#1088#1086#1081#1082#1080
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 18.000000000000000000
+          end
         end
       end
     end

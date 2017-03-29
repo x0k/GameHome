@@ -18,16 +18,20 @@ type
 
     procedure setLogo(id: byte);
     procedure setCapt(id: byte);
-    procedure setText(id: byte); overload;
-    procedure setItem(id: byte; text: TText); overload;
-    procedure setItem(id: byte; memo: TMemo); overload;
+    procedure fillBar(c:byte = 0; l:byte = 0; t:byte = 0);
 
     procedure onFormCreate; virtual;
     procedure afterFormCreate; virtual;
 
+    procedure setBarEvents; virtual;
     procedure onFormShow; virtual;
     procedure onFormClose; virtual;
   public
+    procedure setText(id: byte); overload;
+    procedure setTabText(id: byte);
+    procedure setItem(id: byte; text: TText); overload;
+    procedure setItem(id: byte; memo: TMemo); overload;
+
     procedure onBarCreate(Sender:TObject);
     procedure onBarShow(Sender:TObject);
     procedure onBarClose(Sender: TObject; var Action: TCloseAction);
@@ -36,33 +40,48 @@ type
     constructor Create(AOwner: TComponent); override;
   End;
 
+  TMForm = class(TBarForm)
+  protected
+    imgs: TArray<TGlyph>;
+    id: byte;
+    count: byte;
+    ani: boolean;
+
+    procedure setBarEvents; override;
+    procedure onFormShow; override;
+    procedure onFormClose; override;
+  public
+    procedure showImg(i: Byte);
+    procedure Next(Sender: TObject);
+    procedure Back(Sender: TObject);
+
+    constructor Create(AOwner: TComponent); override;
+  end;
+
   TGForm = class(TBarForm)
   protected class var
     states:array[0..LVL_COUNT] of byte;
     //awards:array[1..AWD_COUNT] of boolean;
   protected
-    level:byte;
-    backgrounds:TArray<TGlyph>;
-    layouts:TArray<TControl>;
-
-    //Заполнение формы изображениями
-    procedure fillFormByImgs(layouts:TArray<TLayout>);
+    level: byte;
+    backgrounds: TArray<TGlyph>;
+    layouts: TArray<TControl>;
 
     function getStatus:byte;
     procedure setStatus(s:byte);
     procedure upStatus;
-    procedure clearData;
+    procedure gameExit;
 
     procedure addShow; virtual;
     procedure firstShow; virtual;
     procedure addWin; virtual;
 
     procedure afterFormCreate; override;
+    procedure setBarEvents; override;
     procedure onFormShow; override;
     procedure onFormClose; override;
   public
     procedure win;
-    procedure setText(l, c, d: byte); overload;
 
     procedure showAni; overload; virtual;
     procedure hideAni; overload; virtual;
@@ -73,11 +92,8 @@ type
     procedure Next(Sender: TObject); virtual;
     procedure Back(Sender: TObject); virtual;
 
-    property lvl:byte read level;
     property state:byte read getStatus write setStatus;
 
-    class function createForm(id:byte): TGForm;
-    class procedure showForm(id:byte);
     constructor Create(Lvl:byte; Own:TComponent); reintroduce;
   end;
 
@@ -85,47 +101,73 @@ type
   protected
     gTabs:TTabControl;
     gTab:byte;
+
+    procedure setBarEvents; override;
+    procedure afterTabChange(newTab: byte); virtual;
   public
     procedure Next(Sender: TObject); override;
     procedure Back(Sender: TObject); override;
   end;
 
   procedure initForms;
+  procedure showForm(id:byte);
   procedure destroyForms;
 
 var
-  IM:TImageManager;
-  TM:TTextManager;
-  SM:TSoundManager;
-  GD:TGameData;
+  IM: TImageManager;
+  TM: TTextManager;
+  SM: TSoundManager;
+  GD: TGameData;
+  Bar: TBar;
 
 implementation
 
 uses
   System.Types, System.SysUtils,
+  FMX.Dialogs,
   windows, Messages,
   GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit, WarmingUnit;
 
 var
-  GameForm: TGForm;
-  Bar: TBar;
+  GameForm: TGTabForm;
 
 procedure initForms;
 begin
   Bar:=TBar.create(nil);
+  Bar.setDots;
+
   IM:=TImageManager.Create;
   GD:=TGameData.Create;
   SM:=TSoundManager.Create;
   TM:=TTextManager.Create;
-  //
-  IM.add(rSequences);
-  IM.add(rImages);
-  IM.add(rOther);
+
+  GameForm:=TGameForm.Create(0, nil);
+end;
+
+function createForm(id:byte): TGForm;
+begin
+  case id of
+    1:result:=TSeazonForm.Create(1, GameForm);
+    2:result:=TPlaceForm.Create(2, GameForm);
+    3:result:=TToolsForm.Create(3, GameForm);
+    4:result:=TMaterialsForm.Create(4, GameForm);
+    5:result:=TTaskForm.Create(5, GameForm);
+    6:result:=TFoundationForm.Create(6, GameForm);
+    7:result:=TMapForm.Create(7, GameForm);
+    8:result:=TOmenForm.Create(8, GameForm);
+    9:result:=TWarmingForm.Create(9, GameForm);
+    else result:=GameForm;
+  end;
+end;
+
+procedure showForm(id: byte);
+begin
+  createForm(id).show;
 end;
 
 procedure destroyForms;
 begin
-  Bar.Destroy;
+  //Bar.Destroy;
   RemoveFontResource(PChar(ResourcesManager.getPath(pTexts)+'font.ttf'));
   SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
   GD.LoadSavedRamp;
@@ -154,6 +196,24 @@ begin
     Bar.SubText.Text:=b;
 end;
 
+procedure TBarForm.setTabText(id: byte);
+var
+  b: string;
+begin
+  b:=FormText.TabTexts[id];
+  if length(b)=0 then
+    Bar.SubText.Lines.Clear
+  else
+    Bar.SubText.Text:=b;
+end;
+
+procedure TBarForm.fillBar(c:byte = 0; l:byte = 0; t:byte = 0);
+begin
+  setCapt(c);
+  setLogo(l);
+  if self is TGTabForm then setTabText(t) else setText(t);
+end;
+
 procedure TBarForm.setItem(id: byte; text:TText);
 begin
   text.text:=FormText.Items[id];
@@ -163,7 +223,7 @@ procedure TBarForm.setItem(id: byte; memo: TMemo);
 var
   b: string;
 begin
-  b:=FormText.Texts[id];
+  b:=FormText.Items[id];
   if length(b)=0 then
     memo.Lines.Clear
   else
@@ -192,12 +252,22 @@ begin
   afterFormCreate;
 end;
 
+procedure TBarForm.setBarEvents;
+begin
+  with Bar do
+  begin
+    BackBtn.OnClick:=closeByClick;
+    NextBtn.Visible:=false;
+    progress.Visible:=false;
+  end;
+end;
+
 procedure TBarForm.onBarShow(Sender: TObject);
 begin
-  FormText:=TM.Forms[name];
-  //setText;
+  fillBar;
   Bar.Parent:=self;
-  //Bar.update;
+  Bar.RBonus.Position.X:=Width;
+  setBarEvents;
   onFormShow;
 end;
 
@@ -218,6 +288,99 @@ begin
   self.OnCreate:=onBarCreate;
   self.OnShow:=onBarShow;
   self.OnClose:=onBarClose;
+
+  FormText:=TM.Forms[name];
+end;
+
+  {TMForm}
+
+procedure TMForm.showImg(i: Byte);
+begin
+  imgs[i].BringToFront;
+  setText(i);
+  TAnimator.AnimateFloatWait(imgs[i], 'Opacity', 1, 0.6);
+  ani:=false;
+end;
+
+procedure TMForm.Next(Sender: TObject);
+var
+  last: byte;
+begin
+  if not ani then
+  begin
+    ani:=true;
+    last:=id;
+    Bar.dotsStat[id]:=0;
+    if id=count-1 then id:=0 else inc(id);
+    Bar.dotsStat[id]:=1;
+    showImg(id);
+    imgs[last].Opacity:=0;
+  end;
+end;
+
+procedure TMForm.Back(Sender: TObject);
+var
+  last: byte;
+begin
+  if not ani then
+  begin
+    ani:=true;
+    last:=id;
+    Bar.dotsStat[id]:=0;
+    if id>0 then dec(id) else id:=count-1;
+    Bar.dotsStat[id]:=1;
+    showImg(id);
+    imgs[last].Opacity:=0;
+  end;
+end;
+
+procedure TMForm.setBarEvents;
+begin
+  with Bar do
+  begin
+    NextBtn.Visible:=true;
+    progress.Visible:=true;
+    NextBtn.OnClick:=(self as TMForm).Next;
+    BackBtn.OnClick:=(self as TMForm).Back;
+  end;
+end;
+
+procedure TMForm.onFormShow;
+begin
+  Bar.dotsStat[id]:=1;
+end;
+
+procedure TMForm.onFormClose;
+begin
+  Bar.dotsStat[id]:=0;
+end;
+
+constructor TMForm.Create(AOwner: TComponent);
+var
+  g,c:TGlyph;
+  i:byte;
+begin
+  inherited create(AOwner);
+  IM.add(rMuseum);
+  count:=getImgList(rMuseum).Destination.Count;
+  if count>0 then
+  begin
+    G:=TGlyph.Create(self);
+    G.Images:=getImgList(rMuseum);
+    G.Align:=TAlignLayout.Center;
+    G.ImageIndex:=0;
+    IM.setSize(G, Screen.Size);
+    G.Opacity:=0;
+    setlength(imgs, count);
+    for i:=1 to count-1 do
+    begin
+      C:=G.Clone(self) as TGlyph;
+      C.ImageIndex:=i;
+      imgs[i]:=C;
+    end;
+    G.Opacity:=1;
+    imgs[0]:=G;
+  end;
 end;
 
   {TGForm}
@@ -228,22 +391,17 @@ begin
   Level:=lvl;
 end;
 
+procedure TGForm.setStatus(s: Byte);
+begin
+  states[level]:=s;
+  if s<2 then Bar.dotsStat[level]:=s
+    else Bar.dotsStat[level]:=2;
+end;
+
 procedure TGForm.win;
 begin
   upStatus;
   addWin;
-end;
-
-procedure TGForm.SetText(l, c, d: byte);
-begin
-  setLogo(l);
-  setCapt(c);
-  setText(d);
-end;
-
-procedure TGForm.setStatus(s: Byte);
-begin
-  states[level]:=s;
 end;
 
 function TGForm.getStatus;
@@ -253,17 +411,19 @@ end;
 
 procedure TGForm.upStatus;
 begin
-  if states[level]<2 then inc(states[level]);
-  if states[level]=2 then Bar.showNext;
-  Bar.upProgress;
+  if state<2 then state:=state+1;
+  if state=2 then Bar.showNext;
 end;
 
-procedure TGForm.clearData;
+procedure TGForm.gameExit;
 var
   i:byte;
 begin
+  GameForm.Hide;
+  GameForm.gTabs.TabIndex:=0;
   for i:=0 to LVL_COUNT do
-
+    states[i]:=0;
+  if level>0 then self.Destroy;
 end;
 
 procedure TGForm.addShow;
@@ -326,6 +486,19 @@ begin
       layouts[i].Opacity:=0;
 end;
 
+procedure TGForm.setBarEvents;
+begin
+  with Bar do
+  begin
+    NextBtn.Visible:=true;
+    progress.Visible:=true;
+    NextBtn.OnClick:=(self as TGForm).Next;
+    BackBtn.OnClick:=(self as TGForm).Back;
+    if (self as TGForm).state<2 then hideNext
+      else if not NextBtn.Visible then showNext;
+  end;
+end;
+
 procedure TGForm.onFormShow;
 begin
   addShow;
@@ -333,7 +506,7 @@ begin
   begin
     firstShow;
     upStatus;
-  end else Bar.upProgress;
+  end;
   showAni;
 end;
 
@@ -345,12 +518,13 @@ begin
     if state<2 then
       state:=0;
     Release;
-  end;
+  end else gameExit;
 end;
 
 procedure TGForm.Next;
 begin
   hideAni;
+  if Assigned(Bar.Parent) then Bar.Parent:=nil;
   if level<LVL_COUNT then
     showForm(level+1);
   if state<2 then
@@ -361,67 +535,34 @@ end;
 procedure TGForm.Back;
 begin
   hideAni;
-  if level>0 then
-    showForm(level-1);
+  if Assigned(Bar.Parent) then Bar.Parent:=nil;
   if state<2 then
     state:=0;
-  Destroy;
-end;
-
-class function TGForm.createForm;
-begin
-  result:=GameForm;
-  case id of
-    0:if not Assigned(GameForm) then GameForm:=TGameForm.Create(0, nil);
-    1:result:=TSeazonForm.Create(1, GameForm);
-    2:result:=TPlaceForm.Create(2, GameForm);
-    3:result:=TToolsForm.Create(3, GameForm);
-    4:result:=TMaterialsForm.Create(4, GameForm);
-    5:result:=TTaskForm.Create(5, GameForm);
-    6:result:=TFoundationForm.Create(6, GameForm);
-    7:result:=TMapForm.Create(7, GameForm);
-    8:result:=TOmenForm.Create(8, GameForm);
-    9:result:=TWarmingForm.Create(9, GameForm);
-    else raise Exception.Create('Форма'+id.toString+'не существует');
-  end;
-end;
-
-class procedure TGForm.showForm(id: byte);
-begin
-  createForm(id).show;
-end;
-
-procedure TGForm.fillFormByImgs(layouts:TArray<TLayout>);
-var
-  c:byte;
-  w: single;
-  s: TSizeF;
-  l: TLayout;
-  o: TFMXObject;
-
-  procedure setFontSize(t: TText; s: TSizeF);
+  if level>0 then
   begin
-  end;
-
-begin
-  c:=Length(layouts);
-  if c>0 then
-  begin
-    w:=Width/c;
-    s:=TSizeF.Create(w, Height);
-    for l in layouts do
-    begin
-      l.Width:=w;
-      for o in l.children do
-        if o is TGlyph then
-          IM.setSize(o as TGlyph, s)
-        else if o is TText then
-          setFontSize(o as TText, s);
-    end;
-  end;
+    showForm(level-1);
+    Destroy;
+  end else gameExit;
 end;
 
   {TGTabForm}
+
+procedure TGTabForm.setBarEvents;
+begin
+  with Bar do
+  begin
+    NextBtn.Visible:=true;
+    progress.Visible:=true;
+    NextBtn.OnClick:=(self as TGForm).Next;
+    BackBtn.OnClick:=(self as TGForm).Back;
+    if (gTabs.TabIndex=gTab) and (state<2) then hideNext
+      else if not NextBtn.Visible then showNext;
+  end;
+end;
+
+procedure TGTabForm.afterTabChange(newTab: Byte);
+begin
+end;
 
 procedure TGTabForm.next(Sender: TObject);
 var
@@ -431,16 +572,20 @@ begin
   if ti<gTabs.TabCount-1 then
   begin
     gTabs.Next;
-    SetText(ti, ti, ti);
+    inc(ti);
+    fillBar(ti, ti, ti);
+    if (ti=gTab)and(state<2) then Bar.hideNext
+      else if not Bar.NextBtn.Visible then Bar.showNext;
+    afterTabChange(ti);
   end
   else
   begin
     hideAni;
+    if Assigned(Bar.Parent) then Bar.Parent:=nil;
     if (level>0) and (level<LVL_COUNT-1) then
       showForm(level+1);
     destroy;
   end;
-  if (ti=gTab)and(state<2) then Bar.hideNext;
 end;
 
 procedure TGTabForm.back(Sender: TObject);
@@ -451,16 +596,22 @@ begin
   if ti>0 then
   begin
     gTabs.Previous;
-    SetText(ti, ti, ti);
+    dec(ti);
+    fillBar(ti, ti, ti);
+    if (ti=gTab)and(state<2) then Bar.hideNext
+      else if not Bar.NextBtn.Visible then Bar.showNext;
+    afterTabChange(ti);
   end
   else
   begin
     hideAni;
+    if Assigned(Bar.Parent) then Bar.Parent:=nil;
     if level>0 then
+    begin
       showForm(level-1);
-    destroy;
+      destroy;
+    end else gameExit;
   end;
-  if (ti=gTab)and(state<2) then Bar.hideNext;
 end;
 
 

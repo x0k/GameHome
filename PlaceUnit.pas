@@ -37,6 +37,8 @@ type
   protected
     procedure addShow; override;
     procedure onFormCreate; override;
+  public
+    procedure isWin(id: byte);
   end;
 
 
@@ -45,61 +47,41 @@ implementation
 
 {$R *.fmx}
 
+uses
+  FullScreenTabs;
+
 var
-  w:single;
-  shw,lst:ShortInt;
+  fTabs: FSTabs;
 
 procedure TPlaceForm.onFormCreate;
 begin
   backgrounds:=[BG1, BG2];
   layouts:=[main1, main2];
   gTabs:=tabs;
-  gTab:=0;
+  gTab:=1;
+  fTabs:=FSTabs.create(self, 4, main2);
+  fTabs.showClick:=isWin;
+end;
+
+procedure TPlaceForm.isWin(id: Byte);
+begin
+  if id=2 then win;
 end;
 
 procedure TPlaceForm.s0Click(Sender: TObject);
 begin
-  if shw>=0 then
-  begin
-    TAnimator.AnimateFloat(Main2.Children[shw], 'width', w);
-    TAnimator.AnimateFloat(Main2, 'Position.X', 0);
-    TAnimator.AnimateInt(Main2.Children[shw].Children[0].Children[0], 'TextSettings.Font.Size', 40);
-    shw:=-1;
-  end else begin
-    shw:=Main2.Children.IndexOf(TFmxObject(sender));
-    setText(TFmxObject(sender).Children[0].tag);
-
-    TAnimator.AnimateFloat(Main2, 'Position.X', -(2*w*TFmxObject(sender).Tag/3));
-    TAnimator.AnimateFloat(TFmxObject(sender), 'width', 3*w);
-    TAnimator.AnimateInt(TFmxObject(sender).Children[0].Children[0], 'TextSettings.Font.Size', 80);
-
-    if TFmxObject(sender).Tag=2 then win;
-  end;
+  fTabs.onClick(TFmxObject(sender).Tag);
 end;
 
 procedure TPlaceForm.s0MouseEnter(Sender: TObject);
-var
-  id:shortint;
 begin
-  id:=main2.Children.IndexOf(TFmxObject(sender));
-  if (shw<0)and(id<>lst) then
-  begin
-    TAnimator.AnimateInt(Main2.Children[lst].Children[0].Children[0], 'TextSettings.Font.Size', 40);
-    TAnimator.AnimateFloat(Main2.Children[lst], 'width', w);
-
-    TAnimator.AnimateInt(TFmxObject(sender).Children[0].Children[0], 'TextSettings.Font.Size', 52);
-    TAnimator.AnimateFloat(Main2, 'Position.X', -(80*TFmxObject(sender).Tag/3));
-    TAnimator.AnimateFloat(TFmxObject(sender), 'width', 80+w);
-    lst:=id;
-  end;
+  fTabs.onEnter((TFmxObject(sender).Tag));
 end;
 
 procedure TPlaceForm.addShow;
 begin
-  fillFormByImgs([s0, s1, s2, s3]);
-
-  shw:=-1;
   self.setItem(0, Text);
+  fTabs.setSize(true);
 end;
 
 end.

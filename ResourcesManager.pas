@@ -49,7 +49,6 @@ end;
 
 function findTexts(t:eTexts):boolean;
 begin
-  result:=false;
   if TFile.Exists(pathTexts(t)) then
     result:=true
   else

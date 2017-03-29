@@ -7,22 +7,32 @@ uses
   ResourcesManager;
 
 type
+  fillProc<T> = procedure(const v:TJSONValue; var item: T) of object;
 
   TFormText = class
   protected
     SubNames: TArray<string>;
     SubLogos: TArray<byte>;
     SubTexts: TArray<string>;
+    SubTabTexts: TArray<string>;
     FormItems: TArray<string>;
 
     function getName(id: byte): string;
     function getLogo(id: byte): byte;
     function getText(id: byte): string;
     function getItem(id: byte): string;
+    function getTabText(id: byte): string;
+
+    procedure fillStr(const v:TJSONValue; var item: string);
+    procedure fillByte(const v:TJSONValue; var item: byte);
+    procedure fillTab(const v:TJSONValue; var item: string);
+
+    procedure fillArr<T>(const j:TJSONArray; const f: fillProc<T>;var m: TArray<T>);
   public
     property Names[index: byte]:string read getName;
     property Logos[index: byte]:byte read getLogo;
     property Texts[index: byte]:string read getText;
+    property TabTexts[index: byte]: string read getTabText;
     property Items[index: byte]:string read getItem;
 
     constructor create(j:TJSONObject);
@@ -71,27 +81,42 @@ begin
     result:=FormItems[id];
 end;
 
-procedure fillStr(m: TJSONArray;var a: TArray<string>);
-var
-  i:integer;
+function TFormText.getTabText(id: Byte): string;
 begin
-  if Assigned(m) and (m.Count>0) then
-  begin
-    setlength(a, m.Count);
-    for i:=0 to m.Count-1 do
-      a[i]:=(m.Items[i] as TJsonString).Value;
-  end;
+  result:='';
+  if id<length(SubTabTexts) then
+    result:=SubTabTexts[id];
 end;
 
-procedure fillByte(m: TJSONArray;var a: TArray<byte>);
+procedure TFormText.fillStr(const v: TJSONValue; var item: string);
+begin
+  item:=TJsonString(v).Value;
+end;
+
+procedure TFormText.fillByte(const v: TJSONValue; var item: Byte);
+begin
+  item:=TJsonNumber(v).AsInt;
+end;
+
+procedure TFormText.fillTab(const v: TJSONValue; var item: string);
+var
+  n: TJSONNumber;
+begin
+  if v.TryGetValue(n) and (n.AsInt<length(SubTabTexts)) then
+    item:=SubTabTexts[n.AsInt]
+  else
+    item:=TJSONString(v).Value;
+end;
+
+procedure TFormText.fillArr<T>(const j:TJSONArray; const f: fillProc<T>; var m: TArray<T>);
 var
   i:integer;
 begin
-  if Assigned(m) and (m.Count>0) then
+  if Assigned(j) and (j.Count>0) then
   begin
-    setlength(a, m.Count);
-    for i:=0 to m.Count-1 do
-      a[i]:=(m.Items[i] as TJsonNumber).AsInt;
+    setlength(m, j.Count);
+    for i:=0 to j.Count-1 do
+      f(j.Items[i], m[i]);
   end;
 end;
 
@@ -100,13 +125,15 @@ var
   val: TJSONArray;
 begin
   if j.TryGetValue('Names', val) then
-    fillStr(val, SubNames);
+    fillArr<string>(val, fillStr, SubNames);
   if j.TryGetValue('Logos', val) then
-    fillByte(val, SubLogos);
+    fillArr<byte>(val, fillByte, SubLogos);
   if j.TryGetValue('Texts', val) then
-    fillStr(val, SubTexts);
+    fillArr<string>(val, fillStr, SubTexts);
+  if j.TryGetValue('TabTexts', val) then
+    fillArr<string>(val, fillTab, SubTabTexts);
   if j.TryGetValue('Items', val) then
-    fillStr(val, FormItems);
+    fillArr<string>(val, fillStr, FormItems);
 end;
 
   {TTextManager}

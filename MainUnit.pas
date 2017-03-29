@@ -3,9 +3,9 @@ unit MainUnit;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  System.SysUtils, System.Types, System.Classes,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Controls.Presentation, FMX.StdCtrls,
-  FMX.Objects, FMX.Layouts, FMX.ImgList, FMX.Ani;
+  FMX.Objects, FMX.Layouts, FMX.ImgList, FGX.ApplicationEvents;
 
 type
   TMainForm = class(TForm)
@@ -13,7 +13,6 @@ type
     SettsBtn: TButton;
     ExitBtn: TButton;
     Panel1: TPanel;
-    GridPanelLayout1: TGridPanelLayout;
     Text1: TText;
     Text2: TText;
     Text3: TText;
@@ -23,16 +22,21 @@ type
     AboutBtn: TButton;
     Text6: TText;
     BG: TGlyph;
-    Glyph1: TGlyph;
+    Logo: TGlyph;
     centerLayout: TLayout;
     main: TLayout;
+    beginLayout: TLayout;
+    MenuLayout: TScaledLayout;
+    exitLayout: TLayout;
+    aboutLayout: TLayout;
+    museumLayout: TLayout;
+    settingsLayout: TLayout;
     procedure ExitBtnClick(Sender: TObject);
     procedure SettsBtnClick(Sender: TObject);
     procedure MuseumBtnClick(Sender: TObject);
     procedure AboutBtnClick(Sender: TObject);
     procedure BGameBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,12 +55,23 @@ uses
   SettingsUnit, MuseumUnit, AboutUnit, Forms, TextManager;
 
 procedure TMainForm.FormCreate(Sender: TObject);
+var
+  i: byte;
+  t: TFormText;
+  m: TArray<TText>;
 begin
+  IM.setSize(BG, Screen.Size);
+
+  centerLayout.Opacity:=0;
+  m:=[text1, text2, text3, text4, text5];
+  t:=TM.Forms[name];
+  text6.Text:=t.Names[0];
+  for i:=0 to 4 do
+    m[i].Text:=t.Items[i];
   SettingsForm:=TSettingsForm.Create(self);
   AboutForm:=TAboutForm.Create(self);
-  IM.setSize(BG, Screen.Size);
-  main.Opacity:=0;
 end;
+
 
 procedure TMainForm.AboutBtnClick(Sender: TObject);
 begin
@@ -65,7 +80,7 @@ end;
 
 procedure TMainForm.BGameBtnClick(Sender: TObject);
 begin
-  TGForm.showForm(0);
+  showForm(0);
 end;
 
 procedure TMainForm.ExitBtnClick(Sender: TObject);
@@ -82,20 +97,6 @@ end;
 procedure TMainForm.SettsBtnClick(Sender: TObject);
 begin
   SettingsForm.Show;
-end;
-
-procedure TMainForm.FormShow(Sender: TObject);
-var
-  m:TArray<TText>;
-  t:TFormText;
-  i: byte;
-begin
-  t:=TM.Forms[name];
-  m:=[text1, text2, text3, text4, text5];
-  text6.Text:=t.Names[0];
-  for i:=0 to 4 do
-    m[i].Text:=t.Items[i];
-  TAnimator.AnimateFloatDelay(main, 'opacity', 1, 1, 1);
 end;
 
 end.

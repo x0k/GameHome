@@ -26,6 +26,10 @@ object AboutForm: TAboutForm
       Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
       Caret.Color = claWhite
       DataDetectorTypes = []
+      Lines.Strings = (
+        'wdamk;lawdkjl;awdkl;'
+        'awdkawdkdkawlkdawl'
+        'awdjkawdnjhawkjlkjlawd')
       StyledSettings = [Family, Style, FontColor]
       TextSettings.Font.Size = 20.000000000000000000
       TextSettings.WordWrap = True

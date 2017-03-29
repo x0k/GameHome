@@ -24,7 +24,7 @@ object SeazonForm: TSeazonForm
     Images = DataForm.Backgrounds
   end
   object Main: TLayout
-    Align = Scale
+    Align = Center
     HitTest = True
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000

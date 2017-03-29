@@ -40,8 +40,10 @@ type
     Place: TGlyph;
     Home: TGlyph;
     procedure l1btnClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   protected
     procedure onFormCreate; override;
+    procedure afterTabChange(newTab: byte); override;
   end;
 
 implementation
@@ -56,7 +58,24 @@ begin
   backgrounds:=[home, BG1, BG2, BG3];
   layouts:=[main1, main3];
   gTabs:=tabs;
-  gTab:=3;
+  gTab:=2;
+end;
+
+procedure TGameForm.afterTabChange(newTab: Byte);
+begin
+  if newTab=2 then
+  begin
+    if state<2 then state:=2;
+    Bar.hideNext;
+  end;
+end;
+
+procedure TGameForm.FormActivate(Sender: TObject);
+begin
+  if Tabs.TabIndex=gTab then
+    Bar.hideNext
+  else
+    Bar.showNext;
 end;
 
 procedure TGameForm.l1btnClick(Sender: TObject);

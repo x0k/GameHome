@@ -163,6 +163,7 @@ object WarmingForm: TWarmingForm
               Images = DataForm.Other
             end
             object b3: TGlyph
+              Tag = 1
               Align = Scale
               Position.X = 376.000000000000000000
               Position.Y = 142.000000000000000000

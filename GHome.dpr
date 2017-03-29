@@ -28,7 +28,8 @@ uses
   ResourcesManager in 'ResourcesManager.pas',
   ImageManager in 'ImageManager.pas',
   GameData in 'GameData.pas',
-  SoundManager in 'SoundManager.pas';
+  SoundManager in 'SoundManager.pas',
+  FullScreenTabs in 'FullScreenTabs.pas';
 
 {$R *.res}
 
@@ -38,5 +39,6 @@ begin
   Application.Initialize;
   Application.CreateForm(TDataForm, DataForm);
   Application.CreateForm(TMainForm, MainForm);
+  Application.RegisterFormFamily('MainForm', [TMainForm]);
   Application.Run;
 end.

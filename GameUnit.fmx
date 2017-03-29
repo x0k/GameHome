@@ -14,6 +14,7 @@ object GameForm: TGameForm
   FormFactor.Orientations = [Landscape]
   FormFactor.Devices = [Desktop]
   FullScreen = True
+  OnActivate = FormActivate
   DesignerMasterStyle = 0
   object Tabs: TTabControl
     Align = Client

@@ -58,7 +58,7 @@ var
 procedure TWarmingForm.click(Sender: TObject);
 begin
   inn.Parent:=nil;
-  setText(TFmxObject(sender).Tag+1);
+  setText(TFmxObject(sender).Tag);
   c.Parent:=TFmxObject(sender);
 
   if TFmxObject(sender).Tag=1 then win;

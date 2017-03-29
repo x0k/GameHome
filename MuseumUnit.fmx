@@ -22,29 +22,21 @@ object MuseumForm: TMuseumForm
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 2
-    object frame: TLayout
-      Align = Client
-      Size.Width = 1280.000000000000000000
-      Size.Height = 720.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 1
-    end
     object controls: TLayout
       Align = Client
       Size.Width = 1280.000000000000000000
       Size.Height = 720.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 0
-      object back: TLayout
+      object lBack: TLayout
         Align = Left
         HitTest = True
         Size.Width = 200.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
-        OnClick = backClick
       end
-      object next: TLayout
+      object lNext: TLayout
         Tag = 1
         Align = Client
         HitTest = True
@@ -52,7 +44,6 @@ object MuseumForm: TMuseumForm
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        OnClick = backClick
       end
     end
   end

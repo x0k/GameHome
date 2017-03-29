@@ -54,16 +54,21 @@ type
     Glyph14: TGlyph;
     Glyph15: TGlyph;
     ImageList1: TImageList;
+    Glyph16: TGlyph;
     procedure RBonusMouseLeave(Sender: TObject);
     procedure logoLayoutClick(Sender: TObject);
   protected
+    dots:TArray<TGlyph>;
     procedure showBonus(Sender: TObject);
   public
+    procedure setDots;
+    procedure setDot(i: byte; v: byte);
     procedure setShowBonus;
+    procedure hideBonus;
     procedure showNext;
     procedure hideNext;
-    procedure update;
-    procedure upProgress;
+
+    property dotsStat[index: byte]: byte write setDot;
   end;
 
 implementation
@@ -79,10 +84,30 @@ const
 var
   open:boolean = false;
 
+procedure TBar.setDots;
+var
+  f:TFmxObject;
+begin
+  setlength(dots, progress.Children.count);
+  for f in  progress.Children do
+    if f is TGlyph then
+      dots[f.tag-1]:=f as TGlyph;
+end;
+
+procedure TBar.setDot;
+begin
+  if i<length(dots) then
+    dots[i].imageIndex:=v;
+end;
+
 procedure TBar.setShowBonus;
 begin
   NextBtn.OnClick:=showBonus;
-  showBonus(self);
+end;
+
+procedure TBar.hideBonus;
+begin
+  if open then showBonus(self);
 end;
 
 procedure TBar.showBonus(Sender: TObject);
@@ -120,37 +145,6 @@ procedure TBar.hideNext;
 begin
   TAnimator.AnimateFloat(NextLayout, 'opacity', 0);
   NextBtn.Visible:=false;
-end;
-
-procedure TBar.update;
-begin
-  BackBtn.OnClick:=(parent as TBarForm).closeByClick;
-  RBonus.Position.X:=(parent as TBarForm).Width;
-  open:=false;
-  if parent is TGForm then
-  begin
-    NextBtn.Visible:=true;
-    progress.Visible:=true;
-    NextBtn.OnClick:=(parent as TGForm).Next;
-    BackBtn.OnClick:=(parent as TGForm).Back;
-    if (parent as TGForm).state<2 then hideNext
-      else if NextBtn.Opacity=0 then showNext;
-  end else begin
-    NextBtn.Visible:=false;
-    progress.Visible:=false;
-  end;
-end;
-
-procedure TBar.upProgress;
-var
-  f:TGlyph;
-  i:byte;
-begin
-  {for i:=0 to progress.Children.Count-1 do
-  begin
-    f:=progress.Children[i] as TGlyph;
-    f.ImageIndex:=TGForm.getState(f.Tag);
-  end;}
 end;
 
 end.
