@@ -29,7 +29,8 @@ uses
   ImageManager in 'ImageManager.pas',
   GameData in 'GameData.pas',
   SoundManager in 'SoundManager.pas',
-  FullScreenTabs in 'FullScreenTabs.pas';
+  FullScreenTabs in 'FullScreenTabs.pas',
+  GameForms in 'GameForms.pas';
 
 {$R *.res}
 

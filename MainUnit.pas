@@ -52,7 +52,7 @@ implementation
 
 uses
   FMX.Dialogs,
-  SettingsUnit, MuseumUnit, AboutUnit, Forms, TextManager;
+  DataUnit, SettingsUnit, MuseumUnit, AboutUnit, Forms, GameForms, TextManager;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 var

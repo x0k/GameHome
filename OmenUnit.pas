@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, DataUnit, system.Math,
   FMX.Objects, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Layouts,
   FMX.ImgList, FMX.ani,
-  Forms;
+  GameForms;
 
 type
   TWalls = class(TGlyph)

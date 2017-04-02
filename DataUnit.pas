@@ -4,7 +4,8 @@ interface
 
 uses
   System.Classes, System.ImageList,
-  FMX.Controls, FMX.ImgList, FMX.Types, FGX.ApplicationEvents;
+  FMX.Controls, FMX.ImgList, FMX.Types, FGX.ApplicationEvents,
+  ImageManager, TextManager, SoundManager, GameData, BarUnit;
 
 type
 
@@ -24,6 +25,11 @@ type
 var
   DataForm: TDataForm;
   Styles:TStyleBook;
+  IM: TImageManager;
+  TM: TTextManager;
+  SM: TSoundManager;
+  GD: TGameData;
+  Bar: TBar;
 
 implementation
 
@@ -33,7 +39,8 @@ implementation
 
 uses
   FMX.Ani,
-  Forms, ResourcesManager, MainUnit;
+  windows, Messages,
+  Forms, GameForms, ResourcesManager, MainUnit;
 
 var
   ld: boolean;
@@ -41,13 +48,22 @@ var
 
 procedure TDataForm.DataModuleCreate(Sender: TObject);
 begin
-  initForms;
+  Bar:=TBar.create(self);
+  Bar.setDots;
+
+  IM:=TImageManager.Create;
+  GD:=TGameData.Create;
+  SM:=TSoundManager.Create;
+  TM:=TTextManager.Create;
   t:=TM.Forms['MainForm'].Names[1];
+  initForms;
 end;
 
 procedure TDataForm.DataModuleDestroy(Sender: TObject);
 begin
-  destroyForms;
+  RemoveFontResource(PChar(ResourcesManager.getPath(pTexts)+'font.ttf'));
+  SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+  GD.LoadSavedRamp;
 end;
 
 procedure TDataForm.fgApplicationEvents1Idle(Sender: TObject;

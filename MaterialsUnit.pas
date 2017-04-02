@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Objects,
   FMX.Layouts, FMX.StdCtrls, DataUnit, FMX.ImgList, FMX.Ani,
-  Forms;
+  GameForms;
 
 type
   TMaterialsForm = class(TGForm)
@@ -33,7 +33,6 @@ type
     procedure L0Click(Sender: TObject);
   protected
     procedure onFormCreate; override;
-    procedure addShow; override;
   end;
 
 implementation
@@ -58,11 +57,11 @@ begin
   for i:=0 to 3 do
     (Grid.Children[i] as TLayout).Width:=w;
   id:=-1;
-end;
-
-procedure TMaterialsForm.addShow;
-begin
   setItem(0, text);
+  setItem(1, t0);
+  setItem(2, t1);
+  setItem(3, t2);
+  setItem(4, t3);
 end;
 
 procedure TMaterialsForm.L0Click(Sender: TObject);

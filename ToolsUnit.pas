@@ -8,7 +8,7 @@ uses
   FMX.Objects, FMX.Layouts, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.Effects, FMX.Filter.Effects, DataUnit,
   FMX.ImgList, system.Generics.Collections, FMX.ani,
-  Forms;
+  GameForms;
 
 type
   TToolsForm = class(TGForm)
@@ -63,7 +63,7 @@ begin
     end;
     else leave(sender);
   end;
-  setText(id+1);
+  setText(id);
   if a and b then win;
 end;
 

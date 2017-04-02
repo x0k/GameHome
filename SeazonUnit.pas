@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.Classes,
   FMX.Types, FMX.Controls, FMX.Objects, FMX.Layouts, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Ani, FMX.ImgList,
-  Forms;
+  GameForms;
 
 type
   TSeazonForm = class(TGForm)
@@ -26,7 +26,6 @@ type
     procedure s0Click(Sender: TObject);
     procedure s0MouseEnter(Sender: TObject);
   protected
-    procedure addShow; override;
     procedure onFormCreate; override;
   public
     procedure isWin(id: byte);
@@ -46,12 +45,11 @@ procedure TSeazonForm.onFormCreate;
 begin
   backgrounds:=[BG];
   layouts:=[Main];
-  Tabs:=FSTabs.create(self, 4, main);
-  Tabs.showClick:=isWin;
-end;
-
-procedure TSeazonForm.addShow;
-begin
+  Tabs:=FSTabs.create(self, 4, main, isWin);
+  setItem(0, t0);
+  setItem(1, t1);
+  setItem(2, t2);
+  setItem(3, t3);
   Tabs.setSize(true);
 end;
 

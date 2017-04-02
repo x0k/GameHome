@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.StdCtrls, FMX.ScrollBox, FMX.Memo, FMX.Controls.Presentation,
   FMX.TabControl, FMX.Layouts, FMX.Filter.Effects, FMX.ImgList, BarUnit, FMX.ani,
-  Forms;
+  GameForms, DataUnit;
 
 type
   TGameForm = class(TGTabForm)
@@ -66,16 +66,13 @@ begin
   if newTab=2 then
   begin
     if state<2 then state:=2;
-    Bar.hideNext;
+    Bar.nxtBtn:=false;
   end;
 end;
 
 procedure TGameForm.FormActivate(Sender: TObject);
 begin
-  if Tabs.TabIndex=gTab then
-    Bar.hideNext
-  else
-    Bar.showNext;
+  Bar.nxtBtn:=Tabs.TabIndex<>gTab;
 end;
 
 procedure TGameForm.l1btnClick(Sender: TObject);

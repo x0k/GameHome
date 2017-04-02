@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Effects,
   FMX.Filter.Effects, DataUnit, FMX.ImgList, FMX.Ani,
-  Forms;
+  GameForms;
 
 type
   TFoundationForm = class(TGForm)

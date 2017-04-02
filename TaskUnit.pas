@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Objects, FMX.StdCtrls,
   FMX.Layouts, DataUnit, FMX.ImgList, FMX.ani,
-  Forms;
+  GameForms;
 
 type
   TTaskForm = class(TGForm)
@@ -42,16 +42,18 @@ begin
   backgrounds:=[BG];
   layouts:=[main];
   img.Width:=(Screen.Height-300)/597*457;
+  setItem(1, text1);
+  setItem(2, text2);
+  setItem(3, text);
 end;
 
 procedure TTaskForm.addShow;
 begin
-  ans:=FormText.Items[0].ToInteger;
+  ans:=TM.Forms[name].Items[0].ToInteger;
   repeat
     num.Tag:=random(14)-7+ans;
   until (num.Tag>ans+2)or(num.Tag<ans-2);
   Num.Text:=Num.Tag.ToString;
-  self.setItem(1, text);
 end;
 
 procedure TTaskForm.addWin;

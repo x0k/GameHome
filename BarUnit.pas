@@ -60,14 +60,15 @@ type
   protected
     dots:TArray<TGlyph>;
     procedure showBonus(Sender: TObject);
+    function getNxt: boolean;
+    procedure setNxt(v: boolean);
   public
     procedure setDots;
     procedure setDot(i: byte; v: byte);
     procedure setShowBonus;
     procedure hideBonus;
-    procedure showNext;
-    procedure hideNext;
 
+    property nxtBtn: boolean read getNxt write setNxt;
     property dotsStat[index: byte]: byte write setDot;
   end;
 
@@ -135,16 +136,23 @@ begin
   open:=false;
 end;
 
-procedure TBar.showNext;
+procedure TBar.setNxt(v: Boolean);
 begin
-  NextBtn.Visible:=true;
-  TAnimator.AnimateFloat(NextLayout, 'opacity', 1);
+  if v and not NextBtn.Visible then
+  begin
+    NextBtn.Visible:=true;
+    TAnimator.AnimateFloat(NextLayout, 'opacity', 1);
+  end
+  else if not v and NextBtn.Visible then
+  begin
+    TAnimator.AnimateFloat(NextLayout, 'opacity', 0);
+    NextBtn.Visible:=false;
+  end;
 end;
 
-procedure TBar.hideNext;
+function TBar.getNxt;
 begin
-  TAnimator.AnimateFloat(NextLayout, 'opacity', 0);
-  NextBtn.Visible:=false;
+  result:=NextBtn.Visible;
 end;
 
 end.

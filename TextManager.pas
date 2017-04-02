@@ -40,6 +40,8 @@ type
 
   TTextManager = class
   private
+    last: string;
+    lText: TFormText;
     texts: TDictionary<string, TFormText>;
 
     function getText(name:string): TFormText;
@@ -102,7 +104,7 @@ procedure TFormText.fillTab(const v: TJSONValue; var item: string);
 var
   n: TJSONNumber;
 begin
-  if v.TryGetValue(n) and (n.AsInt<length(SubTabTexts)) then
+  if (n is TJSONNumber) and v.TryGetValue(n) and (n.AsInt<length(SubTabTexts)) then
     item:=SubTabTexts[n.AsInt]
   else
     item:=TJSONString(v).Value;
@@ -140,7 +142,12 @@ end;
 
 function TTextManager.getText(name: string): TFormText;
 begin
-  result:=texts[name];
+  if last<>name then
+  begin
+    last:=name;
+    lText:=texts[name];
+  end;
+  result:=lText;
 end;
 
 constructor TTextManager.Create;

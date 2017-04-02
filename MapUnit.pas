@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, system.Generics.Collections,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls, system.Math,
   FMX.Objects, BarUnit, FMX.Layouts, FMX.Ani, FMX.Effects, DataUnit, FMX.ImgList, System.UIConsts,
-  Forms;
+  GameForms;
 
 type
   TMapForm = class(TGForm)

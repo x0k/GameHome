@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.ImgList, DataUnit, FMX.TabControl, FMX.ani, system.Math,
   FMX.Effects, FMX.Filter.Effects,
-  Forms;
+  GameForms;
 
 type
   TWarmingForm = class(TGTabForm)

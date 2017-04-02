@@ -5,7 +5,7 @@ interface
 uses
   System.Types,
   FMX.Layouts, FMX.ImgList, FMX.Objects, FMX.Types, FMX.Forms, FMX.Ani,
-  Forms, ImageManager;
+  GameForms, DataUnit;
 
 type
   shwClick = procedure(id: byte) of object;
@@ -33,27 +33,39 @@ type
     procedure onClick(id: byte);
     procedure onEnter(id: ShortInt);
 
-    constructor create(fm: TGForm; c:byte; m: TLayout);
+    constructor create(fm: TGForm; c:byte; m: TLayout; sClick: shwClick);
   end;
 
 implementation
+
+uses
+  System.SysUtils,
+  FMX.Dialogs;
 
 const
   add = 80;
 
 constructor FSTab.create(l: TLayout);
 var
-  f: TFmxObject;
+  f, t: TFmxObject;
 begin
   layout:=l;
-  for f in l.Children do
-    if f is TGlyph then
-      image:=f as TGlyph
-    else if f is TText then
-      text:=f as TText;
+  if l.ChildrenCount>0 then
+  begin
+    for f in l.Children do
+      if f is TGlyph then
+      begin
+        image:=f as TGlyph;
+        if f.ChildrenCount>0 then
+          for t in f.Children do
+            if t is TText then
+              text:=t as TText;
+      end else if f is TText then
+        text:=f as TText;
+  end;
 end;
 
-constructor FSTabs.create(fm: TGForm; c:byte; m: TLayout);
+constructor FSTabs.create(fm: TGForm; c:byte; m: TLayout; sClick: shwClick);
 var
   f: TFmxObject;
 begin
@@ -64,6 +76,7 @@ begin
     if f is TLayout then
       tabs[f.Tag]:=FSTab.create(f as TLayout);
   shw:=-1;
+  showClick:=sClick;
 end;
 
 procedure FSTabs.setSize(img: Boolean);
