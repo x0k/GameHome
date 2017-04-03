@@ -124,8 +124,6 @@ object PlaceForm: TPlaceForm
           Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
-          OnClick = s0Click
-          OnMouseEnter = s0MouseEnter
           object img0: TGlyph
             Tag = 1
             Align = HorzCenter
@@ -161,8 +159,6 @@ object PlaceForm: TPlaceForm
           Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 1
-          OnClick = s0Click
-          OnMouseEnter = s0MouseEnter
           object img1: TGlyph
             Tag = 2
             Align = HorzCenter
@@ -199,8 +195,6 @@ object PlaceForm: TPlaceForm
           Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 2
-          OnClick = s0Click
-          OnMouseEnter = s0MouseEnter
           object img2: TGlyph
             Tag = 4
             Align = HorzCenter
@@ -237,8 +231,6 @@ object PlaceForm: TPlaceForm
           Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 3
-          OnClick = s0Click
-          OnMouseEnter = s0MouseEnter
           object img3: TGlyph
             Tag = 3
             Align = HorzCenter

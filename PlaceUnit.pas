@@ -32,12 +32,8 @@ type
     mapstr: TGlyph;
     Main1: TLayout;
     BG2: TGlyph;
-    procedure s0Click(Sender: TObject);
-    procedure s0MouseEnter(Sender: TObject);
   protected
     procedure onFormCreate; override;
-  public
-    procedure isWin(id: byte);
   end;
 
 
@@ -58,28 +54,13 @@ begin
   layouts:=[main1, main2];
   gTabs:=tabs;
   gTab:=1;
-  fTabs:=FSTabs.create(self, 4, main2, isWin);
+  fTabs:=FSTabs.create(self, main2, 2);
   setItem(0, Text);
   setItem(1, Text0);
   setItem(2, Text1);
   setItem(3, Text2);
   setItem(4, Text3);
-  fTabs.setSize(true);
-end;
-
-procedure TPlaceForm.isWin(id: Byte);
-begin
-  if id=2 then win;
-end;
-
-procedure TPlaceForm.s0Click(Sender: TObject);
-begin
-  fTabs.onClick(TFmxObject(sender).Tag);
-end;
-
-procedure TPlaceForm.s0MouseEnter(Sender: TObject);
-begin
-  fTabs.onEnter((TFmxObject(sender).Tag));
+  fTabs.setSize(true, true);
 end;
 
 end.

@@ -23,12 +23,8 @@ type
     t2: TText;
     t3: TText;
     BG: TGlyph;
-    procedure s0Click(Sender: TObject);
-    procedure s0MouseEnter(Sender: TObject);
   protected
     procedure onFormCreate; override;
-  public
-    procedure isWin(id: byte);
   end;
 
 implementation
@@ -45,27 +41,12 @@ procedure TSeazonForm.onFormCreate;
 begin
   backgrounds:=[BG];
   layouts:=[Main];
-  Tabs:=FSTabs.create(self, 4, main, isWin);
+  Tabs:=FSTabs.create(self, main, 1);
   setItem(0, t0);
   setItem(1, t1);
   setItem(2, t2);
   setItem(3, t3);
-  Tabs.setSize(true);
-end;
-
-procedure TSeazonForm.s0Click(Sender: TObject);
-begin
-  Tabs.onClick(TFmxObject(sender).Tag);
-end;
-
-procedure TSeazonForm.isWin(id: Byte);
-begin
-  if id=1 then win;
-end;
-
-procedure TSeazonForm.s0MouseEnter(Sender: TObject);
-begin
-  Tabs.onEnter(TFmxObject(sender).Tag);
+  Tabs.setSize(true, true);
 end;
 
 end.

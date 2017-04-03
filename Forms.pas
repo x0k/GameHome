@@ -181,7 +181,7 @@ end;
 procedure TMForm.showImg(i: Byte);
 begin
   imgs[i].BringToFront;
-  setText(i);
+  setTabText(i);
   TAnimator.AnimateFloatWait(imgs[i], 'Opacity', 1, 0.6);
   ani:=false;
 end;
