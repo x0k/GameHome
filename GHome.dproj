@@ -362,6 +362,7 @@
         <DCCReference Include="SoundManager.pas"/>
         <DCCReference Include="FullScreenTabs.pas"/>
         <DCCReference Include="GameForms.pas"/>
+        <DCCReference Include="DesignManager.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

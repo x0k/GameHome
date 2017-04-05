@@ -15,7 +15,7 @@ type
     Map: TGlyph;
     brevno: TGlyph;
     Details: TFlowLayout;
-    cent: TLayout;
+    Right: TLayout;
     Path1: TPath;
     Path2: TPath;
     Path3: TPath;
@@ -35,8 +35,7 @@ type
     Path17: TPath;
     Path18: TPath;
     Path19: TPath;
-    left: TLayout;
-    wood: TLayout;
+    Wood: TLayout;
     shepka: TGlyph;
     sp: TPath;
     procedure Path1DragOver(Sender: TObject; const Data: TDragObject; const Point: TPointF; var Operation: TDragOperation);
@@ -59,7 +58,7 @@ procedure TMapForm.onFormCreate;
 begin
   backgrounds:=[BG];
   layouts:=[main];
-  left.Width:=Screen.Width/2;
+  Details.Width:=Screen.Width/2;
   w:=min(Screen.Width/2, Screen.Height-240);
 end;
 

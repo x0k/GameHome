@@ -57,7 +57,7 @@ object PlaceForm: TPlaceForm
         object mapstr: TGlyph
           Margins.Bottom = 100.000000000000000000
           Align = Client
-          Size.Width = 707.000000000000000000
+          Size.Width = 807.000000000000000000
           Size.Height = 620.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 3
@@ -74,18 +74,13 @@ object PlaceForm: TPlaceForm
           CanFocus = False
           Cursor = crDefault
           DisableFocusEffect = True
-          Margins.Left = 100.000000000000000000
-          Margins.Top = 150.000000000000000000
-          Margins.Bottom = 200.000000000000000000
-          Position.X = 100.000000000000000000
-          Position.Y = 150.000000000000000000
           Size.Width = 473.000000000000000000
-          Size.Height = 370.000000000000000000
+          Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'SMemo'
           TabOrder = 1
           Viewport.Width = 473.000000000000000000
-          Viewport.Height = 370.000000000000000000
+          Viewport.Height = 720.000000000000000000
         end
       end
     end
@@ -111,7 +106,7 @@ object PlaceForm: TPlaceForm
         Images = DataForm.Backgrounds
       end
       object Main2: TLayout
-        Align = Client
+        Align = Center
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False

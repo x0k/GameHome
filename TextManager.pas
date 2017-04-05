@@ -16,8 +16,6 @@ type
     SubTexts: TArray<string>;
     SubTabTexts: TArray<string>;
     FormItems: TArray<string>;
-    TxtSize: TArray<single>;
-    TbsSize: TArray<single>;
 
     function getName(id: byte): string;
     function getLogo(id: byte): byte;
@@ -25,16 +23,12 @@ type
     function getItem(id: byte): string;
     function getTabText(id: byte): string;
 
-    procedure fillSingl(const v:TJSONValue; var item: single);
     procedure fillStr(const v:TJSONValue; var item: string);
     procedure fillByte(const v:TJSONValue; var item: byte);
     procedure fillTab(const v:TJSONValue; var item: string);
 
     procedure fillArr<T>(const j:TJSONArray; const f: fillProc<T>;var m: TArray<T>);
   public
-    function TryGetTextSize(var ns, es, ms: single): boolean;
-    function TryGetTabsWidth(var aw, ew: single): boolean;
-
     property Names[index: byte]:string read getName;
     property Logos[index: byte]:byte read getLogo;
     property Texts[index: byte]:string read getText;
@@ -96,25 +90,6 @@ begin
     result:=SubTabTexts[id];
 end;
 
-function TFormText.TryGetTextSize(var ns: Single; var es: Single; var ms: Single): boolean;
-begin
-  result:=false;
-  if length(txtSize)<>3 then exit;
-  ns:=txtSize[0];
-  es:=txtSize[1];
-  ms:=txtSize[2];
-  result:=true;
-end;
-
-function TFormText.TryGetTabsWidth(var aw: single; var ew: single): boolean;
-begin
-  result:=false;
-  if length(tbsSize)<>2 then exit;
-  aw:=tbsSize[0];
-  ew:=tbsSize[1];
-  result:=true;
-end;
-
 procedure TFormText.fillStr(const v: TJSONValue; var item: string);
 begin
   item:=TJsonString(v).Value;
@@ -123,11 +98,6 @@ end;
 procedure TFormText.fillByte(const v: TJSONValue; var item: Byte);
 begin
   item:=TJsonNumber(v).AsInt;
-end;
-
-procedure TFormText.fillSingl(const v: TJSONValue; var item: Single);
-begin
-  item:=TJsonNumber(v).AsDouble;
 end;
 
 procedure TFormText.fillTab(const v: TJSONValue; var item: string);
@@ -166,10 +136,6 @@ begin
     fillArr<string>(val, fillTab, SubTabTexts);
   if j.TryGetValue('Items', val) then
     fillArr<string>(val, fillStr, FormItems);
-  if j.TryGetValue('TextSize', val) then
-    fillArr<single>(val, fillSingl, TxtSize);
-  if j.TryGetValue('TabsSize', val) then
-    fillArr<single>(val, fillSingl, TbsSize);
 end;
 
   {TTextManager}

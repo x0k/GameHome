@@ -12,7 +12,7 @@ type
 
   eSound = (sMain, sBackground, sClick, sAward, sWrong);
 
-  eTexts = (tLevels, tMuseum, tOther);
+  eTexts = (tLevels, tMuseum, tOther, tLayouts);
 
   function getPath(p:ePath):string;
 
@@ -44,6 +44,7 @@ begin
     tLevels: result:=TPath.Combine(getPath(pTexts),'levels.json');
     tMuseum: result:=TPath.Combine(getPath(pTexts),'museum.json');
     tOther: result:=TPath.Combine(getPath(pTexts),'other.json');
+    tLayouts: result:=TPath.Combine(getPath(pTexts),'layouts.json');
   end;
 end;
 

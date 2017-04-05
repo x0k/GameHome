@@ -11,17 +11,17 @@ uses
 
 type
   TTaskForm = class(TGForm)
-    img: TGlyph;
+    Img: TGlyph;
     BG: TGlyph;
-    main: TLayout;
-    Text1: TText;
-    text: TMemo;
-    Text2: TText;
-    Layout1: TLayout;
-    Button1: TButton;
-    Button2: TButton;
-    num: TLabel;
-    grid: TLayout;
+    Main: TLayout;
+    Task: TText;
+    Text: TMemo;
+    Answer: TText;
+    Input: TLayout;
+    DecBtn: TButton;
+    IncBtn: TButton;
+    Num: TLabel;
+    Grid: TLayout;
     procedure DecClick(Sender: TObject);
   protected
     procedure onFormCreate; override;
@@ -42,8 +42,8 @@ begin
   backgrounds:=[BG];
   layouts:=[main];
   img.Width:=(Screen.Height-300)/597*457;
-  setItem(1, text1);
-  setItem(2, text2);
+  setItem(1, Task);
+  setItem(2, Answer);
   setItem(3, text);
 end;
 

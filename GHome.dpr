@@ -30,7 +30,8 @@ uses
   GameData in 'GameData.pas',
   SoundManager in 'SoundManager.pas',
   FullScreenTabs in 'FullScreenTabs.pas',
-  GameForms in 'GameForms.pas';
+  GameForms in 'GameForms.pas',
+  DesignManager in 'DesignManager.pas';
 
 {$R *.res}
 

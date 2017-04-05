@@ -25,18 +25,17 @@ object MapForm: TMapForm
   object Main: TLayout
     Align = Client
     HitTest = True
-    Margins.Bottom = 200.000000000000000000
     Size.Width = 1280.000000000000000000
-    Size.Height = 520.000000000000000000
+    Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
-    object cent: TLayout
+    object Right: TLayout
       Align = Client
       HitTest = True
-      Size.Width = 615.000000000000000000
-      Size.Height = 520.000000000000000000
+      Size.Width = 665.000000000000000000
+      Size.Height = 720.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 2
+      TabOrder = 1
       object Map: TGlyph
         Align = Center
         Size.Width = 400.000000000000000000
@@ -739,16 +738,10 @@ object MapForm: TMapForm
           OnDragDrop = Path1DragDrop
         end
       end
-      object wood: TLayout
+      object Wood: TLayout
         Align = Top
         HitTest = True
-        Margins.Left = 40.000000000000000000
-        Margins.Top = 40.000000000000000000
-        Margins.Right = 40.000000000000000000
-        Margins.Bottom = 40.000000000000000000
-        Position.X = 40.000000000000000000
-        Position.Y = 40.000000000000000000
-        Size.Width = 535.000000000000000000
+        Size.Width = 665.000000000000000000
         Size.Height = 100.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
@@ -796,25 +789,15 @@ object MapForm: TMapForm
         end
       end
     end
-    object left: TLayout
+    object Details: TFlowLayout
       Align = Left
-      Size.Width = 665.000000000000000000
-      Size.Height = 520.000000000000000000
+      Size.Width = 615.000000000000000000
+      Size.Height = 720.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 1
-      object Details: TFlowLayout
-        Align = Client
-        Margins.Left = 60.000000000000000000
-        Margins.Top = 100.000000000000000000
-        Margins.Right = 60.000000000000000000
-        Size.Width = 545.000000000000000000
-        Size.Height = 420.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 0
-        Justify = Center
-        JustifyLastLine = Center
-        FlowDirection = RightToLeft
-      end
+      TabOrder = 2
+      Justify = Center
+      JustifyLastLine = Center
+      FlowDirection = RightToLeft
     end
   end
 end

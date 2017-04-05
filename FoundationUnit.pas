@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.Layouts, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Effects,
   FMX.Filter.Effects, DataUnit, FMX.ImgList, FMX.Ani,
-  GameForms;
+  GameForms, FullScreenTabs;
 
 type
   TFoundationForm = class(TGForm)
@@ -25,31 +25,36 @@ type
     t1: TText;
     t2: TText;
     t3: TText;
-    home: TGlyph;
+    Home: TGlyph;
+    Text: TText;
   protected
     procedure onFormCreate; override;
+    procedure enter(tab: FSTab);
   end;
 
 implementation
 
 {$R *.fmx}
 
-uses
-  FullScreenTabs;
-
 var
   Tabs: FSTabs;
+
+procedure TFoundationForm.enter(tab: FSTab);
+begin
+  Text.Text:=tab.txt.Text;
+end;
 
 procedure TFoundationForm.onFormCreate;
 begin
   backgrounds:=[BG, home];
-  layouts:=[main];
+  layouts:=[main, home];
   Tabs:=FSTabs.create(self, main, 2);
+  Tabs.afterEnter:=enter;
   setItem(0, t0);
   setItem(1, t1);
   setItem(2, t2);
   setItem(3, t3);
-  Tabs.setSize(false, true);
+  Tabs.setSize(false, false);
 end;
 
 end.

@@ -27,10 +27,10 @@ type
 
   TOmenForm = class(TGForm)
     BG: TGlyph;
-    main: TLayout;
-    top: TLayout;
+    Main: TLayout;
+    Top: TLayout;
     Text: TMemo;
-    grid: TLayout;
+    Grid: TLayout;
     L0: TLayout;
     m0: TGlyph;
     T0: TText;
@@ -43,7 +43,7 @@ type
     L3: TLayout;
     m3: TGlyph;
     T3: TText;
-    left: TLayout;
+    Left: TLayout;
     procedure L0MouseEnter(Sender: TObject);
   protected
     procedure onFormCreate; override;

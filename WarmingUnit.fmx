@@ -49,36 +49,31 @@ object WarmingForm: TWarmingForm
         ImageIndex = 1
         Images = DataForm.Backgrounds
       end
-      object main: TLayout
+      object Main: TLayout
         Align = Client
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
-        object home: TGlyph
+        object Home: TGlyph
           AutoHide = False
-          Margins.Left = 100.000000000000000000
-          Margins.Top = 100.000000000000000000
-          Margins.Right = 100.000000000000000000
-          Margins.Bottom = 160.000000000000000000
           Align = Client
-          Size.Width = 1080.000000000000000000
-          Size.Height = 460.000000000000000000
+          Size.Width = 1280.000000000000000000
+          Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 8
           Images = DataForm.Images
           object mox: TGlyph
             Align = Client
             Opacity = 0.000000000000000000
-            Size.Width = 1080.000000000000000000
-            Size.Height = 460.000000000000000000
+            Size.Width = 1280.000000000000000000
+            Size.Height = 720.000000000000000000
             Size.PlatformDefault = False
             ImageIndex = 9
             Images = DataForm.Images
           end
-          object rigth: TLayout
+          object Right: TLayout
             Align = Center
-            Margins.Left = 550.000000000000000000
             Size.Width = 540.000000000000000000
             Size.Height = 460.000000000000000000
             Size.PlatformDefault = False
@@ -135,9 +130,8 @@ object WarmingForm: TWarmingForm
               Images = DataForm.Other
             end
           end
-          object left: TLayout
+          object Left: TLayout
             Align = Center
-            Margins.Right = 550.000000000000000000
             Size.Width = 540.000000000000000000
             Size.Height = 460.000000000000000000
             Size.PlatformDefault = False

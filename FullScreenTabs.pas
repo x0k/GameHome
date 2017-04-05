@@ -8,16 +8,20 @@ uses
   GameForms, DataUnit;
 
 type
-  idAct = procedure(id: byte) of object;
-
   FSTab = class
   private
     layout: TLayout;
     image: TGlyph;
     text: TText;
   public
+    property txt: TText read text;
+    property img: TGlyph read image;
+    property layer: TLayout read layout;
+
     constructor create(l: TLayout);
   end;
+
+  idAct = procedure(tab: FSTab) of object;
 
   FSTabs = class
   private
@@ -25,10 +29,21 @@ type
     main: TLayout;
     tabs: TList<FSTab>;
     shw, lst: ShortInt;
-    w, addW, expW: single;//ширина вкладки, процент при наведении, процент при раскрытии
-    normSize, entSize, maxSize: single;//размер текста, процент при наведении, процент при раскрытии
-    winId:byte;
+    xZero: single;
+    widths:TArray<single>;
+    sizes:TArray<single>;
+    margins:TArray<single>;
+
+    winId: byte;
     txtAni: boolean;
+
+    function w: single;
+    function AddW: single;
+    function MaxW: single;
+
+    function s: single;
+    function AddS: single;
+    function MaxS: single;
 
   public
     afterClick: idAct;
@@ -79,30 +94,82 @@ begin
     if f is TLayout then
       tabs.add(FSTab.create(f as TLayout));
   shw:=-1;
-  normSize:=30;entSize:=1.2; maxSize:=1.4;
-  TM.Forms[fm.Name].TryGetTextSize(normSize, entSize, maxSize);
-  addW:=1.2; expW:=2;
-  TM.Forms[fm.Name].TryGetTabsWidth(addW, expW);
+  winId:=wId;
+  sizes:=DM.getFormLayout(fm.Name, main.Name).Size;
+  widths:=DM.getFormLayout(fm.Name, main.Name).Width;
+  margins:=DM.getFormLayout(fm.Name, main.Name).LayoutMargins;
+end;
+
+function FSTabs.W;
+begin
+  result:=Main.Width/tabs.Count;
+end;
+
+function FSTabs.AddW;
+begin
+  if length(widths)>0 then
+    result:=widths[0]*w
+  else
+    result:=1.2*w;
+end;
+
+function FSTabs.MaxW;
+begin
+  if length(widths)>1 then
+    result:=widths[1]*w
+  else
+    result:=2*w;
+end;
+
+function FSTabs.S;
+begin
+  if length(sizes)>0 then
+    result:=sizes[0]
+  else
+    result:=30;
+end;
+
+function FSTabs.AddS;
+begin
+  if length(sizes)>1 then
+    result:=sizes[1]*S
+  else
+    result:=1.2*S;
+end;
+
+function FSTabs.MaxS;
+begin
+  if length(sizes)>2 then
+    result:=sizes[2]*S
+  else
+    result:=1.4*S;
 end;
 
 procedure FSTabs.setSize(img, txt: Boolean);
 var
   i, c: byte;
+  w, h: single;
 begin
   c:=tabs.Count;
-  main.SetBounds(0, 0, Screen.Width, Screen.Height);
-  w:=Screen.Width/c;
+  xZero:=0;
+  w:=Screen.Width/100;
+  h:=Screen.Height/100;
+  if length(margins)=4 then
+  begin
+    main.SetBounds(margins[0]*w, margins[1]*h, Screen.Width-(margins[0]+margins[2])*w, Screen.Height-(margins[1]+margins[3])*h);
+    xZero:=margins[0]*w;
+  end else main.SetBounds(0, 0, Screen.Width, Screen.Height);
   if tabs.Count>0 then
   begin
     for i:=0 to tabs.Count-1 do
     begin
-      tabs[i].layout.Width:=Screen.Width/c;
-      tabs[i].layout.Height:=Screen.Height;
+      tabs[i].layout.Width:=main.Width/c;
+      tabs[i].layout.Height:=main.Height;
       tabs[i].layout.HitTest:=true;
       tabs[i].layout.OnMouseEnter:=onEnter;
       tabs[i].layout.OnClick:=onClick;
-      if img then IM.setSize(tabs[i].image, TSizeF.Create(w, Screen.Height));
-      if txt then tabs[i].text.TextSettings.Font.Size:=normSize;
+      if img then IM.setSize(tabs[i].image, TSizeF.Create(w, main.Height));
+      if txt then tabs[i].text.TextSettings.Font.Size:=S;
     end;
     txtAni:=txt;
   end;
@@ -112,14 +179,14 @@ procedure FSTabs.onClick;
 var
   id, c: byte;
 begin
-  id:=TFmxObject(sender).Tag;
+  id:=TLayout(sender).TabOrder;
   c:=tabs.Count-1;
   if (shw>=0)and(c>0) then
   begin
-    if txtAni then TAnimator.AnimateFloat(tabs[shw].text, 'TextSettings.Font.Size', normSize);
+    if txtAni then TAnimator.AnimateFloat(tabs[shw].text, 'TextSettings.Font.Size', S);
 
     TAnimator.AnimateFloat(tabs[shw].layout, 'width', w);
-    TAnimator.AnimateFloat(Main, 'Position.X', 0);
+    TAnimator.AnimateFloat(Main, 'Position.X', xZero);
 
     shw:=-1;
   end
@@ -127,13 +194,13 @@ begin
   begin
     shw:=id;
     Form.setText(tabs[id].text.Tag);
-    if txtAni then TAnimator.AnimateFloat(tabs[id].text, 'TextSettings.Font.Size', maxSize*normSize);
+    if txtAni then TAnimator.AnimateFloat(tabs[id].text, 'TextSettings.Font.Size', maxS);
 
-    TAnimator.AnimateFloat(Main, 'Position.X', -((expW*w-w)*id/c));
-    TAnimator.AnimateFloat(tabs[id].layout, 'width', expW*w);
+    TAnimator.AnimateFloat(Main, 'Position.X', xZero-((maxW-W)*id/c));
+    TAnimator.AnimateFloat(tabs[id].layout, 'width', maxW);
 
-    if Assigned(afterClick) then afterClick(id)
-      else if id=winId then form.win;
+    if Assigned(afterClick) then afterClick(tabs[id])
+      else if tabs[id].text.Tag=winId then form.win;
   end;
 end;
 
@@ -141,20 +208,21 @@ procedure FSTabs.onEnter;
 var
   id, c: shortInt;
 begin
-  id:=TFmxObject(sender).Tag;
+  id:=TLayout(sender).TabOrder;
   c:=tabs.Count-1;
   if (shw<0)and(id<>lst)and(c>0) then
   begin
     if txtAni then
     begin
-      TAnimator.AnimateFloat(tabs[lst].text, 'TextSettings.Font.Size', normSize);
-      TAnimator.AnimateFloat(tabs[id].text, 'TextSettings.Font.Size', normSize*entSize);
+      TAnimator.AnimateFloat(tabs[lst].text, 'TextSettings.Font.Size', S);
+      TAnimator.AnimateFloat(tabs[id].text, 'TextSettings.Font.Size', addS);
     end;
 
-    TAnimator.AnimateFloat(tabs[lst].layout, 'width', w);
-    TAnimator.AnimateFloat(Main, 'Position.X', -((addW*w-w)*id/c));
-    TAnimator.AnimateFloat(tabs[id].layout, 'width', addW*w);
+    TAnimator.AnimateFloat(tabs[lst].layout, 'width', W);
+    TAnimator.AnimateFloat(Main, 'Position.X', xZero-((addW-W)*id/c));
+    TAnimator.AnimateFloat(tabs[id].layout, 'width', addW);
 
+    if Assigned(afterEnter) then afterEnter(tabs[id]);
     lst:=id;
   end;
 end;

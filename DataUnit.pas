@@ -5,7 +5,7 @@ interface
 uses
   System.Classes, System.ImageList,
   FMX.Controls, FMX.ImgList, FMX.Types, FGX.ApplicationEvents,
-  ImageManager, TextManager, SoundManager, GameData, BarUnit;
+  DesignManager, ImageManager, TextManager, SoundManager, GameData, BarUnit;
 
 type
 
@@ -25,6 +25,7 @@ type
 var
   DataForm: TDataForm;
   Styles:TStyleBook;
+  DM: TDesignManager;
   IM: TImageManager;
   TM: TTextManager;
   SM: TSoundManager;
@@ -51,6 +52,7 @@ begin
   Bar:=TBar.create(self);
   Bar.setDots;
 
+  DM:=TDesignManager.create;
   IM:=TImageManager.Create;
   GD:=TGameData.Create;
   SM:=TSoundManager.Create;

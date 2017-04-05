@@ -1,0 +1,202 @@
+﻿{
+	"GameForm": [
+		{
+			"Name": "Main1",
+			"Margins": [10, 10, 10, 16]
+		},
+		{
+			"Name": "Main2",
+			"Margins": [0, 10, 0, 25]
+		},
+		{
+			"Name": "Main3",
+			"Margins": [0, 0, 0, 0],
+			"Childrens": [
+				{
+					"Name": "Btns",
+					"Margins": [0, 0, 0, 14.81]
+				}
+			]
+		}
+	],
+	"SeazonForm": [
+		{
+			"Name": "Main",
+			"Margins": [0, 0, 0, 0],
+			"TextSize": [40, 1.2, 2],
+			"TabsSize": [1.2, 2]
+		}
+	],
+	"PlaceForm": [
+		{
+			"Name": "Main1",
+			"Childrens": [
+				{
+					"Name": "Text",
+					"Margins": [10, 20, 0, 0]
+				}
+			]
+		},
+		{
+			"Name": "Main2",
+			"Margins": [0, 0, 0, 0],
+			"TextSize": [40, 1.2, 2],
+			"TabsSize": [1.2, 2]
+		}
+	],
+	"ToolsForm":[
+		{
+			"Name": "tools",
+			"Margins": [10, 10, 10, 16]
+		}
+	],
+	"MaterialsForm":[
+		{
+			"Name": "Main",
+			"Childrens":[
+				{
+					"Name": "Top",
+					"Childrens": [
+						{
+							"Name": "Text",
+							"Margins": [15, 15, 0, 0]
+						},
+						{
+							"Name": "Trees",
+							"Margins": [5, 5, 10, 0]
+						}
+					]
+
+				},
+				{
+					"Name": "Grid",
+					"Margins": [16, 16, 16, 16],
+					"TextSize": [40, 1.1, 1.6],
+					"TabsSize": [1.1, 1.6]			
+				}
+			]
+		}
+	],
+	"TaskForm":[
+		{
+			"Name": "Main",
+			"Childrens": [
+				{
+					"Name": "Grid",
+					"Margins": [0, 10, 10, 16],
+					"Childrens": [
+						{
+							"Name": "Task"
+						},
+						{
+							"Name": "Text"
+						},
+						{
+							"Name": "Answer"
+						},
+						{
+							"Name": "Input",
+							"Childrens": [
+								{
+									"Name": "DecBtn"
+								},
+								{
+									"Name": "Num"
+								},
+								{
+									"Name": "IncBtn"
+								}
+							]
+						}
+					]
+				},
+				{
+					"Name": "Img",
+					"Margins": [10, 10, 10, 16]
+				}
+			]
+		}
+	],
+	"FoundationForm":[
+		{
+			"Name": "Home"
+		},
+		{
+			"Name": "Main",
+			"Margins": [15, 0, 15, 16],
+			"TabsSize": [1.2, 1.5],
+			"Childrens": [
+				{
+					"Name": "Text",
+					"Margins": [2, 10, 0, 20]
+				}
+			]	
+		}
+	],
+	"MapForm":[
+		{
+			"Name": "Main",
+			"Margins": [5, 10, 10, 16],
+			"Childrens":[
+				{
+					"Name": "Details",
+					"Margins": [0, 0, 5, 0]
+				},
+				{
+					"Name": "Right",
+					"Childrens": [
+						{
+							"Name": "Wood"
+						},
+						{
+							"Name": "Map"
+						}
+					]
+				}
+			]
+		}
+	],
+	"OmenForm":[
+		{
+			"Name": "Main",
+			"Margins": [0, 0, 0, 16],
+			"Childrens": [
+				{
+					"Name": "Top",
+					"Childrens": [
+						{
+							"Name": "Left"
+						},
+						{
+							"Name": "Text"
+						}
+					]
+				},
+				{
+					"Name": "Grid"
+				}
+			]
+		}
+	],
+	"WarmingForm":[
+		{
+			"Name": "Main",
+			"Margins": [5, 5, 5, 10],
+			"Childrens": [
+				{
+					"Name": "Home",
+					"Childrens": [
+						{
+							"Name": "Left",
+							"Margins": [0, 0, 30, 0]
+						},
+						{
+							"Name": "Right",
+							"Margins": [30, 0, 0, 0]
+						}
+					]
+				}
+			]
+		}
+	]
+}

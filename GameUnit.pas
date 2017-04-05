@@ -56,7 +56,7 @@ uses
 procedure TGameForm.onFormCreate;
 begin
   backgrounds:=[home, BG1, BG2, BG3];
-  layouts:=[main1, main3];
+  layouts:=[main1, main2, main3];
   gTabs:=tabs;
   gTab:=2;
 end;

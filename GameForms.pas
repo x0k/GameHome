@@ -71,7 +71,7 @@ implementation
 uses
   System.Types, System.SysUtils,
   FMX.Dialogs,
-  DataUnit, GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit, WarmingUnit;
+  DataUnit, DesignManager, GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit, WarmingUnit;
 
 var
   GameForm: TGTabForm;
@@ -196,13 +196,55 @@ end;
 procedure TGForm.afterFormCreate;
 var
   i:byte;
+  w, h: single;
+
+  function findByName(const name: string; const arr: TArray<TFmxObject>; var c: TControl):boolean;
+  var
+    i: byte;
+  begin
+    result:=false;
+    if length(arr)=0 then exit;
+    for i:=Low(arr) to High(arr) do
+      if name = arr[i].Name then
+      begin
+        if arr[i] is TControl then
+        begin
+          c:=arr[i] as TControl;
+          result:=true;
+        end;
+        exit;
+      end;
+  end;
+
+  procedure setSz(const layouts: TArray<TFmxObject>;const setts: TArray<TFormLayout>);
+  var
+    i: byte;
+    ct: TControl;
+  begin
+    for i:=0 to High(setts) do
+      if findByName(setts[i].Name, layouts, ct) then
+      begin
+        if setts[i].pMargins then ct.Margins.Assign(TBounds.Create(
+          TRectF.Create(setts[i].LayoutMargins[0]*w, setts[i].LayoutMargins[1]*h, setts[i].LayoutMargins[2]*w, setts[i].LayoutMargins[3]*h)
+        ));
+        if setts[i].pChildrens and (ct.ChildrenCount>0) then
+          setSz(ct.Children.ToArray, setts[i].Childs);
+      end;
+  end;
+
 begin
   if length(backgrounds)>0 then
     for i:=0 to High(backgrounds) do
       IM.setSize(backgrounds[i], screen.Size);
   if length(layouts)>0 then
+  begin
+    w:=Screen.Width/100;
+    h:=Screen.Height/100;
+    setSz(TArray<TFmxObject>(layouts), DM.Designs[name]);
     for i:=0 to High(layouts) do
       layouts[i].Opacity:=0;
+  end;
+
 end;
 
 procedure TGForm.setBarEvents;

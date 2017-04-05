@@ -11,15 +11,15 @@ uses
 
 type
   TWarmingForm = class(TGTabForm)
-    main: TLayout;
-    home: TGlyph;
-    rigth: TLayout;
+    Main: TLayout;
+    Home: TGlyph;
+    Right: TLayout;
     a2: TGlyph;
     c2: TGlyph;
     a3: TGlyph;
     c3: TGlyph;
     b1: TGlyph;
-    left: TLayout;
+    Left: TLayout;
     a1: TGlyph;
     b2: TGlyph;
     b3: TGlyph;
@@ -93,19 +93,19 @@ begin
 
   c:=TContrastEffect.Create(self);
   inn:=TInnerGlowEffect.Create(self);
-  w:=min((Screen.Width-220)/2, (Screen.Height-260));
   for g in left.Children do
     setGl(g as TGlyph);
-  for g in rigth.Children do
+  for g in right.Children do
     setGl(g as TGlyph)
 end;
 
 procedure TWarmingForm.addShow;
 begin
+  w:=min(Main.Width/2, Main.Height);
   left.SetBounds(left.Position.X, left.Position.Y, w,w);
   left.Margins.Right:=w+20;
-  rigth.SetBounds(rigth.Position.X, rigth.Position.Y, w,w);
-  rigth.Margins.Left:=w+20;
+  right.SetBounds(right.Position.X, right.Position.Y, w,w);
+  right.Margins.Left:=w+20;
 end;
 
 procedure TWarmingForm.addWin;

@@ -19,14 +19,14 @@ object OmenForm: TOmenForm
     ImageIndex = 1
     Images = DataForm.Backgrounds
   end
-  object main: TLayout
+  object Main: TLayout
     Align = Client
     HitTest = True
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
-    object top: TLayout
+    object Top: TLayout
       Align = MostTop
       HitTest = True
       Size.Width = 1280.000000000000000000
@@ -44,40 +44,29 @@ object OmenForm: TOmenForm
         CanFocus = False
         Cursor = crDefault
         DisableFocusEffect = True
-        Margins.Top = 100.000000000000000000
-        Margins.Right = 200.000000000000000000
-        Margins.Bottom = 20.000000000000000000
-        Size.Width = 460.000000000000000000
-        Size.Height = 280.000000000000000000
+        Size.Width = 960.000000000000000000
+        Size.Height = 400.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SMemo'
         TabOrder = 0
-        Viewport.Width = 460.000000000000000000
-        Viewport.Height = 280.000000000000000000
+        Viewport.Width = 960.000000000000000000
+        Viewport.Height = 400.000000000000000000
       end
-      object left: TLayout
+      object Left: TLayout
         Align = Left
         HitTest = True
-        Margins.Left = 200.000000000000000000
-        Margins.Top = 100.000000000000000000
-        Margins.Right = 100.000000000000000000
-        Margins.Bottom = 20.000000000000000000
-        Position.X = 200.000000000000000000
-        Position.Y = 100.000000000000000000
         Size.Width = 320.000000000000000000
-        Size.Height = 280.000000000000000000
+        Size.Height = 400.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
       end
     end
-    object grid: TLayout
+    object Grid: TLayout
       Align = HorzCenter
       HitTest = True
-      Margins.Bottom = 230.000000000000000000
-      Position.X = 216.000000000000000000
       Position.Y = 400.000000000000000000
-      Size.Width = 848.000000000000000000
-      Size.Height = 90.000000000000000000
+      Size.Width = 1280.000000000000000000
+      Size.Height = 320.000000000000000000
       Size.PlatformDefault = False
       TabOrder = 1
       object L0: TLayout
@@ -85,7 +74,7 @@ object OmenForm: TOmenForm
         DragMode = dmAutomatic
         HitTest = True
         Size.Width = 212.000000000000000000
-        Size.Height = 90.000000000000000000
+        Size.Height = 320.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         OnMouseEnter = L0MouseEnter
@@ -95,7 +84,7 @@ object OmenForm: TOmenForm
           Margins.Right = 60.000000000000000000
           Align = Client
           Size.Width = 92.000000000000000000
-          Size.Height = 90.000000000000000000
+          Size.Height = 270.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 31
           Images = DataForm.Other
@@ -104,8 +93,7 @@ object OmenForm: TOmenForm
           Align = Bottom
           Anchors = []
           HitTest = False
-          Margins.Bottom = -50.000000000000000000
-          Position.Y = 90.000000000000000000
+          Position.Y = 270.000000000000000000
           Size.Width = 212.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
@@ -121,7 +109,7 @@ object OmenForm: TOmenForm
         HitTest = True
         Position.X = 212.000000000000000000
         Size.Width = 212.000000000000000000
-        Size.Height = 90.000000000000000000
+        Size.Height = 320.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
         OnMouseEnter = L0MouseEnter
@@ -131,7 +119,7 @@ object OmenForm: TOmenForm
           Margins.Right = 60.000000000000000000
           Align = Client
           Size.Width = 92.000000000000000000
-          Size.Height = 90.000000000000000000
+          Size.Height = 270.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 32
           Images = DataForm.Other
@@ -140,8 +128,7 @@ object OmenForm: TOmenForm
           Align = Bottom
           Anchors = []
           HitTest = False
-          Margins.Bottom = -50.000000000000000000
-          Position.Y = 90.000000000000000000
+          Position.Y = 270.000000000000000000
           Size.Width = 212.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
@@ -157,7 +144,7 @@ object OmenForm: TOmenForm
         HitTest = True
         Position.X = 424.000000000000000000
         Size.Width = 212.000000000000000000
-        Size.Height = 90.000000000000000000
+        Size.Height = 320.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 2
         OnMouseEnter = L0MouseEnter
@@ -167,7 +154,7 @@ object OmenForm: TOmenForm
           Margins.Right = 60.000000000000000000
           Align = Client
           Size.Width = 92.000000000000000000
-          Size.Height = 90.000000000000000000
+          Size.Height = 270.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 33
           Images = DataForm.Other
@@ -176,8 +163,7 @@ object OmenForm: TOmenForm
           Align = Bottom
           Anchors = []
           HitTest = False
-          Margins.Bottom = -50.000000000000000000
-          Position.Y = 90.000000000000000000
+          Position.Y = 270.000000000000000000
           Size.Width = 212.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
@@ -193,7 +179,7 @@ object OmenForm: TOmenForm
         HitTest = True
         Position.X = 636.000000000000000000
         Size.Width = 212.000000000000000000
-        Size.Height = 90.000000000000000000
+        Size.Height = 320.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 3
         OnMouseEnter = L0MouseEnter
@@ -203,7 +189,7 @@ object OmenForm: TOmenForm
           Margins.Right = 60.000000000000000000
           Align = Client
           Size.Width = 92.000000000000000000
-          Size.Height = 90.000000000000000000
+          Size.Height = 270.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 34
           Images = DataForm.Other
@@ -212,8 +198,7 @@ object OmenForm: TOmenForm
           Align = Bottom
           Anchors = []
           HitTest = False
-          Margins.Bottom = -50.000000000000000000
-          Position.Y = 90.000000000000000000
+          Position.Y = 270.000000000000000000
           Size.Width = 212.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False

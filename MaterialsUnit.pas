@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Objects,
   FMX.Layouts, FMX.StdCtrls, DataUnit, FMX.ImgList, FMX.Ani,
-  GameForms;
+  GameForms, FullScreenTabs;
 
 type
   TMaterialsForm = class(TGForm)
@@ -17,7 +17,7 @@ type
     T3: TText;
     Text: TMemo;
     BG: TGlyph;
-    trees: TGlyph;
+    Trees: TGlyph;
     m0: TGlyph;
     m1: TGlyph;
     m2: TGlyph;
@@ -26,13 +26,12 @@ type
     L1: TLayout;
     L2: TLayout;
     L3: TLayout;
-    main: TLayout;
-    top: TLayout;
-    grid: TLayout;
-    procedure L0MouseEnter(Sender: TObject);
-    procedure L0Click(Sender: TObject);
+    Main: TLayout;
+    Top: TLayout;
+    Grid: TLayout;
   protected
     procedure onFormCreate; override;
+    procedure isWin(tab: FSTab);
   end;
 
 implementation
@@ -40,64 +39,36 @@ implementation
 {$R *.fmx}
 
 var
-  a,b:boolean;
-  w:single;
-  id:shortint;
+  tabs:FSTabs;
+  a, b: boolean;
 
 procedure TMaterialsForm.onFormCreate;
-var
-  i:byte;
 begin
   backgrounds:=[BG];
   layouts:=[main];
-  top.Height:=Screen.Height/2;
+  top.Height:=Screen.Height*2/5 ;
   text.Width:=Screen.Width/3;
-  w:=Screen.Width/6;
-  Grid.Width:=w*4;
-  for i:=0 to 3 do
-    (Grid.Children[i] as TLayout).Width:=w;
-  id:=-1;
+  tabs:=FSTabs.create(self, grid, 0);
   setItem(0, text);
   setItem(1, t0);
   setItem(2, t1);
   setItem(3, t2);
   setItem(4, t3);
+  tabs.setSize(true, true);
+  tabs.afterClick:=isWin;
+  a:=false;
+  b:=false;
 end;
 
-procedure TMaterialsForm.L0Click(Sender: TObject);
-var
-  id:byte;
-  G:TGlyph;
+procedure TMaterialsForm.isWin(tab: FSTab);
 begin
-  G:=TFmxObject(sender).Children[0] as TGlyph;
-  id:=G.ImageIndex;
-  case id of
-    18:a:=true;
-    22:b:=true;
+  case tab.txt.Tag of
+    1: a:=true;
+    3: b:=true;
   end;
-  if id mod 2=0 then G.ImageIndex:=id+1;
-  setText(G.Tag);
-  if a and b then win;
-end;
-
-procedure TMaterialsForm.L0MouseEnter(Sender: TObject);
-var
-  last:shortint;
-  procedure incAni(O:TFmxObject);
-  begin
-    TAnimator.AnimateFloat(O, 'Margins.Left', 40);
-    TAnimator.AnimateFloat(O, 'Margins.Right', 40);
-  end;
-  procedure decAni(O:TFmxObject);
-  begin
-    TAnimator.AnimateFloat(O, 'Margins.Left', 60);
-    TAnimator.AnimateFloat(O, 'Margins.Right', 60);
-  end;
-begin
-  last:=id;
-  id:=Grid.Children.IndexOf(Sender as TFmxObject);
-  if (last>=0)and(id<>last) then decAni(Grid.Children.Items[last].Children[0]);
-  incAni(TFmxObject(Sender).Children[0]);
+  setText(tab.layer.TabOrder);
+  if tab.img.ImageIndex mod 2=0 then tab.img.ImageIndex:=tab.img.ImageIndex+1;
+  if a and b then win;  
 end;
 
 end.

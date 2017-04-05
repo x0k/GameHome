@@ -54,7 +54,7 @@ begin
   layouts:=[main1, main2];
   gTabs:=tabs;
   gTab:=1;
-  fTabs:=FSTabs.create(self, main2, 2);
+  fTabs:=FSTabs.create(self, main2, 3);
   setItem(0, Text);
   setItem(1, Text0);
   setItem(2, Text1);

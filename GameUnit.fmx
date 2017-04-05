@@ -54,19 +54,14 @@ object GameForm: TGameForm
       end
       object Main1: TLayout
         Align = Client
-        Margins.Bottom = 160.000000000000000000
         Size.Width = 1280.000000000000000000
-        Size.Height = 560.000000000000000000
+        Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Alex: TGlyph
-          Margins.Left = 40.000000000000000000
-          Margins.Top = 40.000000000000000000
-          Margins.Right = 40.000000000000000000
-          Margins.Bottom = 40.000000000000000000
           Align = Client
-          Size.Width = 1200.000000000000000000
-          Size.Height = 480.000000000000000000
+          Size.Width = 1280.000000000000000000
+          Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 0
           Images = DataForm.Images
@@ -96,19 +91,14 @@ object GameForm: TGameForm
       end
       object Main2: TLayout
         Align = Client
-        Margins.Bottom = 160.000000000000000000
         Size.Width = 1280.000000000000000000
-        Size.Height = 560.000000000000000000
+        Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
         object Place: TGlyph
-          Margins.Left = 40.000000000000000000
-          Margins.Top = 40.000000000000000000
-          Margins.Right = 40.000000000000000000
-          Margins.Bottom = 40.000000000000000000
           Align = Client
-          Size.Width = 1200.000000000000000000
-          Size.Height = 480.000000000000000000
+          Size.Width = 1280.000000000000000000
+          Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 1
           Images = DataForm.Images
@@ -152,9 +142,8 @@ object GameForm: TGameForm
         end
         object Btns: TLayout
           Align = Client
-          Margins.Bottom = 160.000000000000000000
           Size.Width = 1280.000000000000000000
-          Size.Height = 560.000000000000000000
+          Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 0
           object l10btn: TButton
@@ -162,7 +151,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 656.000000000000000000
-            Position.Y = 220.000000000000000000
+            Position.Y = 295.714294433593800000
             Size.Width = 90.000000000000000000
             Size.Height = 90.000000000000000000
             Size.PlatformDefault = False
@@ -177,7 +166,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 592.000000000000000000
-            Position.Y = 164.000000000000000000
+            Position.Y = 221.714279174804700000
             Size.Width = 76.000000000000000000
             Size.Height = 76.000000000000000000
             Size.PlatformDefault = False
@@ -192,7 +181,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 688.000000000000000000
-            Position.Y = 100.000000000000000000
+            Position.Y = 142.285720825195300000
             Size.Width = 96.000000000000000000
             Size.Height = 96.000000000000000000
             Size.PlatformDefault = False
@@ -207,7 +196,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 792.000000000000000000
-            Position.Y = 68.000000000000000000
+            Position.Y = 98.285713195800780000
             Size.Width = 76.000000000000000000
             Size.Height = 76.000000000000000000
             Size.PlatformDefault = False
@@ -222,7 +211,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 888.000000000000000000
-            Position.Y = 108.000000000000000000
+            Position.Y = 152.285720825195300000
             Size.Width = 94.000000000000000000
             Size.Height = 94.000000000000000000
             Size.PlatformDefault = False
@@ -237,7 +226,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 416.000000000000000000
-            Position.Y = 460.000000000000000000
+            Position.Y = 604.285705566406300000
             Size.Width = 90.000000000000000000
             Size.Height = 90.000000000000000000
             Size.PlatformDefault = False
@@ -252,7 +241,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 288.000000000000000000
-            Position.Y = 364.000000000000000000
+            Position.Y = 479.714294433593800000
             Size.Width = 82.000000000000000000
             Size.Height = 82.000000000000000000
             Size.PlatformDefault = False
@@ -267,7 +256,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 368.000000000000000000
-            Position.Y = 308.000000000000000000
+            Position.Y = 406.571441650390600000
             Size.Width = 74.000000000000000000
             Size.Height = 74.000000000000000000
             Size.PlatformDefault = False
@@ -282,7 +271,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 464.000000000000000000
-            Position.Y = 308.000000000000000000
+            Position.Y = 410.285705566406300000
             Size.Width = 100.000000000000000000
             Size.Height = 100.000000000000000000
             Size.PlatformDefault = False
@@ -296,7 +285,7 @@ object GameForm: TGameForm
             Tag = 6
             Anchors = []
             Position.X = 544.000000000000000000
-            Position.Y = 404.000030517578100000
+            Position.Y = 531.142883300781300000
             Size.Width = 82.000000000000000000
             Size.Height = 82.000000000000000000
             Size.PlatformDefault = False
@@ -310,7 +299,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 656.000000000000000000
-            Position.Y = 428.000000000000000000
+            Position.Y = 560.571411132812500000
             Size.Width = 72.000000000000000000
             Size.Height = 72.000000000000000000
             Size.PlatformDefault = False
@@ -325,7 +314,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 640.000000000000000000
-            Position.Y = 339.999969482421900000
+            Position.Y = 449.142822265625000000
             Size.Width = 84.000000000000000000
             Size.Height = 84.000000000000000000
             Size.PlatformDefault = False
@@ -339,7 +328,7 @@ object GameForm: TGameForm
             Tag = 9
             Anchors = []
             Position.X = 728.000000000000000000
-            Position.Y = 292.000000000000000000
+            Position.Y = 386.857147216796900000
             Size.Width = 80.000000000000000000
             Size.Height = 80.000000000000000000
             Size.PlatformDefault = False
@@ -353,7 +342,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 347.000000000000000000
-            Position.Y = 430.000000000000000000
+            Position.Y = 562.857116699218800000
             Size.Width = 70.000000000000000000
             Size.Height = 70.000000000000000000
             Size.PlatformDefault = False
