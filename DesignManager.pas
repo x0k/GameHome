@@ -14,11 +14,13 @@ type
     n: string;
     TxtSize: TArray<single>;
     TbsSize: TArray<single>;
+    Bounds: TArray<single>;
     Margins: TArray<single>;
     Childrens: TArray<TFormLayout>;
 
     function hasSize: boolean;
     function hasWidth: boolean;
+    function hasBounds: boolean;
     function hasMargins: boolean;
     function hasChildrens: boolean;
 
@@ -31,6 +33,8 @@ type
     property Size:TArray<single> read txtSize;
     property pWidth: boolean read hasWidth;
     property Width:TArray<single> read tbsSize;
+    property pBounds: boolean read hasBounds;
+    property LayouBounds:TArray<single> read Bounds;
     property pMargins: boolean read hasMargins;
     property LayoutMargins:TArray<single> read margins;
     property pChildrens: boolean read hasChildrens;
@@ -68,6 +72,11 @@ begin
   result:=length(TxtSize)>0;
 end;
 
+function TFormLayout.hasBounds;
+begin
+  result:=length(Bounds)=4;
+end;
+
 function TFormLayout.hasMargins;
 begin
   result:=length(Margins)=4;
@@ -103,12 +112,16 @@ end;
 constructor TFormLayout.create(j: TJSONObject);
 var
   val: TJSONArray;
+  s: TJSONString;
 begin
-  n:=TJSONString(j.GetValue('Name')).Value;
+  if j.TryGetValue('Name', s) then n:=s.Value
+    else exit;
   if j.TryGetValue('TextSize', val) then
     fillArr<single>(val, fillSingl, TxtSize);
   if j.TryGetValue('TabsSize', val) then
     fillArr<single>(val, fillSingl, TbsSize);
+  if j.TryGetValue('Bounds', val) then
+    fillArr<single>(val, fillSingl, bounds);
   if j.TryGetValue('Margins', val) then
     fillArr<single>(val, fillSingl, margins);
   if j.TryGetValue('Childrens', val) and (Val.Count>0) then

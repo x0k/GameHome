@@ -141,7 +141,10 @@ begin
   GameForm.Hide;
   GameForm.gTabs.TabIndex:=0;
   for i:=0 to LVL_COUNT do
+  begin
     states[i]:=0;
+    Bar.dotsStat[i]:=0;
+  end;
   if level>0 then self.Destroy;
 end;
 
@@ -224,6 +227,8 @@ var
     for i:=0 to High(setts) do
       if findByName(setts[i].Name, layouts, ct) then
       begin
+        if setts[i].pBounds then
+          ct.SetBounds(setts[i].LayouBounds[0]*w, setts[i].LayouBounds[1]*h, setts[i].LayouBounds[2]*w, setts[i].LayouBounds[3]*h);
         if setts[i].pMargins then ct.Margins.Assign(TBounds.Create(
           TRectF.Create(setts[i].LayoutMargins[0]*w, setts[i].LayoutMargins[1]*h, setts[i].LayoutMargins[2]*w, setts[i].LayoutMargins[3]*h)
         ));

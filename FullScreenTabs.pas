@@ -148,17 +148,12 @@ end;
 procedure FSTabs.setSize(img, txt: Boolean);
 var
   i, c: byte;
-  w, h: single;
+  w: single;
 begin
   c:=tabs.Count;
   xZero:=0;
   w:=Screen.Width/100;
-  h:=Screen.Height/100;
-  if length(margins)=4 then
-  begin
-    main.SetBounds(margins[0]*w, margins[1]*h, Screen.Width-(margins[0]+margins[2])*w, Screen.Height-(margins[1]+margins[3])*h);
-    xZero:=margins[0]*w;
-  end else main.SetBounds(0, 0, Screen.Width, Screen.Height);
+  xZero:=margins[0]*w;
   if tabs.Count>0 then
   begin
     for i:=0 to tabs.Count-1 do
@@ -168,7 +163,7 @@ begin
       tabs[i].layout.HitTest:=true;
       tabs[i].layout.OnMouseEnter:=onEnter;
       tabs[i].layout.OnClick:=onClick;
-      if img then IM.setSize(tabs[i].image, TSizeF.Create(w, main.Height));
+      if img then IM.setSize(tabs[i].image, TSizeF.Create(tabs[i].layout.Width, tabs[i].layout.Height));
       if txt then tabs[i].text.TextSettings.Font.Size:=S;
     end;
     txtAni:=txt;

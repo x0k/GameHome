@@ -25,6 +25,7 @@ type
     BG: TGlyph;
   protected
     procedure onFormCreate; override;
+    procedure addShow; override;
   end;
 
 implementation
@@ -46,6 +47,10 @@ begin
   setItem(1, t1);
   setItem(2, t2);
   setItem(3, t3);
+end;
+
+procedure TSeazonForm.addShow;
+begin
   Tabs.setSize(true, true);
 end;
 

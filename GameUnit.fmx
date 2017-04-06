@@ -166,7 +166,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 592.000000000000000000
-            Position.Y = 221.714279174804700000
+            Position.Y = 221.714294433593800000
             Size.Width = 76.000000000000000000
             Size.Height = 76.000000000000000000
             Size.PlatformDefault = False
@@ -196,7 +196,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 792.000000000000000000
-            Position.Y = 98.285713195800780000
+            Position.Y = 98.285705566406250000
             Size.Width = 76.000000000000000000
             Size.Height = 76.000000000000000000
             Size.PlatformDefault = False

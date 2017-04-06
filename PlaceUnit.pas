@@ -29,11 +29,12 @@ type
     s3: TLayout;
     img3: TGlyph;
     Text3: TText;
-    mapstr: TGlyph;
+    Map: TGlyph;
     Main1: TLayout;
     BG2: TGlyph;
   protected
     procedure onFormCreate; override;
+    procedure addShow; override;
   end;
 
 
@@ -60,6 +61,10 @@ begin
   setItem(2, Text1);
   setItem(3, Text2);
   setItem(4, Text3);
+end;
+
+procedure TPlaceForm.addShow;
+begin
   fTabs.setSize(true, true);
 end;
 

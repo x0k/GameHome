@@ -46,8 +46,6 @@ procedure TMaterialsForm.onFormCreate;
 begin
   backgrounds:=[BG];
   layouts:=[main];
-  top.Height:=Screen.Height*2/5 ;
-  text.Width:=Screen.Width/3;
   tabs:=FSTabs.create(self, grid, 0);
   setItem(0, text);
   setItem(1, t0);

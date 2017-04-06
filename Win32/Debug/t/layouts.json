@@ -2,11 +2,21 @@
 	"GameForm": [
 		{
 			"Name": "Main1",
-			"Margins": [10, 10, 10, 16]
+			"Margins": [10, 10, 10, 16],
+			"Childrens": [
+				{
+					"Name": "Alex"
+				}
+			]
 		},
 		{
 			"Name": "Main2",
-			"Margins": [0, 10, 0, 25]
+			"Margins": [0, 10, 0, 25],
+			"Childrens": [
+				{
+					"Name": "Place"
+				}
+			]
 		},
 		{
 			"Name": "Main3",
@@ -15,6 +25,9 @@
 				{
 					"Name": "Btns",
 					"Margins": [0, 0, 0, 14.81]
+				},
+				{
+					"Name": "Home"
 				}
 			]
 		}
@@ -22,6 +35,7 @@
 	"SeazonForm": [
 		{
 			"Name": "Main",
+			"Bounds": [0, 0, 100, 100],
 			"Margins": [0, 0, 0, 0],
 			"TextSize": [40, 1.2, 2],
 			"TabsSize": [1.2, 2]
@@ -33,12 +47,18 @@
 			"Childrens": [
 				{
 					"Name": "Text",
+					"Bounds": [0, 0, 40, 80],
 					"Margins": [10, 20, 0, 0]
+				},
+				{
+					"Name": "Map",
+					"Margins": [0, 0, 0, 16]
 				}
 			]
 		},
 		{
 			"Name": "Main2",
+			"Bounds": [0, 0, 100, 100],
 			"Margins": [0, 0, 0, 0],
 			"TextSize": [40, 1.2, 2],
 			"TabsSize": [1.2, 2]
@@ -56,9 +76,11 @@
 			"Childrens":[
 				{
 					"Name": "Top",
+					"Bounds": [0, 0, 100, 40],
 					"Childrens": [
 						{
 							"Name": "Text",
+							"Bounds": [0, 0, 30, 25],
 							"Margins": [15, 15, 0, 0]
 						},
 						{

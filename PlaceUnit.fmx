@@ -54,11 +54,10 @@ object PlaceForm: TPlaceForm
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
-        object mapstr: TGlyph
-          Margins.Bottom = 100.000000000000000000
+        object Map: TGlyph
           Align = Client
           Size.Width = 807.000000000000000000
-          Size.Height = 620.000000000000000000
+          Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 3
           Images = DataForm.Images
