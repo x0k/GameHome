@@ -71,7 +71,8 @@ implementation
 uses
   System.Types, System.SysUtils,
   FMX.Dialogs, FMX.Graphics,
-  DataUnit, DesignManager, GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit, WarmingUnit;
+  DataUnit, DesignManager, GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit, WarmingUnit,
+  MatrixUnit, WindowsUnit, RoofUnit, RidgeUnit;
 
 var
   GameForm: TGTabForm;
@@ -93,6 +94,10 @@ begin
     7:result:=TMapForm.Create(7, GameForm);
     8:result:=TOmenForm.Create(8, GameForm);
     9:result:=TWarmingForm.Create(9, GameForm);
+    10:result:=TMatrixForm.Create(10, GameForm);
+    11:result:=TWindowsForm.Create(11, GameForm);
+    12:result:=TRoofForm.Create(12, GameForm);
+    13:result:=TRidgeForm.Create(13, GameForm);
     else result:=GameForm;
   end;
 end;
@@ -226,10 +231,10 @@ var
     for i:=0 to High(setts) do
       if findByName(setts[i].Name, layouts, ct) then
       begin
-        if Assigned(setts[i].TextSettings) then
-          (ct as ITextSettings).TextSettings.Assign(setts[i].TextSettings);
         if setts[i].pAlign then
           ct.Align:=setts[i].LayoutAlign;
+        if Assigned(setts[i].TextSettings) then
+          (ct as ITextSettings).TextSettings.Assign(setts[i].TextSettings);
         if Assigned(setts[i].LayouBounds) then
           ct.BoundsRect:=setts[i].LayouBounds.Rect;
         if Assigned(setts[i].LayoutMargins) then

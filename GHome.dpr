@@ -31,7 +31,11 @@ uses
   SoundManager in 'SoundManager.pas',
   FullScreenTabs in 'FullScreenTabs.pas',
   GameForms in 'GameForms.pas',
-  DesignManager in 'DesignManager.pas';
+  DesignManager in 'DesignManager.pas',
+  MatrixUnit in 'MatrixUnit.pas' {MatrixForm},
+  WindowsUnit in 'WindowsUnit.pas' {WindowsForm},
+  RoofUnit in 'RoofUnit.pas' {RoofForm},
+  RidgeUnit in 'RidgeUnit.pas' {RidgeForm};
 
 {$R *.res}
 
@@ -41,6 +45,10 @@ begin
   Application.Initialize;
   Application.CreateForm(TDataForm, DataForm);
   Application.CreateForm(TMainForm, MainForm);
+  Application.CreateForm(TMatrixForm, MatrixForm);
+  Application.CreateForm(TWindowsForm, WindowsForm);
+  Application.CreateForm(TRoofForm, RoofForm);
+  Application.CreateForm(TRidgeForm, RidgeForm);
   Application.RegisterFormFamily('MainForm', [TMainForm]);
   Application.Run;
 end.

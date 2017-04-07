@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, DataUnit, system.Math,
   FMX.Objects, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Layouts,
   FMX.ImgList, FMX.ani,
-  GameForms;
+  GameForms, FullScreenTabs;
 
 type
   TWalls = class(TGlyph)
@@ -44,11 +44,11 @@ type
     m3: TGlyph;
     T3: TText;
     Left: TLayout;
-    procedure L0MouseEnter(Sender: TObject);
   protected
     procedure onFormCreate; override;
     procedure addShow; override;
     procedure addWin; override;
+    procedure enter(tab:FSTab);
   end;
 
 implementation
@@ -56,10 +56,9 @@ implementation
 {$R *.fmx}
 
 uses
-  ResourcesManager, FullScreenTabs;
+  ResourcesManager;
 
 var
-  w:single;
   t:boolean;
   walls:TWalls;
   tabs:FSTabs;
@@ -174,20 +173,19 @@ begin
   end;
 end;
 
-procedure TOmenForm.L0MouseEnter(Sender: TObject);
+procedure TOmenForm.enter(tab: FSTab);
 begin
   if not t then
-    setText(TFmxObject(sender).Tag+1);
+    setText(tab.txt.Tag-1);
 end;
 
 procedure TOmenForm.onFormCreate;
-var
-  i:byte;
 begin
   backgrounds:=[BG];
   layouts:=[main];
   Walls:=TWalls.create(self, left);
   tabs:=FSTabs.create(self, grid, 0);
+  tabs.afterEnter:=enter;
 end;
 
 procedure TOmenForm.addShow;

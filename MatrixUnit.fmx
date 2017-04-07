@@ -1,0 +1,188 @@
+object MatrixForm: TMatrixForm
+  Left = 0
+  Top = 0
+  Caption = 'MatrixForm'
+  ClientHeight = 720
+  ClientWidth = 1280
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  FullScreen = True
+  DesignerMasterStyle = 0
+  object tabs: TTabControl
+    Align = Client
+    Size.Width = 1280.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+    TabIndex = 0
+    TabOrder = 0
+    TabPosition = None
+    Sizes = (
+      1280s
+      720s)
+    object TabItem1: TTabItem
+      CustomIcon = <
+        item
+        end>
+      IsSelected = True
+      Size.Width = 8.000000000000000000
+      Size.Height = 8.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = ''
+      TabOrder = 0
+      Text = 'TabItem1'
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      object BG1: TGlyph
+        Align = Center
+        Size.Width = 1280.000000000000000000
+        Size.Height = 720.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 1
+        Images = DataForm.Backgrounds
+      end
+      object Main: TLayout
+        Align = Client
+        Size.Width = 1280.000000000000000000
+        Size.Height = 720.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object Left: TLayout
+          Align = Left
+          Size.Width = 599.000000000000000000
+          Size.Height = 720.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          object Img: TGlyph
+            Align = Client
+            Size.Width = 599.000000000000000000
+            Size.Height = 551.000000000000000000
+            Size.PlatformDefault = False
+            ImageIndex = 10
+            Images = DataForm.Images
+          end
+          object Text: TMemo
+            Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+            DataDetectorTypes = []
+            ReadOnly = True
+            StyledSettings = [Style, FontColor]
+            TextSettings.Font.Family = 'Default'
+            TextSettings.Font.Size = 30.000000000000000000
+            TextSettings.HorzAlign = Center
+            TextSettings.WordWrap = True
+            Align = Top
+            CanFocus = False
+            HitTest = False
+            Size.Width = 599.000000000000000000
+            Size.Height = 169.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'SMemo'
+            TabOrder = 1
+            Viewport.Width = 599.000000000000000000
+            Viewport.Height = 169.000000000000000000
+          end
+        end
+        object List: TListBox
+          Align = Client
+          Size.Width = 681.000000000000000000
+          Size.Height = 720.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'transparentlistboxstyle'
+          TabOrder = 1
+          OnDragOver = ListDragOver
+          OnDragDrop = ListDragDrop
+          OnMouseDown = ListMouseDown
+          OnMouseMove = ListMouseMove
+          OnMouseLeave = ListMouseLeave
+          ShowScrollBars = False
+          AllowDrag = True
+          DisableFocusEffect = True
+          DefaultItemStyles.ItemStyle = ''
+          DefaultItemStyles.GroupHeaderStyle = ''
+          DefaultItemStyles.GroupFooterStyle = ''
+          Viewport.Width = 681.000000000000000000
+          Viewport.Height = 720.000000000000000000
+          object ListBoxItem1: TListBoxItem
+            DragMode = dmAutomatic
+            TextSettings.Font.Family = 'Default'
+            TextSettings.Font.Size = 22.000000000000000000
+            TextSettings.WordWrap = True
+            StyledSettings = [Style, FontColor]
+            TabOrder = 0
+            Text = 'ListBoxItem1'
+          end
+          object ListBoxItem2: TListBoxItem
+            DragMode = dmAutomatic
+            TextSettings.Font.Family = 'Default'
+            TextSettings.Font.Size = 22.000000000000000000
+            TextSettings.WordWrap = True
+            StyledSettings = [Style, FontColor]
+            Position.Y = 19.000000000000000000
+            TabOrder = 1
+            Text = 'ListBoxItem2'
+          end
+          object ListBoxItem3: TListBoxItem
+            DragMode = dmAutomatic
+            TextSettings.Font.Family = 'Default'
+            TextSettings.Font.Size = 22.000000000000000000
+            TextSettings.WordWrap = True
+            StyledSettings = [Style, FontColor]
+            Position.Y = 38.000000000000000000
+            TabOrder = 2
+            Text = 'ListBoxItem3'
+          end
+          object ListBoxItem4: TListBoxItem
+            DragMode = dmAutomatic
+            TextSettings.Font.Family = 'Default'
+            TextSettings.Font.Size = 22.000000000000000000
+            TextSettings.WordWrap = True
+            StyledSettings = [Style, FontColor]
+            Position.Y = 57.000000000000000000
+            TabOrder = 3
+            Text = 'ListBoxItem4'
+          end
+          object ListBoxItem5: TListBoxItem
+            DragMode = dmAutomatic
+            TextSettings.Font.Family = 'Default'
+            TextSettings.Font.Size = 22.000000000000000000
+            TextSettings.WordWrap = True
+            StyledSettings = [Style, FontColor]
+            Position.Y = 76.000000000000000000
+            TabOrder = 4
+            Text = 'ListBoxItem5'
+          end
+          object ListBoxItem6: TListBoxItem
+            DragMode = dmAutomatic
+            TextSettings.Font.Family = 'Default'
+            TextSettings.Font.Size = 22.000000000000000000
+            TextSettings.WordWrap = True
+            StyledSettings = [Style, FontColor]
+            Position.Y = 95.000000000000000000
+            TabOrder = 5
+            Text = 'ListBoxItem6'
+          end
+          object ListBoxItem7: TListBoxItem
+            DragMode = dmAutomatic
+            TextSettings.Font.Family = 'Default'
+            TextSettings.Font.Size = 22.000000000000000000
+            TextSettings.WordWrap = True
+            StyledSettings = [Style, FontColor]
+            Position.Y = 114.000000000000000000
+            TabOrder = 6
+            Text = 'ListBoxItem7'
+          end
+          object ListBoxItem8: TListBoxItem
+            DragMode = dmAutomatic
+            TextSettings.Font.Family = 'Default'
+            TextSettings.Font.Size = 22.000000000000000000
+            TextSettings.WordWrap = True
+            StyledSettings = [Style, FontColor]
+            Position.Y = 133.000000000000000000
+            TabOrder = 7
+            Text = 'ListBoxItem8'
+          end
+        end
+      end
+    end
+  end
+end

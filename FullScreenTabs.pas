@@ -186,7 +186,7 @@ begin
   else
   begin
     shw:=id;
-    Form.setText(tabs[id].text.Tag);
+    Form.setText(id);
     if txtAni then TAnimator.AnimateFloat(tabs[id].text, 'TextSettings.Font.Size', maxS);
 
     TAnimator.AnimateFloat(Main, 'Position.X', xZero-((maxW-W)*id/c));

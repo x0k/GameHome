@@ -234,5 +234,89 @@
 				}
 			]
 		}
+	],
+	"MatrixForm":[
+		{
+			"Name": "Main",
+			"Margins": [5, 10, 5, 16],
+			"Childrens": [
+				{
+					"Name": "Left",
+					"Bounds": [0, 0, 30, 74],
+					"Margins": [0, 0, 5, 0],
+					"Childrens":[
+						{
+							"Name": "Text",
+							"Font": {
+								"Name": "Tkachenko Sketch 4F",
+								"Size": 30,
+								"HorzAlign": 0
+							}
+						},
+						{
+							"Name": "Img"
+						}
+					]
+				},
+				{
+					"Name": "List",
+					"TextSize": [22]
+				}
+			]
+		}
+	],
+	"WindowsForm": [
+		{
+			"Name": "Main",
+			"Margins": [10, 10, 10, 16],
+			"Childrens": [
+				{
+					"Name": "Home",
+					"Bounds": [0, 0, 80, 40]
+				},
+				{
+					"Name": "Grid",
+					"Margins": [0, 10, 0, 0],
+					"TextSize": [40, 1.1, 1.6],
+					"TabsSize": [1.1, 1.6]	
+				}
+			] 
+		}
+	],
+	"RoofForm": [
+		{
+			"Name": "Main",
+			"Childrens":[
+				{
+					"Name": "Home",
+					"Bounds": [0, 0, 80, 40],
+					"Margins": [10, 10, 10, 10]
+				},
+				{
+					"Name": "Grid",
+					"TextSize": [40, 1.2, 1.5],
+					"TabsSize": [1.2, 1.5]	
+				}
+			]
+		}
+	],
+	"RidgeForm":[
+		{
+			"Name": "Main",
+			"Margins": [10, 10, 10, 16],
+			"Childrens":[
+				{
+					"Name": "Home",
+					"Bounds": [0, 0, 80, 40],
+					"Margins": [0, 0, 0, 10]
+				},
+				{
+					"Name": "Grid",
+					"TextSize": [40, 1, 1.2],
+					"TabsSize": [1, 1.2]	
+				}
+			]
+		}
+
 	]
 }

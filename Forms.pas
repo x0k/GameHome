@@ -23,6 +23,7 @@ type
   public
     procedure setText(id: byte); overload;
     procedure setTabText(id: byte);
+    function getItem(id: byte): string;
     procedure setItem(id: byte; text: TText); overload;
     procedure setItem(id: byte; memo: TMemo); overload;
 
@@ -98,6 +99,11 @@ begin
   setCapt(c);
   setLogo(l);
   setTabText(t);
+end;
+
+function TBarForm.getItem(id: Byte): string;
+begin
+  result:=TM.Forms[name].Items[id];
 end;
 
 procedure TBarForm.setItem(id: byte; text:TText);
