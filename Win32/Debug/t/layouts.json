@@ -1,4 +1,4 @@
-﻿{
+{
 	"GameForm": [
 		{
 			"Name": "Main1",
@@ -312,7 +312,7 @@
 				},
 				{
 					"Name": "Grid",
-					"TextSize": [40, 1, 1.2],
+					"TextSize": [40, 1, 1],
 					"TabsSize": [1, 1.2]	
 				}
 			]
