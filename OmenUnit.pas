@@ -56,12 +56,13 @@ implementation
 {$R *.fmx}
 
 uses
-  ResourcesManager;
+  ResourcesManager, FullScreenTabs;
 
 var
   w:single;
   t:boolean;
   walls:TWalls;
+  tabs:FSTabs;
 
 constructor TWalls.create(own:TComponent; p:TFmxObject);
 var
@@ -185,21 +186,13 @@ var
 begin
   backgrounds:=[BG];
   layouts:=[main];
-  top.Height:=Screen.Height*2/3;
-  text.Margins.Right:=Screen.Width*(5/32);
-  text.Margins.Top:=Screen.Width*(5/36);
-  left.Margins.Right:=Screen.Width*(5/36);
-  left.Margins.Left:=Screen.Width*(5/32);
-  text.Width:=Screen.Width/2-(20+text.Margins.Right);
   Walls:=TWalls.create(self, left);
-  w:=Screen.Width/6;
-  Grid.Width:=w*4;
-  for i:=0 to 3 do
-    (Grid.Children[i] as TLayout).Width:=w;
+  tabs:=FSTabs.create(self, grid, 0);
 end;
 
 procedure TOmenForm.addShow;
 begin
+  tabs.setSize(false, true);
   setItem(0, Text);
   walls.upPositions(min(m0.Height, m0.Width));
   t:=false;

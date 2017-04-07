@@ -70,7 +70,7 @@ implementation
 
 uses
   System.Types, System.SysUtils,
-  FMX.Dialogs,
+  FMX.Dialogs, FMX.Graphics,
   DataUnit, DesignManager, GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit, WarmingUnit;
 
 var
@@ -199,7 +199,6 @@ end;
 procedure TGForm.afterFormCreate;
 var
   i:byte;
-  w, h: single;
 
   function findByName(const name: string; const arr: TArray<TFmxObject>; var c: TControl):boolean;
   var
@@ -227,12 +226,15 @@ var
     for i:=0 to High(setts) do
       if findByName(setts[i].Name, layouts, ct) then
       begin
-        if setts[i].pBounds then
-          ct.SetBounds(setts[i].LayouBounds[0]*w, setts[i].LayouBounds[1]*h, setts[i].LayouBounds[2]*w, setts[i].LayouBounds[3]*h);
-        if setts[i].pMargins then ct.Margins.Assign(TBounds.Create(
-          TRectF.Create(setts[i].LayoutMargins[0]*w, setts[i].LayoutMargins[1]*h, setts[i].LayoutMargins[2]*w, setts[i].LayoutMargins[3]*h)
-        ));
-        if setts[i].pChildrens and (ct.ChildrenCount>0) then
+        if Assigned(setts[i].TextSettings) then
+          (ct as ITextSettings).TextSettings.Assign(setts[i].TextSettings);
+        if setts[i].pAlign then
+          ct.Align:=setts[i].LayoutAlign;
+        if Assigned(setts[i].LayouBounds) then
+          ct.BoundsRect:=setts[i].LayouBounds.Rect;
+        if Assigned(setts[i].LayoutMargins) then
+          ct.Margins:=setts[i].LayoutMargins;
+        if setts[i].pClilds and (ct.ChildrenCount>0) then
           setSz(ct.Children.ToArray, setts[i].Childs);
       end;
   end;
@@ -243,8 +245,6 @@ begin
       IM.setSize(backgrounds[i], screen.Size);
   if length(layouts)>0 then
   begin
-    w:=Screen.Width/100;
-    h:=Screen.Height/100;
     setSz(TArray<TFmxObject>(layouts), DM.Designs[name]);
     for i:=0 to High(layouts) do
       layouts[i].Opacity:=0;

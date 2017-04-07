@@ -41,7 +41,6 @@ procedure TTaskForm.onFormCreate;
 begin
   backgrounds:=[BG];
   layouts:=[main];
-  img.Width:=(Screen.Height-300)/597*457;
   setItem(1, Task);
   setItem(2, Answer);
   setItem(3, text);

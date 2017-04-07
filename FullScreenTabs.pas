@@ -32,7 +32,6 @@ type
     xZero: single;
     widths:TArray<single>;
     sizes:TArray<single>;
-    margins:TArray<single>;
 
     winId: byte;
     txtAni: boolean;
@@ -86,6 +85,7 @@ end;
 constructor FSTabs.create(fm: TGForm; m: TLayout; wId: byte);
 var
   f: TFmxObject;
+  b: TBounds;
 begin
   form:=fm;
   main:=m;
@@ -95,9 +95,11 @@ begin
       tabs.add(FSTab.create(f as TLayout));
   shw:=-1;
   winId:=wId;
-  sizes:=DM.getFormLayout(fm.Name, main.Name).Size;
-  widths:=DM.getFormLayout(fm.Name, main.Name).Width;
-  margins:=DM.getFormLayout(fm.Name, main.Name).LayoutMargins;
+  sizes:=DM.getFormLayout(fm.Name, main.Name).TextSize;
+  widths:=DM.getFormLayout(fm.Name, main.Name).TabWidth;
+  b:=DM.getFormLayout(form.Name, main.Name).LayoutMargins;
+  if assigned(b) then xZero:=b.Left
+    else xZero:=0;
 end;
 
 function FSTabs.W;
@@ -148,12 +150,8 @@ end;
 procedure FSTabs.setSize(img, txt: Boolean);
 var
   i, c: byte;
-  w: single;
 begin
   c:=tabs.Count;
-  xZero:=0;
-  w:=Screen.Width/100;
-  xZero:=margins[0]*w;
   if tabs.Count>0 then
   begin
     for i:=0 to tabs.Count-1 do
@@ -195,7 +193,7 @@ begin
     TAnimator.AnimateFloat(tabs[id].layout, 'width', maxW);
 
     if Assigned(afterClick) then afterClick(tabs[id])
-      else if tabs[id].text.Tag=winId then form.win;
+      else if id=winId then form.win;
   end;
 end;
 

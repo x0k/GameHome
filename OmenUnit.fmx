@@ -62,9 +62,8 @@ object OmenForm: TOmenForm
       end
     end
     object Grid: TLayout
-      Align = HorzCenter
+      Align = Client
       HitTest = True
-      Position.Y = 400.000000000000000000
       Size.Width = 1280.000000000000000000
       Size.Height = 320.000000000000000000
       Size.PlatformDefault = False
@@ -80,10 +79,10 @@ object OmenForm: TOmenForm
         OnMouseEnter = L0MouseEnter
         object m0: TGlyph
           Tag = 1
-          Margins.Left = 60.000000000000000000
-          Margins.Right = 60.000000000000000000
+          Margins.Left = 20.000000000000000000
+          Margins.Right = 20.000000000000000000
           Align = Client
-          Size.Width = 92.000000000000000000
+          Size.Width = 172.000000000000000000
           Size.Height = 270.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 31
@@ -115,10 +114,10 @@ object OmenForm: TOmenForm
         OnMouseEnter = L0MouseEnter
         object m1: TGlyph
           Tag = 2
-          Margins.Left = 60.000000000000000000
-          Margins.Right = 60.000000000000000000
+          Margins.Left = 20.000000000000000000
+          Margins.Right = 20.000000000000000000
           Align = Client
-          Size.Width = 92.000000000000000000
+          Size.Width = 172.000000000000000000
           Size.Height = 270.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 32
@@ -150,10 +149,10 @@ object OmenForm: TOmenForm
         OnMouseEnter = L0MouseEnter
         object m2: TGlyph
           Tag = 3
-          Margins.Left = 60.000000000000000000
-          Margins.Right = 60.000000000000000000
+          Margins.Left = 20.000000000000000000
+          Margins.Right = 20.000000000000000000
           Align = Client
-          Size.Width = 92.000000000000000000
+          Size.Width = 172.000000000000000000
           Size.Height = 270.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 33
@@ -185,10 +184,10 @@ object OmenForm: TOmenForm
         OnMouseEnter = L0MouseEnter
         object m3: TGlyph
           Tag = 4
-          Margins.Left = 60.000000000000000000
-          Margins.Right = 60.000000000000000000
+          Margins.Left = 20.000000000000000000
+          Margins.Right = 20.000000000000000000
           Align = Client
-          Size.Width = 92.000000000000000000
+          Size.Width = 172.000000000000000000
           Size.Height = 270.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 34

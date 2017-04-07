@@ -80,6 +80,7 @@ object TaskForm: TTaskForm
           Size.Height = 128.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'VarText'
+          TextSettings.Font.Family = 'Default'
           TextSettings.Font.Size = 50.000000000000000000
           TextSettings.FontColor = claWhite
           TextSettings.HorzAlign = Center

@@ -3,6 +3,7 @@ unit DesignManager;
 interface
 
 uses
+  FMX.Graphics, FMX.Types,
   System.JSON, System.Generics.Collections,
   ResourcesManager;
 
@@ -14,30 +15,30 @@ type
     n: string;
     TxtSize: TArray<single>;
     TbsSize: TArray<single>;
-    Bounds: TArray<single>;
-    Margins: TArray<single>;
+    hasAlign: boolean;
+    Align: TAlignLayout;
+    Font: TTextSettings;
+    Bounds: TBounds;
+    Margins: TBounds;
+    hasChilds: boolean;
     Childrens: TArray<TFormLayout>;
-
-    function hasSize: boolean;
-    function hasWidth: boolean;
-    function hasBounds: boolean;
-    function hasMargins: boolean;
-    function hasChildrens: boolean;
 
     procedure fillLayout(const v:TJSONValue; var item: TFormLayout);
     procedure fillSingl(const v:TJSONValue; var item: single);
     procedure fillArr<T>(const j:TJSONArray; const f: fillProc<T>;var m: TArray<T>);
+
+    function fontFromJSON(const v:TJSONObject): TTextSettings;
+    function boundsFromJSON(const v:TJSONArray): TBounds;
   public
     property Name: string read n;
-    property pSize: boolean read hasSize;
-    property Size:TArray<single> read txtSize;
-    property pWidth: boolean read hasWidth;
-    property Width:TArray<single> read tbsSize;
-    property pBounds: boolean read hasBounds;
-    property LayouBounds:TArray<single> read Bounds;
-    property pMargins: boolean read hasMargins;
-    property LayoutMargins:TArray<single> read margins;
-    property pChildrens: boolean read hasChildrens;
+    property TextSize:TArray<single> read txtSize;
+    property TabWidth:TArray<single> read tbsSize;
+    property TextSettings: TTextSettings read Font;
+    property pAlign: boolean read hasAlign;
+    property LayoutAlign: TAlignLayout read Align;
+    property LayouBounds:TBounds read Bounds;
+    property LayoutMargins:TBounds read margins;
+    property pClilds: boolean read hasChilds;
     property Childs:TArray<TFormLayout> read Childrens;
 
     constructor create(j:TJSONObject);
@@ -60,31 +61,46 @@ type
 
 implementation
 
+uses
+  System.UIConsts, System.Types, System.Math,
+  FMX.Forms;
+
   {TFormText}
 
-function TFormLayout.hasSize;
+function TFormLayout.fontFromJSON(const v: TJSONObject): TTextSettings;
+var
+  val: TJSONValue;
 begin
-  result:=length(TbsSize)>0;
+  result:=TTextSettings.Create(nil);
+  if v.TryGetValue('Size', val) then
+    result.Font.Size:=TJSONNumber(val).AsDouble;
+  if v.TryGetValue('Name', val) then
+    result.Font.Family:=TJSONString(val).Value;
+  if v.TryGetValue('Color', val) then
+    result.FontColor:=StringToAlphaColor(TJSONSTring(val).Value);
+  if v.TryGetValue('HorzAlign', val) then
+    result.HorzAlign:=TTextAlign(TJSONNumber(val).AsInt);
+  if v.TryGetValue('VertAlign', val) then
+    result.VertAlign:=TTextAlign(TJSONNumber(val).AsInt);
 end;
 
-function TFormLayout.hasWidth;
+function TFormLayout.boundsFromJSON(const v: TJSONArray): TBounds;
+var
+  w, h: single;
+  r: TRectF;
+  i: byte;
 begin
-  result:=length(TxtSize)>0;
-end;
-
-function TFormLayout.hasBounds;
-begin
-  result:=length(Bounds)=4;
-end;
-
-function TFormLayout.hasMargins;
-begin
-  result:=length(Margins)=4;
-end;
-
-function TFormLayout.hasChildrens;
-begin
-  result:=length(Childrens)>0;
+  w:=Screen.Width/100;
+  h:=Screen.Height/100;
+  for i:=0 to v.Count-1 do
+  case i of
+    0:r.Left:=TJSONNumber(v.Items[0]).AsDouble*w;
+    1:r.Top:=TJSONNumber(v.Items[1]).AsDouble*h;
+    2:r.Right:=TJSONNumber(v.Items[2]).AsDouble*w;
+    3:r.Bottom:=TJSONNumber(v.Items[3]).AsDouble*h;
+    else break;
+  end;
+  result:=TBounds.Create(r);
 end;
 
 procedure TFormLayout.fillLayout(const v: TJSONValue; var item: TFormLayout);
@@ -112,6 +128,8 @@ end;
 constructor TFormLayout.create(j: TJSONObject);
 var
   val: TJSONArray;
+  obj: TJSONObject;
+  num: TJSONNumber;
   s: TJSONString;
 begin
   if j.TryGetValue('Name', s) then n:=s.Value
@@ -120,12 +138,22 @@ begin
     fillArr<single>(val, fillSingl, TxtSize);
   if j.TryGetValue('TabsSize', val) then
     fillArr<single>(val, fillSingl, TbsSize);
+  if j.TryGetValue('Font', obj) then
+    Font:=fontFromJSON(obj);
+  if j.TryGetValue('Align', num) then
+  begin
+    Align:=TAlignLayout(num.AsInt);
+    hasAlign:=true;
+  end;
   if j.TryGetValue('Bounds', val) then
-    fillArr<single>(val, fillSingl, bounds);
+    bounds:=boundsFromJSON(val);
   if j.TryGetValue('Margins', val) then
-    fillArr<single>(val, fillSingl, margins);
+    margins:=boundsFromJSON(val);
   if j.TryGetValue('Childrens', val) and (Val.Count>0) then
+  begin
     fillArr<TFormLayout>(val, fillLayout, childrens);
+    hasChilds:=true;
+  end;
 end;
 
   {TDesignManager}
@@ -156,7 +184,7 @@ function TDesignManager.getFormLayout(const form: string; const name: string): T
           result:=m[i];
           exit;
         end;
-        if m[i].pChildrens then
+        if m[i].pClilds then
           result:=findName(m[i].Childrens);
         if Assigned(result) then
           exit;

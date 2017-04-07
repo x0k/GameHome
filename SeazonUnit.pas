@@ -33,6 +33,7 @@ implementation
 {$R *.fmx}
 
 uses
+  FMX.Dialogs,
   FullScreenTabs;
 
 var
@@ -42,7 +43,7 @@ procedure TSeazonForm.onFormCreate;
 begin
   backgrounds:=[BG];
   layouts:=[Main];
-  Tabs:=FSTabs.create(self, main, 3);
+  Tabs:=FSTabs.create(self, main, 1);
   setItem(0, t0);
   setItem(1, t1);
   setItem(2, t2);
