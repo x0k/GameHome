@@ -50,10 +50,9 @@ end;
 
 function findTexts(t:eTexts):boolean;
 begin
-  if TFile.Exists(pathTexts(t)) then
-    result:=true
-  else
-    raise Exception.Create('Текст не найден: '+sLineBreak+pathTexts(t));
+  result:=TFile.Exists(pathTexts(t));
+  if not result then
+    raise Exception.Create('Не найден текст : '+sLineBreak+pathTexts(t));
 end;
 
 function getTexts(t:eTexts):string;

@@ -24,7 +24,9 @@ type
 
 implementation
 
-uses System.Math, FMX.Graphics, FMX.MultiResBitmap, FMX.Controls;
+uses
+  System.Math, System.Classes,
+  FMX.Graphics, FMX.MultiResBitmap, FMX.Controls;
 
   {TImageManager}
 

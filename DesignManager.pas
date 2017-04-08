@@ -18,6 +18,8 @@ type
     hasAlign: boolean;
     Align: TAlignLayout;
     Font: TTextSettings;
+    hasTxt: boolean;
+    Txt: string;
     Bounds: TBounds;
     Margins: TBounds;
     hasChilds: boolean;
@@ -34,6 +36,8 @@ type
     property TextSize:TArray<single> read txtSize;
     property TabWidth:TArray<single> read tbsSize;
     property TextSettings: TTextSettings read Font;
+    property pText: boolean read hasTxt;
+    property Text: string read Txt;
     property pAlign: boolean read hasAlign;
     property LayoutAlign: TAlignLayout read Align;
     property LayouBounds:TBounds read Bounds;
@@ -62,8 +66,8 @@ type
 implementation
 
 uses
-  System.UIConsts, System.Types, System.Math,
-  FMX.Forms;
+  System.UIConsts, System.Types, System.Math, System.SysUtils,
+  FMX.Forms, FMX.Dialogs;
 
   {TFormText}
 
@@ -130,6 +134,7 @@ var
   val: TJSONArray;
   obj: TJSONObject;
   num: TJSONNumber;
+  str: TJSONString;
   s: TJSONString;
 begin
   if j.TryGetValue('Name', s) then n:=s.Value
@@ -144,6 +149,11 @@ begin
   begin
     Align:=TAlignLayout(num.AsInt);
     hasAlign:=true;
+  end;
+  if j.TryGetValue('Text', str) then
+  begin
+    Txt:=str.Value;
+    hasTxt:=true;
   end;
   if j.TryGetValue('Bounds', val) then
     bounds:=boundsFromJSON(val);
@@ -199,23 +209,28 @@ end;
 constructor TDesignManager.Create;
 var
   i, c: byte;
-  p:TJSONPair;
-  json:TJSONObject;
+  p: TJSONPair;
+  json: TJSONObject;
   m: TArray<TFormLayout>;
 begin
   layouts:=TDictionary<string, TArray<TFormLayout>>.Create;
-  if findTexts(tLayouts) then
-  begin
-    json:=TJSONObject(TJSONObject.ParseJSONValue(getTexts(tLayouts)));
-    for p in json do
+  try
+    if findTexts(tLayouts) then
     begin
-      c:=TJSONArray(p.JsonValue).Count;
-      if c=0 then continue;
-      setlength(m, c);
-      for i:=0 to c-1 do
-        m[i]:=TFormLayout.create(TJSONArray(p.JsonValue).Items[i] as TJsonObject);
-      layouts.Add(p.JsonString.Value, copy(m, 0, c));
+      json:=TJSONObject(TJSONObject.ParseJSONValue(getTexts(tLayouts)));
+      for p in json do
+      begin
+        c:=TJSONArray(p.JsonValue).Count;
+        if c=0 then continue;
+        setlength(m, c);
+        for i:=0 to c-1 do
+          m[i]:=TFormLayout.create(TJSONArray(p.JsonValue).Items[i] as TJsonObject);
+        layouts.Add(p.JsonString.Value, copy(m, 0, c));
+      end;
     end;
+  except
+    on E: Exception do
+      ShowMessage('Ошибка при чтении шаблона форм: '+E.Message);
   end;
 end;
 

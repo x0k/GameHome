@@ -47,11 +47,10 @@ begin
   backgrounds:=[BG];
   layouts:=[main];
   tabs:=FSTabs.create(self, grid, 0);
-  setItem(0, text);
-  setItem(1, t0);
-  setItem(2, t1);
-  setItem(3, t2);
-  setItem(4, t3);
+  setItem(0, t0);
+  setItem(1, t1);
+  setItem(2, t2);
+  setItem(3, t3);
   tabs.setSize(true, true);
   tabs.afterClick:=isWin;
   a:=false;

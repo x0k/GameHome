@@ -35,7 +35,8 @@ uses
   MatrixUnit in 'MatrixUnit.pas' {MatrixForm},
   WindowsUnit in 'WindowsUnit.pas' {WindowsForm},
   RoofUnit in 'RoofUnit.pas' {RoofForm},
-  RidgeUnit in 'RidgeUnit.pas' {RidgeForm};
+  RidgeUnit in 'RidgeUnit.pas' {RidgeForm},
+  MovingUnit in 'MovingUnit.pas' {MovingForm};
 
 {$R *.res}
 
@@ -49,6 +50,7 @@ begin
   Application.CreateForm(TWindowsForm, WindowsForm);
   Application.CreateForm(TRoofForm, RoofForm);
   Application.CreateForm(TRidgeForm, RidgeForm);
+  Application.CreateForm(TMovingForm, MovingForm);
   Application.RegisterFormFamily('MainForm', [TMainForm]);
   Application.Run;
 end.

@@ -72,7 +72,7 @@ uses
   System.Types, System.SysUtils,
   FMX.Dialogs, FMX.Graphics,
   DataUnit, DesignManager, GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit, WarmingUnit,
-  MatrixUnit, WindowsUnit, RoofUnit, RidgeUnit;
+  MatrixUnit, WindowsUnit, RoofUnit, RidgeUnit, MovingUnit;
 
 var
   GameForm: TGTabForm;
@@ -98,6 +98,7 @@ begin
     11:result:=TWindowsForm.Create(11, GameForm);
     12:result:=TRoofForm.Create(12, GameForm);
     13:result:=TRidgeForm.Create(13, GameForm);
+    14:result:=TMovingForm.Create(14, GameForm);
     else result:=GameForm;
   end;
 end;
@@ -233,6 +234,13 @@ var
       begin
         if setts[i].pAlign then
           ct.Align:=setts[i].LayoutAlign;
+        if setts[i].pText then
+        begin
+          if ct is TText then
+            (ct as TText).Text:=setts[i].Text
+          else if ct is TMemo then
+            (ct as TMemo).Text:=setts[i].Text;
+        end;
         if Assigned(setts[i].TextSettings) then
           (ct as ITextSettings).TextSettings.Assign(setts[i].TextSettings);
         if Assigned(setts[i].LayouBounds) then
@@ -298,6 +306,7 @@ begin
     showForm(level+1);
   if state<2 then
     state:=0;
+  if level=LVL_COUNT then showForm(0);
   Destroy;
 end;
 

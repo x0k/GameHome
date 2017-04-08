@@ -56,11 +56,10 @@ begin
   gTabs:=tabs;
   gTab:=1;
   fTabs:=FSTabs.create(self, main2, 2);
-  setItem(0, Text);
-  setItem(1, Text0);
-  setItem(2, Text1);
-  setItem(3, Text2);
-  setItem(4, Text3);
+  setItem(0, Text0);
+  setItem(1, Text1);
+  setItem(2, Text2);
+  setItem(3, Text3);
 end;
 
 procedure TPlaceForm.addShow;

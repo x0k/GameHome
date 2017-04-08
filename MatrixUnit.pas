@@ -110,7 +110,7 @@ begin
 
   l:=TList<TPair<Byte, String>>.Create;
   for i:=0 to 7 do
-     l.Add(TPair<byte, string>.Create(i, getItem(i+1)));
+     l.Add(TPair<byte, string>.Create(i, getItem(i)));
   for i:=0 to 7 do
   begin
     id:=random(l.Count);
