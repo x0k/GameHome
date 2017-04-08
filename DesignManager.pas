@@ -13,6 +13,7 @@ type
   TFormLayout = class
   protected
     n: string;
+    Ani: boolean;
     TxtSize: TArray<single>;
     TbsSize: TArray<single>;
     hasAlign: boolean;
@@ -33,6 +34,7 @@ type
     function boundsFromJSON(const v:TJSONArray): TBounds;
   public
     property Name: string read n;
+    property Animation: boolean read ani;
     property TextSize:TArray<single> read txtSize;
     property TabWidth:TArray<single> read tbsSize;
     property TextSettings: TTextSettings read Font;
@@ -45,6 +47,7 @@ type
     property pClilds: boolean read hasChilds;
     property Childs:TArray<TFormLayout> read Childrens;
 
+    destructor destroy; reintroduce;
     constructor create(j:TJSONObject);
   end;
 
@@ -60,6 +63,7 @@ type
 
     property Designs[index: string]: TArray<TFormLayout> read getDesign;
 
+    destructor destroy; reintroduce;
     constructor create;
   end;
 
@@ -129,16 +133,30 @@ begin
   end;
 end;
 
+destructor TFormLayout.destroy;
+var
+  l: TFormLayout;
+begin
+  inherited;
+  Font.Free;
+  Bounds.Free;
+  Margins.Free;
+  for l in Childrens do
+    l.Free;
+end;
+
 constructor TFormLayout.create(j: TJSONObject);
 var
   val: TJSONArray;
   obj: TJSONObject;
   num: TJSONNumber;
   str: TJSONString;
-  s: TJSONString;
+  bool: TJSONBool;
 begin
-  if j.TryGetValue('Name', s) then n:=s.Value
+  if j.TryGetValue('Name', str) then n:=str.Value
     else exit;
+  if j.TryGetValue('Animation', bool) then Ani:=bool.AsBoolean
+    else Ani:=true;
   if j.TryGetValue('TextSize', val) then
     fillArr<single>(val, fillSingl, TxtSize);
   if j.TryGetValue('TabsSize', val) then
@@ -204,6 +222,17 @@ function TDesignManager.getFormLayout(const form: string; const name: string): T
 
 begin
   result:=findName(getDesign(form));
+end;
+
+destructor TDesignManager.destroy;
+var
+  p: TPair<string, TArray<TFormLayout>>;
+  l: TFormLayout;
+begin
+  inherited;
+  for p in layouts do
+    for l in p.Value do
+      l.Free;
 end;
 
 constructor TDesignManager.Create;

@@ -17,6 +17,7 @@ type
     Other: TImageList;
     Images: TImageList;
     fgApplicationEvents1: TfgApplicationEvents;
+    winMuseum: TImageList;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure fgApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
@@ -66,6 +67,13 @@ begin
   RemoveFontResource(PChar(ResourcesManager.getPath(pTexts)+'font.ttf'));
   SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
   GD.LoadSavedRamp;
+  freeForms;
+  Bar.Free;
+  DM.Free;
+  IM.Free;
+  GD.Free;
+  SM.Free;
+  TM.Free;
 end;
 
 procedure TDataForm.fgApplicationEvents1Idle(Sender: TObject;

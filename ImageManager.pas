@@ -10,7 +10,7 @@ uses
 type
   TImageManager = class
   private
-    loaded:TList<eResource>;
+    loaded: TList<eResource>;
   public
     procedure add(r: eResource);
     procedure remove(r: eResource);
@@ -19,14 +19,15 @@ type
     procedure setSize(img:TGlyph; s:TControlSize); overload;
     procedure setSize(img:TGlyph; s:TSizeF); overload;
 
+    destructor Destroy; override;
     constructor Create();
   end;
 
 implementation
 
 uses
-  System.Math, System.Classes,
-  FMX.Graphics, FMX.MultiResBitmap, FMX.Controls;
+  System.Math, System.Classes, System.SysUtils,
+  FMX.Graphics, FMX.MultiResBitmap, FMX.Controls, FMX.Dialogs;
 
   {TImageManager}
 
@@ -53,17 +54,22 @@ begin
   list:=getImgList(r);
   if not loaded.Contains(r) then
   try
-    Res:=TStyleBook.Create(nil);
-    Res.LoadFromFile(pathResource(r));
-    for i:=0 to Res.Style.ChildrenCount-1 do
-    begin
-      Sor:=List.Source.AddOrSet(Res.Style.Children.Items[i].StyleName, [],[]);
-      Sor.MultiResBitmap.SizeKind:=TSizeKind.Source;
-      LoadPicture(Sor, 1, (Res.Style.Children.Items[i] as TBitmapObject).Bitmap);
+    try
+      Res:=TStyleBook.Create(nil);
+      Res.LoadFromFile(pathResource(r));
+      for i:=0 to Res.Style.ChildrenCount-1 do
+      begin
+        Sor:=List.Source.AddOrSet(Res.Style.Children.Items[i].StyleName, [],[]);
+        Sor.MultiResBitmap.SizeKind:=TSizeKind.Source;
+        LoadPicture(Sor, 1, (Res.Style.Children.Items[i] as TBitmapObject).Bitmap);
+      end;
+    except
+      on E: exception do
+        showMessage(E.Message);
     end;
   finally
     loaded.Add(r);
-    Res.Destroy;
+    Res.Free;
   end;
 end;
 
@@ -108,6 +114,12 @@ begin
   if loaded.Count>0 then
   for i:=0 to loaded.Count-1 do
     remove(loaded[i]);
+end;
+
+destructor TImageManager.Destroy;
+begin
+  inherited;
+  loaded.Free;
 end;
 
 // онструктор (загрузка изображений из .style в TImageList)

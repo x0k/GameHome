@@ -48,6 +48,7 @@ type
   public
     property Forms[index: string]:TFormText read getText;
 
+    destructor Destroy; override;
     constructor create;
   end;
 
@@ -148,6 +149,12 @@ begin
     lText:=texts[name];
   end;
   result:=lText;
+end;
+
+destructor TTextManager.Destroy;
+begin
+  inherited;
+  texts.Free;
 end;
 
 constructor TTextManager.Create;

@@ -52,7 +52,7 @@ implementation
 
 uses
   FMX.Dialogs,
-  DataUnit, SettingsUnit, MuseumUnit, AboutUnit, Forms, GameForms, TextManager;
+  DataUnit, SettingsUnit, MuseumUnit, AboutUnit, Forms, GameForms, TextManager, ResourcesManager;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 var
@@ -90,7 +90,8 @@ end;
 
 procedure TMainForm.MuseumBtnClick(Sender: TObject);
 begin
-  if not Assigned(MuseumForm) then MuseumForm:=TMuseumForm.Create(self);
+  IM.add(rMuseum);
+  if not Assigned(MuseumForm) then MuseumForm:=TMuseumForm.Create(self, rMuseum);
   MuseumForm.Show;
 end;
 

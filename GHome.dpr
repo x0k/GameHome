@@ -43,6 +43,11 @@ uses
 begin
   if AddFontResource('t/font.ttf')>0 then SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0)
     else Raise Exception.create('Ошибка при загрузке шрифтов');
+
+  {$IFDEF DEBUG}
+    ReportMemoryLeaksOnShutdown := True;
+  {$ENDIF}
+
   Application.Initialize;
   Application.CreateForm(TDataForm, DataForm);
   Application.CreateForm(TMainForm, MainForm);

@@ -50,7 +50,7 @@ type
     procedure Next(Sender: TObject);
     procedure Back(Sender: TObject);
 
-    constructor Create(AOwner: TComponent); override;
+    constructor Create(AOwner: TComponent; r: eResource); reintroduce;
   end;
 
 implementation
@@ -245,18 +245,17 @@ begin
   Bar.dotsStat[id]:=0;
 end;
 
-constructor TMForm.Create(AOwner: TComponent);
+constructor TMForm.Create(AOwner: TComponent; r: eResource);
 var
   g,c:TGlyph;
   i:byte;
 begin
   inherited create(AOwner);
-  IM.add(rMuseum);
-  count:=getImgList(rMuseum).Destination.Count;
+  count:=getImgList(r).Destination.Count;
   if count>0 then
   begin
     G:=TGlyph.Create(self);
-    G.Images:=getImgList(rMuseum);
+    G.Images:=getImgList(r);
     G.Align:=TAlignLayout.Center;
     G.ImageIndex:=0;
     IM.setSize(G, Screen.Size);

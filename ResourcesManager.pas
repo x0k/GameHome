@@ -8,7 +8,7 @@ uses
 type
   ePath = (pTexts, pSounds, pResource);
 
-  eResource = (rImages, rSequences, rOther, rMuseum);
+  eResource = (rImages, rSequences, rOther, rMuseum, rWinMuseum);
 
   eSound = (sMain, sBackground, sClick, sAward, sWrong);
 
@@ -27,7 +27,9 @@ type
 
 implementation
 
-uses System.IOUtils, System.SysUtils, DataUnit;
+uses
+  FMX.Dialogs,
+  System.IOUtils, System.SysUtils, DataUnit;
 
 function getPath(p:ePath):string;
 begin
@@ -58,8 +60,13 @@ end;
 function getTexts(t:eTexts):string;
 begin
   result:='';
-  if findTexts(t) then
-    result:=TFile.ReadAllText(pathTexts(t), TEncoding.UTF8);
+  try
+    if findTexts(t) then
+      result:=TFile.ReadAllText(pathTexts(t), TEncoding.UTF8);
+  except
+    on E: exception do
+      showMessage(E.Message);
+  end;
 end;
 
 function pathResource(r:eResource):string;
@@ -69,6 +76,7 @@ begin
     rSequences: result:=TPath.Combine(getPath(pResource),'Sequences.style');
     rOther: result:=TPath.Combine(getPath(pResource),'Other.style');
     rMuseum: result:=TPath.Combine(getPath(pResource),'Museum.style');
+    rWinMuseum: result:=TPath.Combine(getPath(pResource),'winMuseum.style');
   end;
 end;
 
@@ -99,6 +107,7 @@ begin
     rSequences: result:=DataForm.Sequence;
     rOther: result:=DataForm.Other;
     rMuseum: result:=DataForm.Museum;
+    rWinMuseum: result:=DataForm.winMuseum;
   end;
 end;
 

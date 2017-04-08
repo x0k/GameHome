@@ -12,7 +12,7 @@ type
     fail: boolean;
     Vol:single;
     last:eSound;
-    mainStream,backgroundStream:HSTREAM;
+    mainStream,backgroundStream: HSTREAM;
     procedure setVol(v:single); overload;
     procedure setVol(v:byte); overload;
     procedure loadSound(s:eSound);

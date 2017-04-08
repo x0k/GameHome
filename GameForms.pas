@@ -64,6 +64,7 @@ type
   end;
 
   procedure initForms;
+  procedure freeForms;
   procedure showForm(id:byte);
 
 implementation
@@ -80,6 +81,11 @@ var
 procedure initForms;
 begin
   GameForm:=TGameForm.Create(0, nil);
+end;
+
+procedure freeForms;
+begin
+  GameForm.Free;
 end;
 
 function createForm(id:byte): TGForm;
