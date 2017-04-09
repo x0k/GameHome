@@ -27,6 +27,7 @@ type
     m3: TGlyph;
     T3: TText;
     Window: TGlyph;
+    procedure FormDestroy(Sender: TObject);
   protected
     procedure onFormCreate; override;
     procedure addShow; override;
@@ -57,11 +58,20 @@ begin
   backgrounds:=[BG];
   layouts:=[main];
   tabs:=FSTabs.create(self, grid, 3);
+  setItem(0, t0);
+  setItem(1, t1);
+  setItem(2, t2);
+  setItem(3, t3);
 end;
 
 procedure TWindowsForm.addShow;
 begin
   tabs.setSize(false, true);
+end;
+
+procedure TWindowsForm.FormDestroy(Sender: TObject);
+begin
+  tabs.Free;
 end;
 
 end.

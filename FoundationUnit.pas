@@ -27,6 +27,7 @@ type
     t3: TText;
     Home: TGlyph;
     Text: TText;
+    procedure FormDestroy(Sender: TObject);
   protected
     procedure onFormCreate; override;
     procedure enter(tab: FSTab);
@@ -55,6 +56,11 @@ begin
   setItem(2, t2);
   setItem(3, t3);
   Tabs.setSize(false, false);
+end;
+
+procedure TFoundationForm.FormDestroy(Sender: TObject);
+begin
+  tabs.Free;
 end;
 
 end.

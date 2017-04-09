@@ -25,6 +25,9 @@ type
 
 var
   DataForm: TDataForm;
+  {$IFDEF DEBUG}
+    Debug: TStrings;
+  {$ENDIF}
   Styles:TStyleBook;
   DM: TDesignManager;
   IM: TImageManager;
@@ -32,6 +35,12 @@ var
   SM: TSoundManager;
   GD: TGameData;
   Bar: TBar;
+
+{$IFDEF DEBUG}
+  procedure addD(const u, m: string); overload;
+  procedure addD(ct: TObject; const m:string); overload
+  procedure addD(ct: TFmxObject; const m: string); overload;
+{$ENDIF}
 
 implementation
 
@@ -48,16 +57,36 @@ var
   ld: boolean;
   t: string;
 
+{$IFDEF DEBUG}
+procedure addD(const u, m: string);
+begin
+  Debug.Add('Unit: '+u+' [Method: '+m+']');
+end;
+
+procedure addD(ct: TObject; const m:string);
+begin
+  Debug.Add('Unit: '+ct.UnitName+' {Class: '+ct.ClassName+'} [Method: '+m+']');
+end;
+
+procedure addD(ct: TFmxObject; const m: string);
+begin
+  Debug.Add('Unit: '+ct.UnitName+' {Class: '+ct.ClassName+'} (Name: '+ct.Name+') [Method: '+m+']')
+end;
+{$ENDIF}
+
 procedure TDataForm.DataModuleCreate(Sender: TObject);
 begin
+  {$IFDEF DEBUG}
+    Debug:=TStringList.Create;
+    addD(self, 'Create DataForm');
+  {$ENDIF}
   Bar:=TBar.create(self);
   Bar.setDots;
-
   DM:=TDesignManager.create;
   IM:=TImageManager.Create;
   GD:=TGameData.Create;
   SM:=TSoundManager.Create;
-  TM:=TTextManager.Create;
+  TM:=TTextManager.Create(name);
   t:=TM.Forms['MainForm'].Names[1];
   initForms;
 end;
@@ -74,6 +103,11 @@ begin
   GD.Free;
   SM.Free;
   TM.Free;
+  {$IFDEF DEBUG}
+    addD(self, 'Destroy');
+    Debug.SaveToFile('Debug.txt');
+    Debug.Free;
+  {$ENDIF}
 end;
 
 procedure TDataForm.fgApplicationEvents1Idle(Sender: TObject;
@@ -81,6 +115,9 @@ procedure TDataForm.fgApplicationEvents1Idle(Sender: TObject;
 begin
   if not ld then
   begin
+    {$IFDEF DEBUG}
+      addD(self, 'Initialization (load imgs)');
+    {$ENDIF}
     IM.add(rSequences);
     IM.add(rImages);
     IM.add(rOther);

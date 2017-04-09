@@ -27,7 +27,8 @@ implementation
 
 uses
   System.Math, System.Classes, System.SysUtils,
-  FMX.Graphics, FMX.MultiResBitmap, FMX.Controls, FMX.Dialogs;
+  FMX.Graphics, FMX.MultiResBitmap, FMX.Controls, FMX.Dialogs,
+  DataUnit;
 
   {TImageManager}
 
@@ -112,19 +113,25 @@ var
   i:byte;
 begin
   if loaded.Count>0 then
-  for i:=0 to loaded.Count-1 do
-    remove(loaded[i]);
+    for i:=0 to loaded.Count-1 do
+      remove(loaded[i]);
 end;
 
 destructor TImageManager.Destroy;
 begin
-  inherited;
+  {$IFDEF DEBUG}
+    addD(self, 'Destroy');
+  {$ENDIF}
   loaded.Free;
+  inherited;
 end;
 
 // онструктор (загрузка изображений из .style в TImageList)
 constructor TImageManager.Create();
 begin
+  {$IFDEF DEBUG}
+    addD(self, 'Create Image Manager');
+  {$ENDIF}
   loaded:=TList<eResource>.create;
 end;
 

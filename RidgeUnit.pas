@@ -29,6 +29,7 @@ type
     T4: TText;
     Home: TGlyph;
     roof: TGlyph;
+    procedure FormDestroy(Sender: TObject);
   protected
     procedure onFormCreate; override;
     procedure addShow; override;
@@ -65,6 +66,11 @@ procedure TRidgeForm.addWin;
 begin
   TAnimator.AnimateFloatWait(roof, 'opacity', 1);
   home.ImageIndex:=-1;
+end;
+
+procedure TRidgeForm.FormDestroy(Sender: TObject);
+begin
+  tabs.Free;
 end;
 
 end.

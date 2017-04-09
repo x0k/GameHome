@@ -12,6 +12,7 @@ object WarmingForm: TWarmingForm
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
   FullScreen = True
+  OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object Tabs: TTabControl
     Align = Client

@@ -80,16 +80,25 @@ var
 
 procedure initForms;
 begin
+  {$IFDEF DEBUG}
+    addD('GameForms', 'Initialization form');
+  {$ENDIF}
   GameForm:=TGameForm.Create(0, nil);
 end;
 
 procedure freeForms;
 begin
+  {$IFDEF DEBUG}
+    addD('GameForms', 'Free form');
+  {$ENDIF}
   GameForm.Free;
 end;
 
 function createForm(id:byte): TGForm;
 begin
+  {$IFDEF DEBUG}
+    addD('GameForms', 'Create form');
+  {$ENDIF}
   case id of
     1:result:=TSeazonForm.Create(1, GameForm);
     2:result:=TPlaceForm.Create(2, GameForm);
@@ -111,6 +120,9 @@ end;
 
 procedure showForm(id: byte);
 begin
+  {$IFDEF DEBUG}
+    addD('GameForms', 'Show form');
+  {$ENDIF}
   createForm(id).show;
 end;
 
@@ -118,6 +130,9 @@ end;
 
 constructor TGForm.Create(Lvl:byte; Own:TComponent);
 begin
+  {$IFDEF DEBUG}
+    addD(self, 'Creaate TGForm');
+  {$ENDIF}
   inherited Create(own);
   Level:=lvl;
 end;
@@ -150,6 +165,9 @@ procedure TGForm.gameExit;
 var
   i:byte;
 begin
+  {$IFDEF DEBUG}
+    addD(self, 'Game exit');
+  {$ENDIF}
   GameForm.Hide;
   GameForm.gTabs.TabIndex:=0;
   for i:=0 to LVL_COUNT do
@@ -166,8 +184,6 @@ end;
 
 procedure TGForm.firstShow;
 begin
-  //if Assigned(tbs) then tbs.TabIndex:=0;
-  //lLogo:=0;lCapt:=0;lDesc:=0;
 end;
 
 procedure TGForm.addWin;
@@ -268,7 +284,6 @@ begin
     for i:=0 to High(layouts) do
       layouts[i].Opacity:=0;
   end;
-
 end;
 
 procedure TGForm.setBarEvents;

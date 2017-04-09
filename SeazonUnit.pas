@@ -23,6 +23,7 @@ type
     t2: TText;
     t3: TText;
     BG: TGlyph;
+    procedure FormDestroy(Sender: TObject);
   protected
     procedure onFormCreate; override;
     procedure addShow; override;
@@ -53,6 +54,11 @@ end;
 procedure TSeazonForm.addShow;
 begin
   Tabs.setSize(true, true);
+end;
+
+procedure TSeazonForm.FormDestroy(Sender: TObject);
+begin
+  Tabs.Free;
 end;
 
 end.

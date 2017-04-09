@@ -36,6 +36,7 @@ type
     BG3: TGlyph;
     BG4: TGlyph;
     mox: TGlyph;
+    procedure FormDestroy(Sender: TObject);
   protected
     procedure onFormCreate; override;
     procedure addShow; override;
@@ -112,6 +113,12 @@ procedure TWarmingForm.addWin;
 begin
   TAnimator.AnimateFloatWait(mox, 'opacity', 1);
   home.ImageIndex:=-1;
+end;
+
+procedure TWarmingForm.FormDestroy(Sender: TObject);
+begin
+  c.Free;
+  inn.Free;
 end;
 
 end.

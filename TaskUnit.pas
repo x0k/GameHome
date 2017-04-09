@@ -32,7 +32,6 @@ type
 var
   ans:word;
 
-
 implementation
 
 {$R *.fmx}

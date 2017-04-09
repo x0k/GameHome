@@ -29,8 +29,10 @@ type
     Main: TLayout;
     Top: TLayout;
     Grid: TLayout;
+    procedure FormDestroy(Sender: TObject);
   protected
     procedure onFormCreate; override;
+    procedure addShow; override;
     procedure isWin(tab: FSTab);
   end;
 
@@ -51,10 +53,14 @@ begin
   setItem(1, t1);
   setItem(2, t2);
   setItem(3, t3);
-  tabs.setSize(true, true);
   tabs.afterClick:=isWin;
   a:=false;
   b:=false;
+end;
+
+procedure TMaterialsForm.addShow;
+begin
+  tabs.setSize(false, true);
 end;
 
 procedure TMaterialsForm.isWin(tab: FSTab);
@@ -66,6 +72,11 @@ begin
   setText(tab.layer.TabOrder);
   if tab.img.ImageIndex mod 2=0 then tab.img.ImageIndex:=tab.img.ImageIndex+1;
   if a and b then win;  
+end;
+
+procedure TMaterialsForm.FormDestroy(Sender: TObject);
+begin
+  tabs.Free;
 end;
 
 end.

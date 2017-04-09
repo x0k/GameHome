@@ -14,6 +14,7 @@ object SeazonForm: TSeazonForm
   FormFactor.Orientations = [Landscape]
   FormFactor.Devices = [Desktop]
   FullScreen = True
+  OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object BG: TGlyph
     Align = Center

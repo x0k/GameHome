@@ -14,6 +14,7 @@ type
   TToolsForm = class(TGForm)
     BG: TGlyph;
     tools: TGridLayout;
+    procedure FormDestroy(Sender: TObject);
   protected
     procedure onFormCreate; override;
     procedure addShow; override;
@@ -112,6 +113,12 @@ begin
     l.Remove(l[k]);
   end;
   l.Free;
+end;
+
+procedure TToolsForm.FormDestroy(Sender: TObject);
+begin
+  eff1.Free;
+  eff2.Free;
 end;
 
 end.

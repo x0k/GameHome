@@ -16,7 +16,7 @@ object AboutForm: TAboutForm
   FullScreen = True
   DesignerMasterStyle = 0
   object BG: TGlyph
-    Align = Client
+    Align = Center
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False

@@ -73,6 +73,7 @@ end;
 procedure TGameForm.FormActivate(Sender: TObject);
 begin
   Bar.nxtBtn:=Tabs.TabIndex<>gTab;
+  fillBar(Tabs.TabIndex, 0 , Tabs.TabIndex);
 end;
 
 procedure TGameForm.l1btnClick(Sender: TObject);

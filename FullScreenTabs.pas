@@ -18,6 +18,7 @@ type
     property img: TGlyph read image;
     property layer: TLayout read layout;
 
+    destructor Destroy; override;
     constructor create(l: TLayout);
   end;
 
@@ -49,7 +50,7 @@ type
     procedure onClick(sender: TObject);
     procedure onEnter(sender: TObject);
 
-    destructor destroy; reintroduce;
+    destructor Destroy; override;
     constructor create(fm: TGForm; m: TLayout; wId: byte);
   end;
 
@@ -58,6 +59,11 @@ implementation
 uses
   System.SysUtils,
   FMX.Dialogs;
+
+destructor FSTab.Destroy;
+begin
+  inherited;
+end;
 
 constructor FSTab.create(l: TLayout);
 var
@@ -83,9 +89,13 @@ destructor FSTabs.destroy;
 var
   t: FSTab;
 begin
-  inherited;
+  {$IFDEF DEBUG}
+    addD(self, 'Destroy');
+  {$ENDIF}
   for t in tabs do
-    t.Free
+    t.Free;
+  tabs.Free;
+  inherited;
 end;
 
 constructor FSTabs.create(fm: TGForm; m: TLayout; wId: byte);
@@ -93,6 +103,9 @@ var
   f: TFmxObject;
   b: TBounds;
 begin
+  {$IFDEF DEBUG}
+    addD(self, 'Create FSTabs');
+  {$ENDIF}
   form:=fm;
   main:=m;
   tabs:=TList<FSTab>.create;

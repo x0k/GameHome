@@ -26,6 +26,15 @@ type
     BG1: TGlyph;
     Main: TLayout;
     Text: TMemo;
+    Nums: TListBox;
+    ListBoxItem9: TListBoxItem;
+    ListBoxItem10: TListBoxItem;
+    ListBoxItem11: TListBoxItem;
+    ListBoxItem12: TListBoxItem;
+    ListBoxItem13: TListBoxItem;
+    ListBoxItem14: TListBoxItem;
+    ListBoxItem15: TListBoxItem;
+    ListBoxItem16: TListBoxItem;
     procedure ListMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Single);
     procedure ListDragOver(Sender: TObject; const Data: TDragObject;
       const Point: TPointF; var Operation: TDragOperation);
@@ -123,8 +132,8 @@ end;
 
 procedure TMatrixForm.addShow;
 begin
-  List.ItemWidth:=List.Width;
   List.ItemHeight:=List.Height/8;
+  Nums.ItemHeight:=List.Height/8;
 end;
 
 end.

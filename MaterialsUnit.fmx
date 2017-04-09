@@ -13,6 +13,7 @@ object MaterialsForm: TMaterialsForm
   FormFactor.Orientations = [Landscape]
   FormFactor.Devices = [Desktop]
   FullScreen = True
+  OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object BG: TGlyph
     Align = Center
@@ -76,8 +77,10 @@ object MaterialsForm: TMaterialsForm
         Size.PlatformDefault = False
         TabOrder = 0
         object m0: TGlyph
+          Margins.Left = 20.000000000000000000
+          Margins.Right = 20.000000000000000000
           Align = Client
-          Size.Width = 212.000000000000000000
+          Size.Width = 172.000000000000000000
           Size.Height = 382.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 18
@@ -108,8 +111,10 @@ object MaterialsForm: TMaterialsForm
         TabOrder = 1
         object m1: TGlyph
           Tag = 1
+          Margins.Left = 20.000000000000000000
+          Margins.Right = 20.000000000000000000
           Align = Client
-          Size.Width = 212.000000000000000000
+          Size.Width = 172.000000000000000000
           Size.Height = 382.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 20
@@ -140,8 +145,10 @@ object MaterialsForm: TMaterialsForm
         TabOrder = 2
         object m2: TGlyph
           Tag = 2
+          Margins.Left = 20.000000000000000000
+          Margins.Right = 20.000000000000000000
           Align = Client
-          Size.Width = 212.000000000000000000
+          Size.Width = 172.000000000000000000
           Size.Height = 382.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 22
@@ -172,8 +179,10 @@ object MaterialsForm: TMaterialsForm
         TabOrder = 3
         object m3: TGlyph
           Tag = 3
+          Margins.Left = 20.000000000000000000
+          Margins.Right = 20.000000000000000000
           Align = Client
-          Size.Width = 212.000000000000000000
+          Size.Width = 172.000000000000000000
           Size.Height = 382.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 24

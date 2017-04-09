@@ -11,6 +11,7 @@ type
 
   TFormText = class
   protected
+    sender: string;
     SubNames: TArray<string>;
     SubLogos: TArray<byte>;
     SubTexts: TArray<string>;
@@ -35,7 +36,8 @@ type
     property TabTexts[index: byte]: string read getTabText;
     property Items[index: byte]:string read getItem;
 
-    constructor create(j:TJSONObject);
+    destructor Destroy; override;
+    constructor Create(const n: string; j:TJSONObject);
   end;
 
   TTextManager = class
@@ -49,12 +51,16 @@ type
     property Forms[index: string]:TFormText read getText;
 
     destructor Destroy; override;
-    constructor create;
+    constructor create(const sender: string);
   end;
 
 implementation
 
   {TFormText}
+
+uses
+  System.SysUtils, FMX.Dialogs,
+  DataUnit;
 
 function TFormText.getName(id: Byte): string;
 begin
@@ -123,7 +129,12 @@ begin
   end;
 end;
 
-constructor TFormText.create(j: TJSONObject);
+destructor TFormText.destroy;
+begin
+  inherited;
+end;
+
+constructor TFormText.create;
 var
   val: TJSONArray;
 begin
@@ -152,9 +163,16 @@ begin
 end;
 
 destructor TTextManager.Destroy;
+var
+  p:TPair<string, TFormText>;
 begin
-  inherited;
+  {$IFDEF DEBUG}
+    addD(self, 'Destroy');
+  {$ENDIF}
+  for p in texts do
+    p.Value.Free;
   texts.Free;
+  inherited;
 end;
 
 constructor TTextManager.Create;
@@ -163,14 +181,23 @@ var
   p:TJSONPair;
   json:TJSONObject;
 begin
+  {$IFDEF DEBUG}
+    addD(self, 'Create text manager for '+sender);
+  {$ENDIF}
   texts:=TDictionary<string, TFormText>.Create;
-  for t in [tLevels, tMuseum, tOther] do
-    if findTexts(t) then
-    begin
-      json:=TJSONObject(TJSONObject.ParseJSONValue(getTexts(t)));
-      for p in json do
-        texts.Add(p.JsonString.Value, TFormText.create(p.JsonValue as TJSONObject));
-    end;
+  try
+    for t in [tLevels, tMuseum, tOther] do
+      if findTexts(t) then
+      begin
+        json:=TJSONObject(TJSONObject.ParseJSONValue(getTexts(t)));
+        for p in json do
+          texts.Add(p.JsonString.Value, TFormText.create(p.JsonString.Value, p.JsonValue as TJSONObject));
+        json.Free;
+      end;
+  except
+    on E: Exception do
+      ShowMessage('TextManager error: '+E.Message);
+  end;
 end;
 
 end.

@@ -27,6 +27,7 @@ type
     L3: TLayout;
     m3: TGlyph;
     T3: TText;
+    procedure FormDestroy(Sender: TObject);
   protected
     procedure onFormCreate; override;
     procedure addShow; override;
@@ -63,6 +64,11 @@ procedure TRoofForm.addWin;
 begin
   TAnimator.AnimateFloatWait(roof, 'opacity', 1);
   home.ImageIndex:=-1;
+end;
+
+procedure TRoofForm.FormDestroy(Sender: TObject);
+begin
+  tabs.Free;
 end;
 
 end.

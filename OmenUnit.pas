@@ -14,6 +14,7 @@ type
   private
     points:array[0..4] of TPointF;
     circles:array[0..3] of TGlyph;
+
     function findId(id:byte):ShortInt;
     procedure hideCir(i:byte;id:ShortInt=-1);
     procedure showCir(i,id:byte);
@@ -22,6 +23,8 @@ type
     procedure over(Sender: TObject; const Data: TDragObject; const Point: TPointF; var Operation: TDragOperation);
   public
     procedure upPositions(h:single);
+
+    destructor Destroy; override;
     constructor create(own:TComponent; p :TFmxObject); reintroduce;
   end;
 
@@ -44,6 +47,7 @@ type
     m3: TGlyph;
     T3: TText;
     Left: TLayout;
+    procedure FormDestroy(Sender: TObject);
   protected
     procedure onFormCreate; override;
     procedure addShow; override;
@@ -62,6 +66,15 @@ var
   t:boolean;
   walls:TWalls;
   tabs:FSTabs;
+
+destructor TWalls.Destroy;
+var
+  g:TGlyph;
+begin
+  for g in circles do
+    g.Free;
+  inherited;
+end;
 
 constructor TWalls.create(own:TComponent; p:TFmxObject);
 var
@@ -144,13 +157,13 @@ function TWalls.findId(id: Byte):ShortInt;
 var
   i:byte;
 begin
+  result:=-1;
   for i:=0 to 3 do
     if circles[i].ImageIndex=id then
     begin
       result:=i;
       exit;
     end;
-  result:=-1;
 end;
 
 procedure TWalls.drop(Sender: TObject; const Data: TDragObject; const Point: TPointF);
@@ -191,7 +204,6 @@ end;
 procedure TOmenForm.addShow;
 begin
   tabs.setSize(false, true);
-  setItem(0, Text);
   walls.upPositions(min(m0.Height, m0.Width));
   t:=false;
 end;
@@ -200,6 +212,12 @@ procedure TOmenForm.addWin;
 begin
   t:=true;
   setText(5);
+end;
+
+procedure TOmenForm.FormDestroy(Sender: TObject);
+begin
+  walls.Free;
+  tabs.Free;
 end;
 
 end.

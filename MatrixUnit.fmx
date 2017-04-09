@@ -67,10 +67,10 @@ object MatrixForm: TMatrixForm
             ReadOnly = True
             StyledSettings = [Style, FontColor]
             TextSettings.Font.Family = 'Default'
-            TextSettings.Font.Size = 30.000000000000000000
+            TextSettings.Font.Size = 28.000000000000000000
             TextSettings.HorzAlign = Center
             TextSettings.WordWrap = True
-            Align = Top
+            Align = MostTop
             CanFocus = False
             HitTest = False
             Size.Width = 599.000000000000000000
@@ -84,11 +84,11 @@ object MatrixForm: TMatrixForm
         end
         object List: TListBox
           Align = Client
-          Size.Width = 681.000000000000000000
+          Size.Width = 631.000000000000000000
           Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
           StyleLookup = 'transparentlistboxstyle'
-          TabOrder = 1
+          TabOrder = 2
           OnDragOver = ListDragOver
           OnDragDrop = ListDragDrop
           OnMouseDown = ListMouseDown
@@ -100,7 +100,7 @@ object MatrixForm: TMatrixForm
           DefaultItemStyles.ItemStyle = ''
           DefaultItemStyles.GroupHeaderStyle = ''
           DefaultItemStyles.GroupFooterStyle = ''
-          Viewport.Width = 681.000000000000000000
+          Viewport.Width = 631.000000000000000000
           Viewport.Height = 720.000000000000000000
           object ListBoxItem1: TListBoxItem
             DragMode = dmAutomatic
@@ -180,6 +180,102 @@ object MatrixForm: TMatrixForm
             Position.Y = 133.000000000000000000
             TabOrder = 7
             Text = 'ListBoxItem8'
+          end
+        end
+        object Nums: TListBox
+          Align = Left
+          EnableDragHighlight = False
+          HitTest = False
+          Position.X = 599.000000000000000000
+          Size.Width = 50.000000000000000000
+          Size.Height = 720.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'transparentlistboxstyle'
+          TabOrder = 1
+          OnDragOver = ListDragOver
+          OnDragDrop = ListDragDrop
+          OnMouseDown = ListMouseDown
+          OnMouseMove = ListMouseMove
+          OnMouseLeave = ListMouseLeave
+          DisableMouseWheel = True
+          ShowScrollBars = False
+          CanFocus = False
+          DisableFocusEffect = True
+          DefaultItemStyles.ItemStyle = ''
+          DefaultItemStyles.GroupHeaderStyle = ''
+          DefaultItemStyles.GroupFooterStyle = ''
+          Viewport.Width = 50.000000000000000000
+          Viewport.Height = 720.000000000000000000
+          object ListBoxItem9: TListBoxItem
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 38.000000000000000000
+            TextSettings.HorzAlign = Center
+            StyledSettings = [Style, FontColor]
+            TabOrder = 0
+            Text = '1)'
+          end
+          object ListBoxItem10: TListBoxItem
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 38.000000000000000000
+            TextSettings.HorzAlign = Center
+            StyledSettings = [Style, FontColor]
+            Position.Y = 19.000000000000000000
+            TabOrder = 1
+            Text = '2)'
+          end
+          object ListBoxItem11: TListBoxItem
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 38.000000000000000000
+            TextSettings.HorzAlign = Center
+            StyledSettings = [Style, FontColor]
+            Position.Y = 38.000000000000000000
+            TabOrder = 2
+            Text = '3)'
+          end
+          object ListBoxItem12: TListBoxItem
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 38.000000000000000000
+            TextSettings.HorzAlign = Center
+            StyledSettings = [Style, FontColor]
+            Position.Y = 57.000000000000000000
+            TabOrder = 3
+            Text = '4)'
+          end
+          object ListBoxItem13: TListBoxItem
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 38.000000000000000000
+            TextSettings.HorzAlign = Center
+            StyledSettings = [Style, FontColor]
+            Position.Y = 76.000000000000000000
+            TabOrder = 4
+            Text = '5)'
+          end
+          object ListBoxItem14: TListBoxItem
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 38.000000000000000000
+            TextSettings.HorzAlign = Center
+            StyledSettings = [Style, FontColor]
+            Position.Y = 95.000000000000000000
+            TabOrder = 5
+            Text = '6)'
+          end
+          object ListBoxItem15: TListBoxItem
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 38.000000000000000000
+            TextSettings.HorzAlign = Center
+            StyledSettings = [Style, FontColor]
+            Position.Y = 114.000000000000000000
+            TabOrder = 6
+            Text = '7)'
+          end
+          object ListBoxItem16: TListBoxItem
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 38.000000000000000000
+            TextSettings.HorzAlign = Center
+            StyledSettings = [Style, FontColor]
+            Position.Y = 133.000000000000000000
+            TabOrder = 7
+            Text = '8)'
           end
         end
       end

@@ -13,6 +13,7 @@ object PlaceForm: TPlaceForm
   FormFactor.Devices = [Desktop]
   FullScreen = True
   ShowHint = False
+  OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object Tabs: TTabControl
     Align = Client

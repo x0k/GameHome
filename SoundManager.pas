@@ -20,19 +20,33 @@ type
   public
     procedure play(s:eSound);
     property volume:byte read getVol write setVol;
+
+    destructor Destroy; override;
     constructor Create;
   end;
 
 implementation
 
 uses
-  System.SysUtils;
+  System.SysUtils,
+  DataUnit;
 
   {TSoundManager}
 
 //Конструктор
+destructor TSoundManager.Destroy;
+begin
+  {$IFDEF DEBUG}
+    addD(self, 'Destroy');
+  {$ENDIF}
+  inherited;
+end;
+
 constructor TSoundManager.Create;
 begin
+  {$IFDEF DEBUG}
+    addD(self, 'Create Sound Manager');
+  {$ENDIF}
   fail:=true;
   try
     if not BASS_Init(-1, 44100, 0, 0, nil) then

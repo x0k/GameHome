@@ -176,6 +176,9 @@ end;
 
 constructor TBarForm.create(AOwner: TComponent);
 begin
+  {$IFDEF DEBUG}
+    addD(self, 'Create TBarForm');
+  {$ENDIF}
   inherited create(AOwner);
   self.OnCreate:=onBarCreate;
   self.OnShow:=onBarShow;
@@ -250,6 +253,9 @@ var
   g,c:TGlyph;
   i:byte;
 begin
+  {$IFDEF DEBUG}
+    addD(self, 'Create TMForm');
+  {$ENDIF}
   inherited create(AOwner);
   count:=getImgList(r).Destination.Count;
   if count>0 then

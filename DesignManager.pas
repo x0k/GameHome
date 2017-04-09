@@ -47,7 +47,7 @@ type
     property pClilds: boolean read hasChilds;
     property Childs:TArray<TFormLayout> read Childrens;
 
-    destructor destroy; reintroduce;
+    destructor Destroy; override;
     constructor create(j:TJSONObject);
   end;
 
@@ -63,15 +63,16 @@ type
 
     property Designs[index: string]: TArray<TFormLayout> read getDesign;
 
-    destructor destroy; reintroduce;
-    constructor create;
+    destructor Destroy; override;
+    constructor Create;
   end;
 
 implementation
 
 uses
   System.UIConsts, System.Types, System.Math, System.SysUtils,
-  FMX.Forms, FMX.Dialogs;
+  FMX.Forms, FMX.Dialogs,
+  DataUnit;
 
   {TFormText}
 
@@ -137,12 +138,12 @@ destructor TFormLayout.destroy;
 var
   l: TFormLayout;
 begin
-  inherited;
   Font.Free;
   Bounds.Free;
   Margins.Free;
   for l in Childrens do
     l.Free;
+  inherited;
 end;
 
 constructor TFormLayout.create(j: TJSONObject);
@@ -229,10 +230,14 @@ var
   p: TPair<string, TArray<TFormLayout>>;
   l: TFormLayout;
 begin
-  inherited;
+  {$IFDEF DEBUG}
+    addD(self, 'Destroy');
+  {$ENDIF}
   for p in layouts do
     for l in p.Value do
       l.Free;
+  layouts.Free;
+  inherited;
 end;
 
 constructor TDesignManager.Create;
@@ -240,26 +245,35 @@ var
   i, c: byte;
   p: TJSONPair;
   json: TJSONObject;
+  val: TJSONValue;
   m: TArray<TFormLayout>;
 begin
+  {$IFDEF DEBUG}
+    addD(self, 'Create Designe Manager');
+  {$ENDIF}
   layouts:=TDictionary<string, TArray<TFormLayout>>.Create;
   try
     if findTexts(tLayouts) then
     begin
-      json:=TJSONObject(TJSONObject.ParseJSONValue(getTexts(tLayouts)));
-      for p in json do
+      val:=TJSONObject.ParseJSONValue(getTexts(tLayouts));
+      if Assigned(val) and (val is TJSONObject) then
       begin
-        c:=TJSONArray(p.JsonValue).Count;
-        if c=0 then continue;
-        setlength(m, c);
-        for i:=0 to c-1 do
-          m[i]:=TFormLayout.create(TJSONArray(p.JsonValue).Items[i] as TJsonObject);
-        layouts.Add(p.JsonString.Value, copy(m, 0, c));
+        json:=val as TJSONObject;
+        for p in json do
+        begin
+          c:=TJSONArray(p.JsonValue).Count;
+          if c=0 then continue;
+          setlength(m, c);
+          for i:=0 to c-1 do
+            m[i]:=TFormLayout.create(TJSONArray(p.JsonValue).Items[i] as TJsonObject);
+          layouts.Add(p.JsonString.Value, copy(m, 0, c));
+          p.Free;
+        end;
       end;
     end;
   except
     on E: Exception do
-      ShowMessage('Ошибка при чтении шаблона форм: '+E.Message);
+      ShowMessage('DesigneManager error: '+E.Message);
   end;
 end;
 

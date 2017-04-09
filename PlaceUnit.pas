@@ -32,6 +32,7 @@ type
     Map: TGlyph;
     Main1: TLayout;
     BG2: TGlyph;
+    procedure FormDestroy(Sender: TObject);
   protected
     procedure onFormCreate; override;
     procedure addShow; override;
@@ -65,6 +66,11 @@ end;
 procedure TPlaceForm.addShow;
 begin
   fTabs.setSize(true, true);
+end;
+
+procedure TPlaceForm.FormDestroy(Sender: TObject);
+begin
+  fTabs.Free;
 end;
 
 end.
