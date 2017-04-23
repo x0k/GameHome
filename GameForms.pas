@@ -9,7 +9,7 @@ uses
 
 const
   AWD_COUNT = 17;
-  LVL_COUNT = 14;
+  LVL_COUNT = 15;
 
 type
   TGForm = class(TBarForm)
@@ -20,6 +20,7 @@ type
     level: byte;
     backgrounds: TArray<TGlyph>;
     layouts: TArray<TControl>;
+    clickBlock: boolean;
 
     function getStatus:byte;
     procedure setStatus(s:byte);
@@ -73,7 +74,7 @@ uses
   System.Types, System.SysUtils,
   FMX.Dialogs, FMX.Graphics,
   DataUnit, DesignManager, GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit, WarmingUnit,
-  MatrixUnit, WindowsUnit, RoofUnit, RidgeUnit, MovingUnit;
+  MatrixUnit, WindowsUnit, RoofUnit, RidgeUnit, MovingUnit, EndUnit;
 
 var
   GameForm: TGTabForm;
@@ -114,6 +115,7 @@ begin
     12:result:=TRoofForm.Create(12, GameForm);
     13:result:=TRidgeForm.Create(13, GameForm);
     14:result:=TMovingForm.Create(14, GameForm);
+    15:result:=TEndForm.Create(15, GameForm);
     else result:=GameForm;
   end;
 end;
@@ -121,7 +123,7 @@ end;
 procedure showForm(id: byte);
 begin
   {$IFDEF DEBUG}
-    addD('GameForms', 'Show form');
+  addD('GameForms', 'Show form');
   {$ENDIF}
   createForm(id).show;
 end;
@@ -131,10 +133,11 @@ end;
 constructor TGForm.Create(Lvl:byte; Own:TComponent);
 begin
   {$IFDEF DEBUG}
-    addD(self, 'Creaate TGForm');
+  addD(self, 'Creaate TGForm');
   {$ENDIF}
   inherited Create(own);
   Level:=lvl;
+  clickBlock:=true;
 end;
 
 procedure TGForm.setStatus(s: Byte);
@@ -158,23 +161,17 @@ end;
 procedure TGForm.upStatus;
 begin
   if state<2 then state:=state+1;
-  if state=2 then Bar.nxtBtn:=true;
+  if (state=2) or godMode then
+    Bar.nxtBtn:=true;
 end;
 
 procedure TGForm.gameExit;
-var
-  i:byte;
 begin
   {$IFDEF DEBUG}
-    addD(self, 'Game exit');
+  addD(self, 'Game exit');
   {$ENDIF}
   GameForm.Hide;
   GameForm.gTabs.TabIndex:=0;
-  for i:=0 to LVL_COUNT do
-  begin
-    states[i]:=0;
-    Bar.dotsStat[i]:=0;
-  end;
   if level>0 then self.Destroy;
 end;
 
@@ -200,12 +197,14 @@ begin
       TAnimator.AnimateFloat(layouts[i], 'opacity', 1, 0.5);
     TAnimator.AnimateFloatWait(layouts[0], 'opacity', 1, 0.5);
   end;
+  clickBlock:=false;
 end;
 
 procedure TGForm.hideAni;
 var
   i:byte;
 begin
+  clickBlock:=true;
   if length(layouts)>0 then
   begin
     for i:=1 to High(layouts) do
@@ -321,18 +320,22 @@ end;
 
 procedure TGForm.Next;
 begin
+  if clickBlock then exit;  
   hideAni;
   if Assigned(Bar.Parent) then Bar.Parent:=nil;
   if level<LVL_COUNT then
     showForm(level+1);
   if state<2 then
     state:=0;
-  if level=LVL_COUNT then showForm(0);
-  Destroy;
+  if level=LVL_COUNT then
+    gameExit
+  else
+    Destroy;
 end;
 
 procedure TGForm.Back;
 begin
+  if clickBlock then exit;
   hideAni;
   if Assigned(Bar.Parent) then Bar.Parent:=nil;
   if state<2 then
@@ -353,7 +356,7 @@ begin
     progress.Visible:=true;
     NextBtn.OnClick:=(self as TGForm).Next;
     BackBtn.OnClick:=(self as TGForm).Back;
-    Bar.nxtBtn:=(gTabs.TabIndex<>gTab) or (state=2);
+    Bar.nxtBtn:=(gTabs.TabIndex<>gTab) or (state=2) or godMode;
   end;
 end;
 
@@ -365,14 +368,17 @@ procedure TGTabForm.next(Sender: TObject);
 var
   ti: byte;
 begin
+  if clickBlock then exit;
+  clickBlock:=true;
   ti:=gTabs.tabIndex;
   if ti<gTabs.TabCount-1 then
   begin
     gTabs.Next;
     inc(ti);
     fillBar(ti, ti, ti);
-    Bar.nxtBtn:=(ti<>gTab) or (state=2);
+    Bar.nxtBtn:=(ti<>gTab) or (state=2) or godMode;
     afterTabChange(ti);
+    clickBlock:=false;
   end
   else
   begin
@@ -388,14 +394,17 @@ procedure TGTabForm.back(Sender: TObject);
 var
   ti: byte;
 begin
+  if clickBlock then exit;
+  clickBlock:=true;
   ti:=gTabs.tabIndex;
   if ti>0 then
   begin
     gTabs.Previous;
     dec(ti);
     fillBar(ti, ti, ti);
-    Bar.nxtBtn:=(ti<>gTab) or (state=2);
+    Bar.nxtBtn:=(ti<>gTab) or (state=2) or godMode;
     afterTabChange(ti);
+    clickBlock:=false;
   end
   else
   begin

@@ -120,7 +120,7 @@ end;
 destructor TImageManager.Destroy;
 begin
   {$IFDEF DEBUG}
-    addD(self, 'Destroy');
+  addD(self, 'Destroy');
   {$ENDIF}
   loaded.Free;
   inherited;
@@ -130,7 +130,7 @@ end;
 constructor TImageManager.Create();
 begin
   {$IFDEF DEBUG}
-    addD(self, 'Create Image Manager');
+  addD(self, 'Create Image Manager');
   {$ENDIF}
   loaded:=TList<eResource>.create;
 end;

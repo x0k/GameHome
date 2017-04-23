@@ -1,12 +1,8 @@
 program GHome;
 
-
 uses
-  System.StartUpCopy,
   System.SysUtils,
   FMX.Forms,
-  windows,
-  Messages,
   MainUnit in 'MainUnit.pas' {MainForm},
   SettingsUnit in 'SettingsUnit.pas' {SettingsForm},
   DataUnit in 'DataUnit.pas' {DataForm: TDataModule},
@@ -36,25 +32,18 @@ uses
   WindowsUnit in 'WindowsUnit.pas' {WindowsForm},
   RoofUnit in 'RoofUnit.pas' {RoofForm},
   RidgeUnit in 'RidgeUnit.pas' {RidgeForm},
-  MovingUnit in 'MovingUnit.pas' {MovingForm};
+  MovingUnit in 'MovingUnit.pas' {MovingForm},
+  EndUnit in 'EndUnit.pas' {EndForm};
 
 {$R *.res}
 
 begin
-  {$IFDEF DEBUG}
-    ReportMemoryLeaksOnShutdown := True;
-  {$ENDIF}
+  if FindCmdLineSwitch('debug') then
+    ReportMemoryLeaksOnShutdown:=True;
 
-  if AddFontResource('t/font.ttf')>0 then SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0)
-    else Raise Exception.create('Ошибка при загрузке шрифтов');
   Application.Initialize;
   Application.CreateForm(TDataForm, DataForm);
   Application.CreateForm(TMainForm, MainForm);
-  Application.CreateForm(TMatrixForm, MatrixForm);
-  Application.CreateForm(TWindowsForm, WindowsForm);
-  Application.CreateForm(TRoofForm, RoofForm);
-  Application.CreateForm(TRidgeForm, RidgeForm);
-  Application.CreateForm(TMovingForm, MovingForm);
   Application.RegisterFormFamily('MainForm', [TMainForm]);
   Application.Run;
 end.

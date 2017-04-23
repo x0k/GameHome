@@ -56,8 +56,8 @@ begin
     SetVol(0.1);
     //BASS_ChannelPlay(BackgroundStream, true);
     fail:=false;
-  finally
-
+  except
+    fail:=true;
   end;
 end;
 

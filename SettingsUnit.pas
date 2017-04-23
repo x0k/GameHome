@@ -71,6 +71,7 @@ end;
 
 procedure TSettingsForm.onFormCreate;
 begin
+  IM.setSize(BG, Screen.Size);
   Vlev.Tag:=SM.volume;
   Vlev.Text:=Vlev.Tag.ToString;
 

@@ -24,9 +24,10 @@ type
   end;
 
 var
+  godMode, dbgMode: boolean;
   DataForm: TDataForm;
   {$IFDEF DEBUG}
-    Debug: TStrings;
+  Debug: TStrings;
   {$ENDIF}
   Styles:TStyleBook;
   DM: TDesignManager;
@@ -36,11 +37,11 @@ var
   GD: TGameData;
   Bar: TBar;
 
-{$IFDEF DEBUG}
+  {$IFDEF DEBUG}
   procedure addD(const u, m: string); overload;
   procedure addD(ct: TObject; const m:string); overload
   procedure addD(ct: TFmxObject; const m: string); overload;
-{$ENDIF}
+  {$ENDIF}
 
 implementation
 
@@ -49,7 +50,8 @@ implementation
 {$R *.dfm}
 
 uses
-  FMX.Ani,
+  System.SysUtils,
+  FMX.Ani, FMX.Forms,
   windows, Messages,
   Forms, GameForms, ResourcesManager, MainUnit;
 
@@ -76,12 +78,13 @@ end;
 
 procedure TDataForm.DataModuleCreate(Sender: TObject);
 begin
+  godMode:=FindCmdLineSwitch('god');
+  dbgMode:=FindCmdLineSwitch('debug');
   {$IFDEF DEBUG}
-    Debug:=TStringList.Create;
-    addD(self, 'Create DataForm');
+  Debug:=TStringList.Create;
+  addD(self, 'Create DataForm');
   {$ENDIF}
   Bar:=TBar.create(self);
-  Bar.setDots;
   DM:=TDesignManager.create;
   IM:=TImageManager.Create;
   GD:=TGameData.Create;
@@ -93,8 +96,6 @@ end;
 
 procedure TDataForm.DataModuleDestroy(Sender: TObject);
 begin
-  RemoveFontResource(PChar(ResourcesManager.getPath(pTexts)+'font.ttf'));
-  SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
   GD.LoadSavedRamp;
   freeForms;
   Bar.Free;
@@ -104,9 +105,9 @@ begin
   SM.Free;
   TM.Free;
   {$IFDEF DEBUG}
-    addD(self, 'Destroy');
-    Debug.SaveToFile('Debug.txt');
-    Debug.Free;
+  addD(self, 'Destroy');
+  Debug.SaveToFile('Debug.txt');
+  Debug.Free;
   {$ENDIF}
 end;
 
@@ -116,8 +117,13 @@ begin
   if not ld then
   begin
     {$IFDEF DEBUG}
-      addD(self, 'Initialization (load imgs)');
+    addD(self, 'Initialization (load imgs)');
     {$ENDIF}
+    if not dbgMode then
+    begin
+      IM.add(rMuseum);
+      IM.add(rWinMuseum);
+    end;
     IM.add(rSequences);
     IM.add(rImages);
     IM.add(rOther);

@@ -41,7 +41,6 @@ type
     procedure Text1Click(Sender: TObject);
   protected
     procedure onFormCreate; override;
-    procedure addShow; override;
   end;
 
 var
@@ -107,11 +106,6 @@ begin
     unsel(nick); unsel(thing);
     nick:=nil; thing:=nil;
   end;
-end;
-
-procedure TMovingForm.addShow;
-begin
-
 end;
 
 end.

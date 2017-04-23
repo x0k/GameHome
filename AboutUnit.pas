@@ -31,6 +31,7 @@ implementation
 
 procedure TAboutForm.onFormCreate;
 begin
+  IM.setSize(BG, Screen.Size);
   setItem(0, Text);
 end;
 

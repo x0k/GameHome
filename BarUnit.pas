@@ -39,22 +39,7 @@ type
     backLayout: TLayout;
     Glyph1: TGlyph;
     progress: TLayout;
-    Glyph2: TGlyph;
-    Glyph3: TGlyph;
-    Glyph4: TGlyph;
-    Glyph5: TGlyph;
-    Glyph6: TGlyph;
-    Glyph7: TGlyph;
-    Glyph8: TGlyph;
-    Glyph9: TGlyph;
-    Glyph10: TGlyph;
-    Glyph11: TGlyph;
-    Glyph12: TGlyph;
-    Glyph13: TGlyph;
-    Glyph14: TGlyph;
-    Glyph15: TGlyph;
-    ImageList1: TImageList;
-    Glyph16: TGlyph;
+    imgs: TImageList;
     procedure RBonusMouseLeave(Sender: TObject);
     procedure logoLayoutClick(Sender: TObject);
   protected
@@ -63,7 +48,7 @@ type
     function getNxt: boolean;
     procedure setNxt(v: boolean);
   public
-    procedure setDots;
+    procedure setDots(c: byte);
     procedure setDot(i: byte; v: byte);
     procedure setShowBonus;
     procedure hideBonus;
@@ -87,12 +72,29 @@ var
 
 procedure TBar.setDots;
 var
-  f:TFmxObject;
+  g, cl: TGlyph;
+  i: byte;
 begin
-  setlength(dots, progress.Children.count);
-  for f in  progress.Children do
-    if f is TGlyph then
-      dots[f.tag-1]:=f as TGlyph;
+  for g in dots do
+    g.Free;
+  setlength(dots, c);
+  g:=TGlyph.Create(self);
+  with g do
+  begin
+    Align:=TAlignLayout.Right;
+    Height:=30;
+    Width:=30;
+    Margins.Right:=10;
+  end;
+  for i:=c-1 downto 0 do
+  begin
+    cl:=g.Clone(self) as TGlyph;
+    cl.Images:=imgs;
+    cl.ImageIndex:=0;
+    dots[i]:=cl;
+    progress.AddObject(cl);
+  end;
+  g.Free;
 end;
 
 procedure TBar.setDot;

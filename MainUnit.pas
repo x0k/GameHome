@@ -70,6 +70,8 @@ begin
     m[i].Text:=t.Items[i];
   SettingsForm:=TSettingsForm.Create(self);
   AboutForm:=TAboutForm.Create(self);
+  if not dbgMode then
+    MuseumForm:=TMuseumForm.Create(self, rMuseum);
 end;
 
 
@@ -80,6 +82,7 @@ end;
 
 procedure TMainForm.BGameBtnClick(Sender: TObject);
 begin
+  Bar.setDots(15);
   showForm(0);
 end;
 
@@ -90,8 +93,12 @@ end;
 
 procedure TMainForm.MuseumBtnClick(Sender: TObject);
 begin
-  IM.add(rMuseum);
-  if not Assigned(MuseumForm) then MuseumForm:=TMuseumForm.Create(self, rMuseum);
+  if dbgMode then
+  begin
+    IM.add(rMuseum);
+    if not Assigned(MuseumForm) then MuseumForm:=TMuseumForm.Create(self, rMuseum);
+  end;
+  Bar.setDots(15);
   MuseumForm.Show;
 end;
 
