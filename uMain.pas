@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Imaging.pngimage,
-  Vcl.ExtCtrls;
+  Vcl.ExtCtrls, Vcl.ComCtrls;
 
 type
   TMainForm = class(TForm)
@@ -14,12 +14,16 @@ type
     GroupBox1: TGroupBox;
     godMode: TCheckBox;
     debugMode: TCheckBox;
+    Bar: TProgressBar;
     procedure playBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
     procedure ExecAndWait(const FileName, Params: String; const WinState: Word);
+    procedure WMCopyData(var M: TWMCopyData); message WM_COPYDATA;
   end;
+
+  Comands = (open, setCount, upCount, cclose);
 
 var
   MainForm: TMainForm;
@@ -31,34 +35,41 @@ implementation
 uses
   System.IOUtils;
 
-procedure TMainForm.ExecAndWait(const FileName, Params: String; const WinState: Word);
+function WinExec(const ACmdLine: String; const ACmdShow: UINT = SW_SHOWNORMAL): boolean;
 var
-  StartInfo: TStartupInfo;
-  ProcInfo: TProcessInformation;
+  SI: TStartupInfo;
+  PI: TProcessInformation;
   CmdLine: String;
 begin
-  { Помещаем имя файла между кавычками, с соблюдением всех пробелов в именах Win9x }
-  playBtn.Enabled:=false;
-  playBtn.Caption:='Запущено';
+  Assert(ACmdLine <> '');
+
+  CmdLine := ACmdLine;
+  UniqueString(CmdLine);
+
+  FillChar(SI, SizeOf(SI), 0);
+  FillChar(PI, SizeOf(PI), 0);
+  SI.cb := SizeOf(SI);
+  SI.dwFlags := STARTF_USESHOWWINDOW;
+  SI.wShowWindow := ACmdShow;
+
+  SetLastError(ERROR_INVALID_PARAMETER);
+  {$WARN SYMBOL_PLATFORM OFF}
+  result:=Win32Check(CreateProcess(nil, PChar(CmdLine), nil, nil, False, CREATE_DEFAULT_ERROR_MODE {$IFDEF UNICODE}or CREATE_UNICODE_ENVIRONMENT{$ENDIF}, nil, nil, SI, PI));
+  {$WARN SYMBOL_PLATFORM ON}
+  CloseHandle(PI.hThread);
+  CloseHandle(PI.hProcess);
+end;
+
+procedure TMainForm.ExecAndWait(const FileName, Params: String; const WinState: Word);
+var
+  CmdLine: String;
+begin
   CmdLine := '"' + Filename + '"' + Params;
-  FillChar(StartInfo, SizeOf(StartInfo), #0);
-  with StartInfo do
+  if winExec(cmdLine) then
   begin
-    cb := SizeOf(StartInfo);
-    dwFlags := STARTF_USESHOWWINDOW;
-    wShowWindow := WinState;
+      playBtn.Enabled:=false;
+      playBtn.Caption:='Запущено';
   end;
-  { Ожидаем завершения приложения }
-  if CreateProcess(nil, PChar(CmdLine), nil, nil, false,  CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS, nil, PChar(ExtractFilePath(Filename)), StartInfo, ProcInfo) then
-  begin
-    WaitForSingleObject(ProcInfo.hProcess, INFINITE);
-    { Free the Handles }
-    CloseHandle(ProcInfo.hProcess);
-    CloseHandle(ProcInfo.hThread);
-    playBtn.Enabled:=true;
-    playBtn.Caption:='Запустить';
-  end;
-  Application.Restore;
 end;
 
 procedure TMainForm.playBtnClick(Sender: TObject);
@@ -70,17 +81,40 @@ begin
     p:=p+' /god';
   if DebugMode.Checked then
     p:=p+' /debug';
+  p:=p+' '+Cardinal(Handle).ToString;
   if TFile.Exists(path) then
     ExecAndWait(path, p, SW_SHOWNORMAL)
   else
     showMessage('Файл не найден: '+path);
 end;
 
+procedure TMainForm.WMCopyData(var M: TWMCopyData);
+begin
+  case Comands(M.CopyDataStruct.dwData) of
+    open:playBtn.Caption:=PChar(M.CopyDataStruct.lpData);
+    setCount: Bar.Max:=Byte.Parse(PChar(M.CopyDataStruct.lpData));
+    upCount:begin
+      Bar.Position:=Bar.Position+1;
+      playBtn.Caption:=PChar(M.CopyDataStruct.lpData)
+    end;
+    cclose:begin
+      Bar.Position:=0;
+      playBtn.Enabled:=true;
+      playBtn.Caption:='Запустить';
+    end;
+    else begin
+      M.Result:=0;
+      exit;
+    end;
+  end;
+  M.Result:=1;
+end;
+
 procedure TMainForm.FormCreate(Sender: TObject);
 var
   p: string;
 begin
-  p:=TPath.Combine(TPath.GetLibraryPath,TPath.Combine('t', 'font.ttf'));
+  p:=TPath.Combine(TPath.GetLibraryPath, TPath.Combine('t', 'font.ttf'));
   if AddFontResource(PChar(p))>0 then
     sendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0)
   else

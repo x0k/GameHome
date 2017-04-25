@@ -48,6 +48,7 @@ type
     procedure Back(Sender: TObject); virtual;
 
     property state:byte read getStatus write setStatus;
+    property clBlock:boolean read clickBlock write clickBlock;
 
     constructor Create(Lvl:byte; Own:TComponent); reintroduce;
   end;
@@ -166,10 +167,14 @@ begin
 end;
 
 procedure TGForm.gameExit;
+var
+  i: byte;
 begin
   {$IFDEF DEBUG}
   addD(self, 'Game exit');
   {$ENDIF}
+  for i:=0 to LVL_COUNT do
+    states[i]:=0;
   GameForm.Hide;
   GameForm.gTabs.TabIndex:=0;
   if level>0 then self.Destroy;

@@ -28,7 +28,7 @@ type
 implementation
 
 uses
-  System.SysUtils,
+  System.SysUtils, FMX.Dialogs,
   DataUnit;
 
   {TSoundManager}
@@ -57,7 +57,11 @@ begin
     //BASS_ChannelPlay(BackgroundStream, true);
     fail:=false;
   except
-    fail:=true;
+    on E: Exception do
+    begin
+      showMessage(E.Message);
+      fail:=true;
+    end;
   end;
 end;
 

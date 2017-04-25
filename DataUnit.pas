@@ -8,7 +8,6 @@ uses
   DesignManager, ImageManager, TextManager, SoundManager, GameData, BarUnit;
 
 type
-
   TDataForm = class(TDataModule)
     Museum: TImageList;
     Backgrounds: TImageList;
@@ -16,12 +15,12 @@ type
     Sequence: TImageList;
     Other: TImageList;
     Images: TImageList;
-    fgApplicationEvents1: TfgApplicationEvents;
     winMuseum: TImageList;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
-    procedure fgApplicationEvents1Idle(Sender: TObject; var Done: Boolean);
   end;
+
+  Comands = (open, setCount, upCount, close);
 
 var
   godMode, dbgMode: boolean;
@@ -51,13 +50,14 @@ implementation
 
 uses
   System.SysUtils,
-  FMX.Ani, FMX.Forms,
+  FMX.Ani, FMX.Forms, FMX.Platform.Win, FMX.Dialogs,
   windows, Messages,
-  Forms, GameForms, ResourcesManager, MainUnit;
+  Forms, GameForms, ResourcesManager;
 
 var
-  ld: boolean;
-  t: string;
+  m: boolean;
+  hdl: Cardinal;
+  msg: TCopyDataStruct;
 
 {$IFDEF DEBUG}
 procedure addD(const u, m: string);
@@ -76,22 +76,56 @@ begin
 end;
 {$ENDIF}
 
+procedure sendMsg(const cmd: Comands; const s: string = String.Empty);
+begin
+  if m then exit;
+  msg.dwData:=ord(cmd);
+  msg.cbData:=sizeOf(s)*Length(s);
+  GetMem(msg.lpData, msg.cbData);
+  try
+    StrPCopy(msg.lpData, s);
+    SendMessage(hdl, WM_COPYDATA, FMX.Platform.Win.ApplicationHWND, Integer(@msg));
+  finally
+    FreeMem(msg.lpData, msg.cbData);
+  end;
+end;
+
 procedure TDataForm.DataModuleCreate(Sender: TObject);
 begin
   godMode:=FindCmdLineSwitch('god');
   dbgMode:=FindCmdLineSwitch('debug');
+  hdl:=0;
+  m:=not ((ParamCount>0) and Cardinal.TryParse(ParamStr(ParamCount), hdl));
+  if not m then hdl:=Cardinal.Parse(ParamStr(ParamCount));
   {$IFDEF DEBUG}
   Debug:=TStringList.Create;
   addD(self, 'Create DataForm');
   {$ENDIF}
+  sendMsg(open, ('Initialization'));
   Bar:=TBar.create(self);
   DM:=TDesignManager.create;
   IM:=TImageManager.Create;
   GD:=TGameData.Create;
   SM:=TSoundManager.Create;
   TM:=TTextManager.Create(name);
-  t:=TM.Forms['MainForm'].Names[1];
   initForms;
+  {$IFDEF DEBUG}
+  addD(self, 'Initialization (load imgs)');
+  {$ENDIF}
+  if not dbgMode then
+  begin
+    sendMsg(setCount, (5).ToString);
+    IM.add(rMuseum);
+    sendMsg(upCount, 'Loading: Museum');
+    IM.add(rWinMuseum);
+    sendMsg(upCount, 'Loading: Sequences');
+  end else sendMsg(setCount, (3).ToString);
+  IM.add(rSequences);
+  sendMsg(upCount, 'Loading: Images');
+  IM.add(rImages);
+  sendMsg(upCount, 'Loading: Other');
+  IM.add(rOther);
+  sendMsg(upCount, 'Done.');
 end;
 
 procedure TDataForm.DataModuleDestroy(Sender: TObject);
@@ -104,35 +138,12 @@ begin
   GD.Free;
   SM.Free;
   TM.Free;
+  sendMsg(close, 'Done.');
   {$IFDEF DEBUG}
   addD(self, 'Destroy');
   Debug.SaveToFile('Debug.txt');
   Debug.Free;
   {$ENDIF}
-end;
-
-procedure TDataForm.fgApplicationEvents1Idle(Sender: TObject;
-  var Done: Boolean);
-begin
-  if not ld then
-  begin
-    {$IFDEF DEBUG}
-    addD(self, 'Initialization (load imgs)');
-    {$ENDIF}
-    if not dbgMode then
-    begin
-      IM.add(rMuseum);
-      IM.add(rWinMuseum);
-    end;
-    IM.add(rSequences);
-    IM.add(rImages);
-    IM.add(rOther);
-    TAnimator.AnimateFloatWait(MainForm.Text6, 'opacity', 0);
-    MainForm.text6.Text:=t;
-    TAnimator.AnimateFloat(MainForm.Text6, 'opacity', 1, 1);
-    TAnimator.AnimateFloat(MainForm.centerLayout, 'opacity', 1, 1);
-    ld:=true;
-  end;
 end;
 
 end.

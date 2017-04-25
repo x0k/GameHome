@@ -62,7 +62,6 @@ var
 begin
   IM.setSize(BG, Screen.Size);
 
-  centerLayout.Opacity:=0;
   m:=[text1, text2, text3, text4, text5];
   t:=TM.Forms[name];
   text6.Text:=t.Names[0];

@@ -840,7 +840,6 @@ END
 
 /* d:\programs\embarcadero\studio\18.0\lib\Win32\release\FMX.Filter.res */
 /* d:\programs\embarcadero\studio\18.0\lib\Win32\release\FMX.Controls.Win.res */
-/* D:\Projects\Delphi\GameHome\BarUnit.fmx */
 /* D:\Projects\Delphi\GameHome\GameUnit.fmx */
 /* D:\Projects\Delphi\GameHome\SeazonUnit.fmx */
 /* D:\Projects\Delphi\GameHome\PlaceUnit.fmx */
@@ -857,6 +856,7 @@ END
 /* D:\Projects\Delphi\GameHome\RidgeUnit.fmx */
 /* D:\Projects\Delphi\GameHome\MovingUnit.fmx */
 /* D:\Projects\Delphi\GameHome\EndUnit.fmx */
+/* D:\Projects\Delphi\GameHome\BarUnit.fmx */
 /* D:\Projects\Delphi\GameHome\DataUnit.dfm */
 /* D:\Projects\Delphi\GameHome\SettingsUnit.fmx */
 /* D:\Projects\Delphi\GameHome\MuseumUnit.fmx */

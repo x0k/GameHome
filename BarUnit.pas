@@ -50,7 +50,6 @@ type
   public
     procedure setDots(c: byte);
     procedure setDot(i: byte; v: byte);
-    procedure setShowBonus;
     procedure hideBonus;
 
     property nxtBtn: boolean read getNxt write setNxt;
@@ -62,7 +61,7 @@ implementation
 {$R *.fmx}
 
 uses
-  Forms;
+  Forms, GameForms;
 
 const
   w = 360;
@@ -103,11 +102,6 @@ begin
     dots[i].imageIndex:=v;
 end;
 
-procedure TBar.setShowBonus;
-begin
-  NextBtn.OnClick:=showBonus;
-end;
-
 procedure TBar.hideBonus;
 begin
   if open then showBonus(self);
@@ -129,7 +123,16 @@ end;
 procedure TBar.logoLayoutClick(Sender: TObject);
 begin
   if Assigned(parent) then
+  begin
+    if (parent is TGForm)or(parent is TGTabForm) then
+    begin
+      if (parent as TGForm).clBlock then
+        exit
+      else
+        (parent as TGForm).clBlock:=true;
+    end;
     (parent as TForm).close;
+  end;
 end;
 
 procedure TBar.RBonusMouseLeave(Sender: TObject);

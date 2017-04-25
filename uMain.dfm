@@ -7,7 +7,7 @@ object MainForm: TMainForm
   Margins.Bottom = 10
   BorderStyle = bsDialog
   Caption = 'Launcher'
-  ClientHeight = 307
+  ClientHeight = 334
   ClientWidth = 330
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -2766,7 +2766,7 @@ object MainForm: TMainForm
   object playBtn: TButton
     AlignWithMargins = True
     Left = 10
-    Top = 250
+    Top = 277
     Width = 310
     Height = 47
     Margins.Left = 10
@@ -2791,6 +2791,8 @@ object MainForm: TMainForm
     Align = alBottom
     Caption = 'Settings'
     TabOrder = 1
+    ExplicitLeft = 5
+    ExplicitTop = 141
     object godMode: TCheckBox
       AlignWithMargins = True
       Left = 5
@@ -2811,5 +2813,20 @@ object MainForm: TMainForm
       Caption = 'Debug mode'
       TabOrder = 1
     end
+  end
+  object Bar: TProgressBar
+    AlignWithMargins = True
+    Left = 10
+    Top = 250
+    Width = 310
+    Height = 17
+    Margins.Left = 10
+    Margins.Top = 10
+    Margins.Right = 10
+    Margins.Bottom = 0
+    Align = alBottom
+    TabOrder = 2
+    ExplicitLeft = 15
+    ExplicitTop = 268
   end
 end

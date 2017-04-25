@@ -52,7 +52,6 @@ object EndForm: TEndForm
         Size.Width = 1280.000000000000000000
         Size.Height = 861.000000000000000000
         Size.PlatformDefault = False
-        Stretch = False
         ImageIndex = 0
         Images = DataForm.winMuseum
       end
@@ -75,7 +74,6 @@ object EndForm: TEndForm
         Size.Width = 1280.000000000000000000
         Size.Height = 861.000000000000000000
         Size.PlatformDefault = False
-        Stretch = False
         ImageIndex = 1
         Images = DataForm.winMuseum
       end
@@ -98,7 +96,6 @@ object EndForm: TEndForm
         Size.Width = 1280.000000000000000000
         Size.Height = 861.000000000000000000
         Size.PlatformDefault = False
-        Stretch = False
         ImageIndex = 2
         Images = DataForm.winMuseum
       end
@@ -121,7 +118,6 @@ object EndForm: TEndForm
         Size.Width = 1280.000000000000000000
         Size.Height = 861.000000000000000000
         Size.PlatformDefault = False
-        Stretch = False
         ImageIndex = 3
         Images = DataForm.winMuseum
       end
@@ -144,7 +140,6 @@ object EndForm: TEndForm
         Size.Width = 1280.000000000000000000
         Size.Height = 861.000000000000000000
         Size.PlatformDefault = False
-        Stretch = False
         ImageIndex = 4
         Images = DataForm.winMuseum
       end
@@ -167,7 +162,6 @@ object EndForm: TEndForm
         Size.Width = 1280.000000000000000000
         Size.Height = 861.000000000000000000
         Size.PlatformDefault = False
-        Stretch = False
         ImageIndex = 5
         Images = DataForm.winMuseum
       end
@@ -190,7 +184,6 @@ object EndForm: TEndForm
         Size.Width = 1280.000000000000000000
         Size.Height = 861.000000000000000000
         Size.PlatformDefault = False
-        Stretch = False
         ImageIndex = 6
         Images = DataForm.winMuseum
       end
@@ -213,7 +206,6 @@ object EndForm: TEndForm
         Size.Width = 1280.000000000000000000
         Size.Height = 861.000000000000000000
         Size.PlatformDefault = False
-        Stretch = False
         ImageIndex = 2
         Images = DataForm.Backgrounds
       end
