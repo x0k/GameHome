@@ -7,3 +7,5 @@
 *.stat
 *.map
 *.res
+*.drc
+*.txt
