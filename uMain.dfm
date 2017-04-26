@@ -18,7 +18,6 @@ object MainForm: TMainForm
   OldCreateOrder = False
   Position = poScreenCenter
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object Img: TImage
@@ -2778,7 +2777,7 @@ object MainForm: TMainForm
     TabOrder = 0
     OnClick = playBtnClick
   end
-  object GroupBox1: TGroupBox
+  object gpr: TGroupBox
     AlignWithMargins = True
     Left = 10
     Top = 170
@@ -2791,8 +2790,6 @@ object MainForm: TMainForm
     Align = alBottom
     Caption = 'Settings'
     TabOrder = 1
-    ExplicitLeft = 5
-    ExplicitTop = 141
     object godMode: TCheckBox
       AlignWithMargins = True
       Left = 5
@@ -2826,7 +2823,5 @@ object MainForm: TMainForm
     Margins.Bottom = 0
     Align = alBottom
     TabOrder = 2
-    ExplicitLeft = 15
-    ExplicitTop = 268
   end
 end

@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.432,D:\Projects\Delphi\GameHome\Unit1.dfm=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.159,D:\Projects\Delphi\GameHome\Launcher.dproj=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Launcher.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.278,C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Launcher.dproj=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.504,=D:\Projects\Delphi\GameHome\uRegFont.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.278,C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Launcher.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.159,C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Launcher.dproj=D:\Projects\Delphi\GameHome\Launcher.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.432,C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\Projects\Delphi\GameHome\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.432,C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Unit1.dfm=D:\Projects\Delphi\GameHome\Unit1.dfm</Transaction>
     <Transaction>1899.12.30 00:00:00.000.947,=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.666,=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.432,D:\Projects\Delphi\GameHome\Unit1.pas=C:\Users\x0kil\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
   </Transactions>
 	<ActiveMobileDevice>
 		<POSX iOSSimulator="iPhone5"/>

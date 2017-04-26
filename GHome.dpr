@@ -2,7 +2,7 @@ program GHome;
 
 uses
   System.SysUtils,
-  FMX.Forms,
+  FMX.Forms, FMX.Dialogs,
   MainUnit in 'MainUnit.pas' {MainForm},
   SettingsUnit in 'SettingsUnit.pas' {SettingsForm},
   DataUnit in 'DataUnit.pas' {DataForm: TDataModule},

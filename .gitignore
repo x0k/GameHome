@@ -2,3 +2,7 @@
 /__recovery/*
 *.exe
 *.dcu
+*.local
+*.identcache
+*.stat
+*.map

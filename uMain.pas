@@ -11,13 +11,12 @@ type
   TMainForm = class(TForm)
     playBtn: TButton;
     Img: TImage;
-    GroupBox1: TGroupBox;
+    gpr: TGroupBox;
     godMode: TCheckBox;
     debugMode: TCheckBox;
     Bar: TProgressBar;
     procedure playBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
   private
     procedure ExecAndWait(const FileName, Params: String; const WinState: Word);
     procedure WMCopyData(var M: TWMCopyData); message WM_COPYDATA;
@@ -33,7 +32,14 @@ implementation
 {$R *.dfm}
 
 uses
-  System.IOUtils;
+  System.IOUtils, uRegFont;
+
+const
+  fullName = 'Tkachenko Sketch 4F (TrueType)';
+  fName = 'Tkachenko Sketch 4F';
+
+var
+  ctr: TArray<TControl>;
 
 function WinExec(const ACmdLine: String; const ACmdShow: UINT = SW_SHOWNORMAL): boolean;
 var
@@ -63,11 +69,13 @@ end;
 procedure TMainForm.ExecAndWait(const FileName, Params: String; const WinState: Word);
 var
   CmdLine: String;
+  c: TControl;
 begin
   CmdLine := '"' + Filename + '"' + Params;
   if winExec(cmdLine) then
   begin
-      playBtn.Enabled:=false;
+      for c in ctr do
+        c.Enabled:=false;
       playBtn.Caption:='Запущено';
   end;
 end;
@@ -89,6 +97,8 @@ begin
 end;
 
 procedure TMainForm.WMCopyData(var M: TWMCopyData);
+var
+  c: TControl;
 begin
   case Comands(M.CopyDataStruct.dwData) of
     open:playBtn.Caption:=PChar(M.CopyDataStruct.lpData);
@@ -99,7 +109,8 @@ begin
     end;
     cclose:begin
       Bar.Position:=0;
-      playBtn.Enabled:=true;
+      for c in ctr do
+        c.Enabled:=true;
       playBtn.Caption:='Запустить';
     end;
     else begin
@@ -112,19 +123,13 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 var
-  p: string;
+  s: string;
 begin
-  p:=TPath.Combine(TPath.GetLibraryPath, TPath.Combine('t', 'font.ttf'));
-  if AddFontResource(PChar(p))>0 then
-    sendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0)
-  else
-    showMessage('Ошибка при загрузке шрифта: '+p);
-end;
-
-procedure TMainForm.FormDestroy(Sender: TObject);
-begin
-  RemoveFontResource(PChar(TPath.Combine(TPath.GetLibraryPath,TPath.Combine('t', 'font.ttf'))));
-  sendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
+  ctr:=[debugMode, godMode, playBtn];
+  for s in Screen.Fonts do
+    if (AnsiCompareText(s, fName)=0)or(AnsiCompareText(s, fullName)=0) then exit;
+  if not RegisterFont(TPath.Combine(TPath.GetLibraryPath, TPath.Combine('t', 'font.ttf')), fullName) then
+    showMessage('Для установки шрифтов, необходим запуск от имени Администратора.');
 end;
 
 end.

@@ -63,6 +63,7 @@ begin
   backgrounds:=[BG];
   layouts:=[Main];
   m:=[line1, line2, line3, line4];
+  c:=0;
 end;
 
 procedure TMovingForm.Text1Click(Sender: TObject);

@@ -391,7 +391,10 @@ begin
     if Assigned(Bar.Parent) then Bar.Parent:=nil;
     if (level>0) and (level<LVL_COUNT-1) then
       showForm(level+1);
-    destroy;
+    if level=LVL_COUNT then
+      gameExit
+    else
+      Destroy;
   end;
 end;
 
