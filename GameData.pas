@@ -24,9 +24,11 @@ type
     property brightnes:byte read getBr write setBr;
     property contrast:byte read getCt write setCt;
 
-    destructor Destroy; override;
     constructor Create;
   end;
+
+var
+  GD: TGameData;
 
 implementation
 
@@ -37,21 +39,11 @@ uses
 
   {TGameData}
 
-destructor TGameData.Destroy;
-begin
-  {$IFDEF DEBUG}
-    addD(self, 'Destroy');
-  {$ENDIF}
-end;
-
 //Конструктор
 constructor TGameData.Create;
 var
   dc: hdc;
 begin
-  {$IFDEF DEBUG}
-    addD(self, 'Create GameData');
-  {$ENDIF}
   dc := getdc(0);
   try
     getdevicegammaramp(dc, origramparray)

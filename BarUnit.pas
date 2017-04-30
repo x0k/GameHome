@@ -56,6 +56,9 @@ type
     property dotsStat[index: byte]: byte write setDot;
   end;
 
+var
+  Bar: TBar;
+
 implementation
 
 {$R *.fmx}

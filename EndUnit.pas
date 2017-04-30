@@ -4,8 +4,8 @@ interface
 
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, DataUnit,
-  FMX.ImgList, GameForms, FMX.TabControl;
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
+  FMX.ImgList, GameForms, FMX.TabControl, DataUnit;
 
 type
   TEndForm = class(TGTabForm)
@@ -38,7 +38,7 @@ implementation
 {$R *.fmx}
 
 uses
-  ResourcesManager;
+  ResourcesManager, ImageManager;
 
 { TEndForm }
 

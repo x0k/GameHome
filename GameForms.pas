@@ -74,7 +74,7 @@ implementation
 uses
   System.Types, System.SysUtils,
   FMX.Dialogs, FMX.Graphics,
-  DataUnit, DesignManager, GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit, WarmingUnit,
+  DataUnit, DesignManager, ImageManager, GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit, WarmingUnit,
   MatrixUnit, WindowsUnit, RoofUnit, RidgeUnit, MovingUnit, EndUnit;
 
 var
@@ -82,25 +82,16 @@ var
 
 procedure initForms;
 begin
-  {$IFDEF DEBUG}
-    addD('GameForms', 'Initialization form');
-  {$ENDIF}
   GameForm:=TGameForm.Create(0, nil);
 end;
 
 procedure freeForms;
 begin
-  {$IFDEF DEBUG}
-    addD('GameForms', 'Free form');
-  {$ENDIF}
   GameForm.Free;
 end;
 
 function createForm(id:byte): TGForm;
 begin
-  {$IFDEF DEBUG}
-    addD('GameForms', 'Create form');
-  {$ENDIF}
   case id of
     1:result:=TSeazonForm.Create(1, GameForm);
     2:result:=TPlaceForm.Create(2, GameForm);
@@ -123,9 +114,6 @@ end;
 
 procedure showForm(id: byte);
 begin
-  {$IFDEF DEBUG}
-  addD('GameForms', 'Show form');
-  {$ENDIF}
   createForm(id).show;
 end;
 
@@ -133,9 +121,6 @@ end;
 
 constructor TGForm.Create(Lvl:byte; Own:TComponent);
 begin
-  {$IFDEF DEBUG}
-  addD(self, 'Creaate TGForm');
-  {$ENDIF}
   inherited Create(own);
   Level:=lvl;
   clickBlock:=true;
@@ -170,9 +155,6 @@ procedure TGForm.gameExit;
 var
   i: byte;
 begin
-  {$IFDEF DEBUG}
-  addD(self, 'Game exit');
-  {$ENDIF}
   for i:=0 to LVL_COUNT do
     states[i]:=0;
   GameForm.Hide;

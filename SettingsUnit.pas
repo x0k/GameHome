@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Objects,
-  FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts, DataUnit, BarUnit,
+  FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts, BarUnit,
   FMX.ImgList,
   Forms;
 
@@ -42,7 +42,7 @@ implementation
 {$R *.fmx}
 
 uses
-  ResourcesManager;
+  ResourcesManager, GameData, ImageManager, SoundManager;
 
 procedure TSettingsForm.DecBrClick(Sender: TObject);
 begin

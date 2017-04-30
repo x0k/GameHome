@@ -136,8 +136,8 @@ object SettingsForm: TSettingsForm
       end
       object DecVol: TButton
         Anchors = []
-        Position.X = 307.483215332031200000
-        Position.Y = 45.051788330078120000
+        Position.X = 307.483215332031300000
+        Position.Y = 45.051788330078130000
         Size.Width = 64.000000000000000000
         Size.Height = 64.000000000000000000
         Size.PlatformDefault = False
@@ -163,7 +163,7 @@ object SettingsForm: TSettingsForm
         Tag = 1
         Anchors = []
         Position.X = 587.822998046875000000
-        Position.Y = 45.051788330078120000
+        Position.Y = 45.051788330078130000
         Size.Width = 64.000000000000000000
         Size.Height = 64.000000000000000000
         Size.PlatformDefault = False
@@ -174,7 +174,7 @@ object SettingsForm: TSettingsForm
       end
       object DecBr: TButton
         Anchors = []
-        Position.X = 307.483215332031200000
+        Position.X = 307.483215332031300000
         Position.Y = 198.769805908203100000
         Size.Width = 64.000000000000000000
         Size.Height = 64.000000000000000000
@@ -211,7 +211,7 @@ object SettingsForm: TSettingsForm
       end
       object DecCtr: TButton
         Anchors = []
-        Position.X = 307.483215332031200000
+        Position.X = 307.483215332031300000
         Position.Y = 351.718017578125000000
         Size.Width = 64.000000000000000000
         Size.Height = 64.000000000000000000

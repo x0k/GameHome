@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
-  GameForms, FMX.ImgList, FMX.Objects, FMX.Layouts, FMX.ListBox, DataUnit,
+  GameForms, FMX.ImgList, FMX.Objects, FMX.Layouts, FMX.ListBox,
   FMX.TabControl, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo;
 
 type
@@ -56,7 +56,8 @@ implementation
 {$R *.fmx}
 
 uses
-  System.Generics.Collections;
+  System.Generics.Collections,
+  DesignManager;
 
 var
   last: TListBoxItem;

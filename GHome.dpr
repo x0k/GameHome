@@ -2,7 +2,8 @@ program GHome;
 
 uses
   System.SysUtils,
-  FMX.Forms, FMX.Dialogs,
+  FMX.Forms,
+  FMX.Dialogs,
   MainUnit in 'MainUnit.pas' {MainForm},
   SettingsUnit in 'SettingsUnit.pas' {SettingsForm},
   DataUnit in 'DataUnit.pas' {DataForm: TDataModule},
@@ -33,7 +34,8 @@ uses
   RoofUnit in 'RoofUnit.pas' {RoofForm},
   RidgeUnit in 'RidgeUnit.pas' {RidgeForm},
   MovingUnit in 'MovingUnit.pas' {MovingForm},
-  EndUnit in 'EndUnit.pas' {EndForm};
+  EndUnit in 'EndUnit.pas' {EndForm},
+  winMessages in 'winMessages.pas';
 
 {$R *.res}
 

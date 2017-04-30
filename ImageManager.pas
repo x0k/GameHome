@@ -20,8 +20,11 @@ type
     procedure setSize(img:TGlyph; s:TSizeF); overload;
 
     destructor Destroy; override;
-    constructor Create();
+    constructor Create;
   end;
+
+var
+  IM: TImageManager;
 
 implementation
 
@@ -119,9 +122,6 @@ end;
 
 destructor TImageManager.Destroy;
 begin
-  {$IFDEF DEBUG}
-  addD(self, 'Destroy');
-  {$ENDIF}
   loaded.Free;
   inherited;
 end;
@@ -129,9 +129,6 @@ end;
 // онструктор (загрузка изображений из .style в TImageList)
 constructor TImageManager.Create();
 begin
-  {$IFDEF DEBUG}
-  addD(self, 'Create Image Manager');
-  {$ENDIF}
   loaded:=TList<eResource>.create;
 end;
 

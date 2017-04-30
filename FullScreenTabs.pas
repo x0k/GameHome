@@ -5,7 +5,7 @@ interface
 uses
   System.Types, System.Generics.Collections,
   FMX.Layouts, FMX.ImgList, FMX.Objects, FMX.Types, FMX.Forms, FMX.Ani,
-  GameForms, DataUnit;
+  GameForms;
 
 type
   FSTab = class
@@ -58,7 +58,8 @@ implementation
 
 uses
   System.SysUtils,
-  FMX.Dialogs;
+  FMX.Dialogs,
+  ImageManager, DesignManager;
 
 destructor FSTab.Destroy;
 begin
@@ -89,9 +90,6 @@ destructor FSTabs.destroy;
 var
   t: FSTab;
 begin
-  {$IFDEF DEBUG}
-    addD(self, 'Destroy');
-  {$ENDIF}
   for t in tabs do
     t.Free;
   tabs.Free;
@@ -103,9 +101,6 @@ var
   f: TFmxObject;
   b: TBounds;
 begin
-  {$IFDEF DEBUG}
-    addD(self, 'Create FSTabs');
-  {$ENDIF}
   form:=fm;
   main:=m;
   tabs:=TList<FSTab>.create;

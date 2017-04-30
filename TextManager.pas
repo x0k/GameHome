@@ -51,8 +51,11 @@ type
     property Forms[index: string]:TFormText read getText;
 
     destructor Destroy; override;
-    constructor create(const sender: string);
+    constructor Create;
   end;
+
+var
+  TM: TTextManager;
 
 implementation
 
@@ -166,9 +169,6 @@ destructor TTextManager.Destroy;
 var
   p:TPair<string, TFormText>;
 begin
-  {$IFDEF DEBUG}
-    addD(self, 'Destroy');
-  {$ENDIF}
   for p in texts do
     p.Value.Free;
   texts.Free;
@@ -181,9 +181,6 @@ var
   p:TJSONPair;
   json:TJSONObject;
 begin
-  {$IFDEF DEBUG}
-    addD(self, 'Create text manager for '+sender);
-  {$ENDIF}
   texts:=TDictionary<string, TFormText>.Create;
   try
     for t in [tLevels, tMuseum, tOther] do

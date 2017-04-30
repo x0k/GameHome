@@ -67,6 +67,9 @@ type
     constructor Create;
   end;
 
+var
+  DM: TDesignManager;
+
 implementation
 
 uses
@@ -230,9 +233,6 @@ var
   p: TPair<string, TArray<TFormLayout>>;
   l: TFormLayout;
 begin
-  {$IFDEF DEBUG}
-    addD(self, 'Destroy');
-  {$ENDIF}
   for p in layouts do
     for l in p.Value do
       l.Free;
@@ -248,9 +248,6 @@ var
   val: TJSONValue;
   m: TArray<TFormLayout>;
 begin
-  {$IFDEF DEBUG}
-    addD(self, 'Create Designe Manager');
-  {$ENDIF}
   layouts:=TDictionary<string, TArray<TFormLayout>>.Create;
   try
     if findTexts(tLayouts) then

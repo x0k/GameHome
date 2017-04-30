@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo, FMX.Objects, FMX.StdCtrls,
-  FMX.Layouts, DataUnit, FMX.ImgList, FMX.ani,
+  FMX.Layouts, FMX.ImgList, FMX.ani,
   GameForms;
 
 type
@@ -35,6 +35,9 @@ var
 implementation
 
 {$R *.fmx}
+
+uses
+  TextManager;
 
 procedure TTaskForm.onFormCreate;
 begin
