@@ -102,7 +102,7 @@ begin
   begin
     points[i]:=getPoint(i);
     circles[i]:=TGlyph.Create(own);
-    circles[i].Images:=getImgList(rOther);
+    circles[i].Images:=getImgList(rSwitchers);
     circles[i].OnDragOver:=over;
     circles[i].OnDragDrop:=drop;
     circles[i].AutoHide:=false;
@@ -176,7 +176,7 @@ begin
   if findId(g.ImageIndex)>=0 then
     hideCir(findId(g.ImageIndex));
   showCir(s, g.ImageIndex);
-  if (circles[0].ImageIndex=32)and(circles[1].ImageIndex=34)and(circles[2].ImageIndex=33)and(circles[3].ImageIndex=31) then
+  if (circles[0].ImageIndex=9)and(circles[1].ImageIndex=11)and(circles[2].ImageIndex=10)and(circles[3].ImageIndex=8) then
     (Owner as TGForm).win
   else
   begin

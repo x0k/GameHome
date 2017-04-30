@@ -316,8 +316,8 @@
 				},
 				{
 					"Name": "Grid",
-					"TextSize": [40, 1.1, 1.3],
-					"TabsSize": [1.1, 1.3]	
+					"TextSize": [40, 1.1, 1.6],
+					"TabsSize": [1.1, 1.2]	
 				}
 			]
 		}

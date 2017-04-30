@@ -29,16 +29,16 @@ object RoofForm: TRoofForm
       Size.Width = 1280.000000000000000000
       Size.Height = 361.000000000000000000
       Size.PlatformDefault = False
-      ImageIndex = 10
-      Images = DataForm.Sequence
+      ImageIndex = 22
+      Images = DataForm.Switchers
       object roof: TGlyph
         Align = Client
         Opacity = 0.000000000000000000
         Size.Width = 1280.000000000000000000
         Size.Height = 361.000000000000000000
         Size.PlatformDefault = False
-        ImageIndex = 11
-        Images = DataForm.Sequence
+        ImageIndex = 23
+        Images = DataForm.Switchers
       end
     end
     object Grid: TLayout
@@ -60,7 +60,7 @@ object RoofForm: TRoofForm
           Size.Width = 320.000000000000000000
           Size.Height = 359.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 0
+          ImageIndex = 10
           Images = DataForm.Sequence
           object T0: TText
             Tag = 1
@@ -95,7 +95,7 @@ object RoofForm: TRoofForm
           Size.Width = 320.000000000000000000
           Size.Height = 359.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 1
+          ImageIndex = 11
           Images = DataForm.Sequence
           object T1: TText
             Tag = 2
@@ -130,7 +130,7 @@ object RoofForm: TRoofForm
           Size.Width = 320.000000000000000000
           Size.Height = 359.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 2
+          ImageIndex = 12
           Images = DataForm.Sequence
           object T2: TText
             Tag = 3
@@ -165,7 +165,7 @@ object RoofForm: TRoofForm
           Size.Width = 320.000000000000000000
           Size.Height = 359.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 3
+          ImageIndex = 13
           Images = DataForm.Sequence
           object T3: TText
             Tag = 4

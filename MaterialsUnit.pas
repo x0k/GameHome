@@ -49,11 +49,11 @@ begin
   backgrounds:=[BG];
   layouts:=[main];
   tabs:=FSTabs.create(self, grid, 0);
+  tabs.afterClick:=isWin;
   setItem(0, t0);
   setItem(1, t1);
   setItem(2, t2);
   setItem(3, t3);
-  tabs.afterClick:=isWin;
   a:=false;
   b:=false;
 end;

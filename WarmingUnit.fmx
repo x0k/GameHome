@@ -86,7 +86,7 @@ object WarmingForm: TWarmingForm
               Size.Width = 177.000000000000000000
               Size.Height = 280.000000000000000000
               Size.PlatformDefault = False
-              ImageIndex = 36
+              ImageIndex = 23
               Images = DataForm.Other
             end
             object c2: TGlyph
@@ -96,7 +96,7 @@ object WarmingForm: TWarmingForm
               Size.Width = 225.000000000000000000
               Size.Height = 185.000000000000000000
               Size.PlatformDefault = False
-              ImageIndex = 44
+              ImageIndex = 31
               Images = DataForm.Other
             end
             object a3: TGlyph
@@ -107,7 +107,7 @@ object WarmingForm: TWarmingForm
               Size.Width = 185.000000000000000000
               Size.Height = 239.000000000000000000
               Size.PlatformDefault = False
-              ImageIndex = 37
+              ImageIndex = 24
               Images = DataForm.Other
             end
             object c3: TGlyph
@@ -117,7 +117,7 @@ object WarmingForm: TWarmingForm
               Size.Width = 208.000000000000000000
               Size.Height = 178.000000000000000000
               Size.PlatformDefault = False
-              ImageIndex = 45
+              ImageIndex = 32
               Images = DataForm.Other
             end
             object b1: TGlyph
@@ -127,7 +127,7 @@ object WarmingForm: TWarmingForm
               Size.Width = 165.000000000000000000
               Size.Height = 137.000000000000000000
               Size.PlatformDefault = False
-              ImageIndex = 38
+              ImageIndex = 25
               Images = DataForm.Other
             end
           end
@@ -144,7 +144,7 @@ object WarmingForm: TWarmingForm
               Size.Width = 350.000000000000000000
               Size.Height = 280.000000000000000000
               Size.PlatformDefault = False
-              ImageIndex = 35
+              ImageIndex = 22
               Images = DataForm.Other
             end
             object b2: TGlyph
@@ -154,7 +154,7 @@ object WarmingForm: TWarmingForm
               Size.Width = 150.000000000000000000
               Size.Height = 150.000000000000000000
               Size.PlatformDefault = False
-              ImageIndex = 39
+              ImageIndex = 26
               Images = DataForm.Other
             end
             object b3: TGlyph
@@ -165,7 +165,7 @@ object WarmingForm: TWarmingForm
               Size.Width = 113.000000000000000000
               Size.Height = 165.000000000000000000
               Size.PlatformDefault = False
-              ImageIndex = 40
+              ImageIndex = 27
               Images = DataForm.Other
             end
             object b5: TGlyph
@@ -175,7 +175,7 @@ object WarmingForm: TWarmingForm
               Size.Width = 126.000000000000000000
               Size.Height = 139.000000000000000000
               Size.PlatformDefault = False
-              ImageIndex = 42
+              ImageIndex = 29
               Images = DataForm.Other
             end
             object c4: TGlyph
@@ -185,7 +185,7 @@ object WarmingForm: TWarmingForm
               Size.Width = 225.000000000000000000
               Size.Height = 137.000000000000000000
               Size.PlatformDefault = False
-              ImageIndex = 46
+              ImageIndex = 33
               Images = DataForm.Other
             end
             object c1: TGlyph
@@ -195,7 +195,7 @@ object WarmingForm: TWarmingForm
               Size.Width = 225.000000000000000000
               Size.Height = 137.000000000000000000
               Size.PlatformDefault = False
-              ImageIndex = 43
+              ImageIndex = 30
               Images = DataForm.Other
             end
             object b4: TGlyph
@@ -205,7 +205,7 @@ object WarmingForm: TWarmingForm
               Size.Width = 128.000000000000000000
               Size.Height = 153.000000000000000000
               Size.PlatformDefault = False
-              ImageIndex = 41
+              ImageIndex = 28
               Images = DataForm.Other
             end
           end

@@ -59,8 +59,8 @@ object MaterialsForm: TMaterialsForm
         Size.Width = 1000.000000000000000000
         Size.Height = 288.000000000000000000
         Size.PlatformDefault = False
-        ImageIndex = 17
-        Images = DataForm.Other
+        ImageIndex = 14
+        Images = DataForm.Images
       end
     end
     object Grid: TLayout
@@ -83,8 +83,8 @@ object MaterialsForm: TMaterialsForm
           Size.Width = 172.000000000000000000
           Size.Height = 382.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 18
-          Images = DataForm.Other
+          ImageIndex = 0
+          Images = DataForm.Switchers
         end
         object T0: TText
           Tag = 1
@@ -117,8 +117,8 @@ object MaterialsForm: TMaterialsForm
           Size.Width = 172.000000000000000000
           Size.Height = 382.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 20
-          Images = DataForm.Other
+          ImageIndex = 2
+          Images = DataForm.Switchers
         end
         object T1: TText
           Tag = 2
@@ -151,8 +151,8 @@ object MaterialsForm: TMaterialsForm
           Size.Width = 172.000000000000000000
           Size.Height = 382.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 22
-          Images = DataForm.Other
+          ImageIndex = 4
+          Images = DataForm.Switchers
         end
         object T2: TText
           Tag = 3
@@ -185,8 +185,8 @@ object MaterialsForm: TMaterialsForm
           Size.Width = 172.000000000000000000
           Size.Height = 382.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 24
-          Images = DataForm.Other
+          ImageIndex = 6
+          Images = DataForm.Switchers
         end
         object T3: TText
           Tag = 4

@@ -59,7 +59,7 @@ object MapForm: TMapForm
             Size.Width = 65.000000000000000000
             Size.Height = 44.000000000000000000
             Size.PlatformDefault = False
-            ImageIndex = 30
+            ImageIndex = 21
             Images = DataForm.Other
           end
           object sp: TPath
@@ -168,7 +168,7 @@ object MapForm: TMapForm
             Position.X = 92.800003051757810000
             Position.Y = 312.000000000000000000
             Size.Width = 47.199996948242190000
-            Size.Height = 53.600006103515620000
+            Size.Height = 53.600006103515630000
             Size.PlatformDefault = False
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
@@ -260,8 +260,8 @@ object MapForm: TMapForm
               BF818E438189B34203000000BF818E437F89B342}
             Position.X = 156.800003051757800000
             Position.Y = 68.800003051757810000
-            Size.Width = 94.400009155273430000
-            Size.Height = 69.599990844726570000
+            Size.Width = 94.400009155273440000
+            Size.Height = 69.599990844726560000
             Size.PlatformDefault = False
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
@@ -400,7 +400,7 @@ object MapForm: TMapForm
             Position.X = 197.600006103515600000
             Position.Y = 167.199996948242200000
             Size.Width = 76.000000000000000000
-            Size.Height = 62.400009155273430000
+            Size.Height = 62.400009155273440000
             Size.PlatformDefault = False
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
@@ -478,8 +478,8 @@ object MapForm: TMapForm
               2FEDCD43DFEC9243030000002FEDCD43DFEC9243}
             Position.X = 187.199996948242200000
             Position.Y = 203.199996948242200000
-            Size.Width = 80.000015258789070000
-            Size.Height = 94.400009155273430000
+            Size.Width = 80.000015258789060000
+            Size.Height = 94.400009155273440000
             Size.PlatformDefault = False
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
@@ -693,7 +693,7 @@ object MapForm: TMapForm
             Position.X = 140.800003051757800000
             Position.Y = 242.400009155273400000
             Size.Width = 68.800003051757810000
-            Size.Height = 77.599990844726570000
+            Size.Height = 77.599990844726560000
             Size.PlatformDefault = False
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
@@ -762,7 +762,7 @@ object MapForm: TMapForm
             Position.X = 83.200004577636720000
             Position.Y = 260.000000000000000000
             Size.Width = 40.000000000000000000
-            Size.Height = 60.799987792968760000
+            Size.Height = 60.799987792968750000
             Size.PlatformDefault = False
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop

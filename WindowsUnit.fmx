@@ -30,16 +30,16 @@ object WindowsForm: TWindowsForm
       Size.Width = 1280.000000000000000000
       Size.Height = 361.000000000000000000
       Size.PlatformDefault = False
-      ImageIndex = 10
-      Images = DataForm.Sequence
+      ImageIndex = 12
+      Images = DataForm.Switchers
       object Window: TGlyph
         Align = Client
         Opacity = 0.000000000000000000
         Size.Width = 1280.000000000000000000
         Size.Height = 361.000000000000000000
         Size.PlatformDefault = False
-        ImageIndex = 11
-        Images = DataForm.Sequence
+        ImageIndex = 13
+        Images = DataForm.Switchers
       end
     end
     object Grid: TLayout
@@ -60,8 +60,8 @@ object WindowsForm: TWindowsForm
           Size.Width = 212.000000000000000000
           Size.Height = 309.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 47
-          Images = DataForm.Other
+          ImageIndex = 14
+          Images = DataForm.Switchers
         end
         object T0: TText
           Tag = 1
@@ -92,8 +92,8 @@ object WindowsForm: TWindowsForm
           Size.Width = 212.000000000000000000
           Size.Height = 309.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 48
-          Images = DataForm.Other
+          ImageIndex = 16
+          Images = DataForm.Switchers
         end
         object T1: TText
           Tag = 2
@@ -124,8 +124,8 @@ object WindowsForm: TWindowsForm
           Size.Width = 212.000000000000000000
           Size.Height = 309.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 49
-          Images = DataForm.Other
+          ImageIndex = 18
+          Images = DataForm.Switchers
         end
         object T2: TText
           Tag = 3
@@ -156,8 +156,8 @@ object WindowsForm: TWindowsForm
           Size.Width = 212.000000000000000000
           Size.Height = 309.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 50
-          Images = DataForm.Other
+          ImageIndex = 20
+          Images = DataForm.Switchers
         end
         object T3: TText
           Tag = 4

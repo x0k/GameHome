@@ -16,6 +16,8 @@ type
     Other: TImageList;
     Images: TImageList;
     winMuseum: TImageList;
+    Switchers: TImageList;
+    StyleBook1: TStyleBook;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   end;
@@ -115,9 +117,9 @@ begin
   if not dbgMode then
   begin
     sendMsg(setCount, (5).ToString);
-    IM.add(rMuseum);
+    //IM.add(rMuseum);
     sendMsg(upCount, 'Loading: Museum');
-    IM.add(rWinMuseum);
+    //IM.add(rWinMuseum);
     sendMsg(upCount, 'Loading: Sequences');
   end else sendMsg(setCount, (3).ToString);
   IM.add(rSequences);

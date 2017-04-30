@@ -44,8 +44,8 @@ object RidgeForm: TRidgeForm
           Size.Width = 136.000000000000000000
           Size.Height = 359.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 18
-          Images = DataForm.Other
+          ImageIndex = 26
+          Images = DataForm.Switchers
         end
         object T0: TText
           Tag = 1
@@ -79,8 +79,8 @@ object RidgeForm: TRidgeForm
           Size.Width = 136.000000000000000000
           Size.Height = 359.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 20
-          Images = DataForm.Other
+          ImageIndex = 28
+          Images = DataForm.Switchers
         end
         object T1: TText
           Tag = 2
@@ -114,8 +114,8 @@ object RidgeForm: TRidgeForm
           Size.Width = 136.000000000000000000
           Size.Height = 359.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 22
-          Images = DataForm.Other
+          ImageIndex = 30
+          Images = DataForm.Switchers
         end
         object T2: TText
           Tag = 3
@@ -149,8 +149,8 @@ object RidgeForm: TRidgeForm
           Size.Width = 136.000000000000000000
           Size.Height = 359.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 24
-          Images = DataForm.Other
+          ImageIndex = 32
+          Images = DataForm.Switchers
         end
         object T3: TText
           Tag = 3
@@ -184,8 +184,8 @@ object RidgeForm: TRidgeForm
           Size.Width = 136.000000000000000000
           Size.Height = 359.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 24
-          Images = DataForm.Other
+          ImageIndex = 34
+          Images = DataForm.Switchers
         end
         object T4: TText
           Tag = 4
@@ -209,16 +209,16 @@ object RidgeForm: TRidgeForm
       Size.Width = 1280.000000000000000000
       Size.Height = 361.000000000000000000
       Size.PlatformDefault = False
-      ImageIndex = 10
-      Images = DataForm.Sequence
-      object roof: TGlyph
+      ImageIndex = 24
+      Images = DataForm.Switchers
+      object Ridge: TGlyph
         Align = Client
         Opacity = 0.000000000000000000
         Size.Width = 1280.000000000000000000
         Size.Height = 361.000000000000000000
         Size.PlatformDefault = False
-        ImageIndex = 11
-        Images = DataForm.Sequence
+        ImageIndex = 25
+        Images = DataForm.Switchers
       end
     end
   end

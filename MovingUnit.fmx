@@ -245,7 +245,7 @@ object MovingForm: TMovingForm
           Size.Width = 581.000000000000000000
           Size.Height = 301.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 12
+          ImageIndex = 14
           Images = DataForm.Sequence
         end
         object line2: TGlyph
@@ -253,7 +253,7 @@ object MovingForm: TMovingForm
           Size.Width = 581.000000000000000000
           Size.Height = 301.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 14
+          ImageIndex = 16
           Images = DataForm.Sequence
         end
         object line3: TGlyph
@@ -261,7 +261,7 @@ object MovingForm: TMovingForm
           Size.Width = 581.000000000000000000
           Size.Height = 301.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 16
+          ImageIndex = 18
           Images = DataForm.Sequence
         end
         object line4: TGlyph
@@ -269,7 +269,7 @@ object MovingForm: TMovingForm
           Size.Width = 581.000000000000000000
           Size.Height = 301.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 18
+          ImageIndex = 20
           Images = DataForm.Sequence
         end
       end
