@@ -31,6 +31,7 @@ type
   protected
     procedure onFormCreate; override;
     procedure enter(tab: FSTab);
+    procedure isWin(tab: FSTab);
   end;
 
 implementation
@@ -39,6 +40,7 @@ implementation
 
 var
   Tabs: FSTabs;
+  wr: boolean;
 
 procedure TFoundationForm.enter(tab: FSTab);
 begin
@@ -50,17 +52,29 @@ begin
   backgrounds:=[BG, home];
   layouts:=[main, home];
   Tabs:=FSTabs.create(self, main, 2);
+  Tabs.afterClick:=isWin;
   Tabs.afterEnter:=enter;
   setItem(0, t0);
   setItem(1, t1);
   setItem(2, t2);
   setItem(3, t3);
   Tabs.setSize(false, false);
+  wr:=false;
 end;
 
 procedure TFoundationForm.FormDestroy(Sender: TObject);
 begin
   tabs.Free;
+end;
+
+procedure TFoundationForm.isWin(tab: FSTab);
+begin
+  if tab.layer.TabOrder=2 then
+  begin
+    win;
+    if not wr then setMedal(3);
+  end;
+  wr:=true;
 end;
 
 end.

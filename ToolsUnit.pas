@@ -38,6 +38,7 @@ var
 procedure TToolsForm.addWin;
 begin
   a:=false;b:=false;
+  setBonus(2);
 end;
 
 procedure TToolsForm.onFormCreate;

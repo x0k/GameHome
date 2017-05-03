@@ -42,7 +42,7 @@ implementation
 
 var
   tabs:FSTabs;
-  a, b: boolean;
+  a, b, wr: boolean;
 
 procedure TMaterialsForm.onFormCreate;
 begin
@@ -56,6 +56,7 @@ begin
   setItem(3, t3);
   a:=false;
   b:=false;
+  wr:=false;
 end;
 
 procedure TMaterialsForm.addShow;
@@ -68,10 +69,15 @@ begin
   case tab.txt.Tag of
     1: a:=true;
     3: b:=true;
+    else wr:=true;
   end;
   setText(tab.layer.TabOrder);
   if tab.img.ImageIndex mod 2=0 then tab.img.ImageIndex:=tab.img.ImageIndex+1;
-  if a and b then win;  
+  if a and b then
+  begin
+    win;
+    if not wr then setMedal(2);
+  end;
 end;
 
 procedure TMaterialsForm.FormDestroy(Sender: TObject);

@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.Classes,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Controls.Presentation, FMX.StdCtrls,
-  FMX.Objects, FMX.Layouts, FMX.ImgList, FGX.ApplicationEvents;
+  FMX.Objects, FMX.Layouts, FMX.ImgList, FMX.ListBox;
 
 type
   TMainForm = class(TForm)
@@ -61,7 +61,6 @@ var
   m: TArray<TText>;
 begin
   IM.setSize(BG, Screen.Size);
-
   m:=[text1, text2, text3, text4, text5];
   t:=TM.Forms[name];
   text6.Text:=t.Names[0];

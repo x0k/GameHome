@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.ScrollBox,
   FMX.Memo, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Objects,
   FMX.Layouts, FMX.TabControl, DataUnit, FMX.ImgList, FMX.Ani,
-  GameForms;
+  GameForms, FullScreenTabs;
 
 type
   TPlaceForm = class(TGTabForm)
@@ -36,16 +36,12 @@ type
   protected
     procedure onFormCreate; override;
     procedure addShow; override;
+    procedure isWin(tab: FSTab);
   end;
-
-
 
 implementation
 
 {$R *.fmx}
-
-uses
-  FullScreenTabs;
 
 var
   fTabs: FSTabs;
@@ -57,6 +53,7 @@ begin
   gTabs:=tabs;
   gTab:=1;
   fTabs:=FSTabs.create(self, main2, 2);
+  fTabs.afterClick:=isWin;
   setItem(0, Text0);
   setItem(1, Text1);
   setItem(2, Text2);
@@ -71,6 +68,15 @@ end;
 procedure TPlaceForm.FormDestroy(Sender: TObject);
 begin
   fTabs.Free;
+end;
+
+procedure TPlaceForm.isWin(tab: FSTab);
+begin
+  if tab.layer.TabOrder=2 then
+  begin
+    win;
+    setBonus(1);
+  end;
 end;
 
 end.

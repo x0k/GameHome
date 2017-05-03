@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.Classes,
   FMX.Types, FMX.Controls, FMX.Objects, FMX.Layouts, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Ani, FMX.ImgList,
-  GameForms;
+  GameForms, FullScreenTabs;
 
 type
   TSeazonForm = class(TGForm)
@@ -27,6 +27,7 @@ type
   protected
     procedure onFormCreate; override;
     procedure addShow; override;
+    procedure isWin(tab: FSTab);
   end;
 
 implementation
@@ -34,21 +35,23 @@ implementation
 {$R *.fmx}
 
 uses
-  FMX.Dialogs,
-  FullScreenTabs;
+  FMX.Dialogs;
 
 var
   Tabs: FSTabs;
+  first: boolean;
 
 procedure TSeazonForm.onFormCreate;
 begin
   backgrounds:=[BG];
   layouts:=[Main];
   Tabs:=FSTabs.create(self, main, 1);
+  Tabs.afterClick:=isWin;
   setItem(0, t0);
   setItem(1, t1);
   setItem(2, t2);
   setItem(3, t3);
+  first:=true;
 end;
 
 procedure TSeazonForm.addShow;
@@ -59,6 +62,16 @@ end;
 procedure TSeazonForm.FormDestroy(Sender: TObject);
 begin
   Tabs.Free;
+end;
+
+procedure TSeazonForm.isWin(tab: FSTab);
+begin
+  if tab.layer.TabOrder=1 then
+  begin
+    win;
+    if first then setMedal(1);
+  end;
+  first:=false;
 end;
 
 end.

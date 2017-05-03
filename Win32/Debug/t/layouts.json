@@ -324,7 +324,7 @@
 	],
 	"RidgeForm": [
 		{
-			"Name": "Main",
+			"Name": "Main1",
 			"Margins": [10, 10, 10, 16],
 			"Childrens":[
 				{
@@ -334,6 +334,22 @@
 				},
 				{
 					"Name": "Grid",
+					"TextSize": [40, 1, 1],
+					"TabsSize": [1, 1.2]	
+				}
+			]
+		},
+		{
+			"Name": "Main2",
+			"Margins": [10, 10, 10, 16],
+			"Childrens":[
+				{
+					"Name": "homeDecor",
+					"Bounds": [0, 0, 80, 40],
+					"Margins": [0, 0, 0, 10]
+				},
+				{
+					"Name": "Decs",
 					"TextSize": [40, 1, 1],
 					"TabsSize": [1, 1.2]	
 				}

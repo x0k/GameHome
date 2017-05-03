@@ -47,6 +47,7 @@ uses
 
 var
   tabs:FSTabs;
+  wr: boolean;
 
 procedure TWindowsForm.addWin;
 begin
@@ -64,6 +65,7 @@ begin
   setItem(1, t1);
   setItem(2, t2);
   setItem(3, t3);
+  wr:=false;
 end;
 
 procedure TWindowsForm.addShow;
@@ -79,7 +81,11 @@ end;
 procedure TWindowsForm.isWin(tab: FSTab);
 begin
   if tab.img.ImageIndex mod 2=0 then tab.img.ImageIndex:=tab.img.ImageIndex+1;
-  if tab.txt.Tag=4 then win;
+  if tab.txt.Tag=4 then
+  begin
+    win;
+    if not wr then setMedal(6);
+  end else wr:=true;
 end;
 
 end.

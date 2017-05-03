@@ -57,6 +57,7 @@ end;
 procedure TTaskForm.addWin;
 begin
   Num.StyleLookup:='SelText';
+  setBonus(3);
 end;
 
 procedure TTaskForm.DecClick(Sender: TObject);

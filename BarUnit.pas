@@ -19,13 +19,7 @@ type
     Logo: TGlyph;
     tools: TGlyph;
     woods: TGlyph;
-    adws: TGridLayout;
-    m0: TGlyph;
-    m1: TGlyph;
-    m2: TGlyph;
-    m3: TGlyph;
-    m4: TGlyph;
-    m5: TGlyph;
+    medal: TGlyph;
     body: TGlyph;
     wh1: TGlyph;
     wh2: TGlyph;
@@ -37,20 +31,27 @@ type
     nextLayout: TLayout;
     SubLogo: TGlyph;
     backLayout: TLayout;
-    Glyph1: TGlyph;
+    shepa: TGlyph;
     progress: TLayout;
     imgs: TImageList;
+    medalTxt: TText;
+    coins: TLayout;
+    bonusBtn: TButton;
     procedure RBonusMouseLeave(Sender: TObject);
     procedure logoLayoutClick(Sender: TObject);
   protected
     dots:TArray<TGlyph>;
-    procedure showBonus(Sender: TObject);
+
     function getNxt: boolean;
     procedure setNxt(v: boolean);
   public
     procedure setDots(c: byte);
     procedure setDot(i: byte; v: byte);
     procedure hideBonus;
+    procedure showBonus(Sender: TObject);
+
+    function getBonus(id: byte): TGlyph;
+    procedure setMedals(c: byte);
 
     property nxtBtn: boolean read getNxt write setNxt;
     property dotsStat[index: byte]: byte write setDot;
@@ -99,6 +100,12 @@ begin
   g.Free;
 end;
 
+procedure TBar.setMedals(c: byte);
+begin
+  medalTxt.Text:='x'+c.ToString;
+  coins.Visible:=c>0;
+end;
+
 procedure TBar.setDot;
 begin
   if i<length(dots) then
@@ -113,13 +120,9 @@ end;
 procedure TBar.showBonus(Sender: TObject);
 begin
   if open then
-  begin
-    TAnimator.AnimateFloat(Rbonus, 'Position.X', (parent as TBarForm).Width);
-    TAnimator.AnimateFloat(NextBtn, 'RotationAngle', 0);
-  end else begin
+    TAnimator.AnimateFloat(Rbonus, 'Position.X', (parent as TBarForm).Width)
+  else
     TAnimator.AnimateFloat(Rbonus, 'Position.X', (parent as TBarForm).Width-w);
-    TAnimator.AnimateFloat(NextBtn, 'RotationAngle', 180);
-  end;
   open:=not open;
 end;
 
@@ -155,6 +158,21 @@ begin
   begin
     TAnimator.AnimateFloat(NextLayout, 'opacity', 0);
     NextBtn.Visible:=false;
+  end;
+end;
+
+function TBar.getBonus(id: byte): TGlyph;
+begin
+  result:=nil;
+  case id of
+    1:result:=wh1;
+    2:result:=tools;
+    3:result:=woods;
+    4:result:=shepa;
+    5:result:=wh2;
+    6:result:=body;
+    7:result:=st1;
+    8:result:=st2;
   end;
 end;
 

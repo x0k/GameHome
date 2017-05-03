@@ -16,7 +16,6 @@ type
     Images: TImageList;
     winMuseum: TImageList;
     Switchers: TImageList;
-    StyleBook1: TStyleBook;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   end;
@@ -34,7 +33,7 @@ implementation
 
 uses
   System.SysUtils,
-  FMX.Ani, FMX.Forms, FMX.Dialogs,
+  FMX.Ani, FMX.Forms, FMX.Dialogs, FMX.Styles,
   GameForms, ImageManager, GameData, BarUnit, DesignManager, TextManager, SoundManager, ResourcesManager, winMessages;
 
 procedure TDataForm.DataModuleCreate(Sender: TObject);
@@ -65,6 +64,9 @@ begin
   IM.add(rImages);
   sendMsg(cUpCount, 'Loading: Other');
   IM.add(rOther);
+  {$IFDEF RELEASE}
+  TStyleManager.SetStyleFromFile(pathResource(rStyle));
+  {$ENDIF}
   sendMsg(cUpCount, 'Done.');
 end;
 

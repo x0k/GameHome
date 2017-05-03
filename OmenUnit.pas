@@ -63,7 +63,7 @@ uses
   ResourcesManager;
 
 var
-  t:boolean;
+  t, wr:boolean;
   walls:TWalls;
   tabs:FSTabs;
 
@@ -182,6 +182,7 @@ begin
   begin
     for i:=0 to 3 do
       if circles[i].ImageIndex=-1 then exit;
+    wr:=true;
     clear;
   end;
 end;
@@ -199,6 +200,7 @@ begin
   Walls:=TWalls.create(self, left);
   tabs:=FSTabs.create(self, grid, 0);
   tabs.afterEnter:=enter;
+  wr:=false;
 end;
 
 procedure TOmenForm.addShow;
@@ -211,7 +213,10 @@ end;
 procedure TOmenForm.addWin;
 begin
   t:=true;
+  if not wr then setMedal(4);
   setText(5);
+  setBonus(6);
+  setBonus(4, false);
 end;
 
 procedure TOmenForm.FormDestroy(Sender: TObject);

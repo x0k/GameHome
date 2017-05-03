@@ -8,19 +8,25 @@ uses
   BarUnit, Forms;
 
 const
-  AWD_COUNT = 17;
   LVL_COUNT = 15;
+  AWD_COUNT = 8;
+  MDL_COUNT = 7;
 
 type
   TGForm = class(TBarForm)
   protected class var
     states:array[0..LVL_COUNT] of byte;
-    //awards:array[1..AWD_COUNT] of boolean;
+    awards:array[1..AWD_COUNT] of boolean;
+    medals:array[1..MDL_COUNT] of boolean;
   protected
     level: byte;
     backgrounds: TArray<TGlyph>;
     layouts: TArray<TControl>;
     clickBlock: boolean;
+
+    procedure setBonus(id: byte; v: boolean = true);
+    function medalCount: byte;
+    procedure setMedal(id: byte; v: boolean = true);
 
     function getStatus:byte;
     procedure setStatus(s:byte);
@@ -129,6 +135,8 @@ end;
 procedure TGForm.setStatus(s: Byte);
 begin
   states[level]:=s;
+  if (level<LVL_COUNT-1)and(s>1) then
+    (gameForm as TGameForm).getButton(level+1).Enabled:=true;
   if s<2 then Bar.dotsStat[level]:=s
     else Bar.dotsStat[level]:=2;
 end;
@@ -157,9 +165,34 @@ var
 begin
   for i:=0 to LVL_COUNT do
     states[i]:=0;
+  for i:=1 to AWD_COUNT do
+    setBonus(i, false);
+  for i:=1 to MDL_COUNT do
+    setMedal(i, false);
   GameForm.Hide;
   GameForm.gTabs.TabIndex:=0;
   if level>0 then self.Destroy;
+end;
+
+procedure TGForm.setBonus(id: Byte; v: boolean);
+begin
+  awards[id]:=v;
+  Bar.getBonus(id).Visible:=v;
+end;
+
+function TGForm.medalCount: byte;
+var
+  b: boolean;
+begin
+  result:=0;
+  for b in medals do
+    if b then inc(result);
+end;
+
+procedure TGForm.setMedal(id: byte; v: boolean);
+begin
+  medals[id]:=v;
+  Bar.setMedals(medalCount);
 end;
 
 procedure TGForm.addShow;
@@ -276,6 +309,8 @@ procedure TGForm.setBarEvents;
 begin
   with Bar do
   begin
+    bonusBtn.Visible:=true;
+    bonusBtn.OnClick:=showBonus;
     progress.Visible:=true;
     NextBtn.OnClick:=(self as TGForm).Next;
     BackBtn.OnClick:=(self as TGForm).Back;
@@ -329,7 +364,7 @@ begin
     state:=0;
   if level>0 then
   begin
-    showForm(level-1);
+    showForm(0);
     Destroy;
   end else gameExit;
 end;
@@ -340,6 +375,8 @@ procedure TGTabForm.setBarEvents;
 begin
   with Bar do
   begin
+    bonusBtn.Visible:=true;
+    bonusBtn.OnClick:=showBonus;
     progress.Visible:=true;
     NextBtn.OnClick:=(self as TGForm).Next;
     BackBtn.OnClick:=(self as TGForm).Back;
@@ -400,9 +437,11 @@ begin
   begin
     hideAni;
     if Assigned(Bar.Parent) then Bar.Parent:=nil;
+    if state<2 then
+      state:=0;
     if level>0 then
     begin
-      showForm(level-1);
+      showForm(0);
       destroy;
     end else gameExit;
   end;

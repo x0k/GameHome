@@ -55,6 +55,7 @@ var
   w:single;
   c:TContrastEffect;
   inn:TInnerGlowEffect;
+  wr: boolean;
 
 procedure TWarmingForm.click(Sender: TObject);
 begin
@@ -62,7 +63,8 @@ begin
   setText(TFmxObject(sender).Tag);
   c.Parent:=TFmxObject(sender);
 
-  if TFmxObject(sender).Tag=1 then win;
+  if TFmxObject(sender).Tag=1 then win
+    else wr:=true;
 end;
 
 procedure TWarmingForm.enter(Sender: TObject);
@@ -91,6 +93,7 @@ begin
   layouts:=[main, BG4];
   gTabs:=tabs;
   gTab:=0;
+  wr:=false;
 
   c:=TContrastEffect.Create(self);
   inn:=TInnerGlowEffect.Create(self);
@@ -112,6 +115,7 @@ end;
 procedure TWarmingForm.addWin;
 begin
   TAnimator.AnimateFloatWait(mox, 'opacity', 1);
+  if not wr then setMedal(5);
   home.ImageIndex:=-1;
 end;
 

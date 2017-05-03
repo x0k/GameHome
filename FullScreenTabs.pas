@@ -18,7 +18,6 @@ type
     property img: TGlyph read image;
     property layer: TLayout read layout;
 
-    destructor Destroy; override;
     constructor create(l: TLayout);
   end;
 
@@ -35,8 +34,10 @@ type
     sizes:TArray<single>;
 
     winId: byte;
+    setTxt: boolean;
     txtAni: boolean;
     tbsAni: boolean;
+    block: boolean;
 
     w, AddW, MaxW: single;
     s, AddS, MaxS: single;
@@ -44,14 +45,16 @@ type
   public
     afterClick: idAct;
     afterEnter: idAct;
+    afterLeave: idAct;
 
     procedure setSize(img, txt: boolean);
 
     procedure onClick(sender: TObject);
     procedure onEnter(sender: TObject);
+    procedure onLeave(sender: TObject);
 
     destructor Destroy; override;
-    constructor create(fm: TGForm; m: TLayout; wId: byte);
+    constructor create(fm: TGForm; m: TLayout; wId: byte; sTxt: boolean = true);
   end;
 
 implementation
@@ -60,11 +63,6 @@ uses
   System.SysUtils,
   FMX.Dialogs,
   ImageManager, DesignManager;
-
-destructor FSTab.Destroy;
-begin
-  inherited;
-end;
 
 constructor FSTab.create(l: TLayout);
 var
@@ -96,13 +94,14 @@ begin
   inherited;
 end;
 
-constructor FSTabs.create(fm: TGForm; m: TLayout; wId: byte);
+constructor FSTabs.create(fm: TGForm; m: TLayout; wId: byte; sTxt: boolean);
 var
   f: TFmxObject;
   b: TBounds;
 begin
   form:=fm;
   main:=m;
+  setTxt:=sTxt;
   tabs:=TList<FSTab>.create;
   for f in m.Children do
     if f is TLayout then
@@ -115,6 +114,7 @@ begin
   tbsAni:=DM.getFormLayout(form.Name, main.Name).Animation;
   if assigned(b) then xZero:=b.Left
     else xZero:=0;
+  block:=false;
 end;
 
 procedure FSTabs.setSize(img, txt: Boolean);
@@ -141,6 +141,7 @@ begin
       tabs[i].layout.Height:=main.Height;
       tabs[i].layout.HitTest:=true;
       tabs[i].layout.OnMouseEnter:=onEnter;
+      tabs[i].layout.OnMouseLeave:=onLeave;
       tabs[i].layout.OnClick:=onClick;
       if img then IM.setSize(tabs[i].image, TSizeF.Create(tabs[i].layout.Width, tabs[i].layout.Height));
       if txt then tabs[i].text.TextSettings.Font.Size:=S;
@@ -153,41 +154,45 @@ procedure FSTabs.onClick;
 var
   id, c: byte;
 begin
+  if block then exit;
   id:=TLayout(sender).TabOrder;
   c:=tabs.Count-1;
-  if (shw>=0)and(c>0) then
-  begin
-    if txtAni then TAnimator.AnimateFloat(tabs[shw].text, 'TextSettings.Font.Size', S);
-    if tbsAni then
+  if c>0 then
+    if shw>=0 then
     begin
-      TAnimator.AnimateFloat(tabs[shw].layout, 'width', w);
-      TAnimator.AnimateFloat(Main, 'Position.X', xZero);
-    end;
-    shw:=-1;
-  end
-  else
-  begin
-    shw:=id;
-    Form.setText(id);
-    if txtAni then TAnimator.AnimateFloat(tabs[id].text, 'TextSettings.Font.Size', maxS);
-    if tbsAni then
+      if txtAni then TAnimator.AnimateFloat(tabs[shw].text, 'TextSettings.Font.Size', S);
+      if tbsAni then
+      begin
+        TAnimator.AnimateFloat(tabs[shw].layout, 'width', w);
+        TAnimator.AnimateFloat(Main, 'Position.X', xZero);
+      end;
+      shw:=-1;
+    end
+    else
     begin
-      TAnimator.AnimateFloat(Main, 'Position.X', xZero-((maxW-W)*id/c));
-      TAnimator.AnimateFloat(tabs[id].layout, 'width', maxW);
+      shw:=id;
+      if setTxt then Form.setText(id);
+      if txtAni then TAnimator.AnimateFloat(tabs[id].text, 'TextSettings.Font.Size', maxS);
+      if tbsAni then
+      begin
+        TAnimator.AnimateFloat(Main, 'Position.X', xZero-((maxW-W)*id/c));
+        TAnimator.AnimateFloat(tabs[id].layout, 'width', maxW);
+      end;
+      if Assigned(afterClick) then afterClick(tabs[id])
+        else if id=winId then form.win;
     end;
-    if Assigned(afterClick) then afterClick(tabs[id])
-      else if id=winId then form.win;
-  end;
 end;
 
 procedure FSTabs.onEnter;
 var
   id, c: shortInt;
 begin
+  if block then exit;
   id:=TLayout(sender).TabOrder;
   c:=tabs.Count-1;
   if (shw<0)and(id<>lst)and(c>0) then
   begin
+    block:=true;
     if txtAni then
     begin
       TAnimator.AnimateFloat(tabs[lst].text, 'TextSettings.Font.Size', S);
@@ -195,13 +200,36 @@ begin
     end;
     if tbsAni then
     begin
+      tabs[lst].layout.StopPropertyAnimation('Width');
       TAnimator.AnimateFloat(tabs[lst].layout, 'width', W);
+      Main.StopPropertyAnimation('Position.X');
       TAnimator.AnimateFloat(Main, 'Position.X', xZero-((addW-W)*id/c));
       TAnimator.AnimateFloat(tabs[id].layout, 'width', addW);
     end;
     if Assigned(afterEnter) then afterEnter(tabs[id]);
     lst:=id;
+    block:=false;
   end;
 end;
 
+procedure FSTabs.onLeave(sender: TObject);
+var
+  id: byte;
+begin
+  if block then exit;
+  id:=TLayout(sender).TabOrder;
+  if (shw>=0)and(tabs.Count>1) then
+  begin
+    block:=true;
+    if txtAni then TAnimator.AnimateFloat(tabs[shw].text, 'TextSettings.Font.Size', S);
+    if tbsAni then
+    begin
+      TAnimator.AnimateFloat(Main, 'Position.X', xZero);
+      TAnimator.AnimateFloatWait(tabs[shw].layout, 'width', w);
+    end;
+    if Assigned(afterLeave) then afterLeave(tabs[id]);
+    shw:=-1;
+    block:=false;
+  end;
+end;
 end.

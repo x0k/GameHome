@@ -8,7 +8,7 @@ uses
 type
   ePath = (pTexts, pSounds, pResource);
 
-  eResource = (rImages, rSequences, rSwitchers, rOther, rMuseum, rWinMuseum);
+  eResource = (rStyle, rImages, rSequences, rSwitchers, rOther, rMuseum, rWinMuseum);
 
   eSound = (sMain, sBackground, sClick, sAward, sWrong);
 
@@ -72,6 +72,7 @@ end;
 function pathResource(r:eResource):string;
 begin
   case r of
+    rStyle: result:=TPath.Combine(getPath(pResource), 'Style.style');
     rImages: result:=TPath.Combine(getPath(pResource), 'Images.style');
     rSequences: result:=TPath.Combine(getPath(pResource), 'Sequences.style');
     rSwitchers: result:=TPath.Combine(getPath(pResource), 'Switchers.style');

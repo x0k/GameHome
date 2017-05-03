@@ -63,6 +63,7 @@ end;
 procedure TRoofForm.addWin;
 begin
   TAnimator.AnimateFloatWait(roof, 'opacity', 1);
+  setBonus(8);
   home.ImageIndex:=-1;
 end;
 

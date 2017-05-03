@@ -9,7 +9,7 @@ uses
   FMX.TabControl, FMX.Controls.Presentation, FMX.ScrollBox, FMX.Memo;
 
 type
-  TMatrixForm = class(TGTabForm)
+  TMatrixForm = class(TGForm)
     List: TListBox;
     ListBoxItem1: TListBoxItem;
     ListBoxItem2: TListBoxItem;
@@ -21,9 +21,7 @@ type
     ListBoxItem8: TListBoxItem;
     Left: TLayout;
     Img: TGlyph;
-    tabs: TTabControl;
-    TabItem1: TTabItem;
-    BG1: TGlyph;
+    BG: TGlyph;
     Main: TLayout;
     Text: TMemo;
     Nums: TListBox;
@@ -47,9 +45,6 @@ type
     procedure onFormCreate; override;
     procedure addShow; override;
   end;
-
-var
-  MatrixForm: TMatrixForm;
 
 implementation
 
@@ -77,7 +72,11 @@ begin
   if Assigned(List.ItemByPoint(Point.X, Point.Y)) and Assigned(Last) then
   begin
     List.ItemsExchange(List.ItemByPoint(Point.X, Point.Y), last);
-    if check then win;    
+    if check then
+    begin
+      win;
+      setBonus(7);
+    end;
   end;
 end;
 
@@ -110,10 +109,8 @@ var
   m: TArray<single>;
   l: TList<TPair<Byte, String>>;
 begin
-  backgrounds:=[BG1];
+  backgrounds:=[BG];
   layouts:=[main];
-  gTabs:=tabs;
-  gTab:=0;
 
   setItem(0, Text);
   m:=DM.getFormLayout(name, 'List').TextSize;

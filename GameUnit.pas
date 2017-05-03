@@ -44,6 +44,8 @@ type
   protected
     procedure onFormCreate; override;
     procedure afterTabChange(newTab: byte); override;
+  public
+    function getButton(tag: byte): TButton;
   end;
 
 implementation
@@ -54,11 +56,18 @@ uses
   ResourcesManager;
 
 procedure TGameForm.onFormCreate;
+var
+  f: TFmxObject;
 begin
   backgrounds:=[home, BG1, BG2, BG3];
   layouts:=[main1, main2, main3];
   gTabs:=tabs;
   gTab:=2;
+  if not godMode then
+    for f in Btns.Children do
+      if f is TButton then
+        with f as TButton do
+          Enabled:=false;
 end;
 
 procedure TGameForm.afterTabChange(newTab: Byte);
@@ -74,6 +83,19 @@ procedure TGameForm.FormActivate(Sender: TObject);
 begin
   Bar.nxtBtn:=Tabs.TabIndex<>gTab;
   fillBar(Tabs.TabIndex, 0 , Tabs.TabIndex);
+end;
+
+function TGameForm.getButton(tag: byte): TButton;
+var
+  f: TFMXObject;
+begin
+  result:=nil;
+  for f in Btns.Children do
+    if (f is TButton) and (f.Tag=tag) then
+    begin
+      result:=F as TButton;
+      exit;
+    end;
 end;
 
 procedure TGameForm.l1btnClick(Sender: TObject);
