@@ -32,9 +32,12 @@ implementation
 {$R *.dfm}
 
 uses
-  System.SysUtils,
+  System.SysUtils, System.IOUtils, windows,
   FMX.Ani, FMX.Forms, FMX.Dialogs, FMX.Styles,
   GameForms, ImageManager, GameData, BarUnit, DesignManager, TextManager, SoundManager, ResourcesManager, winMessages;
+
+const
+  fName = 'TkachenkoSketch4F.ttf';
 
 procedure TDataForm.DataModuleCreate(Sender: TObject);
 begin
@@ -80,6 +83,7 @@ begin
   SM.Free;
   TM.Free;
   Bar.Free;
+  RemoveFontResourceEx(PChar(TPath.Combine(getPath(pTexts),  fName)), FR_NOT_ENUM, nil);
   sendMsg(cClose, 'Done.');
 end;
 

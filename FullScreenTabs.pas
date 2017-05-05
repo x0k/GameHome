@@ -178,6 +178,7 @@ begin
         TAnimator.AnimateFloat(Main, 'Position.X', xZero-((maxW-W)*id/c));
         TAnimator.AnimateFloat(tabs[id].layout, 'width', maxW);
       end;
+      if txtAni or tbsAni then tabs[shw].layout.OnMouseLeave:=onLeave;
       if Assigned(afterClick) then afterClick(tabs[id])
         else if id=winId then form.win;
     end;
@@ -192,7 +193,6 @@ begin
   c:=tabs.Count-1;
   if (shw<0)and(id<>lst)and(c>0) then
   begin
-    block:=true;
     if txtAni then
     begin
       TAnimator.AnimateFloat(tabs[lst].text, 'TextSettings.Font.Size', S);
@@ -208,7 +208,6 @@ begin
     end;
     if Assigned(afterEnter) then afterEnter(tabs[id]);
     lst:=id;
-    block:=false;
   end;
 end;
 
@@ -221,6 +220,7 @@ begin
   if (shw>=0)and(tabs.Count>1) then
   begin
     block:=true;
+    tabs[shw].layout.OnMouseLeave:=nil;
     if txtAni then TAnimator.AnimateFloat(tabs[shw].text, 'TextSettings.Font.Size', S);
     if tbsAni then
     begin
@@ -232,4 +232,5 @@ begin
     block:=false;
   end;
 end;
+
 end.

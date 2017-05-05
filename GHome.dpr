@@ -1,9 +1,8 @@
 program GHome;
 
 uses
-  System.SysUtils,
-  FMX.Forms,
-  FMX.Dialogs,
+  System.SysUtils, System.IOUtils,
+  FMX.Forms, Windows,
   MainUnit in 'MainUnit.pas' {MainForm},
   SettingsUnit in 'SettingsUnit.pas' {SettingsForm},
   DataUnit in 'DataUnit.pas' {DataForm: TDataModule},
@@ -38,14 +37,13 @@ uses
   winMessages in 'winMessages.pas';
 
 {$R *.res}
+const
+  fName = 'TkachenkoSketch4F.ttf';
 
 begin
-  if FindCmdLineSwitch('debug') then
-    ReportMemoryLeaksOnShutdown:=True;
-
+  AddFontResourceEx(PChar(TPath.Combine(getPath(pTexts),  fName)), FR_NOT_ENUM, nil);
   Application.Initialize;
   Application.CreateForm(TDataForm, DataForm);
   Application.CreateForm(TMainForm, MainForm);
-  Application.RegisterFormFamily('MainForm', [TMainForm]);
   Application.Run;
 end.

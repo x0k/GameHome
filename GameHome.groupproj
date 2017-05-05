@@ -6,9 +6,6 @@
         <Projects Include="GHome.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Launcher.dproj">
-            <Dependencies/>
-        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -26,23 +23,14 @@
     <Target Name="GHome:Make">
         <MSBuild Projects="GHome.dproj" Targets="Make"/>
     </Target>
-    <Target Name="Launcher">
-        <MSBuild Projects="Launcher.dproj"/>
-    </Target>
-    <Target Name="Launcher:Clean">
-        <MSBuild Projects="Launcher.dproj" Targets="Clean"/>
-    </Target>
-    <Target Name="Launcher:Make">
-        <MSBuild Projects="Launcher.dproj" Targets="Make"/>
-    </Target>
     <Target Name="Build">
-        <CallTarget Targets="GHome;Launcher"/>
+        <CallTarget Targets="GHome"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="GHome:Clean;Launcher:Clean"/>
+        <CallTarget Targets="GHome:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="GHome:Make;Launcher:Make"/>
+        <CallTarget Targets="GHome:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
