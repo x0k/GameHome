@@ -10,6 +10,8 @@ uses
 type
   TBarForm = class(TForm)
   protected
+    fText: TFormText;
+
     procedure setLogo(id: byte);
     procedure setCapt(id: byte);
     procedure fillBar(c:byte = 0; l:byte = 0; t:byte = 0);
@@ -64,19 +66,19 @@ uses
 
 procedure TBarForm.SetLogo(id: byte);
 begin
-  Bar.SubLogo.imageIndex:=TM.Forms[name].Logos[id];
+  Bar.SubLogo.imageIndex:=fText.Logos[id];
 end;
 
 procedure TBarForm.setCapt(id :byte);
 begin
-  Bar.SubName.Text:=TM.Forms[name].Names[id];
+  Bar.SubName.Text:=fText.Names[id];
 end;
 
 procedure TBarForm.setText(id: byte);
 var
   b: string;
 begin
-  b:=TM.Forms[name].Texts[id];
+  b:=fText.Texts[id];
   if length(b)=0 then
     Bar.SubText.Lines.Clear
   else
@@ -87,7 +89,7 @@ procedure TBarForm.setTabText(id: byte);
 var
   b: string;
 begin
-  b:=TM.Forms[name].TabTexts[id];
+  b:=fText.TabTexts[id];
   if length(b)=0 then
     Bar.SubText.Lines.Clear
   else
@@ -103,19 +105,19 @@ end;
 
 function TBarForm.getItem(id: Byte): string;
 begin
-  result:=TM.Forms[name].Items[id];
+  result:=fText.Items[id];
 end;
 
 procedure TBarForm.setItem(id: byte; text:TText);
 begin
-  text.text:=TM.Forms[name].Items[id];
+  text.text:=fText.Items[id];
 end;
 
 procedure TBarForm.setItem(id: byte; memo: TMemo);
 var
   b: string;
 begin
-  b:=TM.Forms[name].Items[id];
+  b:=fText.Items[id];
   if length(b)=0 then
     memo.Lines.Clear
   else
@@ -180,6 +182,8 @@ begin
   self.OnCreate:=onBarCreate;
   self.OnShow:=onBarShow;
   self.OnClose:=onBarClose;
+  if not TM.tryGetText(name, fText) then
+    raise Exception.Create('Ошибка при получении текста для формы '+name);
 end;
 
   {TMForm}

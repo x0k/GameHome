@@ -246,6 +246,7 @@ end;
 procedure TGForm.afterFormCreate;
 var
   i:byte;
+  lts: TFormLayouts;
 
   function findByName(const name: string; const arr: TArray<TFmxObject>; var c: TControl):boolean;
   var
@@ -265,7 +266,7 @@ var
       end;
   end;
 
-  procedure setSz(const layouts: TArray<TFmxObject>;const setts: TArray<TFormLayout>);
+  procedure setSz(const layouts: TArray<TFmxObject>;const setts: TFormLayouts);
   var
     i: byte;
     ct: TControl;
@@ -297,9 +298,9 @@ begin
   if length(backgrounds)>0 then
     for i:=0 to High(backgrounds) do
       IM.setSize(backgrounds[i], screen.Size);
-  if length(layouts)>0 then
+  if (length(layouts)>0) and DM.tryGetLayouts(name, lts) then
   begin
-    setSz(TArray<TFmxObject>(layouts), DM.Designs[name]);
+    setSz(TArray<TFmxObject>(layouts), lts);
     for i:=0 to High(layouts) do
       layouts[i].Opacity:=0;
   end;

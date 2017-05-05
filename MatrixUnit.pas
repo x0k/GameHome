@@ -108,12 +108,14 @@ var
   i, id: byte;
   m: TArray<single>;
   l: TList<TPair<Byte, String>>;
+  lt: TFormLayout;
 begin
   backgrounds:=[BG];
   layouts:=[main];
 
   setItem(0, Text);
-  m:=DM.getFormLayout(name, 'List').TextSize;
+  if DM.tryGetLayout(name, 'List', lt) then m:=lt.TextSize
+    else m:=[20];
 
   l:=TList<TPair<Byte, String>>.Create;
   for i:=0 to 7 do

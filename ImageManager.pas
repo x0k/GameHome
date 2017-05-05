@@ -11,6 +11,7 @@ type
   TImageManager = class
   private
     loaded: TList<eResource>;
+
   public
     procedure add(r: eResource);
     procedure remove(r: eResource);

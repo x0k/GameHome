@@ -47,7 +47,7 @@ end;
 
 procedure TTaskForm.addShow;
 begin
-  ans:=TM.Forms[name].Items[0].ToInteger;
+  ans:=fText.Items[0].ToInteger;
   repeat
     num.Tag:=random(14)-7+ans;
   until (num.Tag>ans+2)or(num.Tag<ans-2);

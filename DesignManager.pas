@@ -51,17 +51,15 @@ type
     constructor create(j:TJSONObject);
   end;
 
+  TFormLayouts = TArray<TFormLayout>;
+
   TDesignManager = class
   private
-    lName: string;
-    lArr: TArray<TFormLayout>;
-    layouts: TDictionary<string, TArray<TFormLayout>>;
+    layouts: TDictionary<string, TFormLayouts>;
 
-    function getDesign(name: string): TArray<TFormLayout>;
   public
-    function getFormLayout(const form, name: string): TFormLayout;
-
-    property Designs[index: string]: TArray<TFormLayout> read getDesign;
+    function tryGetLayout(const form, name: string; var lt: TFormLayout): boolean;
+    function tryGetLayouts(const form: string; var lts: TFormLayouts): boolean;
 
     destructor Destroy; override;
     constructor Create;
@@ -190,47 +188,45 @@ end;
 
   {TDesignManager}
 
-function TDesignManager.getDesign(name: string): TArray<TFormLayout>;
+function TDesignManager.tryGetLayouts(const form: string; var lts: TFormLayouts): boolean;
 begin
-  if (lName<>name) and Layouts.ContainsKey(name) then
-  begin
-    lArr:=Layouts.Items[name];
-    lName:=name;
-  end;
-  result:=lArr;
+  result:=Layouts.ContainsKey(form);
+  if result then
+    lts:=Layouts[form];
 end;
 
-function TDesignManager.getFormLayout(const form: string; const name: string): TFormLayout;
+function TDesignManager.tryGetLayout(const form, name: string; var lt: TFormLayout): boolean;
+var
+  lts: TFormLayouts;
 
-  function findName(const m: TArray<TFormLayout>): TFormLayout;
+  function tryFindName(const m: TArray<TFormLayout>): boolean;
   var
     i: byte;
   begin
-    result:=nil;
+    result:=false;
     if Assigned(m) and (length(m)>0) then
     begin
       for i:=0 to High(m) do
       begin
         if m[i].Name=name then
         begin
-          result:=m[i];
+          result:=true;
+          lt:=m[i];
           exit;
         end;
-        if m[i].pClilds then
-          result:=findName(m[i].Childrens);
-        if Assigned(result) then
-          exit;
+        if m[i].pClilds then result:=tryFindName(m[i].Childrens);
+        if result then exit;
       end;
     end;
   end;
 
 begin
-  result:=findName(getDesign(form));
+  result:=tryGetLayouts(form, lts) and tryFindName(lts);
 end;
 
 destructor TDesignManager.destroy;
 var
-  p: TPair<string, TArray<TFormLayout>>;
+  p: TPair<string, TFormLayouts>;
   l: TFormLayout;
 begin
   for p in layouts do
