@@ -98,7 +98,6 @@ constructor FSTabs.create(fm: TGForm; m: TLayout; wId: byte; sTxt: boolean);
 var
   f: TFmxObject;
   b: TBounds;
-  lt: TFormLayout;
 begin
   form:=fm;
   main:=m;
@@ -109,14 +108,10 @@ begin
       tabs.add(FSTab.create(f as TLayout));
   shw:=-1;
   winId:=wId;
-  b:=nil;
-  if DM.tryGetLayout(fm.Name, main.Name, lt) then
-  begin
-    sizes:= lt.TextSize;
-    widths:= lt.TabWidth;
-    b:= lt.LayoutMargins;
-    tbsAni:= lt.Animation;
-  end;
+  sizes:=DM.getFormLayout(fm.Name, main.Name).TextSize;
+  widths:=DM.getFormLayout(fm.Name, main.Name).TabWidth;
+  b:=DM.getFormLayout(form.Name, main.Name).LayoutMargins;
+  tbsAni:=DM.getFormLayout(form.Name, main.Name).Animation;
   if assigned(b) then xZero:=b.Left
     else xZero:=0;
   block:=false;

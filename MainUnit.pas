@@ -60,19 +60,16 @@ var
   t: TFormText;
   m: TArray<TText>;
 begin
-  t:=nil;
   IM.setSize(BG, Screen.Size);
   m:=[text1, text2, text3, text4, text5];
-  if TM.tryGetText(name, t) then
-  begin
-    text6.Text:=t.Names[0];
-    for i:=0 to 4 do
-      m[i].Text:=t.Items[i];
-    SettingsForm:=TSettingsForm.Create(self);
-    AboutForm:=TAboutForm.Create(self);
-    if not dbgMode then
-      MuseumForm:=TMuseumForm.Create(self, rMuseum);
-  end;
+  t:=TM.Forms[name];
+  text6.Text:=t.Names[0];
+  for i:=0 to 4 do
+    m[i].Text:=t.Items[i];
+  SettingsForm:=TSettingsForm.Create(self);
+  AboutForm:=TAboutForm.Create(self);
+  if not dbgMode then
+    MuseumForm:=TMuseumForm.Create(self, rMuseum);
 end;
 
 

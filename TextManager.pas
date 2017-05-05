@@ -11,6 +11,7 @@ type
 
   TFormText = class
   protected
+    sender: string;
     SubNames: TArray<string>;
     SubLogos: TArray<byte>;
     SubTexts: TArray<string>;
@@ -36,14 +37,18 @@ type
     property Items[index: byte]:string read getItem;
 
     destructor Destroy; override;
-    constructor Create(j: TJSONObject);
+    constructor Create(const n: string; j:TJSONObject);
   end;
 
   TTextManager = class
   private
+    last: string;
+    lText: TFormText;
     texts: TDictionary<string, TFormText>;
+
+    function getText(name:string): TFormText;
   public
-    function tryGetText(const name: string; var text: TFormText): boolean;
+    property Forms[index: string]:TFormText read getText;
 
     destructor Destroy; override;
     constructor Create;
@@ -150,11 +155,14 @@ end;
 
   {TTextManager}
 
-function TTextManager.tryGetText(const name: string; var text: TFormText): boolean;
+function TTextManager.getText(name: string): TFormText;
 begin
-  result:=texts.ContainsKey(name);
-  if result then
-    text:=texts[name];
+  if last<>name then
+  begin
+    last:=name;
+    lText:=texts[name];
+  end;
+  result:=lText;
 end;
 
 destructor TTextManager.Destroy;
@@ -180,7 +188,7 @@ begin
       begin
         json:=TJSONObject(TJSONObject.ParseJSONValue(getTexts(t)));
         for p in json do
-          texts.Add(p.JsonString.Value, TFormText.create(p.JsonValue as TJSONObject));
+          texts.Add(p.JsonString.Value, TFormText.create(p.JsonString.Value, p.JsonValue as TJSONObject));
         json.Free;
       end;
   except
