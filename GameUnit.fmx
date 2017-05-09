@@ -14,7 +14,6 @@ object GameForm: TGameForm
   FormFactor.Orientations = [Landscape]
   FormFactor.Devices = [Desktop]
   FullScreen = True
-  OnActivate = FormActivate
   DesignerMasterStyle = 0
   object Tabs: TTabControl
     Align = Client
@@ -94,14 +93,226 @@ object GameForm: TGameForm
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 0
-        object Place: TGlyph
+        TabOrder = 1
+        object Home: TGlyph
+          Align = Center
+          Size.Width = 1280.000000000000000000
+          Size.Height = 720.000000000000000000
+          Size.PlatformDefault = False
+          ImageIndex = 2
+          Images = DataForm.Images
+        end
+        object Btns: TLayout
           Align = Client
           Size.Width = 1280.000000000000000000
           Size.Height = 720.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 1
-          Images = DataForm.Images
+          TabOrder = 0
+          object l10btn: TButton
+            Tag = 9
+            Anchors = []
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 656.000000000000000000
+            Position.Y = 295.714294433593800000
+            Size.Width = 90.000000000000000000
+            Size.Height = 90.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 0
+            Text = '10'
+            TextSettings.Font.Size = 50.000000000000000000
+            OnClick = l1btnClick
+          end
+          object l11btn: TButton
+            Tag = 10
+            Anchors = []
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 592.000000000000000000
+            Position.Y = 221.714294433593800000
+            Size.Width = 76.000000000000000000
+            Size.Height = 76.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 1
+            Text = '11'
+            TextSettings.Font.Size = 36.000000000000000000
+            OnClick = l1btnClick
+          end
+          object l12btn: TButton
+            Tag = 11
+            Anchors = []
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 688.000000000000000000
+            Position.Y = 142.285720825195300000
+            Size.Width = 96.000000000000000000
+            Size.Height = 96.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 2
+            Text = '12'
+            TextSettings.Font.Size = 52.000000000000000000
+            OnClick = l1btnClick
+          end
+          object l13btn: TButton
+            Tag = 12
+            Anchors = []
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 792.000000000000000000
+            Position.Y = 98.285705566406250000
+            Size.Width = 76.000000000000000000
+            Size.Height = 76.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 3
+            Text = '13'
+            TextSettings.Font.Size = 38.000000000000000000
+            OnClick = l1btnClick
+          end
+          object l14btn: TButton
+            Tag = 13
+            Anchors = []
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 888.000000000000000000
+            Position.Y = 152.285720825195300000
+            Size.Width = 94.000000000000000000
+            Size.Height = 94.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 4
+            Text = '14'
+            TextSettings.Font.Size = 46.000000000000000000
+            OnClick = l1btnClick
+          end
+          object l1btn: TButton
+            Anchors = []
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 416.000000000000000000
+            Position.Y = 604.285705566406300000
+            Size.Width = 90.000000000000000000
+            Size.Height = 90.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 5
+            Text = '1'
+            TextSettings.Font.Size = 50.000000000000000000
+            OnClick = l1btnClick
+          end
+          object l3btn: TButton
+            Tag = 2
+            Anchors = []
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 288.000000000000000000
+            Position.Y = 479.714294433593800000
+            Size.Width = 82.000000000000000000
+            Size.Height = 82.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 6
+            Text = '3'
+            TextSettings.Font.Size = 55.000000000000000000
+            OnClick = l1btnClick
+          end
+          object l4btn: TButton
+            Tag = 3
+            Anchors = []
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 368.000000000000000000
+            Position.Y = 406.571441650390600000
+            Size.Width = 74.000000000000000000
+            Size.Height = 74.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 7
+            Text = '4'
+            TextSettings.Font.Size = 35.000000000000000000
+            OnClick = l1btnClick
+          end
+          object l5btn: TButton
+            Tag = 4
+            Anchors = []
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 464.000000000000000000
+            Position.Y = 410.285705566406300000
+            Size.Width = 100.000000000000000000
+            Size.Height = 100.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 8
+            Text = '5'
+            TextSettings.Font.Size = 60.000000000000000000
+            OnClick = l1btnClick
+          end
+          object l6btn: TButton
+            Tag = 5
+            Anchors = []
+            Position.X = 544.000000000000000000
+            Position.Y = 531.142883300781300000
+            Size.Width = 82.000000000000000000
+            Size.Height = 82.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 9
+            Text = '6'
+            OnClick = l1btnClick
+          end
+          object l7btn: TButton
+            Tag = 6
+            Anchors = []
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 656.000000000000000000
+            Position.Y = 560.571411132812500000
+            Size.Width = 72.000000000000000000
+            Size.Height = 72.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 10
+            Text = '7'
+            TextSettings.Font.Size = 35.000000000000000000
+            OnClick = l1btnClick
+          end
+          object l8btn: TButton
+            Tag = 7
+            Anchors = []
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 640.000000000000000000
+            Position.Y = 449.142822265625000000
+            Size.Width = 84.000000000000000000
+            Size.Height = 84.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 11
+            Text = '8'
+            TextSettings.Font.Size = 35.000000000000000000
+            OnClick = l1btnClick
+          end
+          object l9btn: TButton
+            Tag = 8
+            Anchors = []
+            Position.X = 728.000000000000000000
+            Position.Y = 386.857147216796900000
+            Size.Width = 80.000000000000000000
+            Size.Height = 80.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 12
+            Text = '9'
+            OnClick = l1btnClick
+          end
+          object l2btn: TButton
+            Tag = 1
+            Anchors = []
+            StyledSettings = [Family, Style, FontColor]
+            Position.X = 347.000000000000000000
+            Position.Y = 562.857116699218800000
+            Size.Width = 70.000000000000000000
+            Size.Height = 70.000000000000000000
+            Size.PlatformDefault = False
+            StyleLookup = 'MapBtn'
+            TabOrder = 13
+            Text = '2'
+            TextSettings.Font.Size = 35.000000000000000000
+            OnClick = l1btnClick
+          end
         end
       end
     end
@@ -132,226 +343,292 @@ object GameForm: TGameForm
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
-        object Home: TGlyph
-          Align = Center
-          Size.Width = 1280.000000000000000000
-          Size.Height = 720.000000000000000000
+      end
+    end
+  end
+  object Main: TLayout
+    Align = Client
+    Size.Width = 1280.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object bonusBtn: TButton
+      Anchors = [akTop, akRight]
+      Position.X = 1176.000000000000000000
+      Position.Y = 48.000000000000000000
+      Size.Width = 94.000000000000000000
+      Size.Height = 88.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'bonusBtn'
+      TabOrder = 0
+      Text = 'bonusBtn'
+      Visible = False
+    end
+    object logoLayout: TLayout
+      HitTest = True
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 161.000000000000000000
+      Size.Height = 81.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      OnClick = logoLayoutClick
+      object topLogo: TGlyph
+        Align = Client
+        Size.Width = 161.000000000000000000
+        Size.Height = 81.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 0
+        Images = DataForm.Icons
+      end
+    end
+    object progress: TLayout
+      Anchors = [akLeft, akTop, akRight]
+      Position.X = 280.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 990.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+    end
+    object RBonus: TLayout
+      Align = Vertical
+      HitTest = True
+      Position.X = 500.000000000000000000
+      Size.Width = 360.000000000000000000
+      Size.Height = 720.000000000000000000
+      Size.PlatformDefault = False
+      Visible = False
+      TabOrder = 3
+      object bonusBG: TRectangle
+        Align = Client
+        Fill.Color = claBlack
+        Opacity = 0.500000000000000000
+        Size.Width = 360.000000000000000000
+        Size.Height = 720.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        Stroke.Thickness = 0.000000000000000000
+      end
+      object telega: TLayout
+        Align = Center
+        Margins.Top = 240.000000000000000000
+        Size.Width = 273.000000000000000000
+        Size.Height = 169.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object st1: TGlyph
+          AutoHide = False
+          Position.X = 96.000000000000000000
+          Position.Y = 80.000000000000000000
+          Visible = False
+          Size.Width = 169.000000000000000000
+          Size.Height = 61.000000000000000000
           Size.PlatformDefault = False
-          ImageIndex = 2
-          Images = DataForm.Images
+          ImageIndex = 14
+          Images = DataForm.Other
         end
-        object Btns: TLayout
-          Align = Client
-          Size.Width = 1280.000000000000000000
-          Size.Height = 720.000000000000000000
+        object st2: TGlyph
+          AutoHide = False
+          Position.X = 72.000000000000000000
+          Position.Y = 96.000000000000000000
+          Visible = False
+          Size.Width = 177.000000000000000000
+          Size.Height = 65.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 0
-          object l10btn: TButton
-            Tag = 10
-            Anchors = []
-            StyledSettings = [Family, Style, FontColor]
-            Position.X = 656.000000000000000000
-            Position.Y = 295.714294433593800000
-            Size.Width = 90.000000000000000000
-            Size.Height = 90.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 0
-            Text = '10'
-            TextSettings.Font.Size = 50.000000000000000000
-            OnClick = l1btnClick
-          end
-          object l11btn: TButton
-            Tag = 11
-            Anchors = []
-            StyledSettings = [Family, Style, FontColor]
-            Position.X = 592.000000000000000000
-            Position.Y = 221.714294433593800000
-            Size.Width = 76.000000000000000000
-            Size.Height = 76.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 1
-            Text = '11'
-            TextSettings.Font.Size = 36.000000000000000000
-            OnClick = l1btnClick
-          end
-          object l12btn: TButton
-            Tag = 12
-            Anchors = []
-            StyledSettings = [Family, Style, FontColor]
-            Position.X = 688.000000000000000000
-            Position.Y = 142.285720825195300000
-            Size.Width = 96.000000000000000000
-            Size.Height = 96.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 2
-            Text = '12'
-            TextSettings.Font.Size = 52.000000000000000000
-            OnClick = l1btnClick
-          end
-          object l13btn: TButton
-            Tag = 13
-            Anchors = []
-            StyledSettings = [Family, Style, FontColor]
-            Position.X = 792.000000000000000000
-            Position.Y = 98.285705566406250000
-            Size.Width = 76.000000000000000000
-            Size.Height = 76.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 3
-            Text = '13'
-            TextSettings.Font.Size = 38.000000000000000000
-            OnClick = l1btnClick
-          end
-          object l14btn: TButton
-            Tag = 14
-            Anchors = []
-            StyledSettings = [Family, Style, FontColor]
-            Position.X = 888.000000000000000000
-            Position.Y = 152.285720825195300000
-            Size.Width = 94.000000000000000000
-            Size.Height = 94.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 4
-            Text = '14'
-            TextSettings.Font.Size = 46.000000000000000000
-            OnClick = l1btnClick
-          end
-          object l1btn: TButton
-            Tag = 1
-            Anchors = []
-            StyledSettings = [Family, Style, FontColor]
-            Position.X = 416.000000000000000000
-            Position.Y = 604.285705566406300000
-            Size.Width = 90.000000000000000000
-            Size.Height = 90.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 5
-            Text = '1'
-            TextSettings.Font.Size = 50.000000000000000000
-            OnClick = l1btnClick
-          end
-          object l3btn: TButton
-            Tag = 3
-            Anchors = []
-            StyledSettings = [Family, Style, FontColor]
-            Position.X = 288.000000000000000000
-            Position.Y = 479.714294433593800000
-            Size.Width = 82.000000000000000000
-            Size.Height = 82.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 6
-            Text = '3'
-            TextSettings.Font.Size = 55.000000000000000000
-            OnClick = l1btnClick
-          end
-          object l4btn: TButton
-            Tag = 4
-            Anchors = []
-            StyledSettings = [Family, Style, FontColor]
-            Position.X = 368.000000000000000000
-            Position.Y = 406.571441650390600000
-            Size.Width = 74.000000000000000000
-            Size.Height = 74.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 7
-            Text = '4'
-            TextSettings.Font.Size = 35.000000000000000000
-            OnClick = l1btnClick
-          end
-          object l5btn: TButton
-            Tag = 5
-            Anchors = []
-            StyledSettings = [Family, Style, FontColor]
-            Position.X = 464.000000000000000000
-            Position.Y = 410.285705566406300000
-            Size.Width = 100.000000000000000000
-            Size.Height = 100.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 8
-            Text = '5'
-            TextSettings.Font.Size = 60.000000000000000000
-            OnClick = l1btnClick
-          end
-          object l6btn: TButton
-            Tag = 6
-            Anchors = []
-            Position.X = 544.000000000000000000
-            Position.Y = 531.142883300781300000
-            Size.Width = 82.000000000000000000
-            Size.Height = 82.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 9
-            Text = '6'
-            OnClick = l1btnClick
-          end
-          object l7btn: TButton
-            Tag = 7
-            Anchors = []
-            StyledSettings = [Family, Style, FontColor]
-            Position.X = 656.000000000000000000
-            Position.Y = 560.571411132812500000
-            Size.Width = 72.000000000000000000
-            Size.Height = 72.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 10
-            Text = '7'
-            TextSettings.Font.Size = 35.000000000000000000
-            OnClick = l1btnClick
-          end
-          object l8btn: TButton
-            Tag = 8
-            Anchors = []
-            StyledSettings = [Family, Style, FontColor]
-            Position.X = 640.000000000000000000
-            Position.Y = 449.142822265625000000
-            Size.Width = 84.000000000000000000
-            Size.Height = 84.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 11
-            Text = '8'
-            TextSettings.Font.Size = 35.000000000000000000
-            OnClick = l1btnClick
-          end
-          object l9btn: TButton
-            Tag = 9
-            Anchors = []
-            Position.X = 728.000000000000000000
-            Position.Y = 386.857147216796900000
-            Size.Width = 80.000000000000000000
-            Size.Height = 80.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 12
-            Text = '9'
-            OnClick = l1btnClick
-          end
-          object l2btn: TButton
-            Tag = 2
-            Anchors = []
-            StyledSettings = [Family, Style, FontColor]
-            Position.X = 347.000000000000000000
-            Position.Y = 562.857116699218800000
-            Size.Width = 70.000000000000000000
-            Size.Height = 70.000000000000000000
-            Size.PlatformDefault = False
-            StyleLookup = 'MapBtn'
-            TabOrder = 13
-            Text = '2'
-            TextSettings.Font.Size = 35.000000000000000000
-            OnClick = l1btnClick
-          end
+          ImageIndex = 15
+          Images = DataForm.Other
+        end
+        object wh2: TGlyph
+          AutoHide = False
+          Position.X = 88.000000000000000000
+          Position.Y = 32.000000000000000000
+          Visible = False
+          Size.Width = 97.000000000000000000
+          Size.Height = 113.000000000000000000
+          Size.PlatformDefault = False
+          ImageIndex = 13
+          Images = DataForm.Other
+        end
+        object body: TGlyph
+          AutoHide = False
+          Position.X = 24.000000000000000000
+          Position.Y = 16.000000000000000000
+          Visible = False
+          Size.Width = 193.000000000000000000
+          Size.Height = 121.000000000000000000
+          Size.PlatformDefault = False
+          ImageIndex = 12
+          Images = DataForm.Other
+        end
+        object wh1: TGlyph
+          AutoHide = False
+          Position.X = 32.000000000000000000
+          Position.Y = 40.000000000000000000
+          Visible = False
+          Size.Width = 105.000000000000000000
+          Size.Height = 121.000000000000000000
+          Size.PlatformDefault = False
+          ImageIndex = 13
+          Images = DataForm.Other
+        end
+      end
+      object woods: TGlyph
+        AutoHide = False
+        Margins.Right = 90.000000000000000000
+        Margins.Bottom = 50.000000000000000000
+        Align = Center
+        Visible = False
+        Size.Width = 214.000000000000000000
+        Size.Height = 117.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 11
+        Images = DataForm.Other
+      end
+      object tools: TGlyph
+        AutoHide = False
+        Margins.Bottom = 400.000000000000000000
+        Align = Center
+        Visible = False
+        Size.Width = 345.000000000000000000
+        Size.Height = 137.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 16
+        Images = DataForm.Other
+      end
+      object shepa: TGlyph
+        AutoHide = False
+        Margins.Left = 250.000000000000000000
+        Margins.Bottom = 60.000000000000000000
+        Align = Center
+        Visible = False
+        Size.Width = 73.000000000000000000
+        Size.Height = 73.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 21
+        Images = DataForm.Other
+      end
+      object coins: TLayout
+        Align = Center
+        Margins.Top = 500.000000000000000000
+        Size.Width = 84.000000000000000000
+        Size.Height = 42.000000000000000000
+        Size.PlatformDefault = False
+        Visible = False
+        TabOrder = 2
+        object medal: TGlyph
+          Align = Left
+          Size.Width = 42.000000000000000000
+          Size.Height = 42.000000000000000000
+          Size.PlatformDefault = False
+          ImageIndex = 10
+          Images = DataForm.Other
+        end
+        object medalTxt: TText
+          Align = Left
+          Position.X = 42.000000000000000000
+          Size.Width = 42.000000000000000000
+          Size.Height = 42.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'x0'
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 30.000000000000000000
+          TextSettings.FontColor = claWhite
+        end
+      end
+    end
+    object SPanel: TPanel
+      Anchors = [akLeft, akRight, akBottom]
+      HitTest = False
+      Position.Y = 560.000000000000000000
+      Size.Width = 1280.000000000000000000
+      Size.Height = 160.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'SPanel'
+      TabOrder = 4
+      object nextLayout: TLayout
+        Align = Right
+        Margins.Right = 20.000000000000000000
+        Position.X = 1200.000000000000000000
+        Size.Width = 60.000000000000000000
+        Size.Height = 160.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object NextBtn: TSpeedButton
+          Align = Center
+          StyledSettings = [Family, Style]
+          Size.Width = 60.000000000000000000
+          Size.Height = 91.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'nextBtn'
+          Text = #1055#1088#1086#1076#1086#1083#1078#1080#1090#1100
+          TextSettings.Font.Size = 15.000000000000000000
+          TextSettings.FontColor = claWhite
+          OnClick = NextBtnClick
+        end
+      end
+      object SubName: TText
+        Align = Left
+        HitTest = False
+        Position.X = 80.000000000000000000
+        Size.Width = 202.000000000000000000
+        Size.Height = 160.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 30.000000000000000000
+        TextSettings.FontColor = claWhite
+        TextSettings.Trimming = Word
+      end
+      object SubText: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        ReadOnly = True
+        StyledSettings = [Family, Style]
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.FontColor = claWhite
+        TextSettings.WordWrap = True
+        Align = Client
+        CanFocus = False
+        Cursor = crDefault
+        DisableFocusEffect = True
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 801.000000000000000000
+        Size.Height = 140.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'SMemo'
+        TabOrder = 3
+        Viewport.Width = 801.000000000000000000
+        Viewport.Height = 140.000000000000000000
+      end
+      object SubLogo: TGlyph
+        Align = Left
+        Position.X = 282.000000000000000000
+        Size.Width = 77.000000000000000000
+        Size.Height = 160.000000000000000000
+        Size.PlatformDefault = False
+        Images = DataForm.Icons
+      end
+      object backLayout: TLayout
+        Align = MostLeft
+        Margins.Left = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Size.Width = 60.000000000000000000
+        Size.Height = 160.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object BackBtn: TSpeedButton
+          Align = MostLeft
+          StyledSettings = [Family, Style]
+          Position.Y = 34.000000000000000000
+          Size.Width = 60.000000000000000000
+          Size.Height = 91.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'backBtn'
+          TextSettings.Font.Size = 15.000000000000000000
+          TextSettings.FontColor = claWhite
+          OnClick = BackBtnClick
         end
       end
     end

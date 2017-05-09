@@ -58,7 +58,6 @@ procedure TMapForm.onFormCreate;
 begin
   backgrounds:=[BG];
   layouts:=[main];
-
 end;
 
 procedure TMapForm.addShow;

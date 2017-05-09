@@ -1,0 +1,10 @@
+inherited TabFrame: TTabFrame
+  object gTabs: TTabControl
+    Align = Client
+    Size.Width = 1280.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    TabPosition = None
+  end
+end

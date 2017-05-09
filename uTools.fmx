@@ -1,0 +1,12 @@
+inherited ToolsFrame: TToolsFrame
+  object tools: TGridLayout
+    Align = Client
+    ItemHeight = 64.000000000000000000
+    ItemWidth = 64.000000000000000000
+    Orientation = Horizontal
+    Size.Width = 1280.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+  end
+end

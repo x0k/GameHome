@@ -1,0 +1,146 @@
+inherited SeazonFrame: TSeazonFrame
+  object Main: TLayout
+    Align = Center
+    HitTest = True
+    Size.Width = 1280.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object s0: TLayout
+      Align = Left
+      ClipChildren = True
+      HitTest = True
+      Size.Width = 320.000000000000000000
+      Size.Height = 720.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object img0: TGlyph
+        Tag = 1
+        Align = HorzCenter
+        Position.X = -381.000000000000000000
+        Size.Width = 1082.000000000000000000
+        Size.Height = 720.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 0
+        Images = DataForm.Sequence
+        object t0: TText
+          Align = Bottom
+          HitTest = False
+          Position.Y = 620.000000000000000000
+          Size.Width = 1082.000000000000000000
+          Size.Height = 100.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1044#1077#1082#1072#1073#1088#1100
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 40.000000000000000000
+          TextSettings.FontColor = claWhite
+        end
+      end
+    end
+    object s1: TLayout
+      Tag = 1
+      Align = Left
+      ClipChildren = True
+      HitTest = True
+      Position.X = 320.000000000000000000
+      Size.Width = 320.000000000000000000
+      Size.Height = 720.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object img1: TGlyph
+        Tag = 4
+        Align = HorzCenter
+        Position.X = -381.000000000000000000
+        Size.Width = 1082.000000000000000000
+        Size.Height = 720.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 1
+        Images = DataForm.Sequence
+        object t1: TText
+          Tag = 3
+          Align = Bottom
+          Anchors = []
+          HitTest = False
+          Position.Y = 620.000000000000000000
+          Size.Width = 1082.000000000000000000
+          Size.Height = 100.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1052#1072#1088#1090
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 40.000000000000000000
+          TextSettings.FontColor = claWhite
+        end
+      end
+    end
+    object s2: TLayout
+      Tag = 2
+      Align = Left
+      ClipChildren = True
+      HitTest = True
+      Position.X = 640.000000000000000000
+      Size.Width = 320.000000000000000000
+      Size.Height = 720.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+      object img2: TGlyph
+        Tag = 2
+        Align = HorzCenter
+        Position.X = -381.000000000000000000
+        Size.Width = 1082.000000000000000000
+        Size.Height = 720.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 2
+        Images = DataForm.Sequence
+        object t2: TText
+          Tag = 1
+          Align = Bottom
+          Anchors = []
+          HitTest = False
+          Position.Y = 620.000000000000000000
+          Size.Width = 1082.000000000000000000
+          Size.Height = 100.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1048#1102#1083#1100
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 40.000000000000000000
+          TextSettings.FontColor = claWhite
+        end
+      end
+    end
+    object s3: TLayout
+      Tag = 3
+      Align = Left
+      ClipChildren = True
+      HitTest = True
+      Position.X = 960.000000000000000000
+      Size.Width = 320.000000000000000000
+      Size.Height = 720.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      object img3: TGlyph
+        Tag = 3
+        Align = HorzCenter
+        Position.X = -381.000000000000000000
+        Size.Width = 1082.000000000000000000
+        Size.Height = 720.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 3
+        Images = DataForm.Sequence
+        object t3: TText
+          Tag = 2
+          Align = Bottom
+          Anchors = []
+          HitTest = False
+          Position.Y = 620.000000000000000000
+          Size.Width = 1082.000000000000000000
+          Size.Height = 100.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1057#1077#1085#1090#1103#1073#1088#1100
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 40.000000000000000000
+          TextSettings.FontColor = claWhite
+        end
+      end
+    end
+  end
+end

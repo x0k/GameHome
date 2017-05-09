@@ -5,13 +5,11 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Objects,
-  FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts, BarUnit,
-  FMX.ImgList,
-  Forms;
+  FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts, FMX.ImgList,
+  Forms, FMX.ScrollBox, FMX.Memo;
 
 type
   TSettingsForm = class(TBarForm)
-    Grid: TGridPanelLayout;
     Volume: TText;
     Brithnes: TText;
     DecVol: TButton;
@@ -25,11 +23,30 @@ type
     CLev: TLabel;
     Contrast: TText;
     BG: TGlyph;
+    logoLayout: TLayout;
+    Logo: TGlyph;
+    SPanel: TPanel;
+    nextLayout: TLayout;
+    NextBtn: TSpeedButton;
+    SubName: TText;
+    SubText: TMemo;
+    SubLogo: TGlyph;
+    backLayout: TLayout;
+    BackBtn: TSpeedButton;
+    Main: TLayout;
+    Vol: TLayout;
+    Brith: TLayout;
+    Contr: TLayout;
+    Grid: TLayout;
+    top: TLayout;
+    down: TLayout;
+    mid: TLayout;
     procedure IncVolClick(Sender: TObject);
     procedure DecBrClick(Sender: TObject);
     procedure DecCtrClick(Sender: TObject);
+    procedure BackBtnClick(Sender: TObject);
   protected
-    procedure onFormCreate; override;
+    procedure onCreate; override;
   public
     { Public declarations }
   end;
@@ -43,6 +60,11 @@ implementation
 
 uses
   ResourcesManager, GameData, ImageManager, SoundManager;
+
+procedure TSettingsForm.BackBtnClick(Sender: TObject);
+begin
+  Close;
+end;
 
 procedure TSettingsForm.DecBrClick(Sender: TObject);
 begin
@@ -69,9 +91,10 @@ begin
   SM.Play(sWrong);
 end;
 
-procedure TSettingsForm.onFormCreate;
+procedure TSettingsForm.onCreate;
 begin
-  IM.setSize(BG, Screen.Size);
+  backgrounds:=[BG];
+  layouts:=[main];
   Vlev.Tag:=SM.volume;
   Vlev.Text:=Vlev.Tag.ToString;
 

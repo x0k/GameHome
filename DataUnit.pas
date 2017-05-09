@@ -14,14 +14,13 @@ type
     Sequence: TImageList;
     Other: TImageList;
     Images: TImageList;
-    winMuseum: TImageList;
     Switchers: TImageList;
+    progress: TImageList;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
   end;
 
 var
-  godMode, dbgMode: boolean;
   DataForm: TDataForm;
   Styles:TStyleBook;
 
@@ -34,32 +33,25 @@ implementation
 uses
   System.SysUtils, System.IOUtils, windows,
   FMX.Ani, FMX.Forms, FMX.Dialogs, FMX.Styles,
-  GameForms, ImageManager, GameData, BarUnit, DesignManager, TextManager, SoundManager, ResourcesManager, winMessages;
+  ImageManager, GameData, DesignManager, TextManager, SoundManager, ResourcesManager, winMessages;
 
 const
   fName = 'TkachenkoSketch4F.ttf';
 
 procedure TDataForm.DataModuleCreate(Sender: TObject);
 begin
-  godMode:=FindCmdLineSwitch('god');
-  dbgMode:=FindCmdLineSwitch('debug');
   setHandle;
   sendMsg(cOpen, 'Initialization');
+  initPath;
   DM:=TDesignManager.create;
   IM:=TImageManager.Create;
   GD:=TGameData.Create;
   SM:=TSoundManager.Create;
   TM:=TTextManager.Create;
-  Bar:=TBar.create(self);
-  initForms;
-  if not dbgMode then
-  begin
-    sendMsg(cSetCount, (6).ToString);
-    IM.add(rMuseum);
-    sendMsg(cUpCount, 'Loading: Museum');
-    IM.add(rWinMuseum);
-    sendMsg(cUpCount, 'Loading: Sequences');
-  end else sendMsg(cSetCount, (4).ToString);
+  //initForms;
+  sendMsg(cSetCount, (6).ToString);
+  //IM.add(rMuseum);
+  sendMsg(cUpCount, 'Loading: Sequences');
   IM.add(rSequences);
   sendMsg(cUpCount, 'Loading: Switchers');
   IM.add(rSwitchers);
@@ -76,13 +68,12 @@ end;
 procedure TDataForm.DataModuleDestroy(Sender: TObject);
 begin
   GD.LoadSavedRamp;
-  freeForms;
+  //freeForms;
   DM.Free;
   IM.Free;
   GD.Free;
   SM.Free;
   TM.Free;
-  Bar.Free;
   RemoveFontResourceEx(PChar(TPath.Combine(getPath(pTexts),  fName)), FR_NOT_ENUM, nil);
   sendMsg(cClose, 'Done.');
 end;

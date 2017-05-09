@@ -1,0 +1,6 @@
+object GFrame: TGFrame
+  Align = Client
+  Size.Width = 1280.000000000000000000
+  Size.Height = 720.000000000000000000
+  Size.PlatformDefault = False
+end

@@ -5,7 +5,7 @@ interface
 uses
   System.Types, System.Generics.Collections,
   FMX.Layouts, FMX.ImgList, FMX.Objects, FMX.Types, FMX.Forms, FMX.Ani,
-  GameForms;
+  uFrame;
 
 type
   FSTab = class
@@ -25,7 +25,7 @@ type
 
   FSTabs = class
   private
-    form: TGForm;
+    form: TGFrame;
     main: TLayout;
     tabs: TList<FSTab>;
     shw, lst: ShortInt;
@@ -33,7 +33,6 @@ type
     widths:TArray<single>;
     sizes:TArray<single>;
 
-    winId: byte;
     setTxt: boolean;
     txtAni: boolean;
     tbsAni: boolean;
@@ -42,11 +41,11 @@ type
     w, AddW, MaxW: single;
     s, AddS, MaxS: single;
 
-  public
     afterClick: idAct;
     afterEnter: idAct;
     afterLeave: idAct;
 
+  public
     procedure setSize(img, txt: boolean);
 
     procedure onClick(sender: TObject);
@@ -54,7 +53,7 @@ type
     procedure onLeave(sender: TObject);
 
     destructor Destroy; override;
-    constructor create(fm: TGForm; m: TLayout; wId: byte; sTxt: boolean = true);
+    constructor create(fm: TGFrame; m: TLayout; aftClck: idAct; aftEntr: idAct = nil; aftLve: idAct = nil; sTxt: boolean = true);
   end;
 
 implementation
@@ -94,10 +93,11 @@ begin
   inherited;
 end;
 
-constructor FSTabs.create(fm: TGForm; m: TLayout; wId: byte; sTxt: boolean);
+constructor FSTabs.create(fm: TGFrame; m: TLayout; aftClck: idAct; aftEntr: idAct = nil; aftLve: idAct = nil; sTxt: boolean = true);
 var
   f: TFmxObject;
   b: TBounds;
+  lt: TFormlayout;
 begin
   form:=fm;
   main:=m;
@@ -107,11 +107,17 @@ begin
     if f is TLayout then
       tabs.add(FSTab.create(f as TLayout));
   shw:=-1;
-  winId:=wId;
-  sizes:=DM.getFormLayout(fm.Name, main.Name).TextSize;
-  widths:=DM.getFormLayout(fm.Name, main.Name).TabWidth;
-  b:=DM.getFormLayout(form.Name, main.Name).LayoutMargins;
-  tbsAni:=DM.getFormLayout(form.Name, main.Name).Animation;
+  afterClick:=aftClck;
+  afterEnter:=aftEntr;
+  afterLeave:=aftLve;
+  b:=nil;
+  if DM.tryGetFormLayout(fm.name, main.name, lt) then
+    with lt do begin
+      sizes:=lt.TextSize;
+      widths:=lt.TabWidth;
+      b:=lt.LayoutMargins;
+      tbsAni:=lt.Animation;
+    end;
   if assigned(b) then xZero:=b.Left
     else xZero:=0;
   block:=false;
@@ -141,7 +147,6 @@ begin
       tabs[i].layout.Height:=main.Height;
       tabs[i].layout.HitTest:=true;
       tabs[i].layout.OnMouseEnter:=onEnter;
-      tabs[i].layout.OnMouseLeave:=onLeave;
       tabs[i].layout.OnClick:=onClick;
       if img then IM.setSize(tabs[i].image, TSizeF.Create(tabs[i].layout.Width, tabs[i].layout.Height));
       if txt then tabs[i].text.TextSettings.Font.Size:=S;
@@ -178,9 +183,10 @@ begin
         TAnimator.AnimateFloat(Main, 'Position.X', xZero-((maxW-W)*id/c));
         TAnimator.AnimateFloat(tabs[id].layout, 'width', maxW);
       end;
-      if txtAni or tbsAni then tabs[shw].layout.OnMouseLeave:=onLeave;
-      if Assigned(afterClick) then afterClick(tabs[id])
-        else if id=winId then form.win;
+      if txtAni or tbsAni then
+        tabs[shw].layout.OnMouseLeave:=onLeave;
+      if Assigned(afterClick) then
+        afterClick(tabs[id]);
     end;
 end;
 

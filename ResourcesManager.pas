@@ -8,11 +8,13 @@ uses
 type
   ePath = (pTexts, pSounds, pResource);
 
-  eResource = (rStyle, rImages, rSequences, rSwitchers, rOther, rMuseum, rWinMuseum);
+  eResource = (rStyle, rImages, rSequences, rSwitchers, rOther, rMuseum, rProgress);
 
   eSound = (sMain, sBackground, sClick, sAward, sWrong);
 
-  eTexts = (tLevels, tMuseum, tOther, tLayouts);
+  eTexts = (tLevels, tMuseum, tOther, tForms, tFrames);
+
+  procedure initPath;
 
   function getPath(p:ePath):string;
 
@@ -31,12 +33,20 @@ uses
   FMX.Dialogs,
   System.IOUtils, System.SysUtils, DataUnit;
 
+var
+  exePath: string;
+
+procedure initPath;
+begin
+  exePath:=TPath.GetLibraryPath;
+end;
+
 function getPath(p:ePath):string;
 begin
   case p of
-    pTexts: result:=TPath.Combine(TPath.GetLibraryPath,'t');
-    pSounds: result:=TPath.Combine(TPath.GetLibraryPath,'s');
-    pResource: result:=TPath.Combine(TPath.GetLibraryPath,'i');
+    pTexts: result:=TPath.Combine(exePath,'t');
+    pSounds: result:=TPath.Combine(exePath,'s');
+    pResource: result:=TPath.Combine(exePath,'i');
   end;
 end;
 
@@ -46,7 +56,8 @@ begin
     tLevels: result:=TPath.Combine(getPath(pTexts),'levels.json');
     tMuseum: result:=TPath.Combine(getPath(pTexts),'museum.json');
     tOther: result:=TPath.Combine(getPath(pTexts),'other.json');
-    tLayouts: result:=TPath.Combine(getPath(pTexts),'layouts.json');
+    tForms: result:=TPath.Combine(getPath(pTexts),'forms.json');
+    tFrames: result:=TPath.Combine(getPath(pTexts),'frames.json');
   end;
 end;
 
@@ -78,7 +89,6 @@ begin
     rSwitchers: result:=TPath.Combine(getPath(pResource), 'Switchers.style');
     rOther: result:=TPath.Combine(getPath(pResource), 'Other.style');
     rMuseum: result:=TPath.Combine(getPath(pResource), 'Museum.style');
-    rWinMuseum: result:=TPath.Combine(getPath(pResource), 'winMuseum.style');
   end;
 end;
 
@@ -110,7 +120,7 @@ begin
     rSwitchers: result:=DataForm.Switchers;
     rOther: result:=DataForm.Other;
     rMuseum: result:=DataForm.Museum;
-    rWinMuseum: result:=DataForm.winMuseum;
+    rProgress: result:=DataForm.progress;
   end;
 end;
 

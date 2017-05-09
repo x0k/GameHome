@@ -6,11 +6,16 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.StdCtrls, FMX.ScrollBox, FMX.Memo, FMX.Controls.Presentation,
-  FMX.TabControl, FMX.Layouts, FMX.Filter.Effects, FMX.ImgList, BarUnit, FMX.ani,
-  GameForms, DataUnit;
+  FMX.TabControl, FMX.Layouts, FMX.Filter.Effects, FMX.ImgList, FMX.ani, System.ImageList,
+  Forms, uFrame;
+
+const
+  LVL_COUNT = 15;
+  AWD_COUNT = 8;
+  MDL_COUNT = 7;
 
 type
-  TGameForm = class(TGTabForm)
+  TGameForm = class(TBarForm)
     Tabs: TTabControl;
     TabItem1: TTabItem;
     TabItem2: TTabItem;
@@ -32,57 +37,170 @@ type
     Btns: TLayout;
     Main1: TLayout;
     Main2: TLayout;
-    Main3: TLayout;
     BG1: TGlyph;
     BG2: TGlyph;
-    BG3: TGlyph;
     Alex: TGlyph;
-    Place: TGlyph;
     Home: TGlyph;
+    Main3: TLayout;
+    bonusBtn: TButton;
+    logoLayout: TLayout;
+    topLogo: TGlyph;
+    progress: TLayout;
+    RBonus: TLayout;
+    bonusBG: TRectangle;
+    telega: TLayout;
+    st1: TGlyph;
+    st2: TGlyph;
+    wh2: TGlyph;
+    body: TGlyph;
+    wh1: TGlyph;
+    woods: TGlyph;
+    tools: TGlyph;
+    shepa: TGlyph;
+    coins: TLayout;
+    medal: TGlyph;
+    medalTxt: TText;
+    SPanel: TPanel;
+    nextLayout: TLayout;
+    NextBtn: TSpeedButton;
+    SubName: TText;
+    SubText: TMemo;
+    SubLogo: TGlyph;
+    backLayout: TLayout;
+    BackBtn: TSpeedButton;
+    BG3: TGlyph;
+    Main: TLayout;
     procedure l1btnClick(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
-  protected
-    procedure onFormCreate; override;
-    procedure afterTabChange(newTab: byte); override;
-  public
+    procedure logoLayoutClick(Sender: TObject);
+    procedure BackBtnClick(Sender: TObject);
+    procedure NextBtnClick(Sender: TObject);
+  private
+    frame: TGFrame;
+    sts:TArray<byte>;//states
+    aws:TArray<boolean>;//awards
+    mds:TArray<boolean>;//medals
+    dots:TArray<TGlyph>;
+    block: boolean;
+
+    function getStatus(id: byte): byte;
+    procedure setStatus(id: byte; v: byte);
+    procedure setAward(id: byte; v: boolean);
+    procedure setMedal(id: byte; v: boolean);
+    function getMdlCount: byte;
+
+    procedure setBar;
+    procedure setCaption(const t: string);
+    procedure setLogo(const b: byte);
+    procedure setText(const t: string);
+
     function getButton(tag: byte): TButton;
+
+  protected
+    procedure onCreate; override;
+
+  public
+    procedure barShow(sender: TObject); override;
+    procedure barClose(Sender: TObject; var  Action: TCloseAction); override;
+
+    procedure nextFrame(id: byte);
+    procedure setNext(id: byte);
+    procedure setBack;
+    procedure gameExit;
+
+    property states[index: byte]: byte read getStatus write setStatus;
+    property awards[index: byte]: boolean write setAward;
+    property medals[index: byte]: boolean write setMedal;
+    property medalsCount: byte read getMdlCount;
+
+    property Caption: string write setCaption;
+    property Logo: byte write setLogo;
+    property Text: string write setText;
+
+    property clBlock: boolean read block write block;
   end;
+
+var
+  GameForm: TGameForm;
 
 implementation
 
 {$R *.fmx}
 
 uses
-  ResourcesManager;
+  ImageManager, ResourcesManager;
 
-procedure TGameForm.onFormCreate;
+procedure TGameForm.onCreate;
 var
-  f: TFmxObject;
+  g, cl: TGlyph;
+  i: byte;
 begin
   backgrounds:=[home, BG1, BG2, BG3];
-  layouts:=[main1, main2, main3];
-  gTabs:=tabs;
-  gTab:=2;
-  if not godMode then
-    for f in Btns.Children do
-      if f is TButton then
-        with f as TButton do
-          Enabled:=false;
-end;
+  layouts:=[main, main1, main2, main3];
 
-procedure TGameForm.afterTabChange(newTab: Byte);
-begin
-  if newTab=2 then
+  setlength(sts, LVL_COUNT);
+  setLength(aws, AWD_COUNT);
+  setLength(mds, MDL_COUNT);
+
+  setLength(dots, LVL_COUNT);
+  g:=TGlyph.Create(self);
+  with g do
   begin
-    if state<2 then state:=2;
-    Bar.nxtBtn:=false;
+    Align:=TAlignLayout.Right;
+    Height:=30;
+    Width:=30;
+    Margins.Right:=10;
   end;
+  for i:=LVL_COUNT-1 downto 0 do
+  begin
+    cl:=g.Clone(self) as TGlyph;
+    cl.Images:=getImgList(rProgress);
+    cl.ImageIndex:=0;
+    dots[i]:=cl;
+    progress.AddObject(cl);
+  end;
+  g.Destroy;
 end;
 
-procedure TGameForm.FormActivate(Sender: TObject);
+procedure TGameForm.barClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Bar.nxtBtn:=Tabs.TabIndex<>gTab;
-  fillBar(Tabs.TabIndex, 0 , Tabs.TabIndex);
+  Frame.Free;
+  inherited;
+end;
+
+procedure TGameForm.setBar;
+begin
+  setCaption(fText.Names[Tabs.TabIndex]);
+  setLogo(fText.Logos[Tabs.TabIndex]);
+  setText(fText.TabTexts[Tabs.TabIndex]);
+end;
+
+procedure TGameForm.barShow(Sender: TObject);
+var
+  f: TFmxObject;
+  i: byte;
+begin
+  Tabs.TabIndex:=0;
+  for i:=0 to LVL_COUNT-1 do
+    sts[i]:=0;
+  for i:=0 to AWD_COUNT-1 do
+    aws[i]:=false;
+  for i:=0 to MDL_COUNT-1 do
+    mds[i]:=false;
+  for i:=0 to LVL_COUNT-1 do
+    dots[i].ImageIndex:=0;
+  for f in Btns.Children do
+    if (f is TButton) and (f.Tag<>0) then
+      with f as TButton do
+        Enabled:=false;
+  block:=false;
+  nextBtn.Visible:=true;
+  setBar;
+  inherited;
+end;
+
+procedure TGameForm.gameExit;
+begin
+  close;
 end;
 
 function TGameForm.getButton(tag: byte): TButton;
@@ -100,9 +218,152 @@ end;
 
 procedure TGameForm.l1btnClick(Sender: TObject);
 begin
-  hideAni;
-    showForm((Sender as TFmxObject).Tag);
-  hide;
+  nextFrame((Sender as TFmxObject).Tag);
+  tabs.Next();
+end;
+
+procedure TGameForm.logoLayoutClick(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TGameForm.setAward(id: byte; v: boolean);
+
+  function getBonus(id: byte): TGlyph;
+  begin
+    result:=nil;
+    case id of
+      0:result:=wh1;
+      1:result:=tools;
+      2:result:=woods;
+      3:result:=shepa;
+      4:result:=wh2;
+      5:result:=body;
+      6:result:=st1;
+      7:result:=st2;
+    end;
+  end;
+
+begin
+  aws[id]:=v;
+  getBonus(id).Visible:=v;
+end;
+
+function TGameForm.getMdlCount: byte;
+var
+  b: boolean;
+begin
+  result:=0;
+  for b in mds do
+    if b then inc(result);
+end;
+
+procedure TGameForm.setMedal(id: byte; v: boolean);
+var
+  c:byte;
+begin
+  c:=getMdlCount;
+  mds[id]:=v;
+  medalTxt.Text:='x'+c.ToString;
+  coins.Visible:=c>0;
+end;
+
+function TGameForm.getStatus(id: byte): byte;
+begin
+  result:=sts[id];
+end;
+
+procedure TGameForm.setStatus(id, v: byte);
+begin
+  sts[id]:=v;
+  if (id<LVL_COUNT-1)and(v>1) then
+    getButton(id+1).Enabled:=true;
+  if v<2 then dots[id].ImageIndex:=v
+    else dots[id].ImageIndex:=2;
+end;
+
+procedure TGameForm.setCaption(const t: string);
+begin
+  subName.Text:=t;
+end;
+
+procedure TGameForm.setLogo(const b: byte);
+begin
+  subLogo.ImageIndex:=b;
+end;
+
+procedure TGameForm.setText(const t: string);
+begin
+  if t='' then
+    subText.Lines.Clear
+  else
+    subText.Text:=t;
+end;
+
+procedure TGameForm.nextFrame(id: Byte);
+begin
+  frame:=createFrame(id);
+  main3.AddObject(frame);
+  frame.onFShow;
+end;
+
+procedure TGameForm.setNext(id: byte);
+begin
+  frame.onFHide;
+  frame.Destroy;
+  nextFrame(id);
+end;
+
+procedure TGameForm.setBack;
+begin
+  tabs.Previous();
+  frame.Free;
+  setBar;
+  block:=false;
+end;
+
+procedure TGameForm.NextBtnClick(Sender: TObject);
+var
+  i: byte;
+begin
+  if block then exit;
+  block:=true;
+  try
+    case Tabs.TabIndex of
+      0:begin
+        Tabs.Next();
+        setBar;
+      end;
+      1:begin
+        i:=0;
+        while sts[i]>1 do inc(i);
+        nextFrame(i);
+        tabs.Next();
+      end;
+      2:begin
+        frame.next;
+      end;
+    end;
+  finally
+    block:=false;
+  end;
+end;
+
+procedure TGameForm.BackBtnClick(Sender: TObject);
+begin
+  if block then exit;
+  case Tabs.TabIndex of
+    0:close;
+    1:begin
+      Tabs.Previous();
+      setBar;
+      block:=false;
+      nextBtn.Visible:=true;
+    end;
+    2:begin
+      frame.back;
+    end;
+  end;
 end;
 
 end.

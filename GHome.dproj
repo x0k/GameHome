@@ -328,37 +328,6 @@
         <DCCReference Include="GameUnit.pas">
             <Form>GameForm</Form>
         </DCCReference>
-        <DCCReference Include="SeazonUnit.pas">
-            <Form>SeazonForm</Form>
-        </DCCReference>
-        <DCCReference Include="BarUnit.pas">
-            <Form>Bar</Form>
-            <DesignClass>TFrame</DesignClass>
-        </DCCReference>
-        <DCCReference Include="PlaceUnit.pas">
-            <Form>PlaceForm</Form>
-        </DCCReference>
-        <DCCReference Include="ToolsUnit.pas">
-            <Form>ToolsForm</Form>
-        </DCCReference>
-        <DCCReference Include="MaterialsUnit.pas">
-            <Form>MaterialsForm</Form>
-        </DCCReference>
-        <DCCReference Include="TaskUnit.pas">
-            <Form>TaskForm</Form>
-        </DCCReference>
-        <DCCReference Include="FoundationUnit.pas">
-            <Form>FoundationForm</Form>
-        </DCCReference>
-        <DCCReference Include="MapUnit.pas">
-            <Form>MapForm</Form>
-        </DCCReference>
-        <DCCReference Include="OmenUnit.pas">
-            <Form>OmenForm</Form>
-        </DCCReference>
-        <DCCReference Include="WarmingUnit.pas">
-            <Form>WarmingForm</Form>
-        </DCCReference>
         <DCCReference Include="Forms.pas"/>
         <DCCReference Include="TextManager.pas"/>
         <DCCReference Include="ResourcesManager.pas"/>
@@ -366,27 +335,93 @@
         <DCCReference Include="GameData.pas"/>
         <DCCReference Include="SoundManager.pas"/>
         <DCCReference Include="FullScreenTabs.pas"/>
-        <DCCReference Include="GameForms.pas"/>
         <DCCReference Include="DesignManager.pas"/>
-        <DCCReference Include="MatrixUnit.pas">
-            <Form>MatrixForm</Form>
-        </DCCReference>
-        <DCCReference Include="WindowsUnit.pas">
-            <Form>WindowsForm</Form>
-        </DCCReference>
-        <DCCReference Include="RoofUnit.pas">
-            <Form>RoofForm</Form>
-        </DCCReference>
-        <DCCReference Include="RidgeUnit.pas">
-            <Form>RidgeForm</Form>
-        </DCCReference>
-        <DCCReference Include="MovingUnit.pas">
-            <Form>MovingForm</Form>
-        </DCCReference>
-        <DCCReference Include="EndUnit.pas">
-            <Form>EndForm</Form>
-        </DCCReference>
         <DCCReference Include="winMessages.pas"/>
+        <DCCReference Include="uSeazon.pas">
+            <Form>SeazonFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uPlace.pas">
+            <Form>PlaceFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uTools.pas">
+            <Form>ToolsFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uMaterials.pas">
+            <Form>MaterialsFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uTask.pas">
+            <Form>TaskFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uFoundation.pas">
+            <Form>FoundationFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uMap.pas">
+            <Form>MapFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uOmen.pas">
+            <Form>OmenFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uWarming.pas">
+            <Form>WarmingFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uMatrix.pas">
+            <Form>MatrixFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uWindows.pas">
+            <Form>WindowsFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uRoof.pas">
+            <Form>RoofFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uRidge.pas">
+            <Form>RidgeFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uMoving.pas">
+            <Form>MovingFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uEnd.pas">
+            <Form>EndFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uFrame.pas">
+            <Form>GFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="uTabFrame.pas">
+            <Form>TabFrame</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
         <None Include="ModelSupport_GHome\ImageManager\default.txvpck"/>
         <None Include="ModelSupport_GHome\OmenUnit\default.txvpck"/>
         <None Include="ModelSupport_GHome\OmenUnit\default.txaPackage"/>
@@ -508,27 +543,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
@@ -879,12 +899,27 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="ProjectiOSDeviceResourceRules">
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>

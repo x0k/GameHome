@@ -1,0 +1,10 @@
+inherited EndFrame: TEndFrame
+  object BG: TGlyph
+    Align = Center
+    Size.Width = 1280.000000000000000000
+    Size.Height = 861.000000000000000000
+    Size.PlatformDefault = False
+    ImageIndex = 2
+    Images = DataForm.Backgrounds
+  end
+end

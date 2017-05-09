@@ -71,57 +71,12 @@ type
     procedure Back(Sender: TObject); override;
   end;
 
-  procedure initForms;
-  procedure freeForms;
-  procedure showForm(id:byte);
-
 implementation
 
 uses
   System.Types, System.SysUtils,
   FMX.Dialogs, FMX.Graphics,
-  DataUnit, DesignManager, ImageManager, GameUnit, SeazonUnit, PlaceUnit, ToolsUnit, MaterialsUnit, TaskUnit, FoundationUnit, MapUnit, OmenUnit, WarmingUnit,
-  MatrixUnit, WindowsUnit, RoofUnit, RidgeUnit, MovingUnit, EndUnit;
-
-var
-  GameForm: TGTabForm;
-
-procedure initForms;
-begin
-  GameForm:=TGameForm.Create(0, nil);
-end;
-
-procedure freeForms;
-begin
-  GameForm.Free;
-end;
-
-function createForm(id:byte): TGForm;
-begin
-  case id of
-    1:result:=TSeazonForm.Create(1, GameForm);
-    2:result:=TPlaceForm.Create(2, GameForm);
-    3:result:=TToolsForm.Create(3, GameForm);
-    4:result:=TMaterialsForm.Create(4, GameForm);
-    5:result:=TTaskForm.Create(5, GameForm);
-    6:result:=TFoundationForm.Create(6, GameForm);
-    7:result:=TMapForm.Create(7, GameForm);
-    8:result:=TOmenForm.Create(8, GameForm);
-    9:result:=TWarmingForm.Create(9, GameForm);
-    10:result:=TMatrixForm.Create(10, GameForm);
-    11:result:=TWindowsForm.Create(11, GameForm);
-    12:result:=TRoofForm.Create(12, GameForm);
-    13:result:=TRidgeForm.Create(13, GameForm);
-    14:result:=TMovingForm.Create(14, GameForm);
-    15:result:=TEndForm.Create(15, GameForm);
-    else result:=GameForm;
-  end;
-end;
-
-procedure showForm(id: byte);
-begin
-  createForm(id).show;
-end;
+  DataUnit, DesignManager, ImageManager, GameUnit;
 
   {TGForm}
 
@@ -135,8 +90,8 @@ end;
 procedure TGForm.setStatus(s: Byte);
 begin
   states[level]:=s;
-  if (level<LVL_COUNT-1)and(s>1) then
-    (gameForm as TGameForm).getButton(level+1).Enabled:=true;
+  //if (level<LVL_COUNT-1)and(s>1) then
+    //(gameForm as TGameForm).getButton(level+1).Enabled:=true;
   if s<2 then Bar.dotsStat[level]:=s
     else Bar.dotsStat[level]:=2;
 end;
@@ -169,8 +124,8 @@ begin
     setBonus(i, false);
   for i:=1 to MDL_COUNT do
     setMedal(i, false);
-  GameForm.Hide;
-  GameForm.gTabs.TabIndex:=0;
+  //GameForm.Hide;
+  //GameForm.gTabs.TabIndex:=0;
   if level>0 then self.Destroy;
 end;
 
@@ -299,7 +254,7 @@ begin
       IM.setSize(backgrounds[i], screen.Size);
   if length(layouts)>0 then
   begin
-    setSz(TArray<TFmxObject>(layouts), DM.Designs[name]);
+    //setSz(TArray<TFmxObject>(layouts), DM.Designs[name]);
     for i:=0 to High(layouts) do
       layouts[i].Opacity:=0;
   end;
@@ -333,7 +288,7 @@ procedure TGForm.onFormClose;
 begin
   if level>0 then
   begin
-    showForm(0);
+    //showForm(0);
     if state<2 then
       state:=0;
     Action:=TCloseAction.caFree;
@@ -346,7 +301,7 @@ begin
   hideAni;
   if Assigned(Bar.Parent) then Bar.Parent:=nil;
   if level<LVL_COUNT then
-    showForm(level+1);
+    //showForm(level+1);
   if state<2 then
     state:=0;
   if level=LVL_COUNT then
@@ -364,7 +319,7 @@ begin
     state:=0;
   if level>0 then
   begin
-    showForm(0);
+    //showForm(0);
     Destroy;
   end else gameExit;
 end;
@@ -409,7 +364,7 @@ begin
     hideAni;
     if Assigned(Bar.Parent) then Bar.Parent:=nil;
     if (level>0) and (level<LVL_COUNT-1) then
-      showForm(level+1);
+      //showForm(level+1);
     if level=LVL_COUNT then
       gameExit
     else
@@ -441,7 +396,7 @@ begin
       state:=0;
     if level>0 then
     begin
-      showForm(0);
+      //showForm(0);
       destroy;
     end else gameExit;
   end;

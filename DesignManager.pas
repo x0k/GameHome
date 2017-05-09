@@ -19,6 +19,7 @@ type
     hasAlign: boolean;
     Align: TAlignLayout;
     Font: TTextSettings;
+    fSize: single;
     hasTxt: boolean;
     Txt: string;
     Bounds: TBounds;
@@ -31,13 +32,14 @@ type
     procedure fillArr<T>(const j:TJSONArray; const f: fillProc<T>;var m: TArray<T>);
 
     function fontFromJSON(const v:TJSONObject): TTextSettings;
-    function boundsFromJSON(const v:TJSONArray): TBounds;
+    function boundsFromJSON(const v:TJSONArray; marg: boolean = true): TBounds;
   public
     property Name: string read n;
     property Animation: boolean read ani;
     property TextSize:TArray<single> read txtSize;
     property TabWidth:TArray<single> read tbsSize;
     property TextSettings: TTextSettings read Font;
+    property FontSize: single read fSize;
     property pText: boolean read hasTxt;
     property Text: string read Txt;
     property pAlign: boolean read hasAlign;
@@ -51,17 +53,17 @@ type
     constructor create(j:TJSONObject);
   end;
 
+  TFormLayouts = TArray<TFormLayout>;
+
   TDesignManager = class
   private
-    lName: string;
-    lArr: TArray<TFormLayout>;
-    layouts: TDictionary<string, TArray<TFormLayout>>;
+    layouts: TDictionary<string, TFormLayouts>;
 
-    function getDesign(name: string): TArray<TFormLayout>;
   public
-    function getFormLayout(const form, name: string): TFormLayout;
+    function tryGetFormLayouts(const form:string; var lts: TFormLayouts): boolean;
+    function tryGetFormLayout(const form, name:string; var lt: TFormLayout): boolean;
 
-    property Designs[index: string]: TArray<TFormLayout> read getDesign;
+    procedure setSz(const layouts: TArray<TFmxObject>;const setts: TArray<TFormLayout>);
 
     destructor Destroy; override;
     constructor Create;
@@ -74,7 +76,7 @@ implementation
 
 uses
   System.UIConsts, System.Types, System.Math, System.SysUtils,
-  FMX.Forms, FMX.Dialogs,
+  FMX.Forms, FMX.Dialogs, FMX.Controls, FMX.Objects, FMX.Memo,
   DataUnit;
 
   {TFormText}
@@ -96,7 +98,7 @@ begin
     result.VertAlign:=TTextAlign(TJSONNumber(val).AsInt);
 end;
 
-function TFormLayout.boundsFromJSON(const v: TJSONArray): TBounds;
+function TFormLayout.boundsFromJSON(const v: TJSONArray; marg: boolean): TBounds;
 var
   w, h: single;
   r: TRectF;
@@ -167,6 +169,8 @@ begin
     fillArr<single>(val, fillSingl, TbsSize);
   if j.TryGetValue('Font', obj) then
     Font:=fontFromJSON(obj);
+  if j.TryGetValue('FontSize', num) then fSize:=num.AsDouble*(Screen.Width+Screen.Height/2)/2700
+    else fSize:=0;
   if j.TryGetValue('Align', num) then
   begin
     Align:=TAlignLayout(num.AsInt);
@@ -190,42 +194,42 @@ end;
 
   {TDesignManager}
 
-function TDesignManager.getDesign(name: string): TArray<TFormLayout>;
+function TDesignManager.tryGetFormLayouts(const form: string; var lts: TFormLayouts): boolean;
 begin
-  if (lName<>name) and Layouts.ContainsKey(name) then
-  begin
-    lArr:=Layouts.Items[name];
-    lName:=name;
-  end;
-  result:=lArr;
+  result:=layouts.ContainsKey(form);
+  if result then
+    lts:=layouts[form];
 end;
 
-function TDesignManager.getFormLayout(const form: string; const name: string): TFormLayout;
+function TDesignManager.tryGetFormLayout(const form, name: string; var lt: TFormLayout): boolean;
+var
+  lts: TFormLayouts;
 
-  function findName(const m: TArray<TFormLayout>): TFormLayout;
+  function tryFindName(const m: TArray<TFormLayout>): boolean;
   var
     i: byte;
   begin
-    result:=nil;
+    result:=false;
     if Assigned(m) and (length(m)>0) then
     begin
       for i:=0 to High(m) do
       begin
         if m[i].Name=name then
         begin
-          result:=m[i];
+          result:=true;
+          lt:=m[i];
           exit;
         end;
         if m[i].pClilds then
-          result:=findName(m[i].Childrens);
-        if Assigned(result) then
+          result:=tryFindName(m[i].Childrens);
+        if result then
           exit;
       end;
     end;
   end;
 
 begin
-  result:=findName(getDesign(form));
+  result:=tryGetFormLayouts(form, lts) and tryFindName(lts);
 end;
 
 destructor TDesignManager.destroy;
@@ -240,6 +244,55 @@ begin
   inherited;
 end;
 
+procedure TDesignManager.setSz(const layouts: TArray<TFmxObject>; const setts: TArray<TFormLayout>);
+  var
+    i: byte;
+    ct: TControl;
+
+  function findByName(const name: string; const arr: TArray<TFmxObject>; var c: TControl):boolean;
+  var
+    i: byte;
+  begin
+    result:=false;
+    if length(arr)=0 then exit;
+    for i:=Low(arr) to High(arr) do
+      if name = arr[i].Name then
+      begin
+        if arr[i] is TControl then
+        begin
+          c:=arr[i] as TControl;
+          result:=true;
+        end;
+        exit;
+      end;
+  end;
+
+  begin
+    for i:=0 to High(setts) do
+      if findByName(setts[i].Name, layouts, ct) then
+      begin
+        if setts[i].pAlign then
+          ct.Align:=setts[i].LayoutAlign;
+        if setts[i].pText then
+        begin
+          if ct is TText then
+            (ct as TText).Text:=setts[i].Text
+          else if ct is TMemo then
+            (ct as TMemo).Text:=setts[i].Text;
+        end;
+        if Assigned(setts[i].TextSettings) then
+          (ct as ITextSettings).TextSettings.Assign(setts[i].TextSettings);
+        if setts[i].FontSize>0 then
+          (ct as ITextSettings).TextSettings.Font.Size:=setts[i].FontSize;
+        if Assigned(setts[i].LayouBounds) then
+          ct.BoundsRect:=setts[i].LayouBounds.Rect;
+        if Assigned(setts[i].LayoutMargins) then
+          ct.Margins:=setts[i].LayoutMargins;
+        if setts[i].pClilds and (ct.ChildrenCount>0) then
+          setSz(ct.Children.ToArray, setts[i].Childs);
+      end;
+  end;
+
 constructor TDesignManager.Create;
 var
   i, c: byte;
@@ -247,27 +300,31 @@ var
   json: TJSONObject;
   val: TJSONValue;
   m: TArray<TFormLayout>;
+  txts: TArray<eTexts>;
+  txt: eTexts;
 begin
   layouts:=TDictionary<string, TArray<TFormLayout>>.Create;
+  txts:=[tForms, tFrames];
   try
-    if findTexts(tLayouts) then
-    begin
-      val:=TJSONObject.ParseJSONValue(getTexts(tLayouts));
-      if Assigned(val) and (val is TJSONObject) then
+    for txt in txts do
+      if findTexts(txt) then
       begin
-        json:=val as TJSONObject;
-        for p in json do
+        val:=TJSONObject.ParseJSONValue(getTexts(txt));
+        if Assigned(val) and (val is TJSONObject) then
         begin
-          c:=TJSONArray(p.JsonValue).Count;
-          if c=0 then continue;
-          setlength(m, c);
-          for i:=0 to c-1 do
-            m[i]:=TFormLayout.create(TJSONArray(p.JsonValue).Items[i] as TJsonObject);
-          layouts.Add(p.JsonString.Value, copy(m, 0, c));
-          p.Free;
+          json:=val as TJSONObject;
+          for p in json do
+          begin
+            c:=TJSONArray(p.JsonValue).Count;
+            if c=0 then continue;
+            setlength(m, c);
+            for i:=0 to c-1 do
+              m[i]:=TFormLayout.create(TJSONArray(p.JsonValue).Items[i] as TJsonObject);
+            layouts.Add(p.JsonString.Value, copy(m, 0, c));
+            p.Free;
+          end;
         end;
       end;
-    end;
   except
     on E: Exception do
       ShowMessage('DesigneManager error: '+E.Message);

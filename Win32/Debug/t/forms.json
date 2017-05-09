@@ -1,0 +1,227 @@
+﻿{
+	"MainForm": [
+		{
+			"Name": "Main",
+			"Childrens": [
+				{
+					"Name": "Bar",
+					"Bounds": [0, 85, 100, 100],
+					"Childrens": [
+						{
+							"Name": "barText",
+							"FontSize": 40,
+							"Text": "Главное меню"}]},
+				{
+					"Name": "centerLayout",
+					"Margins": [0, 0, 0, 15],
+					"Childrens": [
+						{
+							"Name": "Logo",
+							"Margins": [0, 0, 0, 50]},
+						{
+							"Name": "MenuLayout",
+							"Childrens": [
+								{
+									"Name": "beginLayout",
+									"Childrens": [
+										{
+											"Name": "Text1",
+											"Text": "Начать игру"},
+										{
+											"Name": "BGameBtn"}]},
+								{
+									"Name": "settingsLayout",
+									"Childrens": [
+										{
+											"Name": "Text2",
+											"Text": "Настройки"},
+										{
+											"Name": "SettsBtn"}]},
+								{
+									"Name": "museumLayout",
+									"Childrens": [
+										{
+											"Name": "Text3",
+											"Text": "Музей"},
+										{
+											"Name": "MuseumBtn"}]},
+								{
+									"Name": "aboutLayout",
+									"Childrens": [
+										{
+											"Name": "Text4",
+											"Text": "Об игре"},
+										{
+											"Name": "AboutBtn"}]},
+								{
+									"Name": "exitLayout",
+									"Childrens": [
+										{
+											"Name": "Text5",
+											"Text": "Выход"},
+										{
+											"Name": "ExitBtn"}]}]}]}]}],
+	"SettingsForm": [
+		{
+			"Name": "Main",
+			"Childrens":[
+				{
+					"Name": "logoLayout",
+					"Bounds": [1, 1, 10, 10]},
+				{
+					"Name": "Grid",
+					"Margins": [20, 15, 25, 15],
+					"Childrens": [
+						{
+							"Name": "top",
+							"Bounds": [0, 0, 60, 20],
+							"Childrens":[
+								{
+									"Name": "Volume",
+									"FontSize": 40,
+									"Text": "Громкость"},
+								{
+									"Name": "Vol",
+									"Bounds": [0, 0, 30, 20]}]},
+						{
+							"Name": "mid",
+							"Bounds": [0, 0, 60, 20],
+							"Childrens":[
+								{
+									"Name": "Brithnes",
+									"FontSize": 40,
+									"Text": "Яркость"},
+								{
+									"Name": "Brith",
+									"Bounds": [0, 0, 30, 20]}]},
+						{
+							"Name": "down",
+							"Bounds": [0, 0, 60, 20],
+							"Childrens":[
+								{
+									"Name": "Contrast",
+									"FontSize": 40,
+									"Text": "Контрастность"
+								},
+								{
+									"Name": "Contr",
+									"Bounds": [0, 0, 30, 20]}]}]},
+				{
+					"Name": "SPanel",
+					"Bounds": [0, 85, 100, 100],
+					"Childrens": [
+						{
+							"Name": "SubName",
+							"Text": "Настройки",
+							"FontSize": 40,
+							"Bounds": [0, 0, 16, 15]}]}]}],
+	"MuseumForm": [
+		{
+			"Name": "Main",
+			"Childrens": [
+				{
+					"Name": "logoLayout",
+					"Bounds": [1, 1, 10, 10]},
+				{
+					"Name": "controls",
+					"Childrens": [
+						{
+							"Name": "LBack",
+							"Bounds": [0, 0, 16, 100]},
+						{
+							"Name": "LNext"}]},
+				{
+					"Name": "SPanel",
+					"Bounds": [0, 85, 100, 100],
+					"Childrens": [
+						{
+							"Name": "SubName",
+							"Text": "Музей",
+							"FontSize": 40,
+							"Bounds": [0, 0, 16, 15]}]}]}],
+	"AboutForm": [
+		{
+			"Name": "Main",
+			"Childrens": [
+				{
+					"Name": "logoLayout",
+					"Bounds": [1, 1, 10, 10]},
+				{
+					"Name": "SPanel",
+					"Childrens": [
+						{
+							"Name": "Text",
+							"Text": "Nam vel tellus ornare magna facilisis semper vitae fringilla libero. Praesent aliquet ex ex, at convallis purus viverra sed. Vivamus vitae elementum augue, eu ultricies augue. Sed ac pretium arcu. Donec et metus a lectus vulputate laoreet eu dictum dolor. Aliquam turpis diam, tristique non nisi in, ullamcorper dictum erat. Nunc a commodo diam.
+
+Nulla lacinia diam sit amet dictum bibendum. Suspendisse pellentesque non magna eu vehicula. In vehicula nunc eu tellus tincidunt auctor. Nullam enim augue, auctor vitae elit in, lacinia tempor purus. Curabitur metus sem, feugiat eu blandit nec, maximus vitae felis. Ut mauris erat, vestibulum at lorem a, facilisis iaculis enim. In pulvinar eu odio quis pretium. Duis eget interdum purus. Phasellus convallis, erat eu rhoncus vestibulum, nunc arcu fringilla nibh, vitae placerat ex lectus nec ligula. Aliquam quis eleifend tortor, tincidunt dictum neque. Sed lorem urna, accumsan sed nisi ut, rhoncus posuere orci. Pellentesque rhoncus neque sed libero elementum, eu molestie nisi elementum.
+
+In fringilla nunc eu dui euismod, at pharetra leo cursus. Morbi odio lectus, consectetur a viverra a, dictum vitae ipsum. Morbi mattis nunc vel velit auctor finibus. Sed consectetur quam vitae turpis mattis molestie vel sit amet ex. Donec placerat metus eget lobortis faucibus. Nunc tincidunt felis ac augue semper, non aliquet ante varius. Maecenas viverra euismod pulvinar. Aenean ut diam nunc. Fusce et libero eleifend, semper nunc nec, sagittis orci. Proin egestas viverra nisi, nec luctus est semper at. Donec et ex in metus fringilla feugiat ut at arcu. Aenean fringilla ipsum quis urna tempus ornare. Quisque nec placerat urna. Etiam ac ex blandit, efficitur est ac, condimentum lorem. Mauris tempor enim diam, id finibus orci porttitor a.
+
+Duis pellentesque maximus tellus, varius laoreet eros consectetur at. Phasellus pellentesque nec dolor nec egestas. Maecenas ut massa egestas, suscipit ex in, pulvinar orci. Praesent condimentum, eros vitae luctus dignissim, velit nisl blandit eros, vitae suscipit libero risus ac dolor. Duis interdum tortor nisl, sit amet efficitur turpis sodales venenatis. Fusce sapien ligula, iaculis ac pellentesque et, rhoncus id diam. Duis risus augue, efficitur et tellus in, egestas luctus tortor. Curabitur bibendum, libero ac pulvinar volutpat, nisl lorem convallis quam, non rutrum mi justo at massa. Morbi placerat justo vitae dui egestas elementum.
+
+Donec felis urna, sollicitudin vel metus at, congue posuere diam. Sed lacinia, purus sit amet hendrerit scelerisque, tellus diam vulputate ex, nec semper nisi mi at tortor. Suspendisse eget tortor vitae tortor ultrices pharetra. Quisque lobortis porta odio a pharetra. Phasellus sit amet iaculis ligula. Pellentesque eget eros hendrerit, suscipit leo ut, rhoncus elit. Curabitur sagittis nisi ultrices sapien tempor, at dignissim magna ultrices. Fusce non lacinia elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+Sed tincidunt scelerisque dictum. Phasellus posuere erat quis cursus sollicitudin. Nulla aliquet sed neque vel gravida. Integer pulvinar varius dui in ultrices. Fusce euismod in mauris vel consequat. In congue felis id nisl pharetra, ut iaculis dui posuere. Nam congue nisi nec mauris maximus, eu iaculis nisi fringilla. Nulla in pharetra felis.
+
+Nunc in odio porta, pulvinar ligula nec, scelerisque nunc. Quisque scelerisque nunc ultricies, fringilla purus quis, bibendum mauris. In ut pellentesque mauris. Pellentesque consectetur vestibulum magna in vulputate. Suspendisse ut lectus eget augue laoreet consequat non a purus. Proin porttitor quam eget odio molestie, sit amet luctus nunc suscipit. Integer a eleifend mauris. Quisque ut tempus elit. Pellentesque fermentum nibh ut dui fermentum blandit. Maecenas quis orci et lacus posuere aliquam. In placerat odio at libero placerat, et aliquet orci semper. Nunc laoreet, urna in vestibulum pharetra, lorem erat ultrices risus, id congue nibh ante ac sem. Cras laoreet auctor lacus, et tincidunt velit gravida sed. Praesent nibh nunc, venenatis quis luctus non, eleifend quis odio. Etiam scelerisque, velit sed maximus posuere, libero lacus porta dolor, non ultricies ligula massa ac dolor. Ut sollicitudin massa eget magna maximus, in venenatis nisl sollicitudin.
+
+Phasellus turpis tortor, ultricies ac viverra non, mattis vel ex. Aliquam facilisis at sapien sit amet dapibus. Donec at sodales lorem, at ultrices arcu. Aenean tincidunt lorem eros, vitae aliquet enim feugiat sit amet. In sed turpis in diam pretium molestie. Sed sodales interdum mi, imperdiet aliquet sem pulvinar ut. Donec sollicitudin, neque ac scelerisque dapibus, elit diam semper diam, eu imperdiet libero eros eget ipsum. Suspendisse eget malesuada diam. Nulla tempus tincidunt lectus, sed hendrerit magna accumsan ut.
+
+Aenean viverra augue id tortor porta, eu consequat urna efficitur. In sit amet euismod est, a scelerisque tellus. Pellentesque purus erat, pharetra quis arcu sodales, pellentesque sodales turpis. Proin dictum augue a gravida pulvinar. Cras viverra laoreet placerat. Sed ullamcorper sit amet nunc at tincidunt. Nunc lorem diam, vulputate nec sapien ut, tristique varius erat. Morbi dui sapien, egestas in porttitor feugiat, posuere vitae purus. In pharetra est vitae sapien vestibulum, in tempus massa efficitur. Integer a malesuada orci. Praesent congue at quam eget finibus.
+
+Pellentesque in massa varius, euismod elit sed, lobortis urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce aliquet elementum egestas. Phasellus mollis, dui sit amet bibendum sollicitudin, urna velit congue nulla, sit amet ornare ex velit nec dui. Vestibulum odio magna, ultricies in accumsan at, congue tempor augue. Cras quis velit in ligula consectetur commodo id sed quam. Proin blandit egestas maximus. Phasellus eget mauris est. Donec sit amet viverra urna. Proin pharetra sem id libero aliquet ultrices.
+
+In ut nibh ac dui aliquet blandit. Sed ut dui non ligula ornare rhoncus. Praesent scelerisque sed nisl eget aliquet. Vestibulum sit amet dolor suscipit, pharetra mi quis, fringilla mi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque neque eros, vulputate mollis turpis et, tincidunt sagittis ante. Aenean ut eleifend mi, eget lobortis eros. Proin nec lorem quis felis tincidunt sollicitudin non sed quam. Cras vel facilisis massa. Cras eget ante congue, commodo lorem eu, luctus erat.
+
+Donec vel odio nisi. Aenean a enim ac arcu blandit sodales. Mauris sodales laoreet mattis. In tincidunt tempor faucibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque elit in feugiat aliquam. In eleifend diam non mauris venenatis sagittis. Pellentesque quis hendrerit dui. Nam porta auctor scelerisque. Suspendisse convallis neque sem, et facilisis sapien mattis ut. Curabitur euismod mauris sed orci laoreet venenatis. Cras id augue eu augue vehicula porta. Cras aliquam nisi felis, vel auctor sapien auctor tempor. Duis blandit turpis a est elementum, a gravida arcu hendrerit. Mauris mollis augue quis eleifend molestie. Integer quis faucibus est, sit amet lacinia massa.
+
+Nullam id eros tempus, placerat nunc in, egestas libero. Aenean quis tortor vitae risus iaculis sodales. Pellentesque a lacus maximus, laoreet nisi id, dapibus tellus. Sed pulvinar metus at nisi tempus faucibus. Mauris accumsan molestie nisi ac faucibus. Maecenas aliquet id lorem id blandit. Cras lobortis turpis quis aliquet sagittis. Duis pretium sollicitudin dui eget consequat. Nunc at neque ante. Nullam quis placerat leo, et faucibus lorem.
+
+Pellentesque congue, libero eget finibus consequat, arcu odio sodales tortor, at pulvinar lorem felis a magna. Vestibulum auctor ipsum et nisi consequat, ac accumsan nulla blandit. Mauris pretium odio a mi ultricies, id aliquam ex consequat. Nunc at risus pellentesque, consectetur metus eu, rhoncus sapien. Integer sed libero vel libero suscipit eleifend nec ac eros. Sed semper massa sed velit eleifend maximus. Sed sollicitudin erat ac laoreet elementum. Etiam vitae ornare nulla. Sed suscipit eget felis eget commodo. Vivamus accumsan est quis tincidunt imperdiet. Donec non feugiat ipsum, quis venenatis mi.
+
+Suspendisse sollicitudin fermentum purus id pellentesque. Aliquam hendrerit metus eu ultricies placerat. Sed porta dictum pretium. Morbi a dui congue, sollicitudin elit nec, pretium arcu. Etiam ultricies hendrerit ullamcorper. Donec scelerisque eros sed massa fringilla lacinia. Nullam pulvinar ultrices sem, sed convallis diam porta eu. Curabitur quis velit ornare, sagittis ante sed, aliquet ex. Ut quis imperdiet erat, eu feugiat erat. Pellentesque sed mauris in magna lobortis mattis. Praesent tristique tellus quis imperdiet aliquam. Praesent aliquet ipsum quis lacinia porttitor.",
+							"FontSize": 20,
+							"Margins": [11, 3, 10, 3]},
+						{
+							"Name": "backLayout",
+							"Bounds": [1, 85, 5, 100]}]}]}],
+	"GameForm": [
+		{
+			"Name": "Main",
+			"Childrens": [
+				{
+					"Name": "logoLayout",
+					"Bounds": [1, 1, 10, 10]},
+				{
+					"Name": "SPanel",
+					"Bounds": [0, 85, 100, 100],
+					"Childrens": [
+						{
+							"Name": "SubName",
+							"FontSize": 40,
+							"Bounds": [0, 0, 16, 15]},
+						{
+							"Name": "SubText",
+							"FontSize": 20}]}]},
+		{
+			"Name": "Main1",
+			"Margins": [10, 10, 10, 16],
+			"Childrens": [
+				{
+					"Name": "Alex"}]},
+		{
+			"Name": "Main2",
+			"Margins": [0, 10, 0, 25],
+			"Childrens": [
+				{
+					"Name": "Place"}]},
+		{
+			"Name": "Main3",
+			"Margins": [0, 0, 0, 0],
+			"Childrens": [
+				{
+					"Name": "Btns",
+					"Margins": [0, 0, 0, 14.81]
+				},
+				{
+					"Name": "Home"}]}]}

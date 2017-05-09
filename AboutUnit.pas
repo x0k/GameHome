@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
   FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Layouts,
   FMX.ListView.Types, FMX.ListView.Appearances, FMX.ListView.Adapters.Base,
-  FMX.ListView, FMX.ListBox, FMX.ScrollBox, FMX.Memo, FMX.Filter.Effects, BarUnit,
+  FMX.ListView, FMX.ListBox, FMX.ScrollBox, FMX.Memo, FMX.Filter.Effects,
   FMX.ImgList,
   Forms;
 
@@ -15,8 +15,15 @@ type
   TAboutForm = class(TBarForm)
     Text: TMemo;
     BG: TGlyph;
+    Main: TLayout;
+    logoLayout: TLayout;
+    Logo: TGlyph;
+    SPanel: TPanel;
+    backLayout: TLayout;
+    BackBtn: TSpeedButton;
+    procedure BackBtnClick(Sender: TObject);
   protected
-    procedure onFormCreate; override;
+    procedure onCreate; override;
   public
     { Public declarations }
   end;
@@ -31,10 +38,15 @@ implementation
 uses
   ImageManager;
 
-procedure TAboutForm.onFormCreate;
+procedure TAboutForm.BackBtnClick(Sender: TObject);
 begin
-  IM.setSize(BG, Screen.Size);
-  setItem(0, Text);
+  Close;
+end;
+
+procedure TAboutForm.onCreate;
+begin
+  backgrounds:=[BG];
+  layouts:=[main];
 end;
 
 end.

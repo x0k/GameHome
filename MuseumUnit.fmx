@@ -7,6 +7,8 @@ object MuseumForm: TMuseumForm
   Caption = 'MusemForm'
   ClientHeight = 720
   ClientWidth = 1280
+  Fill.Color = claBlack
+  Fill.Kind = Solid
   Position = DesktopCenter
   StyleBook = DataForm.Styles
   WindowState = wsMaximized
@@ -16,18 +18,34 @@ object MuseumForm: TMuseumForm
   FormFactor.Devices = [Desktop]
   FullScreen = True
   DesignerMasterStyle = 0
-  object main: TLayout
+  object Main: TLayout
     Align = Client
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 2
+    TabOrder = 1
+    object Img: TGlyph
+      Align = Client
+      Size.Width = 1280.000000000000000000
+      Size.Height = 720.000000000000000000
+      Size.PlatformDefault = False
+      Images = DataForm.Museum
+    end
+    object progress: TLayout
+      Anchors = [akLeft, akTop, akRight]
+      Position.X = 200.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 1070.000000000000000000
+      Size.Height = 30.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 4
+    end
     object controls: TLayout
       Align = Client
       Size.Width = 1280.000000000000000000
       Size.Height = 720.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 0
+      TabOrder = 1
       object lBack: TLayout
         Align = Left
         HitTest = True
@@ -35,6 +53,7 @@ object MuseumForm: TMuseumForm
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 1
+        OnClick = BackBtnClick
       end
       object lNext: TLayout
         Tag = 1
@@ -44,6 +63,121 @@ object MuseumForm: TMuseumForm
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
         TabOrder = 0
+        OnClick = NextBtnClick
+      end
+    end
+    object SPanel: TPanel
+      Anchors = [akLeft, akRight, akBottom]
+      HitTest = False
+      Position.Y = 560.000000000000000000
+      Size.Width = 1280.000000000000000000
+      Size.Height = 160.000000000000000000
+      Size.PlatformDefault = False
+      StyleLookup = 'SPanel'
+      TabOrder = 0
+      object nextLayout: TLayout
+        Align = Right
+        Margins.Right = 20.000000000000000000
+        Position.X = 1200.000000000000000000
+        Size.Width = 60.000000000000000000
+        Size.Height = 160.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object NextBtn: TSpeedButton
+          Align = Center
+          StyledSettings = [Family, Style]
+          Size.Width = 60.000000000000000000
+          Size.Height = 91.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'nextBtn'
+          Text = #1055#1088#1086#1076#1086#1083#1078#1080#1090#1100
+          TextSettings.Font.Size = 15.000000000000000000
+          TextSettings.FontColor = claWhite
+          OnClick = NextBtnClick
+        end
+      end
+      object SubName: TText
+        Align = Left
+        HitTest = False
+        Position.X = 80.000000000000000000
+        Size.Width = 202.000000000000000000
+        Size.Height = 160.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 30.000000000000000000
+        TextSettings.FontColor = claWhite
+        TextSettings.Trimming = Word
+      end
+      object SubText: TMemo
+        Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+        DataDetectorTypes = []
+        ReadOnly = True
+        StyledSettings = [Family, Style]
+        TextSettings.Font.Size = 20.000000000000000000
+        TextSettings.FontColor = claWhite
+        TextSettings.WordWrap = True
+        Align = Client
+        CanFocus = False
+        Cursor = crDefault
+        DisableFocusEffect = True
+        Margins.Left = 20.000000000000000000
+        Margins.Top = 10.000000000000000000
+        Margins.Right = 20.000000000000000000
+        Margins.Bottom = 10.000000000000000000
+        Size.Width = 801.000000000000000000
+        Size.Height = 140.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'SMemo'
+        TabOrder = 2
+        Viewport.Width = 801.000000000000000000
+        Viewport.Height = 140.000000000000000000
+      end
+      object SubLogo: TGlyph
+        Align = Left
+        Position.X = 282.000000000000000000
+        Size.Width = 77.000000000000000000
+        Size.Height = 160.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 2
+        Images = DataForm.Icons
+      end
+      object backLayout: TLayout
+        Align = MostLeft
+        Margins.Left = 20.000000000000000000
+        Position.X = 20.000000000000000000
+        Size.Width = 60.000000000000000000
+        Size.Height = 160.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object BackBtn: TSpeedButton
+          Align = MostLeft
+          StyledSettings = [Family, Style]
+          Position.Y = 34.000000000000000000
+          Size.Width = 60.000000000000000000
+          Size.Height = 91.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'backBtn'
+          TextSettings.Font.Size = 15.000000000000000000
+          TextSettings.FontColor = claWhite
+          OnClick = BackBtnClick
+        end
+      end
+    end
+    object logoLayout: TLayout
+      HitTest = True
+      Position.X = 8.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 161.000000000000000000
+      Size.Height = 81.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      OnClick = logoLayoutClick
+      object Logo: TGlyph
+        Align = Client
+        Size.Width = 161.000000000000000000
+        Size.Height = 81.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 0
+        Images = DataForm.Icons
       end
     end
   end

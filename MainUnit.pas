@@ -5,14 +5,15 @@ interface
 uses
   System.SysUtils, System.Types, System.Classes,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Controls.Presentation, FMX.StdCtrls,
-  FMX.Objects, FMX.Layouts, FMX.ImgList, FMX.ListBox;
+  FMX.Objects, FMX.Layouts, FMX.ImgList, FMX.ListBox,
+  Forms;
 
 type
-  TMainForm = class(TForm)
+  TMainForm = class(TBarForm)
     BGameBtn: TButton;
     SettsBtn: TButton;
     ExitBtn: TButton;
-    Panel1: TPanel;
+    Bar: TPanel;
     Text1: TText;
     Text2: TText;
     Text3: TText;
@@ -20,11 +21,11 @@ type
     Text5: TText;
     MuseumBtn: TButton;
     AboutBtn: TButton;
-    Text6: TText;
+    barText: TText;
     BG: TGlyph;
     Logo: TGlyph;
     centerLayout: TLayout;
-    main: TLayout;
+    Main: TLayout;
     beginLayout: TLayout;
     MenuLayout: TScaledLayout;
     exitLayout: TLayout;
@@ -36,11 +37,8 @@ type
     procedure MuseumBtnClick(Sender: TObject);
     procedure AboutBtnClick(Sender: TObject);
     procedure BGameBtnClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-  private
-    { Private declarations }
-  public
-    { Public declarations }
+  protected
+    procedure onCreate; override;
   end;
 
 var
@@ -52,24 +50,16 @@ implementation
 
 uses
   FMX.Dialogs,
-  DataUnit, BarUnit, ImageManager, SettingsUnit, MuseumUnit, AboutUnit, GameForms, TextManager, ResourcesManager;
+  GameUnit, ImageManager, SettingsUnit, MuseumUnit, AboutUnit, TextManager, ResourcesManager;
 
-procedure TMainForm.FormCreate(Sender: TObject);
-var
-  i: byte;
-  t: TFormText;
-  m: TArray<TText>;
+procedure TMainForm.onCreate;
 begin
-  IM.setSize(BG, Screen.Size);
-  m:=[text1, text2, text3, text4, text5];
-  t:=TM.Forms[name];
-  text6.Text:=t.Names[0];
-  for i:=0 to 4 do
-    m[i].Text:=t.Items[i];
+  backgrounds:=[BG];
+  layouts:=[main];
+  GameForm:=TGameForm.Create(self);
   SettingsForm:=TSettingsForm.Create(self);
   AboutForm:=TAboutForm.Create(self);
-  if not dbgMode then
-    MuseumForm:=TMuseumForm.Create(self, rMuseum);
+  MuseumForm:=TMuseumForm.Create(self);
 end;
 
 
@@ -80,8 +70,7 @@ end;
 
 procedure TMainForm.BGameBtnClick(Sender: TObject);
 begin
-  Bar.setDots(15);
-  showForm(0);
+  GameForm.Show;
 end;
 
 procedure TMainForm.ExitBtnClick(Sender: TObject);
@@ -91,12 +80,6 @@ end;
 
 procedure TMainForm.MuseumBtnClick(Sender: TObject);
 begin
-  if dbgMode then
-  begin
-    IM.add(rMuseum);
-    if not Assigned(MuseumForm) then MuseumForm:=TMuseumForm.Create(self, rMuseum);
-  end;
-  Bar.setDots(15);
   MuseumForm.Show;
 end;
 
