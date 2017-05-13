@@ -14,6 +14,7 @@ type
     gTab: byte;
 
     procedure setBarText; override;
+    procedure onFCreate; override;
 
   public
     procedure next; override;
@@ -39,6 +40,22 @@ begin
     setBarText;
     clBlock:=false;
   end;
+end;
+
+procedure TTabFrame.onFCreate;
+
+  procedure PreloadContent(const Control: TControl);
+  var
+    I: Integer;
+  begin
+    if Control is TStyledControl then
+      TStyledControl(Control).ApplyStyleLookup;
+    for I := 0 to Control.ControlsCount - 1 do
+      PreloadContent(Control.Controls[I]);
+  end;
+
+begin
+  preloadContent(gtabs);
 end;
 
 procedure TTabFrame.setBarText;

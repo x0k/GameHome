@@ -78,7 +78,8 @@ begin
   for g in left.Children do
     setGl(g as TGlyph);
   for g in right.Children do
-    setGl(g as TGlyph)
+    setGl(g as TGlyph);
+  inherited;
 end;
 
 procedure TWarmingFrame.onFDestroy;

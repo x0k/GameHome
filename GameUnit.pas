@@ -80,7 +80,7 @@ type
     aws:TArray<boolean>;//awards
     mds:TArray<boolean>;//medals
     dots:TArray<TGlyph>;
-    block, bonus: boolean;
+    block, bonus, fr: boolean;
 
     function getStatus(id: byte): byte;
     procedure setStatus(id: byte; v: byte);
@@ -135,9 +135,13 @@ procedure TGameForm.onCreate;
 var
   g, cl: TGlyph;
   i: byte;
+
 begin
   backgrounds:=[home, BG];
   layouts:=[main, main1, main2, main3];
+
+  for i:=0 to Tabs.TabCount-1 do
+    tabs.Tabs[i].DisableDisappear:=true;
 
   setlength(sts, LVL_COUNT);
   setLength(aws, AWD_COUNT);
@@ -165,7 +169,8 @@ end;
 
 procedure TGameForm.barClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Frame.Free;
+  if fr then
+    Frame.Free;
   inherited;
 end;
 
@@ -180,6 +185,17 @@ procedure TGameForm.barShow(Sender: TObject);
 var
   f: TFmxObject;
   i: byte;
+
+  procedure PreloadContent(const Control: TControl);
+  var
+    I: Integer;
+  begin
+    if Control is TStyledControl then
+      TStyledControl(Control).ApplyStyleLookup;
+    for I := 0 to Control.ControlsCount - 1 do
+      PreloadContent(Control.Controls[I]);
+  end;
+
 begin
   Tabs.TabIndex:=0;
   for i:=0 to LVL_COUNT-1 do
@@ -197,9 +213,10 @@ begin
   block:=false;
   nxtBtn:=true;
   setBar;
-  bonus:=false;
+  bonus:=false; fr:=false;
   RBonus.Position.X:=Width;
   RBonus.Position.Y:=0;
+  preloadContent(tabs);
   inherited;
 end;
 
@@ -330,6 +347,7 @@ end;
 
 procedure TGameForm.nextFrame(id: Byte);
 begin
+  fr:=true;
   frame:=createFrame(id);
   main3.AddObject(frame);
   frame.onFShow;
@@ -339,6 +357,7 @@ procedure TGameForm.setNext(id: byte);
 begin
   frame.onFHide;
   frame.Destroy;
+  fr:=false;
   nextFrame(id);
 end;
 
@@ -346,6 +365,7 @@ procedure TGameForm.setBack;
 begin
   tabs.Previous();
   frame.Free;
+  fr:=false;
   setBar;
   block:=false;
 end;

@@ -48,6 +48,7 @@ begin
   layouts:=[main1, main2];
   gTab:=1;
   fTabs:=FSTabs.create(self, main2, isWin);
+  inherited;
 end;
 
 procedure TPlaceFrame.onFDestroy;

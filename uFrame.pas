@@ -87,12 +87,15 @@ var
 begin
   inherited create(GameForm);
   level:=lvl;
+
   if not TM.tryGetText(name, fText) then
     fText:=TFormText.getDefault;
   onFCreate;
+
   if length(backgrounds)>0 then
     for i:=0 to High(backgrounds) do
       IM.setSize(backgrounds[i], screen.Size);
+
   if (length(layouts)>0) and DM.tryGetFormLayouts(name, lts) then
   begin
     DM.setSz(TArray<TFmxObject>(layouts), lts);

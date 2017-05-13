@@ -46,11 +46,13 @@ procedure TBarForm.barShow(Sender: TObject);
 var
   i:byte;
   lts: TFormLayouts;
+
 begin
   if length(layouts)>0 then
   begin
     if DM.tryGetFormLayouts(name, lts) then
       DM.setSz(TArray<TFmxObject>(layouts), lts);
+
     for i:=1 to High(layouts) do
       TAnimator.AnimateFloat(layouts[i], 'opacity', 1, 0.5);
     TAnimator.AnimateFloatWait(layouts[0], 'opacity', 1, 0.5);
@@ -95,6 +97,7 @@ begin
   if length(backgrounds)>0 then
     for i:=0 to High(backgrounds) do
       IM.setSize(backgrounds[i], screen.Size);
+
   if length(layouts)>0 then
     for i:=0 to High(layouts) do
       layouts[i].Opacity:=0;

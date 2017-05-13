@@ -81,6 +81,7 @@ begin
   dcs:=FSTabs.create(self, decs, setDec, nil, nil, false);
   gTab:=0;
   wr:=false;
+  inherited;
 end;
 
 procedure TRidgeFrame.setDec(tab: FSTab);
