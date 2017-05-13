@@ -30,6 +30,8 @@ type
     procedure onFDestroy; override;
     procedure enter(tab: FSTab);
     procedure isWin(tab: FSTab);
+  public
+    procedure onFShow; override;
   end;
 
 implementation
@@ -52,6 +54,12 @@ end;
 procedure TFoundationFrame.onFDestroy;
 begin
   tabs.Free;
+end;
+
+procedure TFoundationFrame.onFShow;
+begin
+  tabs.setSize(false, true);
+  inherited;
 end;
 
 procedure TFoundationFrame.enter(tab: FSTab);

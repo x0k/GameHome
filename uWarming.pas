@@ -11,7 +11,6 @@ uses
 type
   TWarmingFrame = class(TTabFrame)
     TabItem1: TTabItem;
-    BG1: TGlyph;
     Main: TLayout;
     Home: TGlyph;
     mox: TGlyph;
@@ -30,10 +29,9 @@ type
     c1: TGlyph;
     b4: TGlyph;
     TabItem2: TTabItem;
-    BG2: TGlyph;
     TabItem3: TTabItem;
-    BG3: TGlyph;
-    BG4: TGlyph;
+    BG2: TGlyph;
+    BG1: TGlyph;
   protected
     procedure onFCreate; override;
     procedure onFDestroy; override;
@@ -70,8 +68,8 @@ var
     g.HitTest:=true;
   end;
 begin
-  backgrounds:=[BG1, BG2, BG3, BG4];
-  layouts:=[main, BG4];
+  backgrounds:=[BG1, BG2];
+  layouts:=[main, BG2];
   gTab:=0;
   wr:=false;
 

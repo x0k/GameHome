@@ -4,6 +4,7 @@ inherited TabFrame: TTabFrame
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
+    StyleLookup = 'STabs'
     TabOrder = 0
     TabPosition = None
   end

@@ -21,20 +21,12 @@ inherited WarmingFrame: TWarmingFrame
       Text = 'TabItem1'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object BG1: TGlyph
-        Align = Center
-        Size.Width = 1280.000000000000000000
-        Size.Height = 720.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 1
-        Images = DataForm.Backgrounds
-      end
       object Main: TLayout
         Align = Client
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 1
+        TabOrder = 0
         object Home: TGlyph
           AutoHide = False
           Align = Client
@@ -204,7 +196,7 @@ inherited WarmingFrame: TWarmingFrame
       Text = 'TabItem2'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object BG2: TGlyph
+      object BG1: TGlyph
         Align = Center
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
@@ -226,15 +218,7 @@ inherited WarmingFrame: TWarmingFrame
       Text = 'TabItem3'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object BG3: TGlyph
-        Align = Center
-        Size.Width = 1280.000000000000000000
-        Size.Height = 720.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 1
-        Images = DataForm.Backgrounds
-      end
-      object BG4: TGlyph
+      object BG2: TGlyph
         Align = Center
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000

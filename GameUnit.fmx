@@ -6,8 +6,9 @@ object GameForm: TGameForm
   Caption = 'GameForm'
   ClientHeight = 720
   ClientWidth = 1280
-  Position = DesktopCenter
+  Position = MainFormCenter
   StyleBook = DataForm.Styles
+  FormStyle = StayOnTop
   WindowState = wsMaximized
   FormFactor.Width = 1280
   FormFactor.Height = 720
@@ -15,11 +16,21 @@ object GameForm: TGameForm
   FormFactor.Devices = [Desktop]
   FullScreen = True
   DesignerMasterStyle = 0
-  object Tabs: TTabControl
-    Align = Client
+  object BG: TGlyph
+    Align = Center
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
+    ImageIndex = 1
+    Images = DataForm.Backgrounds
+  end
+  object Tabs: TTabControl
+    Align = Client
+    FullSize = True
+    Size.Width = 1280.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'STabs'
     TabIndex = 0
     TabOrder = 0
     TabPosition = None
@@ -43,14 +54,6 @@ object GameForm: TGameForm
       Text = 'TabItem1'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object BG1: TGlyph
-        Align = Center
-        Size.Width = 1280.000000000000000000
-        Size.Height = 720.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 1
-        Images = DataForm.Backgrounds
-      end
       object Main1: TLayout
         Align = Client
         Size.Width = 1280.000000000000000000
@@ -80,20 +83,12 @@ object GameForm: TGameForm
       Text = 'TabItem2'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object BG2: TGlyph
-        Align = Center
-        Size.Width = 1280.000000000000000000
-        Size.Height = 720.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 1
-        Images = DataForm.Backgrounds
-      end
       object Main2: TLayout
         Align = Client
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 1
+        TabOrder = 0
         object Home: TGlyph
           Align = Center
           Size.Width = 1280.000000000000000000
@@ -329,14 +324,6 @@ object GameForm: TGameForm
       Text = 'TabItem3'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object BG3: TGlyph
-        Align = Center
-        Size.Width = 1280.000000000000000000
-        Size.Height = 720.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 1
-        Images = DataForm.Backgrounds
-      end
       object Main3: TLayout
         Align = Client
         Size.Width = 1280.000000000000000000
@@ -347,11 +334,13 @@ object GameForm: TGameForm
     end
   end
   object Main: TLayout
-    Align = Client
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Size.Width = 1280.000000000000000000
     Size.Height = 720.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 2
+    TabStop = False
+    OnClick = MainClick
     object bonusBtn: TButton
       Anchors = [akTop, akRight]
       Position.X = 1176.000000000000000000
@@ -362,7 +351,7 @@ object GameForm: TGameForm
       StyleLookup = 'bonusBtn'
       TabOrder = 0
       Text = 'bonusBtn'
-      Visible = False
+      OnClick = bonusBtnClick
     end
     object logoLayout: TLayout
       HitTest = True
@@ -398,7 +387,6 @@ object GameForm: TGameForm
       Size.Width = 360.000000000000000000
       Size.Height = 720.000000000000000000
       Size.PlatformDefault = False
-      Visible = False
       TabOrder = 3
       object bonusBG: TRectangle
         Align = Client

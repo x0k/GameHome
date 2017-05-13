@@ -5,13 +5,15 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
   FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
-  GameUnit, uFrame, FMX.TabControl;
+  GameUnit, uFrame, FMX.TabControl, DataUnit;
 
 type
   TTabFrame = class(TGFrame)
     gTabs: TTabControl;
   protected
     gTab: byte;
+
+    procedure setBarText; override;
 
   public
     procedure next; override;
@@ -30,16 +32,21 @@ procedure TTabFrame.next;
 begin
   clBlock:=true;
   if gTabs.TabIndex=gTabs.TabCount-1 then
-  begin
-    if (Owner as TGameForm).states[level]<2 then exit;
-      if level<LVL_COUNT-1 then (Owner as TGameForm).setNext(level+1)
-        else (Owner as TGameForm).gameExit;
-  end
+    inherited
   else if (gTabs.TabIndex<>gTab) or ((Owner as TGameForm).states[level]>1) then
   begin
     gTabs.Next();
+    setBarText;
     clBlock:=false;
   end;
+end;
+
+procedure TTabFrame.setBarText;
+begin
+  (Owner as TGameForm).Caption:=fText.Names[gTabs.TabIndex];
+  (Owner as TGameForm).Logo:=fText.Logos[gTabs.TabIndex];
+  (Owner as TGameForm).Text:=fText.TabTexts[gTabs.TabIndex];
+  (Owner as TGameForm).nxtBtn:=((Owner as TGameForm).states[level]=2) or (gTabs.TabIndex<>gTab);
 end;
 
 end.

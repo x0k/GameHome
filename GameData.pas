@@ -11,6 +11,7 @@ type
   private
     origramparray: TRampArray;//текущие значения gamma ramp
     Br,Ct,Gm:byte;
+    dpi: single;
     function UpdateGamma: boolean;
 
     procedure SetBr(b:byte);
@@ -24,6 +25,8 @@ type
     property brightnes:byte read getBr write setBr;
     property contrast:byte read getCt write setCt;
 
+    property ppi: single read dpi;
+
     constructor Create;
   end;
 
@@ -33,7 +36,7 @@ var
 implementation
 
 uses
-  System.Math, windows,
+  System.Types, System.Math, windows, FMX.Platform,
   DataUnit;
 
 
@@ -42,11 +45,19 @@ uses
 //Конструктор
 constructor TGameData.Create;
 var
+  ScreenService: IFMXScreenService;
+  Sz: TPointF;
   dc: hdc;
 begin
   dc := getdc(0);
   try
-    getdevicegammaramp(dc, origramparray)
+    getdevicegammaramp(dc, origramparray);
+    if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, IInterface(ScreenService)) then
+    begin
+      sz:=ScreenService.GetScreenSize;
+      dpi:=sqrt(sqr(sz.X * ScreenService.GetScreenScale)+sqr(sz.Y * ScreenService.GetScreenScale))/(sqrt(sqr(GetDeviceCaps(DC,VERTSIZE))+sqr(GetDeviceCaps(DC,HORZSIZE)))/25.4);
+    end else dpi:=92;
+    //Получаем диагональ
   finally
     releasedc(0, dc)
   end;

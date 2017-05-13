@@ -43,9 +43,9 @@ begin
   setHandle;
   sendMsg(cOpen, 'Initialization');
   initPath;
+  GD:=TGameData.Create;
   DM:=TDesignManager.create;
   IM:=TImageManager.Create;
-  GD:=TGameData.Create;
   SM:=TSoundManager.Create;
   TM:=TTextManager.Create;
   //initForms;

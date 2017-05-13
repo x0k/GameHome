@@ -37,8 +37,7 @@ type
     Btns: TLayout;
     Main1: TLayout;
     Main2: TLayout;
-    BG1: TGlyph;
-    BG2: TGlyph;
+    BG: TGlyph;
     Alex: TGlyph;
     Home: TGlyph;
     Main3: TLayout;
@@ -68,19 +67,20 @@ type
     SubLogo: TGlyph;
     backLayout: TLayout;
     BackBtn: TSpeedButton;
-    BG3: TGlyph;
     Main: TLayout;
     procedure l1btnClick(Sender: TObject);
     procedure logoLayoutClick(Sender: TObject);
     procedure BackBtnClick(Sender: TObject);
     procedure NextBtnClick(Sender: TObject);
+    procedure bonusBtnClick(Sender: TObject);
+    procedure MainClick(Sender: TObject);
   private
     frame: TGFrame;
     sts:TArray<byte>;//states
     aws:TArray<boolean>;//awards
     mds:TArray<boolean>;//medals
     dots:TArray<TGlyph>;
-    block: boolean;
+    block, bonus: boolean;
 
     function getStatus(id: byte): byte;
     procedure setStatus(id: byte; v: byte);
@@ -94,6 +94,7 @@ type
     procedure setText(const t: string);
 
     function getButton(tag: byte): TButton;
+    procedure setBtn(v: boolean);
 
   protected
     procedure onCreate; override;
@@ -117,6 +118,7 @@ type
     property Text: string write setText;
 
     property clBlock: boolean read block write block;
+    property nxtBtn: boolean write setBtn;
   end;
 
 var
@@ -134,7 +136,7 @@ var
   g, cl: TGlyph;
   i: byte;
 begin
-  backgrounds:=[home, BG1, BG2, BG3];
+  backgrounds:=[home, BG];
   layouts:=[main, main1, main2, main3];
 
   setlength(sts, LVL_COUNT);
@@ -181,20 +183,23 @@ var
 begin
   Tabs.TabIndex:=0;
   for i:=0 to LVL_COUNT-1 do
-    sts[i]:=0;
+    states[i]:=0;
   for i:=0 to AWD_COUNT-1 do
-    aws[i]:=false;
+    awards[i]:=false;
   for i:=0 to MDL_COUNT-1 do
-    mds[i]:=false;
+    medals[i]:=false;
   for i:=0 to LVL_COUNT-1 do
     dots[i].ImageIndex:=0;
-  for f in Btns.Children do
+  {for f in Btns.Children do
     if (f is TButton) and (f.Tag<>0) then
       with f as TButton do
-        Enabled:=false;
+        Enabled:=false;}
   block:=false;
-  nextBtn.Visible:=true;
+  nxtBtn:=true;
   setBar;
+  bonus:=false;
+  RBonus.Position.X:=Width;
+  RBonus.Position.Y:=0;
   inherited;
 end;
 
@@ -214,6 +219,26 @@ begin
       result:=F as TButton;
       exit;
     end;
+end;
+
+procedure TGameForm.setBtn(v: boolean);
+var
+  b: boolean;
+begin
+  b:=block;
+  if not v and nextBtn.Visible then
+  begin
+    block:=true;
+    TAnimator.AnimateFloat(nextLayout, 'opacity', 0);
+    nextBtn.Visible:=false;
+  end
+  else if v and not nextBtn.Visible then
+  begin
+    block:=true;
+    nextBtn.Visible:=true;
+    TAnimator.AnimateFloat(nextLayout, 'opacity', 1);
+  end;
+  block:=b;
 end;
 
 procedure TGameForm.l1btnClick(Sender: TObject);
@@ -262,8 +287,8 @@ procedure TGameForm.setMedal(id: byte; v: boolean);
 var
   c:byte;
 begin
-  c:=getMdlCount;
   mds[id]:=v;
+  c:=getMdlCount;
   medalTxt.Text:='x'+c.ToString;
   coins.Visible:=c>0;
 end;
@@ -276,10 +301,13 @@ end;
 procedure TGameForm.setStatus(id, v: byte);
 begin
   sts[id]:=v;
-  if (id<LVL_COUNT-1)and(v>1) then
+  if (id<LVL_COUNT-2)and(v>1) then
     getButton(id+1).Enabled:=true;
   if v<2 then dots[id].ImageIndex:=v
-    else dots[id].ImageIndex:=2;
+    else begin
+      dots[id].ImageIndex:=2;
+      nxtBtn:=true;
+    end;
 end;
 
 procedure TGameForm.setCaption(const t: string);
@@ -326,6 +354,8 @@ procedure TGameForm.NextBtnClick(Sender: TObject);
 var
   i: byte;
 begin
+  if bonus then
+    bonusBtnClick(self);
   if block then exit;
   block:=true;
   try
@@ -351,19 +381,31 @@ end;
 
 procedure TGameForm.BackBtnClick(Sender: TObject);
 begin
+  if bonus then
+    bonusBtnClick(self);
   if block then exit;
   case Tabs.TabIndex of
-    0:close;
-    1:begin
-      Tabs.Previous();
-      setBar;
-      block:=false;
-      nextBtn.Visible:=true;
-    end;
+    0, 1: close;
     2:begin
       frame.back;
     end;
   end;
+end;
+
+procedure TGameForm.MainClick(Sender: TObject);
+begin
+  if bonus then
+    bonusBtnClick(self);
+end;
+
+procedure TGameForm.bonusBtnClick(Sender: TObject);
+begin
+  if bonus then
+    TAnimator.AnimateFloat(RBonus, 'Position.X', Width)
+  else
+    TAnimator.AnimateFloat(RBonus, 'Position.X', Width-RBonus.Width);
+  bonus:=not bonus;
+  main.HitTest:=bonus;
 end;
 
 end.

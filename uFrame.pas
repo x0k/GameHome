@@ -152,6 +152,7 @@ begin
       TAnimator.AnimateFloat(layouts[i], 'opacity', 1, 0.5);
     TAnimator.AnimateFloatWait(layouts[0], 'opacity', 1, 0.5);
   end;
+  if (Owner as TGameForm).states[level]<2 then (Owner as TGameForm).states[level]:=1;  
   clBlock:=false;
 end;
 
@@ -176,7 +177,8 @@ procedure TGFrame.setBarText;
 begin
   (Owner as TGameForm).Caption:=fText.Names[0];
   (Owner as TGameForm).Logo:=fText.Logos[0];
-  (Owner as TGameForm).Text:=fText.TabTexts[0]
+  (Owner as TGameForm).Text:=fText.TabTexts[0];
+  (Owner as TGameForm).nxtBtn:=(Owner as TGameForm).states[level]=2;
 end;
 
 procedure TGFrame.setBonus(id: byte; v: boolean);

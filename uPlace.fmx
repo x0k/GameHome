@@ -19,20 +19,12 @@ inherited PlaceFrame: TPlaceFrame
       Text = 'TabItem1'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object BG1: TGlyph
-        Align = Center
-        Size.Width = 1280.000000000000000000
-        Size.Height = 720.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 1
-        Images = DataForm.Backgrounds
-      end
       object Main1: TLayout
         Align = Client
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 1
+        TabOrder = 0
         object Map: TGlyph
           Align = Client
           Size.Width = 807.000000000000000000
@@ -75,20 +67,12 @@ inherited PlaceFrame: TPlaceFrame
       Text = 'TabItem2'
       ExplicitSize.cx = 8.000000000000000000
       ExplicitSize.cy = 8.000000000000000000
-      object BG2: TGlyph
-        Align = Center
-        Size.Width = 1280.000000000000000000
-        Size.Height = 720.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 1
-        Images = DataForm.Backgrounds
-      end
       object Main2: TLayout
         Align = Center
         Size.Width = 1280.000000000000000000
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
-        TabOrder = 1
+        TabOrder = 0
         object s0: TLayout
           Align = Left
           ClipChildren = True

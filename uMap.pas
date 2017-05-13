@@ -38,10 +38,13 @@ type
     Path8: TPath;
     Path9: TPath;
     Details: TFlowLayout;
+    rnName: TText;
     procedure Path1DragDrop(Sender: TObject; const Data: TDragObject;
       const Point: TPointF);
     procedure Path1DragOver(Sender: TObject; const Data: TDragObject;
       const Point: TPointF; var Operation: TDragOperation);
+    procedure Path1DragEnter(Sender: TObject; const Data: TDragObject;
+      const Point: TPointF);
   protected
     procedure onFCreate; override;
     procedure win; override;
@@ -119,6 +122,16 @@ begin
   end;
 end;
 
+procedure TMapFrame.Path1DragEnter(Sender: TObject; const Data: TDragObject;
+  const Point: TPointF);
+begin
+  if (Sender is TPath) then
+    if (TFmxObject(sender).Tag<19) then
+      rnName.Text:=fText.Items[TFmxObject(sender).Tag]
+    else if (TFmxObject(sender).Tag>19) and (TFmxObject(sender).Tag<39) then
+      rnName.Text:=fText.Items[TFmxObject(sender).Tag-20];
+end;
+
 procedure TMapFrame.Path1DragOver(Sender: TObject; const Data: TDragObject; const Point: TPointF; var Operation: TDragOperation);
 begin
   if (Data.Source is TPath)and(TFmxObject(sender).Tag<20) then
@@ -131,7 +144,7 @@ end;
 procedure TMapFrame.Win;
 begin
   inherited;
-  setText(1);
+  setText(0);
   setBonus(3);
   setBonus(4);
 end;

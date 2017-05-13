@@ -11,12 +11,10 @@ uses
 type
   TPlaceFrame = class(TTabFrame)
     TabItem1: TTabItem;
-    BG1: TGlyph;
     Main1: TLayout;
     Map: TGlyph;
     Text: TMemo;
     TabItem2: TTabItem;
-    BG2: TGlyph;
     Main2: TLayout;
     s0: TLayout;
     img0: TGlyph;
@@ -47,7 +45,6 @@ var
 
 procedure TPlaceFrame.onFCreate;
 begin
-  backgrounds:=[BG1, BG2];
   layouts:=[main1, main2];
   gTab:=1;
   fTabs:=FSTabs.create(self, main2, isWin);

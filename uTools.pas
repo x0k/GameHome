@@ -87,8 +87,8 @@ var
   i,k:byte;
 begin
   l:=TList<byte>.create;
-  tools.ItemWidth:=tools.Width/5-40;
-  tools.ItemHeight:=tools.Height/2-40;
+  tools.ItemWidth:=tools.Width/5-2;
+  tools.ItemHeight:=tools.Height/2-2;
   lt:=TLayout.Create(self);
   lt.Align:=TAlignLayout.Client;
   G:=TGlyph.Create(self);

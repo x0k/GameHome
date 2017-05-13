@@ -117,6 +117,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 80.800018310546880000
             Size.Height = 86.400001525878910000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -147,6 +148,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 47.199996948242190000
             Size.Height = 53.600006103515630000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -181,6 +183,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 36.000000000000000000
             Size.Height = 78.399993896484380000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -212,6 +215,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 78.399993896484380000
             Size.Height = 87.200004577636720000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -240,6 +244,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 94.400009155273440000
             Size.Height = 69.599990844726560000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -273,6 +278,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 84.000000000000000000
             Size.Height = 106.400001525878900000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -301,6 +307,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 64.800003051757810000
             Size.Height = 84.000007629394530000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -343,6 +350,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 102.400009155273400000
             Size.Height = 62.399993896484380000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -379,6 +387,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 76.000000000000000000
             Size.Height = 62.400009155273440000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -412,6 +421,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 63.199996948242190000
             Size.Height = 76.000000000000000000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -458,6 +468,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 80.000015258789060000
             Size.Height = 94.400009155273440000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -498,6 +509,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 66.400001525878910000
             Size.Height = 79.199996948242190000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -550,6 +562,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 96.000000000000000000
             Size.Height = 105.600006103515600000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -601,6 +614,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 63.999992370605470000
             Size.Height = 92.800003051757810000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -629,6 +643,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 31.200004577636720000
             Size.Height = 49.599990844726560000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -672,6 +687,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 68.800003051757810000
             Size.Height = 77.599990844726560000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -708,6 +724,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 47.200004577636720000
             Size.Height = 82.399993896484380000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -741,6 +758,7 @@ inherited MapFrame: TMapFrame
             Size.Width = 40.000000000000000000
             Size.Height = 60.799987792968750000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
           end
@@ -767,8 +785,18 @@ inherited MapFrame: TMapFrame
             Size.Width = 40.799995422363280000
             Size.Height = 40.000000000000000000
             Size.PlatformDefault = False
+            OnDragEnter = Path1DragEnter
             OnDragOver = Path1DragOver
             OnDragDrop = Path1DragDrop
+          end
+          object rnName: TText
+            Align = Top
+            HitTest = False
+            Size.Width = 400.000000000000000000
+            Size.Height = 73.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+            TextSettings.Font.Size = 30.000000000000000000
           end
         end
       end

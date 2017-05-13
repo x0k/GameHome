@@ -11,7 +11,6 @@ uses
 type
   TRidgeFrame = class(TTabFrame)
     TabItem1: TTabItem;
-    BG1: TGlyph;
     Main1: TLayout;
     Grid: TLayout;
     L0: TLayout;
@@ -32,7 +31,6 @@ type
     Home: TGlyph;
     Ridge: TGlyph;
     TabItem2: TTabItem;
-    BG2: TGlyph;
     Main2: TLayout;
     Decs: TLayout;
     S0: TLayout;
@@ -78,7 +76,6 @@ var
 
 procedure TRidgeFrame.onFCreate;
 begin
-  backgrounds:=[BG1, BG2];
   layouts:=[main1, main2];
   rgs:=FSTabs.create(self, grid, isWin);
   dcs:=FSTabs.create(self, decs, setDec, nil, nil, false);
@@ -125,8 +122,9 @@ procedure TRidgeFrame.next;
 var
   i: byte;
 begin
-  for i:=0 to MDL_COUNT-1 do
-    setMedal(i, false);
+  if gTabs.TabIndex=1 then
+    for i:=0 to MDL_COUNT-1 do
+      setMedal(i, false);
   inherited;
 end;
 

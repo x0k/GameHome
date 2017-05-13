@@ -15,7 +15,6 @@ type
     Left: TGlyph;
     Right: TGlyph;
     Content: TGlyph;
-    Grid: TScaledLayout;
     name0: TPanel;
     Text1: TText;
     name1: TPanel;
@@ -37,9 +36,12 @@ type
     line2: TGlyph;
     line3: TGlyph;
     line4: TGlyph;
+    Grid: TLayout;
     procedure Text1Click(Sender: TObject);
   protected
     procedure onFCreate; override;
+  public
+    procedure onFShow; override;
   end;
 
 implementation
@@ -59,6 +61,11 @@ begin
   layouts:=[Main];
   m:=[line1, line2, line3, line4];
   c:=0;
+end;
+
+procedure TMovingFrame.onFShow;
+begin
+  inherited;
 end;
 
 procedure TMovingFrame.Text1Click(Sender: TObject);

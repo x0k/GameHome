@@ -71,13 +71,14 @@ type
 
 var
   DM: TDesignManager;
+  kdp: single;
 
 implementation
 
 uses
-  System.UIConsts, System.Types, System.Math, System.SysUtils,
-  FMX.Forms, FMX.Dialogs, FMX.Controls, FMX.Objects, FMX.Memo,
-  DataUnit;
+  System.UIConsts, System.Types, System.Math, System.SysUtils, System.Classes,
+  FMX.Platform, FMX.Forms, FMX.Dialogs, FMX.Controls, FMX.Objects, FMX.Memo,
+  DataUnit, GameData;
 
   {TFormText}
 
@@ -169,7 +170,7 @@ begin
     fillArr<single>(val, fillSingl, TbsSize);
   if j.TryGetValue('Font', obj) then
     Font:=fontFromJSON(obj);
-  if j.TryGetValue('FontSize', num) then fSize:=num.AsDouble*(Screen.Width+Screen.Height/2)/2700
+  if j.TryGetValue('FontSize', num) then fSize:=num.AsDouble*kdp//fSize:=num.AsDouble*(Screen.Width+Screen.Height/2)/2700
     else fSize:=0;
   if j.TryGetValue('Align', num) then
   begin
@@ -248,6 +249,7 @@ procedure TDesignManager.setSz(const layouts: TArray<TFmxObject>; const setts: T
   var
     i: byte;
     ct: TControl;
+    st: ITextSettings;
 
   function findByName(const name: string; const arr: TArray<TFmxObject>; var c: TControl):boolean;
   var
@@ -280,10 +282,18 @@ procedure TDesignManager.setSz(const layouts: TArray<TFmxObject>; const setts: T
           else if ct is TMemo then
             (ct as TMemo).Text:=setts[i].Text;
         end;
-        if Assigned(setts[i].TextSettings) then
-          (ct as ITextSettings).TextSettings.Assign(setts[i].TextSettings);
-        if setts[i].FontSize>0 then
-          (ct as ITextSettings).TextSettings.Font.Size:=setts[i].FontSize;
+        if IInterface(ct).QueryInterface(ITextSettings, st) = S_OK  then
+        begin
+          st.TextSettings.BeginUpdate;
+          try
+            if Assigned(setts[i].TextSettings) then
+              st.TextSettings.Assign(setts[i].TextSettings);
+            if setts[i].FontSize>0 then
+              st.TextSettings.Font.Size:=setts[i].FontSize;
+          finally
+            st.TextSettings.EndUpdate;
+          end;
+        end;
         if Assigned(setts[i].LayouBounds) then
           ct.BoundsRect:=setts[i].LayouBounds.Rect;
         if Assigned(setts[i].LayoutMargins) then
@@ -303,6 +313,7 @@ var
   txts: TArray<eTexts>;
   txt: eTexts;
 begin
+  kdp:=(GD.ppi/160)*4/3;
   layouts:=TDictionary<string, TArray<TFormLayout>>.Create;
   txts:=[tForms, tFrames];
   try

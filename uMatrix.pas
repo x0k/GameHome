@@ -60,14 +60,14 @@ var
 procedure TMatrixFrame.onFCreate;
 var
   i, id: byte;
-  m: TArray<single>;
+  m: single;
   l: TList<TPair<Byte, String>>;
   lt: TFormLayout;
 begin
   layouts:=[main];
 
-  if DM.tryGetFormLayout(name, 'List', lt) then m:=lt.TextSize
-    else m:=[20];
+  if DM.tryGetFormLayout(name, 'List', lt) then m:=lt.FontSize
+    else m:=20;
 
   l:=TList<TPair<Byte, String>>.Create;
 
@@ -79,6 +79,8 @@ begin
     id:=random(l.Count);
     list.ListItems[i].Tag:=l[id].Key;
     list.ListItems[i].Text:=l[id].Value;
+    list.ListItems[i].TextSettings.Font.Size:=m;
+    nums.ListItems[i].TextSettings.Font.Size:=m+4;
     l.Delete(id);
   end;
   l.Free;

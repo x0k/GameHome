@@ -193,6 +193,9 @@ Suspendisse sollicitudin fermentum purus id pellentesque. Aliquam hendrerit metu
 					"Name": "logoLayout",
 					"Bounds": [1, 1, 10, 10]},
 				{
+					"Name": "RBonus",
+					"Margins": [0, 0, 0, 15]},
+				{
 					"Name": "SPanel",
 					"Bounds": [0, 85, 100, 100],
 					"Childrens": [
@@ -202,7 +205,7 @@ Suspendisse sollicitudin fermentum purus id pellentesque. Aliquam hendrerit metu
 							"Bounds": [0, 0, 16, 15]},
 						{
 							"Name": "SubText",
-							"FontSize": 20}]}]},
+							"FontSize": 25}]}]},
 		{
 			"Name": "Main1",
 			"Margins": [10, 10, 10, 16],
@@ -211,17 +214,12 @@ Suspendisse sollicitudin fermentum purus id pellentesque. Aliquam hendrerit metu
 					"Name": "Alex"}]},
 		{
 			"Name": "Main2",
-			"Margins": [0, 10, 0, 25],
-			"Childrens": [
-				{
-					"Name": "Place"}]},
-		{
-			"Name": "Main3",
-			"Margins": [0, 0, 0, 0],
 			"Childrens": [
 				{
 					"Name": "Btns",
-					"Margins": [0, 0, 0, 14.81]
-				},
+					"Margins": [0, 0, 0, 15]},
 				{
-					"Name": "Home"}]}]}
+					"Name": "Home"}]},
+		{
+			"Name": "Main3",
+			"Childrens": []}]}

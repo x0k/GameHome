@@ -11,14 +11,19 @@ uses
 type
   TEndFrame = class(TGFrame)
     BG: TGlyph;
-  private
-    { Private declarations }
-  public
-    { Public declarations }
+  protected
+    procedure onFCreate; override;
   end;
 
 implementation
 
 {$R *.fmx}
+
+{ TEndFrame }
+
+procedure TEndFrame.onFCreate;
+begin
+  backgrounds:=[BG];
+end;
 
 end.

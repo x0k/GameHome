@@ -37,25 +37,70 @@ inherited MovingFrame: TMovingFrame
         Images = DataForm.Images
       end
     end
-    object Grid: TScaledLayout
+    object Grid: TLayout
       Align = Center
-      OriginalWidth = 726.000000000000000000
-      OriginalHeight = 380.000000000000000000
-      Size.Width = 726.000000000000000000
-      Size.Height = 380.000000000000000000
+      Size.Width = 522.000000000000000000
+      Size.Height = 302.000000000000000000
       Size.PlatformDefault = False
+      TabOrder = 1
+      object Images: TLayout
+        Align = Scale
+        Margins.Top = 40.000000000000000000
+        Margins.Bottom = 40.000000000000000000
+        Position.X = 37.000000000000000000
+        Position.Y = 55.000000000000000000
+        Size.Width = 446.280334472656300000
+        Size.Height = 190.000091552734400000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        object line1: TGlyph
+          Align = Client
+          Size.Width = 446.280334472656300000
+          Size.Height = 190.000091552734400000
+          Size.PlatformDefault = False
+          Stretch = False
+          ImageIndex = 14
+          Images = DataForm.Sequence
+        end
+        object line2: TGlyph
+          Align = Client
+          Size.Width = 446.280334472656300000
+          Size.Height = 190.000091552734400000
+          Size.PlatformDefault = False
+          Stretch = False
+          ImageIndex = 16
+          Images = DataForm.Sequence
+        end
+        object line3: TGlyph
+          Align = Client
+          Size.Width = 446.280334472656300000
+          Size.Height = 190.000091552734400000
+          Size.PlatformDefault = False
+          Stretch = False
+          ImageIndex = 18
+          Images = DataForm.Sequence
+        end
+        object line4: TGlyph
+          Align = Client
+          Size.Width = 446.280334472656300000
+          Size.Height = 190.000091552734400000
+          Size.PlatformDefault = False
+          Stretch = False
+          ImageIndex = 20
+          Images = DataForm.Sequence
+        end
+      end
       object name0: TPanel
-        Anchors = [akTop]
-        Position.X = -0.559638381004333500
-        Size.Width = 129.000000000000000000
-        Size.Height = 41.000000000000000000
+        Align = Scale
+        Size.Width = 92.752075195312500000
+        Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
-        TabOrder = 7
+        TabOrder = 1
         object Text1: TText
           Align = Client
-          Size.Width = 129.000000000000000000
-          Size.Height = 41.000000000000000000
+          Size.Width = 92.752075195312500000
+          Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #214#1083#1100#246#1096
           TextSettings.Font.Family = 'Tkachenko Sketch 4F'
@@ -65,18 +110,18 @@ inherited MovingFrame: TMovingFrame
         end
       end
       object name1: TPanel
-        Anchors = [akTop]
-        Position.X = 147.066390991210900000
-        Size.Width = 153.000000000000000000
-        Size.Height = 41.000000000000000000
+        Align = Scale
+        Position.X = 105.741958618164100000
+        Size.Width = 110.008285522460900000
+        Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
-        TabOrder = 5
+        TabOrder = 2
         object Text2: TText
           Tag = 1
           Align = Client
-          Size.Width = 153.000000000000000000
-          Size.Height = 41.000000000000000000
+          Size.Width = 110.008285522460900000
+          Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #1046#1077#1085#1072' '#214#1083#1100#246#1096
           TextSettings.Font.Family = 'Tkachenko Sketch 4F'
@@ -86,18 +131,18 @@ inherited MovingFrame: TMovingFrame
         end
       end
       object name2: TPanel
-        Anchors = [akTop]
-        Position.X = 304.566406250000000000
-        Size.Width = 201.000000000000000000
-        Size.Height = 41.000000000000000000
+        Align = Scale
+        Position.X = 218.985794067382800000
+        Size.Width = 144.520675659179700000
+        Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
         TabOrder = 3
         object Text3: TText
           Tag = 2
           Align = Client
-          Size.Width = 201.000000000000000000
-          Size.Height = 41.000000000000000000
+          Size.Width = 144.520675659179700000
+          Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #1041#1088#1072#1090#1100#1103'/'#1057#1105#1089#1090#1088#1099
           TextSettings.Font.Family = 'Tkachenko Sketch 4F'
@@ -107,18 +152,18 @@ inherited MovingFrame: TMovingFrame
         end
       end
       object name3: TPanel
-        Anchors = [akTop]
-        Position.X = 513.082092285156300000
-        Size.Width = 181.000000000000000000
-        Size.Height = 41.000000000000000000
+        Align = Scale
+        Position.X = 368.910278320312500000
+        Size.Width = 130.140502929687500000
+        Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
-        TabOrder = 1
+        TabOrder = 4
         object Text4: TText
           Tag = 3
           Align = Client
-          Size.Width = 181.000000000000000000
-          Size.Height = 41.000000000000000000
+          Size.Width = 130.140502929687500000
+          Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #1056#1086#1076#1089#1090#1074#1077#1085#1085#1080#1082#1080
           TextSettings.Font.Family = 'Tkachenko Sketch 4F'
@@ -128,19 +173,19 @@ inherited MovingFrame: TMovingFrame
         end
       end
       object thing0: TPanel
-        Anchors = [akBottom]
-        Position.X = 56.332870483398440000
-        Position.Y = 337.000000000000000000
-        Size.Width = 129.000000000000000000
-        Size.Height = 70.000000000000000000
+        Align = Scale
+        Position.X = 18.000000000000000000
+        Position.Y = 245.000000000000000000
+        Size.Width = 115.000000000000000000
+        Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
-        TabOrder = 6
+        TabOrder = 5
         object Text5: TText
           Tag = 12
           Align = Client
-          Size.Width = 129.000000000000000000
-          Size.Height = 70.000000000000000000
+          Size.Width = 115.000000000000000000
+          Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #1055#1077#1090#1091#1093
           TextSettings.Font.Family = 'Tkachenko Sketch 4F'
@@ -150,19 +195,19 @@ inherited MovingFrame: TMovingFrame
         end
       end
       object thing1: TPanel
-        Anchors = [akBottom]
-        Position.X = 191.740325927734400000
-        Position.Y = 337.000000000000000000
-        Size.Width = 154.000000000000000000
-        Size.Height = 70.000000000000000000
+        Align = Scale
+        Position.X = 137.862884521484400000
+        Position.Y = 245.000000000000000000
+        Size.Width = 110.727279663085900000
+        Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
-        TabOrder = 4
+        TabOrder = 6
         object Text6: TText
           Tag = 13
           Align = Client
-          Size.Width = 154.000000000000000000
-          Size.Height = 70.000000000000000000
+          Size.Width = 110.727279663085900000
+          Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #1057#1086#1088' '#1080#1079' '#1089#1090#1072#1088#1086#1081' '#1080#1079#1073#1099
           TextSettings.Font.Family = 'Tkachenko Sketch 4F'
@@ -172,19 +217,19 @@ inherited MovingFrame: TMovingFrame
         end
       end
       object thing2: TPanel
-        Anchors = [akBottom]
-        Position.X = 360.417968750000000000
-        Position.Y = 337.000000000000000000
-        Size.Width = 129.000000000000000000
-        Size.Height = 70.000000000000000000
+        Align = Scale
+        Position.X = 259.143524169921900000
+        Position.Y = 245.000000000000000000
+        Size.Width = 100.000000000000000000
+        Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
-        TabOrder = 2
+        TabOrder = 7
         object Text7: TText
           Tag = 10
           Align = Client
-          Size.Width = 129.000000000000000000
-          Size.Height = 70.000000000000000000
+          Size.Width = 100.000000000000000000
+          Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #1048#1082#1086#1085#1072
           TextSettings.Font.Family = 'Tkachenko Sketch 4F'
@@ -194,65 +239,25 @@ inherited MovingFrame: TMovingFrame
         end
       end
       object thing3: TPanel
-        Anchors = [akBottom]
-        Position.X = 514.571838378906300000
-        Position.Y = 337.000000000000000000
-        Size.Width = 112.000000000000000000
-        Size.Height = 70.000000000000000000
+        Align = Scale
+        Position.X = 369.981414794921900000
+        Position.Y = 245.000000000000000000
+        Size.Width = 120.000000000000000000
+        Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
-        TabOrder = 0
+        TabOrder = 8
         object Text8: TText
           Tag = 11
           Align = Client
-          Size.Width = 112.000000000000000000
-          Size.Height = 70.000000000000000000
+          Size.Width = 120.000000000000000000
+          Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #1050#1074#1072#1096#1085#1103
           TextSettings.Font.Family = 'Tkachenko Sketch 4F'
           TextSettings.Font.Size = 30.000000000000000000
           TextSettings.FontColor = claWhite
           OnClick = Text1Click
-        end
-      end
-      object Images: TLayout
-        Align = Center
-        Anchors = [akLeft, akTop, akRight, akBottom]
-        Size.Width = 581.000000000000000000
-        Size.Height = 301.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 8
-        object line1: TGlyph
-          Align = Client
-          Size.Width = 581.000000000000000000
-          Size.Height = 301.000000000000000000
-          Size.PlatformDefault = False
-          ImageIndex = 14
-          Images = DataForm.Sequence
-        end
-        object line2: TGlyph
-          Align = Client
-          Size.Width = 581.000000000000000000
-          Size.Height = 301.000000000000000000
-          Size.PlatformDefault = False
-          ImageIndex = 16
-          Images = DataForm.Sequence
-        end
-        object line3: TGlyph
-          Align = Client
-          Size.Width = 581.000000000000000000
-          Size.Height = 301.000000000000000000
-          Size.PlatformDefault = False
-          ImageIndex = 18
-          Images = DataForm.Sequence
-        end
-        object line4: TGlyph
-          Align = Client
-          Size.Width = 581.000000000000000000
-          Size.Height = 301.000000000000000000
-          Size.PlatformDefault = False
-          ImageIndex = 20
-          Images = DataForm.Sequence
         end
       end
     end

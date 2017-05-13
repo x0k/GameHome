@@ -25,7 +25,7 @@ inherited MatrixFrame: TMatrixFrame
         DataDetectorTypes = []
         ReadOnly = True
         StyledSettings = [Style, FontColor]
-        TextSettings.Font.Family = 'Default'
+        TextSettings.Font.Family = 'Tkachenko Sketch 4F'
         TextSettings.Font.Size = 28.000000000000000000
         TextSettings.HorzAlign = Center
         TextSettings.WordWrap = True
