@@ -59,7 +59,7 @@ implementation
 {$R *.fmx}
 
 uses
-  ResourcesManager, GameData, ImageManager, SoundManager;
+  GameData, SoundManager;
 
 procedure TSettingsForm.BackBtnClick(Sender: TObject);
 begin

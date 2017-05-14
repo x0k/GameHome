@@ -10,11 +10,7 @@ type
 
   eResource = (rStyle, rImages, rSequences, rSwitchers, rOther, rMuseum, rProgress);
 
-  eSound = (sMain, sBackground, sClick, sAward, sWrong);
-
   eTexts = (tLevels, tMuseum, tOther, tForms, tFrames);
-
-  procedure initPath;
 
   function getPath(p:ePath):string;
 
@@ -23,7 +19,7 @@ type
 
   function pathResource(r:eResource):string;
 
-  function getSound(s:eSound):string;
+  function getSounds: TArray<string>;
 
   function getImgList(r:eResource):TImageList;
 
@@ -31,15 +27,11 @@ implementation
 
 uses
   FMX.Dialogs,
-  System.IOUtils, System.SysUtils, DataUnit;
+  System.IOUtils, System.SysUtils, System.Types,
+  DataUnit;
 
 var
   exePath: string;
-
-procedure initPath;
-begin
-  exePath:=TPath.GetLibraryPath;
-end;
 
 function getPath(p:ePath):string;
 begin
@@ -92,23 +84,9 @@ begin
   end;
 end;
 
-function getSound(s:eSound):string;
-  function gWrong:string;
-  begin
-    result:='wrong'+random(1).toString+'.wav';
-  end;
-  function gAward:string;
-  begin
-    result:='award'+random(1).toString+'.wav';
-  end;
+function getSounds: TArray<string>;
 begin
-  case s of
-    sMain: result:=TPath.Combine(getPath(pSounds),'s.wav');
-    sBackground: result:=TPath.Combine(getPath(pSounds),'bgtheme.mp3');
-    sClick: result:=TPath.Combine(getPath(pSounds),'Click.wav');
-    sAward: result:=TPath.Combine(getPath(pSounds),gAward);
-    sWrong: result:=TPath.Combine(getPath(pSounds),gWrong);
-  end;
+  result:=TArray<string>(TDirectory.GetFiles(getPath(pSounds)));
 end;
 
 function getImgList(r: eResource):TImageList;
@@ -123,5 +101,8 @@ begin
     rProgress: result:=DataForm.progress;
   end;
 end;
+
+initialization
+  exePath:=TPath.GetLibraryPath;
 
 end.

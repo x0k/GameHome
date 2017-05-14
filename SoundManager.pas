@@ -3,25 +3,34 @@ unit SoundManager;
 interface
 
 uses
-  ResourcesManager, Bass;
+  System.Generics.Collections,
+  Bass;
 
 type
   //Управление звуком
+  eSound = (sBackground, sClick, sAward, sWrong);
+
   TSoundManager = class
   private
+    bgs, cls, aws, wrs: TList<HSTREAM>;
+    lts: TArray<TList<HSTREAM>>;
+    mst, bgst: HSTREAM;
+    bgSync: HSYNC;
     fail: boolean;
     Vol:single;
-    last:eSound;
-    mainStream,backgroundStream: HSTREAM;
     procedure setVol(v:single); overload;
     procedure setVol(v:byte); overload;
-    procedure loadSound(s:eSound);
+
+    function getSound(s: eSound): HSTREAM;
     function getVol:byte;
+
+    procedure playBG;
   public
     procedure play(s:eSound);
     property volume:byte read getVol write setVol;
 
     constructor Create;
+    destructor Destroy; override;
   end;
 
 var
@@ -31,22 +40,37 @@ implementation
 
 uses
   System.SysUtils, FMX.Dialogs,
-  DataUnit;
+  DataUnit, ResourcesManager;
 
   {TSoundManager}
 
 //Конструктор
 constructor TSoundManager.Create;
+var
+  files: TArray<string>;
+  s: string;
+  i: byte;
 begin
   fail:=true;
   try
     if not BASS_Init(-1, 44100, 0, 0, nil) then
       Raise Exception.create('Ошибка при загрузке BASS');
-    BackgroundStream:=BASS_StreamCreateFile(false,pchar(getSound(sBackground)),0,0,BASS_UNICODE);
-    BASS_ChannelFlags(BackgroundStream, BASS_SAMPLE_LOOP, BASS_SAMPLE_LOOP);
+    files:=getSounds;
+    lts:=[bgs, cls, aws, wrs];
+    for i:=0 to 3 do
+      lts[i]:=TList<HSTREAM>.Create;
+    for s in files do
+    begin
+      if s.Contains('background') then i:=0
+      else if s.Contains('click') then i:=1
+      else if s.Contains('award') then i:=2
+      else if s.Contains('wrong') then i:=3
+      else continue;
+      lts[i].Add(BASS_StreamCreateFile(false, pChar(s), 0, 0, BASS_UNICODE));
+    end;
     SetVol(0.1);
-    //BASS_ChannelPlay(BackgroundStream, true);
     fail:=false;
+    playBG;
   except
     on E: Exception do
     begin
@@ -56,31 +80,58 @@ begin
   end;
 end;
 
-//Установить уровень звука
-procedure TSoundManager.SetVol(v:single);
+destructor TSoundManager.Destroy;
+var
+  l: TList<HSTREAM>;
+  st: HSTREAM;
 begin
-  Vol:=v;
-  if fail then exit;
-  Bass_ChannelSetAttribute(MainStream, BASS_ATTRIB_VOL, Vol);
-  Bass_ChannelSetAttribute(BackgroundStream, BASS_ATTRIB_VOL, Vol/2);
+  for l in lts do
+  begin
+    for st in l do
+      BASS_StreamFree(st);
+    l.Free;
+  end;
+  BASS_Free;
+  inherited;
 end;
 
-//Загрузить файл звука в поток
-procedure TSoundManager.LoadSound;
+//Поток рандомного звука из определенной категории
+function TSoundManager.getSound(s: eSound): HSTREAM;
 begin
-  if fail then exit;
-  if MainStream <> 0 then Bass_StreamFree(MainStream);
-  MainStream:=BASS_StreamCreateFile(false,pchar(getSound(s)),0,0,BASS_UNICODE);
-  last:=s;
-  SetVol(Vol);
+  result:=lts[ord(s)][random(lts[ord(s)].Count)];
 end;
 
 //Проиграть звук из потока
 procedure TSoundManager.Play;
 begin
   if fail then exit;
-  if s<>last then LoadSound(s);
-  Bass_ChannelPlay(MainStream,true);
+  mst:=getSound(s);
+  Bass_ChannelSetAttribute(mst, BASS_ATTRIB_VOL, Vol);
+  Bass_ChannelPlay(mst, true);
+end;
+
+procedure bgEndSync(handle: HSYNC; Stream, data: DWORD; user: Pointer); stdcall;
+begin
+  BASS_ChannelRemoveSync(Stream, Handle);
+  SM.PlayBg;
+end;
+
+procedure TSoundManager.PlayBg;
+begin
+  if fail then exit;
+  bgst:=getSound(sBackground);
+  Bass_ChannelSetAttribute(bgst, BASS_ATTRIB_VOL, Vol/2);
+  BASS_ChannelFlags(bgst, BASS_SAMPLE_LOOP, BASS_SAMPLE_LOOP);
+  if not Bass_ChannelPlay(bgst, true) then showMessage(BASS_ErrorGetCode().ToString);
+  bgSync:=BASS_ChannelSetSync(bgst, BASS_SYNC_END, 0, @bgEndSync, nil);
+end;
+
+//Установить уровень звука
+procedure TSoundManager.SetVol(v:single);
+begin
+  Vol:=v;
+  Bass_ChannelSetAttribute(mst, BASS_ATTRIB_VOL, Vol);
+  Bass_ChannelSetAttribute(bgst, BASS_ATTRIB_VOL, Vol/2);
 end;
 
 procedure TSoundManager.SetVol(v:byte);
@@ -88,7 +139,7 @@ begin
   SetVol(v/50);
 end;
 
-function TSoundManager.GetVol;
+function TSoundManager.GetVol: byte;
 begin
   result:=round(Vol*50);
 end;

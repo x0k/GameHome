@@ -42,7 +42,6 @@ procedure TDataForm.DataModuleCreate(Sender: TObject);
 begin
   setHandle;
   sendMsg(cOpen, 'Initialization');
-  initPath;
   GD:=TGameData.Create;
   DM:=TDesignManager.create;
   IM:=TImageManager.Create;

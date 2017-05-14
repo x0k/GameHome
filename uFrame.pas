@@ -52,7 +52,7 @@ implementation
 
 uses
   FMX.Types, FMX.Memo, FMX.Graphics, FMX.Ani,
-  GameUnit, DesignManager, ImageManager,
+  GameUnit, DesignManager, ImageManager, SoundManager,
   uSeazon, uPlace, uTools, uMaterials, uTask, uFoundation, uMap, uOmen, uWarming, uMatrix, uWindows, uRoof, uRidge, uMoving, uEnd;
 
 function createFrame(id:byte): TGFrame;
@@ -206,7 +206,11 @@ end;
 
 procedure TGFrame.win;
 begin
-  (Owner as TGameForm).states[level]:=2;
+  if (Owner as TGameForm).states[level]<2 then
+  begin
+    SM.Play(sAward);
+    (Owner as TGameForm).states[level]:=2;
+  end;
 end;
 
 end.
