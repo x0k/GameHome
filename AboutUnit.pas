@@ -36,10 +36,11 @@ implementation
 {$R *.fmx}
 
 uses
-  ImageManager;
+  ImageManager, SoundManager;
 
 procedure TAboutForm.BackBtnClick(Sender: TObject);
 begin
+  SM.play(sClick);
   Close;
 end;
 

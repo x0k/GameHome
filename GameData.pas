@@ -11,7 +11,7 @@ type
   private
     origramparray: TRampArray;//текущие значени€ gamma ramp
     Br,Ct,Gm:byte;
-    dpi: single;
+    dpi, sr: single;
     function UpdateGamma: boolean;
 
     procedure SetBr(b:byte);
@@ -26,6 +26,7 @@ type
     property contrast:byte read getCt write setCt;
 
     property ppi: single read dpi;
+    property sideRatio: single read sr;
 
     constructor Create;
   end;
@@ -55,6 +56,7 @@ begin
     if TPlatformServices.Current.SupportsPlatformService(IFMXScreenService, IInterface(ScreenService)) then
     begin
       sz:=ScreenService.GetScreenSize;
+      sr:=GetDeviceCaps(DC,HORZSIZE)/GetDeviceCaps(DC,VERTSIZE);
       dpi:=sqrt(sqr(sz.X * ScreenService.GetScreenScale)+sqr(sz.Y * ScreenService.GetScreenScale))/(sqrt(sqr(GetDeviceCaps(DC,VERTSIZE))+sqr(GetDeviceCaps(DC,HORZSIZE)))/25.4);
     end else dpi:=92;
     //ѕолучаем диагональ

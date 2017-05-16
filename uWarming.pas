@@ -55,7 +55,6 @@ var
   w:single;
   c: TContrastEffect;
   inn: TInnerGlowEffect;
-  wr: boolean;
 
 procedure TWarmingFrame.onFCreate;
 var
@@ -71,7 +70,6 @@ begin
   backgrounds:=[BG1, BG2];
   layouts:=[main, BG2];
   gTab:=0;
-  wr:=false;
 
   c:=TContrastEffect.Create(self);
   inn:=TInnerGlowEffect.Create(self);
@@ -95,7 +93,7 @@ begin
   c.Parent:=TFmxObject(sender);
 
   if TFmxObject(sender).Tag=1 then win
-    else wr:=true;
+    else wrong;
 end;
 
 procedure TWarmingFrame.wenter(Sender: TObject);
@@ -123,7 +121,7 @@ procedure TWarmingFrame.Win;
 begin
   inherited;
   TAnimator.AnimateFloatWait(mox, 'opacity', 1);
-  if not wr then setMedal(4);
+  if not fail then setMedal(4);
   home.ImageIndex:=-1;
 end;
 

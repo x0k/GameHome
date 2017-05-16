@@ -32,6 +32,7 @@ implementation
 procedure TTabFrame.next;
 begin
   clBlock:=true;
+  clicks;
   if gTabs.TabIndex=gTabs.TabCount-1 then
     inherited
   else if (gTabs.TabIndex<>gTab) or ((Owner as TGameForm).states[level]>1) then

@@ -54,7 +54,6 @@ inherited MatrixFrame: TMatrixFrame
       DisableMouseWheel = True
       ShowScrollBars = False
       CanFocus = False
-      DisableFocusEffect = True
       DefaultItemStyles.ItemStyle = ''
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
@@ -134,6 +133,7 @@ inherited MatrixFrame: TMatrixFrame
     end
     object List: TListBox
       Align = Client
+      EnableDragHighlight = False
       Size.Width = 631.000000000000000000
       Size.Height = 720.000000000000000000
       Size.PlatformDefault = False
@@ -146,7 +146,6 @@ inherited MatrixFrame: TMatrixFrame
       OnMouseLeave = ListMouseLeave
       ShowScrollBars = False
       AllowDrag = True
-      DisableFocusEffect = True
       DefaultItemStyles.ItemStyle = ''
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''

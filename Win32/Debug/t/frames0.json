@@ -1,0 +1,641 @@
+﻿{
+	"SeazonFrame": [
+		{
+			"Name": "Main",
+			"Bounds": [0, 0, 100, 100],
+			"Margins": [0, 0, 0, 0],
+			"TextSize": [50, 1.2, 2],
+			"TabsSize": [1.2, 2],
+			"Childrens": [
+				{
+					"Name": "s0",
+					"Childrens": [
+						{
+							"Name": "img0",
+							"Childrens": [
+								{
+									"Name": "t0",
+									"Text": "Декабрь",
+									"Margins": [0, 0, 0, 15]}]}]},
+				{
+					"Name": "s1",
+					"Childrens": [
+						{
+							"Name": "img1",
+							"Childrens": [
+								{
+									"Name": "t1",
+									"Text": "Март",
+									"Margins": [0, 0, 0, 15]}]}]},
+				{
+					"Name": "s2",
+					"Childrens": [
+						{
+							"Name": "img2",
+							"Childrens": [
+								{
+									"Name": "t2",
+									"Text": "Июль",
+									"Margins": [0, 0, 0, 15]}]}]},
+				{
+					"Name": "s3",
+					"Childrens": [
+						{
+							"Name": "img3",
+							"Childrens": [
+								{
+									"Name": "t3",
+									"Text": "Сентябрь",
+									"Margins": [0, 0, 0, 15]}]}]}]}],
+	"PlaceFrame": [
+		{
+			"Name": "Main1",
+			"Childrens": [
+				{
+					"Name": "Text",
+					"FontSize": 34,
+					"Text": "Коми-зыряне старались строить новый дом на месте старого, где обитают духи предков. Переселение на новые места считалось приемлимым, если кто-нибудь из членов семьи останется жить на прежднем месте. Нарушение влекло за собой лишения покровительства предков и защиты от несчастий.\n\nВыбрать место для строитльства дома древним коми помогали муравьи, которых приносили из леса в берестяной коробочке и оставляли на месте предпологаемого строительства. Если муравьи за ночь не разбегались, то место считалось пригодным, для возведения жилой постройки.",
+					"Bounds": [0, 0, 40, 68],
+					"Margins": [10, 16, 0, 16]},
+				{
+					"Name": "Map",
+					"Margins": [0, 0, 0, 16]}]},
+		{
+			"Name": "Main2",
+			"Bounds": [0, 0, 100, 100],
+			"Margins": [0, 0, 0, 0],
+			"TextSize": [50, 1.2, 2],
+			"TabsSize": [1.2, 2],
+			"Childrens": [
+				{
+					"Name": "s0",
+					"Childrens": [
+						{
+							"Name": "img0",
+							"Childrens": [
+								{
+									"Name": "Text0",
+									"Text": "Опушка леса",
+									"Margins": [0, 0, 0, 15]}]}]},
+				{
+					"Name": "s1",
+					"Childrens": [
+						{
+							"Name": "img1",
+							"Childrens": [
+								{
+									"Name": "Text1",
+									"Text": "Болото",
+									"Margins": [0, 0, 0, 15]}]}]},
+				{
+					"Name": "s2",
+					"Childrens": [
+						{
+							"Name": "img2",
+							"Childrens": [
+								{
+									"Name": "Text2",
+									"Text": "У реки",
+									"Margins": [0, 0, 0, 15]}]}]},
+				{
+					"Name": "s3",
+					"Childrens": [
+						{
+							"Name": "img3",
+							"Childrens": [
+								{
+									"Name": "Text3",
+									"Text": "Равнина",
+									"Margins": [0, 0, 0, 15]}]}]}]}],
+	"ToolsFrame":[
+		{
+			"Name": "tools",
+			"Margins": [10, 10, 10, 16]}],
+	"MaterialsFrame":[
+		{
+			"Name": "Main",
+			"Childrens":[
+				{
+					"Name": "Top",
+					"Bounds": [0, 0, 100, 40],
+					"Childrens": [
+						{
+							"Name": "Text",
+							"FontSize": 28,
+							"Text": "Заготавливать древисину старались в период убывающей луны, поскольку считалось, что такая древесина не потрескается.\nИногда для выбора дерева приглашали колдуна, который мог почувствовать и увидеть \"правильное\" дерево. К примеру, считалось, что дерево с двумя вершинами имеет два сердца. Использовать его в строительстве никак нельзя, так как вероятно навлечь какю-то беду.",
+							"Bounds": [0, 0, 35, 25],
+							"Margins": [10, 10, 0, 0]},
+						{
+							"Name": "Trees",
+							"Margins": [5, 5, 10, 0]}]},
+				{
+					"Name": "Grid",
+					"Margins": [16, 16, 16, 16],
+					"TextSize": [50, 1.1, 1.6],
+					"TabsSize": [1.1, 1.6],
+					"Childrens": [
+						{
+							"Name": "L0",
+							"Childrens": [
+								{
+									"Name": "T0",
+									"Text": "Сосна"},
+								{
+									"Name": "m0",
+									"Margins": [2, 0, 2, 0]}]},
+						{
+							"Name": "L1",
+							"Childrens": [
+								{
+									"Name": "T1",
+									"Text": "Ель"},
+								{
+									"Name": "m1",
+									"Margins": [2, 0, 2, 0]}]},
+						{
+							"Name": "L2",
+							"Childrens": [
+								{
+									"Name": "T2",
+									"Text": "Лиственница"},
+								{
+									"Name": "m2",
+									"Margins": [2, 0, 2, 0]}]},
+						{
+							"Name": "L3",
+							"Childrens": [
+								{
+									"Name": "T3",
+									"Text": "Осина"},
+								{
+									"Name": "m3",
+									"Margins": [2, 0, 2, 0]}]}]}]}],
+	"TaskFrame":[
+		{
+			"Name": "Main",
+			"Margins": [10, 10, 10, 16],
+			"Childrens": [
+				{
+					"Name": "Grid",
+					"Childrens": [
+						{
+							"Name": "Task",
+							"FontSize": 40,
+							"Text": "Задача"},
+						{
+							"Name": "Text",
+							"FontSize": 24,
+							"Text": "Например, дом состоит из 21 венца. А венец - это 1 ряд сруба. Количество стен дома - 4. Это значит, что 4 надо умножить на 21 венец. В итоге получится 84 бревна необходимо для строительства дома.\nНо коми строили дом из двух одинаковых половин - летней и зимней. Таким образом 84 бревна нужно удвоить. Получим 168 бревен, которые строитель будет использовать для возведения двух половин дома.\nОднако, в жилище есть еще хозяйственная половина, на строительство которой тоже требуются бревна. Рассчитать их количесво можно так: 84 бревна умножить на 2, поскольку хозяйственная часть занимает столько места, сколько летняя и зимняя половины взятые вместе.\nЕще можно добавить 50 бревен для полов и потолков будущего дома. Таким образом, необходимо примерно 386 бревен. А сколько потребуется Öльöшу бревен для дома состоящего, к примеру, из 23 венцов.",
+							"Margins": [1, 1, 1, 1]},
+						{
+							"Name": "Answer",
+							"FontSize": 40,
+							"Text": "Ответ:"},
+						{
+							"Name": "Input",
+							"Childrens": [
+								{
+									"Name": "DecBtn"},
+								{
+									"Name": "Num",
+									"Font": {
+										"Name": "Tkachenko Sketch 4F",
+										"Size": 50,
+										"HorzAlign": 0,
+										"VertAlign": 0}},
+								{
+									"Name": "IncBtn"}]}]},
+				{
+					"Name": "Img",
+					"Bounds": [0, 0, 30, 74],
+					"Margins": [0, 0, 10, 4]}]}],
+	"FoundationFrame":[
+		{
+			"Name": "Home"},
+		{
+			"Name": "Main",
+			"Margins": [15, 0, 15, 16],
+			"TabsSize": [1.2, 1.4],
+			"Childrens": [
+				{
+					"Name": "Text",
+					"Text": "",
+					"FontSize": 70,
+					"Margins": [2, 10, 0, 20]},
+				{
+					"Name": "s0",
+					"Childrens": [
+						{
+							"Name": "f0",
+							"Childrens": [
+								{
+									"Name": "t0",
+									"Text": "На камнях"}]}]},
+				{
+					"Name": "s1",
+					"Childrens": [
+						{
+							"Name": "f1",
+							"Childrens": [
+								{
+									"Name": "t1",
+									"Text": "На бетонных столбах"}]}]},
+				{
+					"Name": "s2",
+					"Childrens": [
+						{
+							"Name": "f2",
+							"Childrens": [
+								{
+									"Name": "t2",
+									"Text": "На деревянных столбах"}]}]},
+				{
+					"Name": "s3",
+					"Childrens": [
+						{
+							"Name": "f3",
+							"Childrens": [
+								{
+									"Name": "t3",
+									"Text": "Без фундамента"}]}]}]}],
+	"MapFrame":[
+		{
+			"Name": "Main",
+			"Margins": [5, 10, 5, 16],
+			"Childrens":[
+				{
+					"Name": "Details",
+					"Bounds": [0, 0, 35, 74],
+					"Margins": [0, 0, 5, 0]},
+				{
+					"Name": "Right",
+					"Bounds": [0, 0, 50, 74],
+					"Childrens": [
+						{
+							"Name": "Wood",
+							"Bounds": [0, 0, 50, 6]},
+						{
+							"Name": "Client",
+							"Childrens": [
+								{
+									"Name": "Map",
+									"Childrens": [
+										{
+											"Name": "rnName",
+											"Bounds": [0, 0, 50, 4],
+											"FontSize": 50}]}]}]}]}],
+	"OmenFrame":[
+		{
+			"Name": "Main",
+			"Margins": [0, 0, 0, 16],
+			"Childrens": [
+				{
+					"Name": "Top",
+					"Bounds": [0, 0, 80, 40],
+					"Margins": [10, 10, 10, 10],
+					"Childrens": [
+						{
+							"Name": "Left",
+							"Bounds": [0, 0, 30, 30]},
+						{
+							"Name": "Text",
+							"FontSize": 30,
+							"Text": "Предметы размещали по часовой стрелке, начиная с красного угла. Разместите предметы так, чтобы первая щепа находилась там, где расположен красный угол, по диагонали от него - не зерно, а справа от красного угла - не крыло утки. По диагонали от второго угла - не осиное гнездо. Зная, что крыло утки по диагонали от зерна, распределите предметы в правильном порядке.",
+							"Margins": [10, 10, 0, 0]}]},
+				{
+					"Name": "Grid",
+					"Margins": [20, 0, 20, 0],
+					"TabsSize": [1, 1],
+					"TextSize": [40, 1.2, 1.2],
+					"Childrens": [
+						{
+							"Name": "L0",
+							"Childrens": [
+								{
+									"Name": "m0",
+									"Margins": [2, 2, 2, 0]},
+								{
+									"Name": "T0",
+									"Text": "Осиное гнездо"}]},
+						{
+							"Name": "L1",
+							"Childrens": [
+								{
+									"Name": "m1",
+									"Margins": [2, 2, 2, 0]},
+								{
+									"Name": "T1",
+									"Text": "Первая щепа"}]},
+						{
+							"Name": "L2",
+							"Childrens": [
+								{
+									"Name": "m2",
+									"Margins": [2, 2, 2, 0]},
+								{
+									"Name": "T2",
+									"Text": "Крыло утки"}]},
+						{
+							"Name": "L3",
+							"Childrens": [
+								{
+									"Name": "m3",
+									"Margins": [2, 0, 2, 0]},
+								{
+									"Name": "T3",
+									"Text": "Зерно"}]}]}]}],
+	"WarmingFrame":[
+		{
+			"Name": "Main",
+			"Margins": [5, 5, 5, 10],
+			"Childrens": [
+				{
+					"Name": "Home",
+					"Childrens": [
+						{
+							"Name": "Left",
+							"Margins": [0, 0, 30, 0]},
+						{
+							"Name": "Right",
+							"Margins": [30, 0, 0, 0]}]}]}],
+	"MatrixFrame":[
+		{
+			"Name": "Main",
+			"Margins": [5, 10, 5, 16],
+			"Childrens": [
+				{
+					"Name": "Left",
+					"Bounds": [0, 0, 30, 74],
+					"Margins": [0, 0, 5, 0],
+					"Childrens":[
+						{
+							"Name": "Text",
+							"FontSize": 30,
+							"Text": "Матрица - это главная несущая балка, поддерживающая потолочный настил в деревянных постройках. Матрица врубалась в нечетный венец",
+							"Margins":[0, 10, 0, 0]},
+						{
+							"Name": "Img",
+							"Align": 1,
+							"Bounds": [0, 0, 30, 30]}]},
+				{
+					"Name": "Nums"},
+				{
+					"Name": "List",
+					"FontSize": 28}]}],
+	"WindowsFrame": [
+		{
+			"Name": "Main",
+			"Margins": [10, 10, 10, 16],
+			"Childrens": [
+				{
+					"Name": "Home",
+					"Bounds": [0, 0, 80, 40]},
+				{
+					"Name": "Grid",
+					"Margins": [0, 10, 0, 0],
+					"TextSize": [40, 1.1, 1.6],
+					"TabsSize": [1.1, 1.6],
+					"Childrens": [
+						{
+							"Name": "L0",
+							"Childrens": [
+								{
+									"Name": "m0",
+									"Margins": [2, 0, 2, 0]},
+								{
+									"Name": "T0",
+									"Text": "Вариант 1"}]},
+						{
+							"Name": "L1",
+							"Childrens": [
+								{
+									"Name": "m1",
+									"Margins": [2, 0, 2, 0]},
+								{
+									"Name": "T1",
+									"Text": "Вариант 2"}]},
+						{
+							"Name": "L2",
+							"Childrens": [
+								{
+									"Name": "m2",
+									"Margins": [2, 0, 2, 0]},
+								{
+									"Name": "T2",
+									"Text": "Вариант 3"}]},
+						{
+							"Name": "L3",
+							"Childrens": [
+								{
+									"Name": "m3",
+									"Margins": [2, 0, 2, 0]},
+								{
+									"Name": "T3",
+									"Text": "Вариант 4"}]}]}]}],
+	"RoofFrame": [
+		{
+			"Name": "Main",
+			"Childrens":[
+				{
+					"Name": "Home",
+					"Bounds": [0, 0, 80, 40],
+					"Margins": [10, 10, 10, 10]},
+				{
+					"Name": "Grid",
+					"TextSize": [40, 1.1, 1.6],
+					"TabsSize": [1.1, 1.2],
+					"Childrens": [
+						{
+							"Name": "L0",
+							"Childrens": [
+								{
+									"Name": "m0",
+									"Childrens": [
+										{
+											"Name": "T0",
+											"Text": "Солома",
+											"Margins": [0, 0, 0, 16]}]}]},
+						{
+							"Name": "L1",
+							"Childrens": [
+								{
+									"Name": "m1",
+									"Childrens": [
+										{
+											"Name": "T1",
+											"Text": "Шифер",
+											"Margins": [0, 0, 0, 15]}]}]},
+						{
+							"Name": "L2",
+							"Childrens": [
+								{
+									"Name": "m2",
+									"Childrens": [
+										{
+											"Name": "T2",
+											"Text": "Тёс",
+											"Margins": [0, 0, 0, 16]}]}]},
+						{
+							"Name": "L3",
+							"Childrens": [
+								{
+									"Name": "m3",
+									"Childrens": [
+										{
+											"Name": "T3",
+											"Text": "Черепица",
+											"Margins": [0, 0, 0, 16]}]}]}]}]}],
+	"RidgeFrame": [
+		{
+			"Name": "Main1",
+			"Margins": [10, 10, 10, 16],
+			"Childrens":[
+				{
+					"Name": "Home",
+					"Bounds": [0, 0, 80, 40],
+					"Margins": [0, 0, 0, 10]},
+				{
+					"Name": "Grid",
+					"TextSize": [40, 1, 1],
+					"TabsSize": [1, 1.2],
+					"Childrens": [
+						{
+							"Name": "L0",
+							"Childrens": [
+								{
+									"Name": "m0",
+									"Margins": [4, 0, 4, 0]},
+								{
+									"Name": "T0",
+									"Text": "Вариант 1"}]},
+						{
+							"Name": "L1",
+							"Childrens": [
+								{
+									"Name": "m1",
+									"Margins": [4, 0, 4, 0]},
+								{
+									"Name": "T1",
+									"Text": "Вариант 2"}]},
+						{
+							"Name": "L2",
+							"Childrens": [
+								{
+									"Name": "m2",
+									"Margins": [4, 0, 4, 0]},
+								{
+									"Name": "T2",
+									"Text": "Вариант 3"}]},
+						{
+							"Name": "L3",
+							"Childrens": [
+								{
+									"Name": "m3",
+									"Margins": [4, 0, 4, 0]},
+								{
+									"Name": "T3",
+									"Text": "Вариант 4"}]},
+						{
+							"Name": "L4",
+							"Childrens": [
+								{
+									"Name": "m4",
+									"Margins": [4, 0, 4, 0]},
+								{
+									"Name": "T4",
+									"Text": "Вариант 5"}]}]}]},
+		{
+			"Name": "Main2",
+			"Margins": [10, 10, 10, 16],
+			"Childrens":[
+				{
+					"Name": "homeDecor",
+					"Bounds": [0, 0, 80, 40],
+					"Margins": [0, 0, 0, 10]},
+				{
+					"Name": "Decs",
+					"TextSize": [40, 1, 1],
+					"TabsSize": [1, 1.2]	}]}],
+	"MovingFrame": [
+		{
+			"Name": "Main",
+			"Margins": [10, 10, 10, 18],
+			"Childrens":[
+				{
+					"Name": "Top",
+					"Bounds": [0, 0, 80, 30],
+					"Margins": [0, 0, 0, 5],
+					"Childrens": [
+						{
+							"Name": "Left",
+							"Bounds": [0, 0, 30, 20],
+							"Margins": [2.5, 0, 0, 12]},
+						{
+							"Name": "Content"},
+						{
+							"Name": "Right",
+							"Margins": [0, 7.5, 5, 5],
+							"Bounds": [0, 0, 32, 20]}]},
+				{
+					"Name": "Grid",
+					"Bounds": [0, 0, 40, 37],
+					"Childrens": [
+						{
+							"Name": "Imges"},
+						{
+							"Name": "name0",
+							"Childrens":[
+								{
+									"Name": "Text1",
+									"FontSize": 34,
+									"Text": "Öльöш"}]},
+						{
+							"Name": "name1",
+							"Childrens":[
+								{
+									"Name": "Text2",
+									"FontSize": 34,
+									"Text": "Жена Öльöш"}]},
+						{
+							"Name": "name2",
+							"Childrens":[
+								{
+									"Name": "Text3",
+									"FontSize": 34,
+									"Text": "Братья/Сёстры"}]},
+						{
+							"Name": "name3",
+							"Childrens":[
+								{
+									"Name": "Text4",
+									"FontSize": 34,
+									"Text": "Родственники"}]},
+						{
+							"Name": "thing0",
+							"Childrens":[
+								{
+									"Name": "Text5",
+									"FontSize": 34,
+									"Text": "Петух"}]},
+						{
+							"Name": "thing1",
+							"Childrens":[
+								{
+									"Name": "Text6",
+									"FontSize": 34,
+									"Text": "Сор из старой избы"}]},
+						{
+							"Name": "thing2",
+							"Childrens":[
+								{
+									"Name": "Text7",
+									"FontSize": 34,
+									"Text": "Икона"}]},
+						{
+							"Name": "thing3",
+							"Childrens":[
+								{
+									"Name": "Text8",
+									"FontSize": 34,
+									"Text": "Квашня"}]}]}]}],
+	"EndFrame": []}

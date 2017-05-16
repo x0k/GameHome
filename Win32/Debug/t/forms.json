@@ -187,6 +187,34 @@ Suspendisse sollicitudin fermentum purus id pellentesque. Aliquam hendrerit metu
 							"Bounds": [1, 85, 5, 100]}]}]}],
 	"GameForm": [
 		{
+			"Name": "modalDialog",
+			"Childrens":[
+				{
+					"Name": "dlgBG"
+				},
+				{
+					"Name": "dlgText",
+					"FontSize": 26,
+					"Text": "Действительно хотите выйти?\nПрогресс не будет сохранен."
+				},
+				{
+					"Name": "dlgBtns",
+					"Childrens": [
+						{
+							"Name": "yesBtn",
+							"FontSize": 30,
+							"Text": "Да"
+						},
+						{
+							"Name": "noBtn",
+							"FontSize": 30,
+							"Text": "Нет"
+						}
+					]
+				}
+			]
+		},
+		{
 			"Name": "Main",
 			"Childrens": [
 				{

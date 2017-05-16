@@ -67,7 +67,8 @@ begin
     if (Tbutton(sender).Tag=1)and(Num.Tag<ans+10) then Num.Tag:=Num.Tag+1 else
     if (Tbutton(sender).Tag=0)and(Num.Tag>ans-10) then Num.Tag:=Num.Tag-1;
     Num.Text:=Num.Tag.ToString;
-    if ans=num.Tag then win;
+    if ans=num.Tag then win
+      else clicks;
   end;
 end;
 

@@ -391,6 +391,7 @@ object GameForm: TGameForm
       object bonusBG: TRectangle
         Align = Client
         Fill.Color = claBlack
+        HitTest = False
         Opacity = 0.500000000000000000
         Size.Width = 360.000000000000000000
         Size.Height = 720.000000000000000000
@@ -514,6 +515,7 @@ object GameForm: TGameForm
         end
         object medalTxt: TText
           Align = Left
+          HitTest = False
           Position.X = 42.000000000000000000
           Size.Width = 42.000000000000000000
           Size.Height = 42.000000000000000000
@@ -619,6 +621,70 @@ object GameForm: TGameForm
           OnClick = BackBtnClick
         end
       end
+    end
+  end
+  object modalDialog: TLayout
+    Align = Center
+    Size.Width = 349.000000000000000000
+    Size.Height = 228.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 3
+    object dlgBG: TRectangle
+      Align = Client
+      Fill.Color = claBlack
+      HitTest = False
+      Opacity = 0.500000000000000000
+      Size.Width = 349.000000000000000000
+      Size.Height = 228.000000000000000000
+      Size.PlatformDefault = False
+      Stroke.Kind = None
+      Stroke.Thickness = 0.000000000000000000
+    end
+    object dlgBtns: TLayout
+      Anchors = [akLeft, akTop, akRight, akBottom]
+      Position.Y = 178.000000000000000000
+      Size.Width = 349.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object yesBtn: TSpeedButton
+        Align = Left
+        StyledSettings = [Family, Style]
+        Size.Width = 177.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Text = #1044#1072
+        TextSettings.Font.Size = 15.000000000000000000
+        TextSettings.FontColor = claWhite
+        OnClick = yesBtnClick
+      end
+      object noBtn: TSpeedButton
+        Tag = 1
+        Align = Right
+        StyledSettings = [Family, Style]
+        Position.X = 177.000000000000000000
+        Size.Width = 172.000000000000000000
+        Size.Height = 50.000000000000000000
+        Size.PlatformDefault = False
+        Text = #1053#1077#1090
+        TextSettings.Font.Size = 15.000000000000000000
+        TextSettings.FontColor = claWhite
+        OnClick = yesBtnClick
+      end
+    end
+    object dlgText: TText
+      Align = Scale
+      Margins.Left = 10.000000000000000000
+      Margins.Top = 10.000000000000000000
+      Margins.Right = 10.000000000000000000
+      Margins.Bottom = 10.000000000000000000
+      Position.X = 10.000000000000000000
+      Position.Y = 10.000000000000000000
+      Size.Width = 329.000000000000000000
+      Size.Height = 159.000000000000000000
+      Size.PlatformDefault = False
+      Text = '213123'
+      TextSettings.FontColor = claWhite
     end
   end
 end

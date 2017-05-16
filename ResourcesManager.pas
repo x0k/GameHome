@@ -28,7 +28,7 @@ implementation
 uses
   FMX.Dialogs,
   System.IOUtils, System.SysUtils, System.Types,
-  DataUnit;
+  DataUnit, GameData;
 
 var
   exePath: string;
@@ -49,7 +49,8 @@ begin
     tMuseum: result:=TPath.Combine(getPath(pTexts),'museum.json');
     tOther: result:=TPath.Combine(getPath(pTexts),'other.json');
     tForms: result:=TPath.Combine(getPath(pTexts),'forms.json');
-    tFrames: result:=TPath.Combine(getPath(pTexts),'frames.json');
+    tFrames: if GD.sideRatio<1.5 then result:=TPath.Combine(getPath(pTexts),'frames1.json')
+      else result:=TPath.Combine(getPath(pTexts),'frames0.json')
   end;
 end;
 

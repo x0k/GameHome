@@ -33,7 +33,7 @@ uses
 
 var
   eff1, eff2: TInnerGlowEffect;
-  a,b:boolean;
+  a, b:boolean;
 
 procedure TToolsFrame.Win;
 begin
@@ -58,12 +58,14 @@ begin
     0:begin
       eff1.Parent:=TFmxObject(sender).Children[0];
       a:=true;
+      if not b then clicks;
     end;
     1:begin
       eff2.Parent:=TFmxObject(sender).Children[0];
       b:=true;
+      if not a then clicks;
     end;
-    else tleave(sender);
+    else wrong;
   end;
   setText(id);
   if a and b then win;

@@ -63,6 +63,7 @@ uses
 
 procedure TSettingsForm.BackBtnClick(Sender: TObject);
 begin
+  SM.play(sClick);
   Close;
 end;
 
@@ -72,6 +73,7 @@ begin
   if ((sender as Tbutton).Tag=0)and(Blev.Tag>0) then Blev.Tag:=Blev.Tag-1;
   Blev.Text:=Blev.Tag.ToString;
   GD.brightnes:=Blev.Tag;
+  SM.play(sClick);
 end;
 
 procedure TSettingsForm.DecCtrClick(Sender: TObject);
@@ -80,6 +82,7 @@ begin
   if ((sender as Tbutton).Tag=0)and(Clev.Tag>0) then Clev.Tag:=Clev.Tag-1;
   Clev.Text:=Clev.Tag.ToString;
   GD.contrast:=Clev.Tag;
+  SM.play(sClick);
 end;
 
 procedure TSettingsForm.IncVolClick(Sender: TObject);
@@ -88,7 +91,7 @@ begin
   if ((sender as Tbutton).Tag=0)and(Vlev.Tag>0) then Vlev.Tag:=Vlev.Tag-1;
   Vlev.Text:=Vlev.Tag.ToString;
   SM.volume:=Vlev.Tag;
-  SM.Play(sWrong);
+  SM.play(eSound(2+random(2)));
 end;
 
 procedure TSettingsForm.onCreate;

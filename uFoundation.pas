@@ -40,7 +40,6 @@ implementation
 
 var
   Tabs: FSTabs;
-  wr: boolean;
 
 procedure TFoundationFrame.onFCreate;
 begin
@@ -48,7 +47,6 @@ begin
   layouts:=[main, home];
   Tabs:=FSTabs.create(self, main, isWin, enter);
   Tabs.setSize(false, false);
-  wr:=false;
 end;
 
 procedure TFoundationFrame.onFDestroy;
@@ -72,9 +70,8 @@ begin
   if tab.layer.TabOrder=2 then
   begin
     win;
-    if not wr then setMedal(2);
-  end;
-  wr:=true;
+    if not fail then setMedal(2);
+  end else wrong;
 end;
 
 end.

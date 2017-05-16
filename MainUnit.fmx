@@ -93,6 +93,7 @@ object MainForm: TMainForm
           Size.PlatformDefault = False
           TabOrder = 3
           object ExitBtn: TButton
+            Tag = 4
             Align = MostTop
             Position.X = 14.000000000000000000
             Size.Width = 92.000000000000000000
@@ -101,7 +102,7 @@ object MainForm: TMainForm
             StyleLookup = 'exitbtn'
             TabOrder = 0
             Text = 'ExitBtn'
-            OnClick = ExitBtnClick
+            OnClick = BGameBtnClick
           end
           object Text5: TText
             Align = Top
@@ -122,6 +123,7 @@ object MainForm: TMainForm
           Size.PlatformDefault = False
           TabOrder = 2
           object AboutBtn: TButton
+            Tag = 3
             Align = MostTop
             Position.X = 14.000000000000000000
             Size.Width = 92.000000000000000000
@@ -130,7 +132,7 @@ object MainForm: TMainForm
             StyleLookup = 'aboutBtn'
             TabOrder = 0
             Text = 'AboutBtn'
-            OnClick = AboutBtnClick
+            OnClick = BGameBtnClick
           end
           object Text4: TText
             Align = Top
@@ -151,6 +153,7 @@ object MainForm: TMainForm
           Size.PlatformDefault = False
           TabOrder = 1
           object MuseumBtn: TButton
+            Tag = 2
             Align = MostTop
             Position.X = 14.000000000000000000
             Size.Width = 92.000000000000000000
@@ -159,7 +162,7 @@ object MainForm: TMainForm
             StyleLookup = 'MuseumBtn'
             TabOrder = 0
             Text = 'MuseumBtn'
-            OnClick = MuseumBtnClick
+            OnClick = BGameBtnClick
           end
           object Text3: TText
             Align = Top
@@ -180,6 +183,7 @@ object MainForm: TMainForm
           Size.PlatformDefault = False
           TabOrder = 0
           object SettsBtn: TButton
+            Tag = 1
             Align = MostTop
             Position.X = 14.000000000000000000
             Size.Width = 92.000000000000000000
@@ -188,7 +192,7 @@ object MainForm: TMainForm
             StyleLookup = 'settsbtn'
             TabOrder = 0
             Text = 'Button1'
-            OnClick = SettsBtnClick
+            OnClick = BGameBtnClick
           end
           object Text2: TText
             Align = Top

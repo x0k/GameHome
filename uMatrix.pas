@@ -114,7 +114,7 @@ begin
     begin
       win;
       setBonus(6);
-    end;
+    end else clicks;
   end;
 end;
 

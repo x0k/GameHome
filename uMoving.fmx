@@ -153,8 +153,8 @@ inherited MovingFrame: TMovingFrame
       end
       object name3: TPanel
         Align = Scale
-        Position.X = 368.910278320312500000
-        Size.Width = 130.140502929687500000
+        Position.X = 369.000000000000000000
+        Size.Width = 152.000000000000000000
         Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
@@ -162,7 +162,7 @@ inherited MovingFrame: TMovingFrame
         object Text4: TText
           Tag = 3
           Align = Client
-          Size.Width = 130.140502929687500000
+          Size.Width = 152.000000000000000000
           Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #1056#1086#1076#1089#1090#1074#1077#1085#1085#1080#1082#1080
@@ -174,9 +174,8 @@ inherited MovingFrame: TMovingFrame
       end
       object thing0: TPanel
         Align = Scale
-        Position.X = 18.000000000000000000
         Position.Y = 245.000000000000000000
-        Size.Width = 115.000000000000000000
+        Size.Width = 133.000000000000000000
         Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
@@ -184,7 +183,7 @@ inherited MovingFrame: TMovingFrame
         object Text5: TText
           Tag = 12
           Align = Client
-          Size.Width = 115.000000000000000000
+          Size.Width = 133.000000000000000000
           Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #1055#1077#1090#1091#1093
@@ -196,9 +195,9 @@ inherited MovingFrame: TMovingFrame
       end
       object thing1: TPanel
         Align = Scale
-        Position.X = 137.862884521484400000
+        Position.X = 138.000000000000000000
         Position.Y = 245.000000000000000000
-        Size.Width = 110.727279663085900000
+        Size.Width = 119.000000000000000000
         Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
@@ -206,7 +205,7 @@ inherited MovingFrame: TMovingFrame
         object Text6: TText
           Tag = 13
           Align = Client
-          Size.Width = 110.727279663085900000
+          Size.Width = 119.000000000000000000
           Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #1057#1086#1088' '#1080#1079' '#1089#1090#1072#1088#1086#1081' '#1080#1079#1073#1099
@@ -218,9 +217,9 @@ inherited MovingFrame: TMovingFrame
       end
       object thing2: TPanel
         Align = Scale
-        Position.X = 259.143524169921900000
+        Position.X = 264.000000000000000000
         Position.Y = 245.000000000000000000
-        Size.Width = 100.000000000000000000
+        Size.Width = 97.000000000000000000
         Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
@@ -228,7 +227,7 @@ inherited MovingFrame: TMovingFrame
         object Text7: TText
           Tag = 10
           Align = Client
-          Size.Width = 100.000000000000000000
+          Size.Width = 97.000000000000000000
           Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #1048#1082#1086#1085#1072
@@ -240,9 +239,9 @@ inherited MovingFrame: TMovingFrame
       end
       object thing3: TPanel
         Align = Scale
-        Position.X = 369.981414794921900000
+        Position.X = 370.000000000000000000
         Position.Y = 245.000000000000000000
-        Size.Width = 120.000000000000000000
+        Size.Width = 151.000000000000000000
         Size.Height = 56.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SPanel'
@@ -250,7 +249,7 @@ inherited MovingFrame: TMovingFrame
         object Text8: TText
           Tag = 11
           Align = Client
-          Size.Width = 120.000000000000000000
+          Size.Width = 151.000000000000000000
           Size.Height = 56.000000000000000000
           Size.PlatformDefault = False
           Text = #1050#1074#1072#1096#1085#1103

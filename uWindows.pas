@@ -44,13 +44,11 @@ uses
 
 var
   tabs:FSTabs;
-  wr: boolean;
 
 procedure TWindowsFrame.onFCreate;
 begin
   layouts:=[main];
   tabs:=FSTabs.create(self, grid, isWin);
-  wr:=false;
 end;
 
 procedure TWindowsFrame.onFDestroy;
@@ -77,8 +75,8 @@ begin
   if tab.txt.Tag=4 then
   begin
     win;
-    if not wr then setMedal(5);
-  end else wr:=true;
+    if not fail then setMedal(5);
+  end else wrong;
 end;
 
 end.

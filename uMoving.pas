@@ -86,7 +86,8 @@ var
   begin
     g.ImageIndex:=g.ImageIndex+1;
     inc(c);
-    if c=4 then win;
+    if c=4 then win
+      else clicks;
   end;
 
 begin
@@ -105,7 +106,8 @@ begin
   end;
   if Assigned(nick) and Assigned(thing) then
   begin
-    if (nick.tag+10=thing.tag) and (m[nick.tag].ImageIndex mod 2=0) then add(m[nick.tag]);
+    if (nick.tag+10=thing.tag) and (m[nick.tag].ImageIndex mod 2=0) then add(m[nick.tag])
+      else wrong;
     unsel(nick); unsel(thing);
     nick:=nil; thing:=nil;
   end;

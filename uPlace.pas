@@ -68,7 +68,7 @@ begin
   begin
     win;
     setBonus(0);
-  end;
+  end else wrong;
 end;
 
 end.

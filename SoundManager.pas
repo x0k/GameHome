@@ -7,7 +7,6 @@ uses
   Bass;
 
 type
-  //Управление звуком
   eSound = (sBackground, sClick, sAward, sWrong);
 
   TSoundManager = class
@@ -44,7 +43,6 @@ uses
 
   {TSoundManager}
 
-//Конструктор
 constructor TSoundManager.Create;
 var
   files: TArray<string>;
@@ -95,16 +93,15 @@ begin
   inherited;
 end;
 
-//Поток рандомного звука из определенной категории
 function TSoundManager.getSound(s: eSound): HSTREAM;
 begin
   result:=lts[ord(s)][random(lts[ord(s)].Count)];
 end;
 
-//Проиграть звук из потока
 procedure TSoundManager.Play;
 begin
   if fail then exit;
+  if mst<>0 then BASS_ChannelStop(mst);
   mst:=getSound(s);
   Bass_ChannelSetAttribute(mst, BASS_ATTRIB_VOL, Vol);
   Bass_ChannelPlay(mst, true);
@@ -120,23 +117,21 @@ procedure TSoundManager.PlayBg;
 begin
   if fail then exit;
   bgst:=getSound(sBackground);
-  Bass_ChannelSetAttribute(bgst, BASS_ATTRIB_VOL, Vol/2);
-  BASS_ChannelFlags(bgst, BASS_SAMPLE_LOOP, BASS_SAMPLE_LOOP);
-  if not Bass_ChannelPlay(bgst, true) then showMessage(BASS_ErrorGetCode().ToString);
+  Bass_ChannelSetAttribute(bgst, BASS_ATTRIB_VOL, Vol/3);
+  Bass_ChannelPlay(bgst, true);
   bgSync:=BASS_ChannelSetSync(bgst, BASS_SYNC_END, 0, @bgEndSync, nil);
 end;
 
-//Установить уровень звука
 procedure TSoundManager.SetVol(v:single);
 begin
   Vol:=v;
   Bass_ChannelSetAttribute(mst, BASS_ATTRIB_VOL, Vol);
-  Bass_ChannelSetAttribute(bgst, BASS_ATTRIB_VOL, Vol/2);
+  Bass_ChannelSetAttribute(bgst, BASS_ATTRIB_VOL, Vol/3);
 end;
 
 procedure TSoundManager.SetVol(v:byte);
 begin
-  SetVol(v/50);
+  setVol(v/50);
 end;
 
 function TSoundManager.GetVol: byte;

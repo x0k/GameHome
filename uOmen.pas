@@ -65,7 +65,7 @@ uses
   ResourcesManager;
 
 var
-  t, wr:boolean;
+  t:boolean;
   walls:TWalls;
   tabs:FSTabs;
 
@@ -184,8 +184,12 @@ begin
   else
   begin
     for i:=0 to 3 do
-      if circles[i].ImageIndex=-1 then exit;
-    wr:=true;
+      if circles[i].ImageIndex=-1 then
+      begin
+        (self.Owner as  TOmenFrame).clicks;
+        exit;
+      end;
+    (self.Owner as  TOmenFrame).wrong;
     clear;
   end;
 end;
@@ -201,7 +205,6 @@ begin
   layouts:=[main];
   Walls:=TWalls.create(self, left, win);
   tabs:=FSTabs.create(self, grid, nil, enter);
-  wr:=false;
 end;
 
 procedure TOmenFrame.onFDestroy;
@@ -222,7 +225,7 @@ procedure TOmenFrame.Win;
 begin
   inherited;
   t:=true;
-  if not wr then setMedal(4);
+  if not fail then setMedal(4);
   setText(5);
   setBonus(5);
   setBonus(3, false);

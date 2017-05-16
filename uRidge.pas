@@ -72,7 +72,6 @@ uses
 
 var
   rgs, dcs:FSTabs;
-  wr: boolean;
 
 procedure TRidgeFrame.onFCreate;
 begin
@@ -80,12 +79,12 @@ begin
   rgs:=FSTabs.create(self, grid, isWin);
   dcs:=FSTabs.create(self, decs, setDec, nil, nil, false);
   gTab:=0;
-  wr:=false;
   inherited;
 end;
 
 procedure TRidgeFrame.setDec(tab: FSTab);
 begin
+  clicks;
   if (Owner as TGameForm).medalsCount>=tab.txt.Tag then
   begin
     homeDecor.ImageIndex:=22+tab.txt.Tag div 2;
@@ -104,7 +103,7 @@ procedure TRidgeFrame.Win;
 begin
   inherited;
   TAnimator.AnimateFloatWait(Ridge, 'opacity', 1);
-  if not wr then setMedal(6);
+  if not fail then setMedal(6);
   home.ImageIndex:=-1;
 end;
 
@@ -116,7 +115,8 @@ end;
 procedure TRidgeFrame.isWin(tab: FSTab);
 begin
   if tab.img.ImageIndex mod 2=0 then tab.img.ImageIndex:=tab.img.ImageIndex+1;
-  if tab.layer.TabOrder=0 then win else wr:=true;
+  if tab.layer.TabOrder=0 then win
+    else wrong;
 end;
 
 procedure TRidgeFrame.next;

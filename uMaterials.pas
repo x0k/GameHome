@@ -41,7 +41,7 @@ implementation
 
 var
   tabs:FSTabs;
-  a, b, wr: boolean;
+  a, b: boolean;
 
 procedure TMaterialsFrame.onFCreate;
 begin
@@ -49,7 +49,6 @@ begin
   tabs:=FSTabs.create(self, grid, isWin);
   a:=false;
   b:=false;
-  wr:=false;
 end;
 
 procedure TMaterialsFrame.onFShow;
@@ -61,16 +60,22 @@ end;
 procedure TMaterialsFrame.isWin(tab: FSTab);
 begin
   case tab.txt.Tag of
-    1: a:=true;
-    3: b:=true;
-    else wr:=true;
+    1:begin
+      a:=true;
+      if not b then clicks;
+    end;
+    3:begin
+      b:=true;
+      if not a then clicks;
+    end;
+    else wrong;
   end;
   setText(tab.layer.TabOrder);
   if tab.img.ImageIndex mod 2=0 then tab.img.ImageIndex:=tab.img.ImageIndex+1;
   if a and b then
   begin
     win;
-    if not wr then setMedal(1);
+    if not fail then setMedal(1);
   end;
 end;
 

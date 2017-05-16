@@ -64,7 +64,8 @@ end;
 
 procedure TRoofFrame.isWin(tab: FSTab);
 begin
-  if tab.layer.TabOrder=2 then win;
+  if tab.layer.TabOrder=2 then win
+    else wrong;
 end;
 
 procedure TRoofFrame.Win;

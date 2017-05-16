@@ -417,10 +417,9 @@
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
-        <DCCReference Include="uTabFrame.pas">
-            <Form>TabFrame</Form>
+        <DCCReference Include="uLoading.pas">
+            <Form>LoadingForm</Form>
             <FormType>fmx</FormType>
-            <DesignClass>TFrame</DesignClass>
         </DCCReference>
         <None Include="ModelSupport_GHome\ImageManager\default.txvpck"/>
         <None Include="ModelSupport_GHome\OmenUnit\default.txvpck"/>

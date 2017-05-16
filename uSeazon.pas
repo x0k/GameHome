@@ -40,13 +40,11 @@ uses
 
 var
   Tabs: FSTabs;
-  wr: boolean;
 
 procedure TSeazonFrame.onFCreate;
 begin
   layouts:=[Main];
   Tabs:=FSTabs.create(self, main, isWin);
-  wr:=false;
 end;
 
 procedure TSeazonFrame.onFDestroy;
@@ -65,9 +63,8 @@ begin
   if tab.layer.TabOrder=1 then
   begin
     win;
-    if not wr then setMedal(0);
-  end;
-  wr:=true;
+    if not fail then setMedal(0);
+  end else wrong;
 end;
 
 end.

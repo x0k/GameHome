@@ -33,35 +33,40 @@ implementation
 uses
   System.SysUtils, System.IOUtils, windows,
   FMX.Ani, FMX.Forms, FMX.Dialogs, FMX.Styles,
-  ImageManager, GameData, DesignManager, TextManager, SoundManager, ResourcesManager, winMessages;
+  ImageManager, GameData, DesignManager, TextManager, SoundManager, ResourcesManager, winMessages, uLoading;
 
 const
   fName = 'TkachenkoSketch4F.ttf';
 
 procedure TDataForm.DataModuleCreate(Sender: TObject);
+var
+  f: TLoadingForm;
 begin
-  setHandle;
-  sendMsg(cOpen, 'Initialization');
-  GD:=TGameData.Create;
-  DM:=TDesignManager.create;
-  IM:=TImageManager.Create;
-  SM:=TSoundManager.Create;
-  TM:=TTextManager.Create;
-  //initForms;
-  sendMsg(cSetCount, (6).ToString);
-  //IM.add(rMuseum);
-  sendMsg(cUpCount, 'Loading: Sequences');
-  IM.add(rSequences);
-  sendMsg(cUpCount, 'Loading: Switchers');
-  IM.add(rSwitchers);
-  sendMsg(cUpCount, 'Loading: Images');
-  IM.add(rImages);
-  sendMsg(cUpCount, 'Loading: Other');
-  IM.add(rOther);
-  {$IFDEF RELEASE}
-  TStyleManager.SetStyleFromFile(pathResource(rStyle));
-  {$ENDIF}
-  sendMsg(cUpCount, 'Done.');
+  f:=TLoadingForm.Create(self);
+  f.Show;
+  try
+    f.setCount(6, 'Initialization');
+    GD:=TGameData.Create;
+    DM:=TDesignManager.Create;
+    IM:=TImageManager.Create;
+    SM:=TSoundManager.Create;
+    TM:=TTextManager.Create;
+    f.up('Loading: Museum');
+    IM.add(rMuseum);
+    f.up('Loading: Sequences');
+    IM.add(rSequences);
+    f.up('Loading: Switchers');
+    IM.add(rSwitchers);
+    f.up('Loading: Images');
+    IM.add(rImages);
+    f.up('Loading: Other');
+    IM.add(rOther);
+    {$IFDEF RELEASE}
+    TStyleManager.SetStyleFromFile(pathResource(rStyle));
+    {$ENDIF}
+  finally
+    f.Close;
+  end;
 end;
 
 procedure TDataForm.DataModuleDestroy(Sender: TObject);

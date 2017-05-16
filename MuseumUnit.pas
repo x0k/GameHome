@@ -41,13 +41,14 @@ implementation
 {$R *.fmx}
 
 uses
-  ResourcesManager;
+  ResourcesManager, SoundManager;
 
 var
   dots: TArray<TGlyph>;
 
 procedure TMuseumForm.BackBtnClick(Sender: TObject);
 begin
+  SM.play(sClick);
   dots[img.ImageIndex].ImageIndex:=0;
   if img.ImageIndex>0 then
     img.ImageIndex:=img.ImageIndex-1
@@ -59,6 +60,7 @@ end;
 
 procedure TMuseumForm.NextBtnClick(Sender: TObject);
 begin
+  SM.play(sClick);
   dots[img.ImageIndex].ImageIndex:=0;
   if img.ImageIndex<img.Images.Count-1 then
     img.ImageIndex:=img.ImageIndex+1
@@ -70,6 +72,7 @@ end;
 
 procedure TMuseumForm.logoLayoutClick(Sender: TObject);
 begin
+  SM.play(sClick);
   Close;
 end;
 

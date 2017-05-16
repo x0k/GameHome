@@ -68,12 +68,19 @@ type
     backLayout: TLayout;
     BackBtn: TSpeedButton;
     Main: TLayout;
+    dlgBG: TRectangle;
+    yesBtn: TSpeedButton;
+    modalDialog: TLayout;
+    dlgBtns: TLayout;
+    noBtn: TSpeedButton;
+    dlgText: TText;
     procedure l1btnClick(Sender: TObject);
     procedure logoLayoutClick(Sender: TObject);
     procedure BackBtnClick(Sender: TObject);
     procedure NextBtnClick(Sender: TObject);
     procedure bonusBtnClick(Sender: TObject);
     procedure MainClick(Sender: TObject);
+    procedure yesBtnClick(Sender: TObject);
   private
     frame: TGFrame;
     sts:TArray<byte>;//states
@@ -96,6 +103,7 @@ type
     function getButton(tag: byte): TButton;
     procedure setBtn(v: boolean);
 
+    procedure closeDlg;
   protected
     procedure onCreate; override;
 
@@ -129,7 +137,7 @@ implementation
 {$R *.fmx}
 
 uses
-  ImageManager, ResourcesManager;
+  ImageManager, ResourcesManager, SoundManager;
 
 procedure TGameForm.onCreate;
 var
@@ -138,7 +146,7 @@ var
 
 begin
   backgrounds:=[home, BG];
-  layouts:=[main, main1, main2, main3];
+  layouts:=[main, modalDialog, main1, main2, main3];
 
   for i:=0 to Tabs.TabCount-1 do
     tabs.Tabs[i].DisableDisappear:=true;
@@ -213,7 +221,9 @@ begin
   block:=false;
   nxtBtn:=true;
   setBar;
-  bonus:=false; fr:=false;
+  bonus:=false; fr:=false; main.HitTest:=false;
+  modalDialog.Opacity:=0;
+  modalDialog.Visible:=false;
   RBonus.Position.X:=Width;
   RBonus.Position.Y:=0;
   preloadContent(tabs);
@@ -260,13 +270,15 @@ end;
 
 procedure TGameForm.l1btnClick(Sender: TObject);
 begin
+  SM.play(sClick);
   nextFrame((Sender as TFmxObject).Tag);
   tabs.Next();
 end;
 
 procedure TGameForm.logoLayoutClick(Sender: TObject);
 begin
-  close;
+  if block then exit;
+  closeDlg;
 end;
 
 procedure TGameForm.setAward(id: byte; v: boolean);
@@ -377,22 +389,23 @@ begin
   if bonus then
     bonusBtnClick(self);
   if block then exit;
+  SM.play(sClick);
   block:=true;
   try
     case Tabs.TabIndex of
       0:begin
+        SM.play(sClick);
         Tabs.Next();
         setBar;
       end;
       1:begin
+        SM.play(sClick);
         i:=0;
         while sts[i]>1 do inc(i);
         nextFrame(i);
         tabs.Next();
       end;
-      2:begin
-        frame.next;
-      end;
+      2: frame.next;
     end;
   finally
     block:=false;
@@ -405,27 +418,50 @@ begin
     bonusBtnClick(self);
   if block then exit;
   case Tabs.TabIndex of
-    0, 1: close;
-    2:begin
-      frame.back;
-    end;
+    0, 1: closeDlg;
+    2: frame.back;
   end;
 end;
 
 procedure TGameForm.MainClick(Sender: TObject);
 begin
+  if block then exit;
   if bonus then
     bonusBtnClick(self);
+  SM.play(sClick);
 end;
 
 procedure TGameForm.bonusBtnClick(Sender: TObject);
 begin
+  if block then exit;  
   if bonus then
     TAnimator.AnimateFloat(RBonus, 'Position.X', Width)
   else
     TAnimator.AnimateFloat(RBonus, 'Position.X', Width-RBonus.Width);
   bonus:=not bonus;
+  SM.play(sClick);
   main.HitTest:=bonus;
+end;
+
+procedure TGameForm.closeDlg;
+begin
+  SM.play(sClick);
+  block:=true; main.HitTest:=true;
+  modalDialog.Visible:=true;
+  TAnimator.AnimateFloat(modalDialog, 'opacity', 1);
+end;
+
+procedure TGameForm.yesBtnClick(Sender: TObject);
+begin
+  case TFmxObject(sender).Tag of
+    0:close;
+    1:begin
+      TAnimator.AnimateFloatWait(modalDialog, 'opacity', 0);
+      modalDialog.Visible:=false;
+      main.HitTest:=false;
+      block:=false;
+    end;
+  end;
 end;
 
 end.

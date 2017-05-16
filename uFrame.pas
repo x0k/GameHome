@@ -14,11 +14,15 @@ type
     fText: TFormText;
     backgrounds: TArray<TGlyph>;
     layouts: TArray<TControl>;
+    fail: boolean;
 
     procedure setClBlock(v: boolean);
     function getClBlock: boolean;
 
     procedure win; virtual;
+    procedure wrong; virtual;
+    procedure clicks; virtual;
+
     procedure setMedal(id: byte; v: boolean = true);
     procedure setBonus(id: byte; v: boolean = true);
 
@@ -87,6 +91,7 @@ var
 begin
   inherited create(GameForm);
   level:=lvl;
+  fail:=false;
 
   if not TM.tryGetText(name, fText) then
     fText:=TFormText.getDefault;
@@ -123,6 +128,7 @@ end;
 procedure TGFrame.next;
 begin
   clBlock:=true;
+  clicks;
   if (Owner as TGameForm).states[level]<2 then exit;
   if level<LVL_COUNT-1 then (Owner as TGameForm).setNext(level+1)
     else (Owner as TGameForm).gameExit;
@@ -131,6 +137,7 @@ end;
 procedure TGFrame.back;
 begin
   clBlock:=true;
+  clicks;
   if (Owner as TGameForm).states[level]<2 then
     (Owner as TGameForm).states[level]:=0;
   (Owner as TGameForm).setBack;
@@ -210,7 +217,19 @@ begin
   begin
     SM.Play(sAward);
     (Owner as TGameForm).states[level]:=2;
-  end;
+  end else SM.play(sClick);
+end;
+
+procedure TGFrame.wrong;
+begin
+  if (Owner as TGameForm).states[level]<2 then SM.Play(sWrong)
+    else SM.play(sClick);
+  fail:=true;
+end;
+
+procedure TGFrame.clicks;
+begin
+  SM.play(sClick);
 end;
 
 end.

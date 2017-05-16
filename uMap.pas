@@ -114,8 +114,10 @@ begin
       TAnimator.AnimateFloat(shepka, 'opacity', 1, 1);
     TFmxObject(sender).Tag:=TFmxObject(sender).Tag+20;
     inc(c);
-    if c=20 then win;
+    if c=20 then win
+      else clicks;
   end else begin
+    wrong;
     TPath(sender).Fill.Color:=TAlphaColorRec.Crimson;
     TAnimator.AnimateFloatWait(TFmxObject(sender), 'opacity', 1, 0.5);
     TAnimator.AnimateFloat(TFmxObject(sender), 'opacity', 0,  0.5);

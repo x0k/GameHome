@@ -32,10 +32,6 @@ type
     aboutLayout: TLayout;
     museumLayout: TLayout;
     settingsLayout: TLayout;
-    procedure ExitBtnClick(Sender: TObject);
-    procedure SettsBtnClick(Sender: TObject);
-    procedure MuseumBtnClick(Sender: TObject);
-    procedure AboutBtnClick(Sender: TObject);
     procedure BGameBtnClick(Sender: TObject);
   protected
     procedure onCreate; override;
@@ -50,7 +46,7 @@ implementation
 
 uses
   FMX.Dialogs,
-  GameUnit, ImageManager, SettingsUnit, MuseumUnit, AboutUnit, TextManager, ResourcesManager;
+  GameUnit, ImageManager, SettingsUnit, MuseumUnit, AboutUnit, TextManager, ResourcesManager, SoundManager;
 
 procedure TMainForm.onCreate;
 begin
@@ -62,30 +58,16 @@ begin
   MuseumForm:=TMuseumForm.Create(self);
 end;
 
-
-procedure TMainForm.AboutBtnClick(Sender: TObject);
-begin
-  AboutForm.Show;
-end;
-
 procedure TMainForm.BGameBtnClick(Sender: TObject);
 begin
-  GameForm.Show;
-end;
-
-procedure TMainForm.ExitBtnClick(Sender: TObject);
-begin
-  close;
-end;
-
-procedure TMainForm.MuseumBtnClick(Sender: TObject);
-begin
-  MuseumForm.Show;
-end;
-
-procedure TMainForm.SettsBtnClick(Sender: TObject);
-begin
-  SettingsForm.Show;
+  SM.play(sClick);
+  case TFmxObject(sender).Tag of
+    0:GameForm.Show;
+    1:SettingsForm.Show;
+    2:MuseumForm.Show;
+    3:AboutForm.Show;
+    4:close;
+  end;
 end;
 
 end.
