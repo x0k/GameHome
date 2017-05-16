@@ -75,7 +75,7 @@ begin
   if tab.txt.Tag=4 then
   begin
     win;
-    if not fail then setMedal(5);
+    if not fail then setMedal(10);
   end else wrong;
 end;
 

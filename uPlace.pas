@@ -67,7 +67,7 @@ begin
   if tab.layer.TabOrder=2 then
   begin
     win;
-    setBonus(0);
+    if not fail then setMedal(1);
   end else wrong;
 end;
 

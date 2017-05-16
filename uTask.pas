@@ -57,7 +57,7 @@ procedure TTaskFrame.Win;
 begin
   inherited;
   Num.StyleLookup:='SelText';
-  setBonus(2);
+  setMedal(4);
 end;
 
 procedure TTaskFrame.DecBtnClick(Sender: TObject);

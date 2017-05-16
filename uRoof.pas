@@ -72,7 +72,7 @@ procedure TRoofFrame.Win;
 begin
   inherited;
   TAnimator.AnimateFloatWait(roof, 'opacity', 1);
-  setBonus(7);
+  if not fail then setMedal(11);
   home.ImageIndex:=-1;
 end;
 

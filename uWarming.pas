@@ -121,7 +121,7 @@ procedure TWarmingFrame.Win;
 begin
   inherited;
   TAnimator.AnimateFloatWait(mox, 'opacity', 1);
-  if not fail then setMedal(4);
+  if not fail then setMedal(8);
   home.ImageIndex:=-1;
 end;
 

@@ -147,8 +147,7 @@ procedure TMapFrame.Win;
 begin
   inherited;
   setText(0);
-  setBonus(3);
-  setBonus(4);
+  if not fail then setMedal(6);
 end;
 
 end.

@@ -24,7 +24,6 @@ type
     procedure clicks; virtual;
 
     procedure setMedal(id: byte; v: boolean = true);
-    procedure setBonus(id: byte; v: boolean = true);
 
     procedure onFCreate; virtual;
     procedure onFDestroy; virtual;
@@ -189,11 +188,6 @@ begin
   (Owner as TGameForm).Logo:=fText.Logos[0];
   (Owner as TGameForm).Text:=fText.TabTexts[0];
   (Owner as TGameForm).nxtBtn:=(Owner as TGameForm).states[level]=2;
-end;
-
-procedure TGFrame.setBonus(id: byte; v: boolean);
-begin
-  (Owner as TGameForm).awards[id]:=v;
 end;
 
 procedure TGFrame.setMedal(id: byte; v: boolean);

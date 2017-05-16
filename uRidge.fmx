@@ -257,7 +257,7 @@ inherited RidgeFrame: TRidgeFrame
               Images = DataForm.Other
             end
             object Text1: TText
-              Tag = 2
+              Tag = 5
               Align = Bottom
               Anchors = []
               HitTest = False
@@ -283,7 +283,7 @@ inherited RidgeFrame: TRidgeFrame
                 Size.Width = 60.000000000000000000
                 Size.Height = 60.000000000000000000
                 Size.PlatformDefault = False
-                Text = 'x2'
+                Text = 'x5'
                 TextSettings.Font.Family = 'Tkachenko Sketch 4F'
                 TextSettings.Font.Size = 40.000000000000000000
               end
@@ -319,7 +319,7 @@ inherited RidgeFrame: TRidgeFrame
               Images = DataForm.Other
             end
             object Text2: TText
-              Tag = 4
+              Tag = 8
               Align = Bottom
               Anchors = []
               HitTest = False
@@ -345,7 +345,7 @@ inherited RidgeFrame: TRidgeFrame
                 Size.Width = 60.000000000000000000
                 Size.Height = 60.000000000000000000
                 Size.PlatformDefault = False
-                Text = 'x4'
+                Text = 'x8'
                 TextSettings.Font.Family = 'Tkachenko Sketch 4F'
                 TextSettings.Font.Size = 40.000000000000000000
               end
@@ -381,7 +381,7 @@ inherited RidgeFrame: TRidgeFrame
               Images = DataForm.Other
             end
             object Text3: TText
-              Tag = 6
+              Tag = 11
               Align = Bottom
               Anchors = []
               HitTest = False
@@ -407,7 +407,7 @@ inherited RidgeFrame: TRidgeFrame
                 Size.Width = 60.000000000000000000
                 Size.Height = 60.000000000000000000
                 Size.PlatformDefault = False
-                Text = 'x6'
+                Text = 'x11'
                 TextSettings.Font.Family = 'Tkachenko Sketch 4F'
                 TextSettings.Font.Size = 40.000000000000000000
               end

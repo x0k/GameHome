@@ -54,6 +54,7 @@ inherited MatrixFrame: TMatrixFrame
       DisableMouseWheel = True
       ShowScrollBars = False
       CanFocus = False
+      DisableFocusEffect = True
       DefaultItemStyles.ItemStyle = ''
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
@@ -121,19 +122,9 @@ inherited MatrixFrame: TMatrixFrame
         TabOrder = 6
         Text = '7)'
       end
-      object ListBoxItem16: TListBoxItem
-        TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-        TextSettings.Font.Size = 38.000000000000000000
-        TextSettings.HorzAlign = Center
-        StyledSettings = [Style, FontColor]
-        Position.Y = 133.000000000000000000
-        TabOrder = 7
-        Text = '8)'
-      end
     end
     object List: TListBox
       Align = Client
-      EnableDragHighlight = False
       Size.Width = 631.000000000000000000
       Size.Height = 720.000000000000000000
       Size.PlatformDefault = False
@@ -146,6 +137,7 @@ inherited MatrixFrame: TMatrixFrame
       OnMouseLeave = ListMouseLeave
       ShowScrollBars = False
       AllowDrag = True
+      DisableFocusEffect = True
       DefaultItemStyles.ItemStyle = ''
       DefaultItemStyles.GroupHeaderStyle = ''
       DefaultItemStyles.GroupFooterStyle = ''
@@ -219,16 +211,6 @@ inherited MatrixFrame: TMatrixFrame
         Position.Y = 114.000000000000000000
         TabOrder = 6
         Text = 'ListBoxItem7'
-      end
-      object ListBoxItem8: TListBoxItem
-        DragMode = dmAutomatic
-        TextSettings.Font.Family = 'Default'
-        TextSettings.Font.Size = 22.000000000000000000
-        TextSettings.WordWrap = True
-        StyledSettings = [Style, FontColor]
-        Position.Y = 133.000000000000000000
-        TabOrder = 7
-        Text = 'ListBoxItem8'
       end
     end
   end

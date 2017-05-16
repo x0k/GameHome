@@ -108,7 +108,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 656.000000000000000000
-            Position.Y = 295.714294433593800000
+            Position.Y = 295.714294433593700000
             Size.Width = 90.000000000000000000
             Size.Height = 90.000000000000000000
             Size.PlatformDefault = False
@@ -197,7 +197,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 288.000000000000000000
-            Position.Y = 479.714294433593800000
+            Position.Y = 479.714294433593700000
             Size.Width = 82.000000000000000000
             Size.Height = 82.000000000000000000
             Size.PlatformDefault = False
@@ -212,7 +212,7 @@ object GameForm: TGameForm
             Anchors = []
             StyledSettings = [Family, Style, FontColor]
             Position.X = 368.000000000000000000
-            Position.Y = 406.571441650390600000
+            Position.Y = 406.571441650390700000
             Size.Width = 74.000000000000000000
             Size.Height = 74.000000000000000000
             Size.PlatformDefault = False
@@ -241,7 +241,7 @@ object GameForm: TGameForm
             Tag = 5
             Anchors = []
             Position.X = 544.000000000000000000
-            Position.Y = 531.142883300781300000
+            Position.Y = 531.142883300781200000
             Size.Width = 82.000000000000000000
             Size.Height = 82.000000000000000000
             Size.PlatformDefault = False
@@ -341,18 +341,6 @@ object GameForm: TGameForm
     TabOrder = 2
     TabStop = False
     OnClick = MainClick
-    object bonusBtn: TButton
-      Anchors = [akTop, akRight]
-      Position.X = 1176.000000000000000000
-      Position.Y = 48.000000000000000000
-      Size.Width = 94.000000000000000000
-      Size.Height = 88.000000000000000000
-      Size.PlatformDefault = False
-      StyleLookup = 'bonusBtn'
-      TabOrder = 0
-      Text = 'bonusBtn'
-      OnClick = bonusBtnClick
-    end
     object logoLayout: TLayout
       HitTest = True
       Position.X = 8.000000000000000000
@@ -360,7 +348,7 @@ object GameForm: TGameForm
       Size.Width = 161.000000000000000000
       Size.Height = 81.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 1
+      TabOrder = 0
       OnClick = logoLayoutClick
       object topLogo: TGlyph
         Align = Client
@@ -378,154 +366,7 @@ object GameForm: TGameForm
       Size.Width = 990.000000000000000000
       Size.Height = 30.000000000000000000
       Size.PlatformDefault = False
-      TabOrder = 2
-    end
-    object RBonus: TLayout
-      Align = Vertical
-      HitTest = True
-      Position.X = 500.000000000000000000
-      Size.Width = 360.000000000000000000
-      Size.Height = 720.000000000000000000
-      Size.PlatformDefault = False
-      TabOrder = 3
-      object bonusBG: TRectangle
-        Align = Client
-        Fill.Color = claBlack
-        HitTest = False
-        Opacity = 0.500000000000000000
-        Size.Width = 360.000000000000000000
-        Size.Height = 720.000000000000000000
-        Size.PlatformDefault = False
-        Stroke.Kind = None
-        Stroke.Thickness = 0.000000000000000000
-      end
-      object telega: TLayout
-        Align = Center
-        Margins.Top = 240.000000000000000000
-        Size.Width = 273.000000000000000000
-        Size.Height = 169.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 1
-        object st1: TGlyph
-          AutoHide = False
-          Position.X = 96.000000000000000000
-          Position.Y = 80.000000000000000000
-          Visible = False
-          Size.Width = 169.000000000000000000
-          Size.Height = 61.000000000000000000
-          Size.PlatformDefault = False
-          ImageIndex = 14
-          Images = DataForm.Other
-        end
-        object st2: TGlyph
-          AutoHide = False
-          Position.X = 72.000000000000000000
-          Position.Y = 96.000000000000000000
-          Visible = False
-          Size.Width = 177.000000000000000000
-          Size.Height = 65.000000000000000000
-          Size.PlatformDefault = False
-          ImageIndex = 15
-          Images = DataForm.Other
-        end
-        object wh2: TGlyph
-          AutoHide = False
-          Position.X = 88.000000000000000000
-          Position.Y = 32.000000000000000000
-          Visible = False
-          Size.Width = 97.000000000000000000
-          Size.Height = 113.000000000000000000
-          Size.PlatformDefault = False
-          ImageIndex = 13
-          Images = DataForm.Other
-        end
-        object body: TGlyph
-          AutoHide = False
-          Position.X = 24.000000000000000000
-          Position.Y = 16.000000000000000000
-          Visible = False
-          Size.Width = 193.000000000000000000
-          Size.Height = 121.000000000000000000
-          Size.PlatformDefault = False
-          ImageIndex = 12
-          Images = DataForm.Other
-        end
-        object wh1: TGlyph
-          AutoHide = False
-          Position.X = 32.000000000000000000
-          Position.Y = 40.000000000000000000
-          Visible = False
-          Size.Width = 105.000000000000000000
-          Size.Height = 121.000000000000000000
-          Size.PlatformDefault = False
-          ImageIndex = 13
-          Images = DataForm.Other
-        end
-      end
-      object woods: TGlyph
-        AutoHide = False
-        Margins.Right = 90.000000000000000000
-        Margins.Bottom = 50.000000000000000000
-        Align = Center
-        Visible = False
-        Size.Width = 214.000000000000000000
-        Size.Height = 117.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 11
-        Images = DataForm.Other
-      end
-      object tools: TGlyph
-        AutoHide = False
-        Margins.Bottom = 400.000000000000000000
-        Align = Center
-        Visible = False
-        Size.Width = 345.000000000000000000
-        Size.Height = 137.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 16
-        Images = DataForm.Other
-      end
-      object shepa: TGlyph
-        AutoHide = False
-        Margins.Left = 250.000000000000000000
-        Margins.Bottom = 60.000000000000000000
-        Align = Center
-        Visible = False
-        Size.Width = 73.000000000000000000
-        Size.Height = 73.000000000000000000
-        Size.PlatformDefault = False
-        ImageIndex = 21
-        Images = DataForm.Other
-      end
-      object coins: TLayout
-        Align = Center
-        Margins.Top = 500.000000000000000000
-        Size.Width = 84.000000000000000000
-        Size.Height = 42.000000000000000000
-        Size.PlatformDefault = False
-        Visible = False
-        TabOrder = 2
-        object medal: TGlyph
-          Align = Left
-          Size.Width = 42.000000000000000000
-          Size.Height = 42.000000000000000000
-          Size.PlatformDefault = False
-          ImageIndex = 10
-          Images = DataForm.Other
-        end
-        object medalTxt: TText
-          Align = Left
-          HitTest = False
-          Position.X = 42.000000000000000000
-          Size.Width = 42.000000000000000000
-          Size.Height = 42.000000000000000000
-          Size.PlatformDefault = False
-          Text = 'x0'
-          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
-          TextSettings.Font.Size = 30.000000000000000000
-          TextSettings.FontColor = claWhite
-        end
-      end
+      TabOrder = 1
     end
     object SPanel: TPanel
       Anchors = [akLeft, akRight, akBottom]
@@ -535,7 +376,7 @@ object GameForm: TGameForm
       Size.Height = 160.000000000000000000
       Size.PlatformDefault = False
       StyleLookup = 'SPanel'
-      TabOrder = 4
+      TabOrder = 2
       object nextLayout: TLayout
         Align = Right
         Margins.Right = 20.000000000000000000
@@ -622,6 +463,37 @@ object GameForm: TGameForm
         end
       end
     end
+    object coins: TLayout
+      Anchors = [akTop, akRight]
+      Margins.Top = 500.000000000000000000
+      Position.X = 1185.000000000000000000
+      Position.Y = 50.000000000000000000
+      Size.Width = 84.000000000000000000
+      Size.Height = 42.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 3
+      TabStop = False
+      object medal: TGlyph
+        Align = Left
+        Size.Width = 42.000000000000000000
+        Size.Height = 42.000000000000000000
+        Size.PlatformDefault = False
+        ImageIndex = 10
+        Images = DataForm.Other
+      end
+      object medalTxt: TText
+        Align = Left
+        HitTest = False
+        Position.X = 42.000000000000000000
+        Size.Width = 42.000000000000000000
+        Size.Height = 42.000000000000000000
+        Size.PlatformDefault = False
+        Text = 'x0'
+        TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+        TextSettings.Font.Size = 30.000000000000000000
+        TextSettings.FontColor = claWhite
+      end
+    end
   end
   object modalDialog: TLayout
     Align = Center
@@ -685,6 +557,13 @@ object GameForm: TGameForm
       Size.PlatformDefault = False
       Text = '213123'
       TextSettings.FontColor = claWhite
+      object ShadowEffect1: TShadowEffect
+        Distance = 3.000000000000000000
+        Direction = 45.000000000000000000
+        Softness = 0.300000011920929000
+        Opacity = 0.600000023841857900
+        ShadowColor = claBlack
+      end
     end
   end
 end

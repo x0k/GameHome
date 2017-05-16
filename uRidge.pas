@@ -87,7 +87,11 @@ begin
   clicks;
   if (Owner as TGameForm).medalsCount>=tab.txt.Tag then
   begin
-    homeDecor.ImageIndex:=22+tab.txt.Tag div 2;
+    case tab.txt.Tag of
+      5:homeDecor.ImageIndex:=23;
+      8:homeDecor.ImageIndex:=24;
+      11:homeDecor.ImageIndex:=25;
+    end;
     setText(5)
   end else setText(6);
 end;
@@ -103,7 +107,7 @@ procedure TRidgeFrame.Win;
 begin
   inherited;
   TAnimator.AnimateFloatWait(Ridge, 'opacity', 1);
-  if not fail then setMedal(6);
+  if not fail then setMedal(12);
   home.ImageIndex:=-1;
 end;
 

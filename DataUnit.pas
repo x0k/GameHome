@@ -61,9 +61,6 @@ begin
     IM.add(rImages);
     f.up('Loading: Other');
     IM.add(rOther);
-    {$IFDEF RELEASE}
-    TStyleManager.SetStyleFromFile(pathResource(rStyle));
-    {$ENDIF}
   finally
     f.Close;
   end;
@@ -72,7 +69,6 @@ end;
 procedure TDataForm.DataModuleDestroy(Sender: TObject);
 begin
   GD.LoadSavedRamp;
-  //freeForms;
   DM.Free;
   IM.Free;
   GD.Free;

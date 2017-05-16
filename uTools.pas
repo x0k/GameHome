@@ -39,7 +39,7 @@ procedure TToolsFrame.Win;
 begin
   inherited;
   a:=false;b:=false;
-  setBonus(1);
+  if not fail then setMedal(2);
 end;
 
 procedure TToolsFrame.onFCreate;

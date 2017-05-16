@@ -19,8 +19,9 @@ type
     logoLayout: TLayout;
     Logo: TGlyph;
     SPanel: TPanel;
-    backLayout: TLayout;
-    BackBtn: TSpeedButton;
+    sgy: TGlyph;
+    vtb: TGlyph;
+    hmpk: TGlyph;
     procedure BackBtnClick(Sender: TObject);
   protected
     procedure onCreate; override;

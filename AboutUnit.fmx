@@ -8,6 +8,7 @@ object AboutForm: TAboutForm
   ClientHeight = 720
   ClientWidth = 1280
   StyleBook = DataForm.Styles
+  FormStyle = StayOnTop
   WindowState = wsMaximized
   FormFactor.Width = 1280
   FormFactor.Height = 720
@@ -66,33 +67,11 @@ object AboutForm: TAboutForm
         Size.Height = 720.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = 'SMemo'
-        TabOrder = 1
+        TabOrder = 0
         ParentShowHint = False
         ShowHint = False
         Viewport.Width = 1280.000000000000000000
         Viewport.Height = 720.000000000000000000
-      end
-      object backLayout: TLayout
-        Anchors = [akLeft, akBottom]
-        Margins.Left = 20.000000000000000000
-        Position.X = 20.000000000000000000
-        Position.Y = 570.000000000000000000
-        Size.Width = 60.000000000000000000
-        Size.Height = 150.000000000000000000
-        Size.PlatformDefault = False
-        TabOrder = 0
-        object BackBtn: TSpeedButton
-          Align = MostLeft
-          StyledSettings = [Family, Style]
-          Position.Y = 30.000000000000000000
-          Size.Width = 60.000000000000000000
-          Size.Height = 91.000000000000000000
-          Size.PlatformDefault = False
-          StyleLookup = 'backBtn'
-          TextSettings.Font.Size = 15.000000000000000000
-          TextSettings.FontColor = claWhite
-          OnClick = BackBtnClick
-        end
       end
     end
     object logoLayout: TLayout
@@ -112,6 +91,33 @@ object AboutForm: TAboutForm
         ImageIndex = 0
         Images = DataForm.Icons
       end
+    end
+    object sgy: TGlyph
+      Position.X = 1112.000000000000000000
+      Position.Y = 8.000000000000000000
+      Size.Width = 160.000000000000000000
+      Size.Height = 80.000000000000000000
+      Size.PlatformDefault = False
+      ImageIndex = 22
+      Images = DataForm.Icons
+    end
+    object vtb: TGlyph
+      Position.X = 1112.000000000000000000
+      Position.Y = 96.000000000000000000
+      Size.Width = 160.000000000000000000
+      Size.Height = 80.000000000000000000
+      Size.PlatformDefault = False
+      ImageIndex = 23
+      Images = DataForm.Icons
+    end
+    object hmpk: TGlyph
+      Position.X = 1112.000000000000000000
+      Position.Y = 184.000000000000000000
+      Size.Width = 160.000000000000000000
+      Size.Height = 80.000000000000000000
+      Size.PlatformDefault = False
+      ImageIndex = 24
+      Images = DataForm.Icons
     end
   end
 end

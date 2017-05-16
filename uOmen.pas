@@ -225,10 +225,8 @@ procedure TOmenFrame.Win;
 begin
   inherited;
   t:=true;
-  if not fail then setMedal(4);
+  if not fail then setMedal(7);
   setText(5);
-  setBonus(5);
-  setBonus(3, false);
 end;
 
 end.

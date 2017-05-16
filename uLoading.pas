@@ -18,9 +18,6 @@ type
     procedure up(const t: string);
   end;
 
-var
-  LoadingForm: TLoadingForm;
-
 implementation
 
 {$R *.fmx}
@@ -29,7 +26,6 @@ uses
   FMX.Ani, DataUnit;
 
 var
-  count: byte;
   p: single;
 
 { TLoadingForm }

@@ -75,7 +75,7 @@ begin
   if a and b then
   begin
     win;
-    if not fail then setMedal(1);
+    if not fail then setMedal(3);
   end;
 end;
 

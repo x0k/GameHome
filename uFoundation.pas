@@ -70,7 +70,7 @@ begin
   if tab.layer.TabOrder=2 then
   begin
     win;
-    if not fail then setMedal(2);
+    if not fail then setMedal(5);
   end else wrong;
 end;
 

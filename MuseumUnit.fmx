@@ -11,6 +11,7 @@ object MuseumForm: TMuseumForm
   Fill.Kind = Solid
   Position = DesktopCenter
   StyleBook = DataForm.Styles
+  FormStyle = StayOnTop
   WindowState = wsMaximized
   FormFactor.Width = 1280
   FormFactor.Height = 720

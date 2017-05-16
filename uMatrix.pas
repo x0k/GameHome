@@ -22,7 +22,6 @@ type
     ListBoxItem13: TListBoxItem;
     ListBoxItem14: TListBoxItem;
     ListBoxItem15: TListBoxItem;
-    ListBoxItem16: TListBoxItem;
     List: TListBox;
     ListBoxItem1: TListBoxItem;
     ListBoxItem2: TListBoxItem;
@@ -31,7 +30,6 @@ type
     ListBoxItem5: TListBoxItem;
     ListBoxItem6: TListBoxItem;
     ListBoxItem7: TListBoxItem;
-    ListBoxItem8: TListBoxItem;
     procedure ListDragDrop(Sender: TObject; const Data: TDragObject;
       const Point: TPointF);
     procedure ListDragOver(Sender: TObject; const Data: TDragObject;
@@ -72,15 +70,15 @@ begin
   l:=TList<TPair<Byte, String>>.Create;
 
   if Assigned(fText) then
-  for i:=0 to 7 do
+  for i:=0 to 6 do
      l.Add(TPair<byte, string>.Create(i, fText.Items[i]));
-  for i:=0 to 7 do
+  for i:=0 to 6 do
   begin
     id:=random(l.Count);
     list.ListItems[i].Tag:=l[id].Key;
     list.ListItems[i].Text:=l[id].Value;
     list.ListItems[i].TextSettings.Font.Size:=m;
-    nums.ListItems[i].TextSettings.Font.Size:=m+4;
+    nums.ListItems[i].TextSettings.Font.Size:=m+6;
     l.Delete(id);
   end;
   l.Free;
@@ -88,8 +86,8 @@ end;
 
 procedure TMatrixFrame.onFShow;
 begin
-  List.ItemHeight:=List.Height/8;
-  Nums.ItemHeight:=List.Height/8;
+  List.ItemHeight:=List.Height/7;
+  Nums.ItemHeight:=List.Height/7;
   inherited;
 end;
 
@@ -100,7 +98,7 @@ procedure TMatrixFrame.ListDragDrop(Sender: TObject; const Data: TDragObject; co
     i:byte;
   begin
     result:=false;
-    for i:=0 to 7 do
+    for i:=0 to 6 do
       with List.ListItems[i] do
         if i<>Tag then exit;
     result:=true;
@@ -113,7 +111,7 @@ begin
     if check then
     begin
       win;
-      setBonus(6);
+      setMedal(9);
     end else clicks;
   end;
 end;

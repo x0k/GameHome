@@ -7,4 +7,26 @@ inherited EndFrame: TEndFrame
     ImageIndex = 2
     Images = DataForm.Backgrounds
   end
+  object Text: TMemo
+    Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+    DataDetectorTypes = []
+    HideSelectionOnExit = False
+    Lines.Strings = (
+      'wdawdaawd')
+    ReadOnly = True
+    StyledSettings = []
+    CanFocus = False
+    HitTest = False
+    Position.X = 608.000000000000000000
+    Position.Y = 48.000000000000000000
+    Size.Width = 554.000000000000000000
+    Size.Height = 281.000000000000000000
+    Size.PlatformDefault = False
+    StyleLookup = 'SMemo'
+    TabOrder = 0
+    ParentShowHint = False
+    ShowHint = False
+    Viewport.Width = 554.000000000000000000
+    Viewport.Height = 281.000000000000000000
+  end
 end

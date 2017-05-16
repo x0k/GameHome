@@ -638,4 +638,13 @@
 									"Name": "Text8",
 									"FontSize": 34,
 									"Text": "Квашня"}]}]}]}],
-	"EndFrame": []}
+	"EndFrame": [
+		{
+			"Name": "Text",
+			"Bounds": [50, 10, 90, 40],
+			"Font":{
+				"Color": "White",
+				"HorzAlign": 0
+			},
+			"FontSize": 40,
+			"Text": "Nam vel tellus ornare magna facilisis semper vitae fringilla libero. Praesent aliquet ex ex, at convallis purus viverra sed. Vivamus vitae elementum augue, eu ultricies augue. Sed ac pretium arcu. Donec et metus a lectus vulputate laoreet eu dictum dolor. Aliquam turpis diam, tristique non nisi in, ullamcorper dictum erat. Nunc a commodo diam."}]}

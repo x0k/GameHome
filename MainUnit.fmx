@@ -9,12 +9,12 @@ object MainForm: TMainForm
   ClientWidth = 1280
   Position = ScreenCenter
   StyleBook = DataForm.Styles
+  FormStyle = StayOnTop
   WindowState = wsMaximized
   FormFactor.Width = 1280
   FormFactor.Height = 720
   FormFactor.Orientations = [Landscape]
   FormFactor.Devices = [Desktop]
-  FullScreen = True
   ShowFullScreenIcon = True
   ShowHint = False
   DesignerMasterStyle = 0

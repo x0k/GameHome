@@ -123,6 +123,7 @@ object SettingsForm: TSettingsForm
           StyleLookup = 'backBtn'
           TextSettings.Font.Size = 15.000000000000000000
           TextSettings.FontColor = claWhite
+          Visible = False
           OnClick = BackBtnClick
         end
       end

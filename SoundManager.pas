@@ -11,8 +11,7 @@ type
 
   TSoundManager = class
   private
-    bgs, cls, aws, wrs: TList<HSTREAM>;
-    lts: TArray<TList<HSTREAM>>;
+    lts: array[0..3] of TList<HSTREAM>;
     mst, bgst: HSTREAM;
     bgSync: HSYNC;
     fail: boolean;
@@ -54,7 +53,6 @@ begin
     if not BASS_Init(-1, 44100, 0, 0, nil) then
       Raise Exception.create('Ошибка при загрузке BASS');
     files:=getSounds;
-    lts:=[bgs, cls, aws, wrs];
     for i:=0 to 3 do
       lts[i]:=TList<HSTREAM>.Create;
     for s in files do
@@ -100,7 +98,7 @@ end;
 
 procedure TSoundManager.Play;
 begin
-  if fail then exit;
+  if fail or (lts[ord(s)].Count=0) then exit;
   if mst<>0 then BASS_ChannelStop(mst);
   mst:=getSound(s);
   Bass_ChannelSetAttribute(mst, BASS_ATTRIB_VOL, Vol);
@@ -115,7 +113,7 @@ end;
 
 procedure TSoundManager.PlayBg;
 begin
-  if fail then exit;
+  if fail or (lts[0].Count=0) then exit;
   bgst:=getSound(sBackground);
   Bass_ChannelSetAttribute(bgst, BASS_ATTRIB_VOL, Vol/3);
   Bass_ChannelPlay(bgst, true);

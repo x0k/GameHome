@@ -7,12 +7,11 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Objects,
   FMX.StdCtrls, FMX.ScrollBox, FMX.Memo, FMX.Controls.Presentation,
   FMX.TabControl, FMX.Layouts, FMX.Filter.Effects, FMX.ImgList, FMX.ani, System.ImageList,
-  Forms, uFrame;
+  Forms, uFrame, FMX.Effects;
 
 const
   LVL_COUNT = 15;
-  AWD_COUNT = 8;
-  MDL_COUNT = 7;
+  MDL_COUNT = 13;
 
 type
   TGameForm = class(TBarForm)
@@ -41,21 +40,9 @@ type
     Alex: TGlyph;
     Home: TGlyph;
     Main3: TLayout;
-    bonusBtn: TButton;
     logoLayout: TLayout;
     topLogo: TGlyph;
     progress: TLayout;
-    RBonus: TLayout;
-    bonusBG: TRectangle;
-    telega: TLayout;
-    st1: TGlyph;
-    st2: TGlyph;
-    wh2: TGlyph;
-    body: TGlyph;
-    wh1: TGlyph;
-    woods: TGlyph;
-    tools: TGlyph;
-    shepa: TGlyph;
     coins: TLayout;
     medal: TGlyph;
     medalTxt: TText;
@@ -74,24 +61,22 @@ type
     dlgBtns: TLayout;
     noBtn: TSpeedButton;
     dlgText: TText;
+    ShadowEffect1: TShadowEffect;
     procedure l1btnClick(Sender: TObject);
     procedure logoLayoutClick(Sender: TObject);
     procedure BackBtnClick(Sender: TObject);
     procedure NextBtnClick(Sender: TObject);
-    procedure bonusBtnClick(Sender: TObject);
     procedure MainClick(Sender: TObject);
     procedure yesBtnClick(Sender: TObject);
   private
     frame: TGFrame;
     sts:TArray<byte>;//states
-    aws:TArray<boolean>;//awards
     mds:TArray<boolean>;//medals
     dots:TArray<TGlyph>;
     block, bonus, fr: boolean;
 
     function getStatus(id: byte): byte;
     procedure setStatus(id: byte; v: byte);
-    procedure setAward(id: byte; v: boolean);
     procedure setMedal(id: byte; v: boolean);
     function getMdlCount: byte;
 
@@ -117,7 +102,6 @@ type
     procedure gameExit;
 
     property states[index: byte]: byte read getStatus write setStatus;
-    property awards[index: byte]: boolean write setAward;
     property medals[index: byte]: boolean write setMedal;
     property medalsCount: byte read getMdlCount;
 
@@ -152,7 +136,6 @@ begin
     tabs.Tabs[i].DisableDisappear:=true;
 
   setlength(sts, LVL_COUNT);
-  setLength(aws, AWD_COUNT);
   setLength(mds, MDL_COUNT);
 
   setLength(dots, LVL_COUNT);
@@ -208,24 +191,22 @@ begin
   Tabs.TabIndex:=0;
   for i:=0 to LVL_COUNT-1 do
     states[i]:=0;
-  for i:=0 to AWD_COUNT-1 do
-    awards[i]:=false;
   for i:=0 to MDL_COUNT-1 do
     medals[i]:=false;
   for i:=0 to LVL_COUNT-1 do
     dots[i].ImageIndex:=0;
-  {for f in Btns.Children do
+  {$IFDEF RELEASE}
+  for f in Btns.Children do
     if (f is TButton) and (f.Tag<>0) then
       with f as TButton do
-        Enabled:=false;}
+        Enabled:=false;
+  {$ENDIF}
   block:=false;
   nxtBtn:=true;
   setBar;
   bonus:=false; fr:=false; main.HitTest:=false;
   modalDialog.Opacity:=0;
   modalDialog.Visible:=false;
-  RBonus.Position.X:=Width;
-  RBonus.Position.Y:=0;
   preloadContent(tabs);
   inherited;
 end;
@@ -279,28 +260,6 @@ procedure TGameForm.logoLayoutClick(Sender: TObject);
 begin
   if block then exit;
   closeDlg;
-end;
-
-procedure TGameForm.setAward(id: byte; v: boolean);
-
-  function getBonus(id: byte): TGlyph;
-  begin
-    result:=nil;
-    case id of
-      0:result:=wh1;
-      1:result:=tools;
-      2:result:=woods;
-      3:result:=shepa;
-      4:result:=wh2;
-      5:result:=body;
-      6:result:=st1;
-      7:result:=st2;
-    end;
-  end;
-
-begin
-  aws[id]:=v;
-  getBonus(id).Visible:=v;
 end;
 
 function TGameForm.getMdlCount: byte;
@@ -386,8 +345,6 @@ procedure TGameForm.NextBtnClick(Sender: TObject);
 var
   i: byte;
 begin
-  if bonus then
-    bonusBtnClick(self);
   if block then exit;
   SM.play(sClick);
   block:=true;
@@ -414,8 +371,6 @@ end;
 
 procedure TGameForm.BackBtnClick(Sender: TObject);
 begin
-  if bonus then
-    bonusBtnClick(self);
   if block then exit;
   case Tabs.TabIndex of
     0, 1: closeDlg;
@@ -426,21 +381,7 @@ end;
 procedure TGameForm.MainClick(Sender: TObject);
 begin
   if block then exit;
-  if bonus then
-    bonusBtnClick(self);
   SM.play(sClick);
-end;
-
-procedure TGameForm.bonusBtnClick(Sender: TObject);
-begin
-  if block then exit;  
-  if bonus then
-    TAnimator.AnimateFloat(RBonus, 'Position.X', Width)
-  else
-    TAnimator.AnimateFloat(RBonus, 'Position.X', Width-RBonus.Width);
-  bonus:=not bonus;
-  SM.play(sClick);
-  main.HitTest:=bonus;
 end;
 
 procedure TGameForm.closeDlg;

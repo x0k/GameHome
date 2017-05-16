@@ -38,6 +38,7 @@ uses
   uMoving in 'uMoving.pas' {MovingFrame: TFrame},
   uEnd in 'uEnd.pas' {EndFrame: TFrame},
   uFrame in 'uFrame.pas' {GFrame: TFrame},
+  uTabFrame in 'uTabFrame.pas' {TabFrame: TFrame},
   uLoading in 'uLoading.pas' {LoadingForm};
 
 {$R *.res}
@@ -49,7 +50,5 @@ begin
   Application.Initialize;
   Application.CreateForm(TDataForm, DataForm);
   Application.CreateForm(TMainForm, MainForm);
-  Application.CreateForm(TLoadingForm, LoadingForm);
-  Application.CreateForm(TLoadingForm, LoadingForm);
   Application.Run;
 end.
