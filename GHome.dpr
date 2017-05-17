@@ -46,9 +46,9 @@ const
   fName = 'TkachenkoSketch4F.ttf';
 
 begin
-  AddFontResourceEx(PChar(TPath.Combine(getPath(pTexts),  fName)), FR_NOT_ENUM, nil);
   Application.Initialize;
   Application.CreateForm(TDataForm, DataForm);
   Application.CreateForm(TMainForm, MainForm);
+  AddFontResourceEx(PChar(TPath.Combine(getPath(pTexts),  fName)), FR_NOT_ENUM, nil);
   Application.Run;
 end.

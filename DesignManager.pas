@@ -170,7 +170,7 @@ begin
     fillArr<single>(val, fillSingl, TbsSize);
   if j.TryGetValue('Font', obj) then
     Font:=fontFromJSON(obj);
-  if j.TryGetValue('FontSize', num) then fSize:=num.AsDouble*kdp//fSize:=num.AsDouble*(Screen.Width+Screen.Height/2)/2700
+  if j.TryGetValue('FontSize', num) then fSize:=num.AsDouble*(Screen.Width+Screen.Height/2)/2800//fSize:=num.AsDouble*kdp
     else fSize:=0;
   if j.TryGetValue('Align', num) then
   begin

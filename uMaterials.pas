@@ -27,6 +27,10 @@ type
     L3: TLayout;
     m3: TGlyph;
     T3: TText;
+    T0t: TText;
+    T1t: TText;
+    T2t: TText;
+    T3t: TText;
   protected
     procedure onFCreate; override;
     procedure onFDestroy; override;

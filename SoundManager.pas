@@ -81,6 +81,7 @@ var
   l: TList<HSTREAM>;
   st: HSTREAM;
 begin
+  if fail then exit;
   for l in lts do
   begin
     for st in l do

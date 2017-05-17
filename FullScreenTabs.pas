@@ -133,7 +133,7 @@ begin
     else AddW:=1.2*w;
   if length(widths)>1 then MaxW:=widths[1]*w
     else MaxW:=2*w;
-  if length(sizes)>0 then s:=sizes[0]*kdp
+  if length(sizes)>0 then s:=sizes[0]*(Screen.Width+Screen.Height/2)/2800//s:=sizes[0]*kdp
     else s:=30;
   if length(sizes)>1 then AddS:=sizes[1]*S
     else AddS:=1.2*S;

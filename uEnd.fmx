@@ -15,6 +15,7 @@ inherited EndFrame: TEndFrame
       'wdawdaawd')
     ReadOnly = True
     StyledSettings = []
+    TextSettings.WordWrap = True
     CanFocus = False
     HitTest = False
     Position.X = 608.000000000000000000

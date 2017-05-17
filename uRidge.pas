@@ -92,8 +92,8 @@ begin
       8:homeDecor.ImageIndex:=24;
       11:homeDecor.ImageIndex:=25;
     end;
-    setText(5)
-  end else setText(6);
+    setText(homeDecor.ImageIndex-17);
+  end else setText(5);
 end;
 
 procedure TRidgeFrame.onFShow;

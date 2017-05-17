@@ -22,6 +22,7 @@ inherited MaterialsFrame: TMaterialsFrame
         CanFocus = False
         Cursor = crDefault
         DisableFocusEffect = True
+        HitTest = False
         Size.Width = 280.000000000000000000
         Size.Height = 288.000000000000000000
         Size.PlatformDefault = False
@@ -55,7 +56,7 @@ inherited MaterialsFrame: TMaterialsFrame
         object m0: TGlyph
           Align = Client
           Size.Width = 212.000000000000000000
-          Size.Height = 382.000000000000000000
+          Size.Height = 332.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 0
           Images = DataForm.Switchers
@@ -66,6 +67,17 @@ inherited MaterialsFrame: TMaterialsFrame
           Anchors = []
           HitTest = False
           Position.Y = 382.000000000000000000
+          Size.Width = 212.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1057#1086#1089#1085#1072
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 40.000000000000000000
+        end
+        object T0t: TText
+          Tag = 1
+          Align = Top
+          HitTest = False
           Size.Width = 212.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
@@ -87,7 +99,7 @@ inherited MaterialsFrame: TMaterialsFrame
           Tag = 1
           Align = Client
           Size.Width = 212.000000000000000000
-          Size.Height = 382.000000000000000000
+          Size.Height = 332.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 2
           Images = DataForm.Switchers
@@ -98,6 +110,17 @@ inherited MaterialsFrame: TMaterialsFrame
           Anchors = []
           HitTest = False
           Position.Y = 382.000000000000000000
+          Size.Width = 212.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1045#1083#1100
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 40.000000000000000000
+        end
+        object T1t: TText
+          Tag = 2
+          Align = Top
+          HitTest = False
           Size.Width = 212.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
@@ -119,7 +142,7 @@ inherited MaterialsFrame: TMaterialsFrame
           Tag = 2
           Align = Client
           Size.Width = 212.000000000000000000
-          Size.Height = 382.000000000000000000
+          Size.Height = 332.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 4
           Images = DataForm.Switchers
@@ -130,6 +153,17 @@ inherited MaterialsFrame: TMaterialsFrame
           Anchors = []
           HitTest = False
           Position.Y = 382.000000000000000000
+          Size.Width = 212.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1051#1080#1089#1090#1074#1077#1085#1085#1080#1094#1072
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 40.000000000000000000
+        end
+        object T2t: TText
+          Tag = 3
+          Align = Top
+          HitTest = False
           Size.Width = 212.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False
@@ -151,7 +185,7 @@ inherited MaterialsFrame: TMaterialsFrame
           Tag = 3
           Align = Client
           Size.Width = 212.000000000000000000
-          Size.Height = 382.000000000000000000
+          Size.Height = 332.000000000000000000
           Size.PlatformDefault = False
           ImageIndex = 6
           Images = DataForm.Switchers
@@ -162,6 +196,17 @@ inherited MaterialsFrame: TMaterialsFrame
           Anchors = []
           HitTest = False
           Position.Y = 382.000000000000000000
+          Size.Width = 212.000000000000000000
+          Size.Height = 50.000000000000000000
+          Size.PlatformDefault = False
+          Text = #1054#1089#1080#1085#1072
+          TextSettings.Font.Family = 'Tkachenko Sketch 4F'
+          TextSettings.Font.Size = 40.000000000000000000
+        end
+        object T3t: TText
+          Tag = 4
+          Align = Top
+          HitTest = False
           Size.Width = 212.000000000000000000
           Size.Height = 50.000000000000000000
           Size.PlatformDefault = False

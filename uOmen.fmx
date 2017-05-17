@@ -24,6 +24,7 @@ inherited OmenFrame: TOmenFrame
         CanFocus = False
         Cursor = crDefault
         DisableFocusEffect = True
+        HitTest = False
         Size.Width = 960.000000000000000000
         Size.Height = 400.000000000000000000
         Size.PlatformDefault = False

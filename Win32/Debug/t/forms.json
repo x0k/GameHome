@@ -160,42 +160,43 @@
 					"Childrens": [
 						{
 							"Name": "Text",
-							"Text": "	Nam vel tellus ornare magna facilisis semper vitae fringilla libero. Praesent aliquet ex ex, at convallis purus viverra sed. Vivamus vitae elementum augue, eu ultricies augue. Sed ac pretium arcu. Donec et metus a lectus vulputate laoreet eu dictum dolor. Aliquam turpis diam, tristique non nisi in, ullamcorper dictum erat. Nunc a commodo diam.
+							"Text": "	Образовательная программа \"КЕРКА/ДОМ. Дом в традиционной культуре коми\" знакомит с технологией строительства традиционного дома. 
 
-	Nulla lacinia diam sit amet dictum bibendum. Suspendisse pellentesque non magna eu vehicula. In vehicula nunc eu tellus tincidunt auctor. Nullam enim augue, auctor vitae elit in, lacinia tempor purus. Curabitur metus sem, feugiat eu blandit nec, maximus vitae felis. Ut mauris erat, vestibulum at lorem a, facilisis iaculis enim. In pulvinar eu odio quis pretium. Duis eget interdum purus.
+	Мультимедийный проект раскрывает секреты старых мастеров: как выбрать место для будущего дома; какой вид древесины и мха использовали; сколько срубить брёвен; как правильно установить матицу и выбрать резное украшение для окон. 
 
-	Duis pellentesque maximus tellus, varius laoreet eros consectetur at. Phasellus pellentesque nec dolor nec egestas. Maecenas ut massa egestas, suscipit ex in, pulvinar orci. Praesent condimentum, eros vitae luctus dignissim, velit nisl blandit eros, vitae suscipit libero risus ac dolor. Duis interdum tortor nisl, sit amet efficitur turpis sodales venenatis. Fusce sapien ligula, iaculis ac pellentesque et, rhoncus id diam. Duis risus augue, efficitur et tellus in, egestas luctus tortor. Curabitur bibendum, libero ac pulvinar volutpat, nisl lorem convallis quam, non rutrum mi justo at massa. Morbi placerat justo vitae dui egestas elementum.",
-							"FontSize": 40,
+	Точный образ строящегося дома воссоздают этнографические фотографии из коллекции Национального музея Республики Коми. 
+
+	Мультимедийная программа подготовлена совместно с Институтом точных наук и информационных технологий Сыктывкарского государственного университета им. Питирима Сорокина. 
+Программист – Красильников Роман, студент Института точных наук и информационных технологий  СГУ (научный руководитель — Гольчевский Юрий Валентинович).
+Художник – Илюкович Светлана, студентка Института культуры и искусства СГУ (научный руководитель – Кубик Степан Павлович). 
+
+	Руководитель проекта – Хозяинова Наталья Алексеевна, заведующая отделом культурно-образовательных программ Национального музея Республики Коми.
+Консультант - Липин Владимир Борисович, научный сотрудник отдела фондов Национального музея Республики Коми.
+
+	Мультимедийная образовательная программа \"КЕРКА/ДОМ. Дом в традиционной культуре коми\" создана при поддержке банка ВТБ24 при личном участии Липатникова Максима Владимировича, управляющего Операционным офисом Сыктывкарского филиала 7806 Банка ВТБ24.",
+							"FontSize": 34,
 							"Margins": [11, 11, 11, 11]}]}]}],
 	"GameForm": [
 		{
 			"Name": "modalDialog",
 			"Childrens":[
 				{
-					"Name": "dlgBG"
-				},
+					"Name": "dlgBG"	},
 				{
 					"Name": "dlgText",
-					"FontSize": 26,
-					"Text": "Действительно хотите выйти?\nПрогресс не будет сохранен."
-				},
+					"FontSize": 30,
+					"Text": "Действительно хотите выйти?\nПрогресс не будет сохранен."},
 				{
 					"Name": "dlgBtns",
 					"Childrens": [
 						{
 							"Name": "yesBtn",
 							"FontSize": 30,
-							"Text": "Да"
-						},
+							"Text": "Да"},
 						{
 							"Name": "noBtn",
 							"FontSize": 30,
-							"Text": "Нет"
-						}
-					]
-				}
-			]
-		},
+							"Text": "Нет"}]}]},
 		{
 			"Name": "Main",
 			"Childrens": [
@@ -215,11 +216,11 @@
 					"Childrens": [
 						{
 							"Name": "SubName",
-							"FontSize": 40,
+							"FontSize": 50,
 							"Bounds": [0, 0, 16, 15]},
 						{
 							"Name": "SubText",
-							"FontSize": 25}]}]},
+							"FontSize": 30}]}]},
 		{
 			"Name": "Main1",
 			"Margins": [10, 10, 10, 16],

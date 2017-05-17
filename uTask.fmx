@@ -75,6 +75,7 @@ inherited TaskFrame: TTaskFrame
         CanFocus = False
         Cursor = crDefault
         DisableFocusEffect = True
+        HitTest = False
         Size.Width = 785.000000000000000000
         Size.Height = 529.000000000000000000
         Size.PlatformDefault = False
